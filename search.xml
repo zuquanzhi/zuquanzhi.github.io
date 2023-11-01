@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Self-balancing-bycycle</title>
-    <url>/2023/10/09/Self-balancing-bycycle/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>平衡车</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>c语言中正则匹配的几种思路</title>
     <url>/2023/10/12/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF/</url>
     <content><![CDATA[<h1 id="关于正则匹配的几种思路"><a href="#关于正则匹配的几种思路" class="headerlink" title="关于正则匹配的几种思路"></a>关于正则匹配的几种思路</h1><p>注意：所谓正则表达指一整个字符串，而部分字符串<br>下面来看这样一个实例：<br><strong>写出一个程序，当输入“yuanshen”的时候，输出为“yes”；输入“no”的时候，输出为“no”</strong></p>
@@ -42,20 +31,6 @@
       </categories>
       <tags>
         <tag>正则匹配</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网站搭建第一天心得</title>
-    <url>/2023/10/02/test/</url>
-    <content><![CDATA[<h2 id="又是崩溃的一天"><a href="#又是崩溃的一天" class="headerlink" title="又是崩溃的一天"></a>又是崩溃的一天</h2><h2 id="这个故事告诉我们"><a href="#这个故事告诉我们" class="headerlink" title="这个故事告诉我们"></a>这个故事告诉我们</h2><p><strong>超出能力范围的事情</strong>不要做！！！！</p>
-<pre><code class="bash">tmd
-</code></pre>
-]]></content>
-      <categories>
-        <category>心得</category>
-      </categories>
-      <tags>
-        <tag>心得</tag>
       </tags>
   </entry>
   <entry>
@@ -96,6 +71,17 @@
       </tags>
   </entry>
   <entry>
+    <title>Self-balancing-bycycle</title>
+    <url>/2023/10/09/Self-balancing-bycycle/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>平衡车</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>贪心算法</title>
     <url>/2023/10/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h1 id="一点关于贪心算法的思考"><a href="#一点关于贪心算法的思考" class="headerlink" title="一点关于贪心算法的思考"></a>一点关于贪心算法的思考</h1><h4 id="关于贪心算法，ChatGPT是这么定义的："><a href="#关于贪心算法，ChatGPT是这么定义的：" class="headerlink" title="关于贪心算法，ChatGPT是这么定义的："></a>关于贪心算法，ChatGPT是这么定义的：</h4><p>贪心算法（Greedy Algorithm）是一种求解最优化问题的算法范式，它在每一步选择当前状态下的最优解，最终期望通过一系列的最优选择达到全局最优解。贪心算法通常适用于那些具有最优子结构性质的问题，其中整体问题的最优解可以通过局部子问题的最优解得到。</p>
@@ -130,6 +116,20 @@
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网站搭建第一天心得</title>
+    <url>/2023/10/02/test/</url>
+    <content><![CDATA[<h2 id="又是崩溃的一天"><a href="#又是崩溃的一天" class="headerlink" title="又是崩溃的一天"></a>又是崩溃的一天</h2><h2 id="这个故事告诉我们"><a href="#这个故事告诉我们" class="headerlink" title="这个故事告诉我们"></a>这个故事告诉我们</h2><p><strong>超出能力范围的事情</strong>不要做！！！！</p>
+<pre><code class="bash">tmd
+</code></pre>
+]]></content>
+      <categories>
+        <category>心得</category>
+      </categories>
+      <tags>
+        <tag>心得</tag>
       </tags>
   </entry>
 </search>
