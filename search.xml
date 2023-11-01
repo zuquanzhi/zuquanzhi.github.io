@@ -86,7 +86,7 @@
 </ul>
 <p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
 <p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a%b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>编程</category>
