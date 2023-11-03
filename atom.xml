@@ -6,7 +6,7 @@
   <link href="http://zuweicun.top/atom.xml" rel="self"/>
   
   <link href="http://zuweicun.top/"/>
-  <updated>2023-11-03T05:41:33.126Z</updated>
+  <updated>2023-11-03T13:08:38.457Z</updated>
   <id>http://zuweicun.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PID算法初探</title>
+    <link href="http://zuweicun.top/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/"/>
+    <id>http://zuweicun.top/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/</id>
+    <published>2023-11-03T12:41:10.000Z</published>
+    <updated>2023-11-03T13:08:38.457Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="PID算法初探"><a href="#PID算法初探" class="headerlink" title="PID算法初探"></a>PID算法初探</h1><p>PID（比例-积分-微分）控制算法是一种用于调节控制系统的反馈控制算法。它是一种常见的控制系统设计方法，用于确保系统的输出与期望值（或参考信号）尽可能接近。PID控制算法基于三个主要参数，分别是比例增益（P）、积分时间（I）和微分时间（D）。</p><span id="more"></span><h3 id="PID详解"><a href="#PID详解" class="headerlink" title="PID详解"></a>PID详解</h3><ul><li><p><strong>比例增益（P）：</strong> 比例部分根据当前误差的大小调整输出。如果误差较大，比例增益会产生更大的输出变化，以更快地减小误差。然而，如果比例增益设置得太大，系统可能会变得不稳定。</p></li><li><p><strong>积分时间（I）：</strong> 积分部分考虑了误差随时间的积累。它用于消除系统稳态误差，因为它会持续增加控制输出，直到误差为零。但如果积分时间设置得太大，可能导致系统的超调或振荡。        </p></li><li><p><strong>微分时间（D）：</strong> 微分部分考虑了误差变化的速度。它可以帮助系统抑制振荡，因为它对误差变化的速度进行响应，减小输出的变化速度。然而，如果微分时间设置得太大，可能会导致系统对噪声敏感。</p></li></ul><p><em>PID算法的执行流程是非常简单的，即利用反馈来检测偏差信号，并通过偏差信号来控制被控量。而控制器本身就是比例、积分、微分三个环节的加和。</em></p><p><img data-src="/1.jpg" alt="功能框图"></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;PID算法初探&quot;&gt;&lt;a href=&quot;#PID算法初探&quot; class=&quot;headerlink&quot; title=&quot;PID算法初探&quot;&gt;&lt;/a&gt;PID算法初探&lt;/h1&gt;&lt;p&gt;PID（比例-积分-微分）控制算法是一种用于调节控制系统的反馈控制算法。它是一种常见的控制系统设计方法，用于确保系统的输出与期望值（或参考信号）尽可能接近。PID控制算法基于三个主要参数，分别是比例增益（P）、积分时间（I）和微分时间（D）。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="项目" scheme="http://zuweicun.top/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="PID" scheme="http://zuweicun.top/tags/PID/"/>
+    
+  </entry>
   
   <entry>
     <title>欧几里得算法</title>
