@@ -13,8 +13,80 @@
 <li><p><strong>微分时间（D）：</strong> 微分部分考虑了误差变化的速度。它可以帮助系统抑制振荡，因为它对误差变化的速度进行响应，减小输出的变化速度。然而，如果微分时间设置得太大，可能会导致系统对噪声敏感。</p>
 </li>
 </ul>
-<p><em>PID算法的执行流程是非常简单的，即利用反馈来检测偏差信号，并通过偏差信号来控制被控量。而控制器本身就是比例、积分、微分三个环节的加和。</em></p>
-<p><img data-src="/1.jpg" alt="功能框图"></p>
+<h3 id="PID算法基本原理"><a href="#PID算法基本原理" class="headerlink" title="PID算法基本原理"></a>PID算法基本原理</h3><p><em>PID算法的执行流程是非常简单的，即利用反馈来检测偏差信号，并通过偏差信号来控制被控量。而控制器本身就是比例、积分、微分三个环节的加和。</em></p>
+<p><img data-src="/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/1.jpg" alt="图片"></p>
+<p>根据上图我们考虑在某个特定的时刻t，此时输入量为rin(t)，输出量为rout(t)，于是偏差就可计算为err(t)&#x3D;rin(t)-rout(t)。于是PID的基本控制规律就可以表示为如下公式：</p>
+<p><img data-src="/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/2.png" alt="公式"><br><em>其中Kp为比例带，TI为积分时间，TD为微分时间。</em></p>
+<h3 id="PID算法离散化"><a href="#PID算法离散化" class="headerlink" title="PID算法离散化"></a>PID算法离散化</h3><p>由于在计算机上应实现离散化问题，我们对比例，积分，微分特性做简单说明。    </p>
+<p>比例就是用来对系统的偏差进行反应，所以只要存在偏差，比例就会起作用。积分主要是用来消除静差，所谓静差就是指系统稳定后输入输出之间依然存在的差值，而积分就是通过偏差的累计来抵消系统的静差。而微分则是对偏差的变化趋势做出反应，根据偏差的变化趋势实现超前调节，提高反应速度。     </p>
+<p>在实现离散前，我们假设系统采样周期为T。假设我们检查第K个采样周期，很显然系统进行第K次采样。此时的偏差可以表示为err(K)&#x3D;rin(K)-rout(K)，那么积分就可以表示为：err(K)+ err(K+1)+┈┈，而微分就可以表示为：(err(K)- err(K-1))&#x2F;T。于是我们可以将第K次采样时，PID算法的离线形式表示为：<br><img data-src="/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/3.png" alt="公式"><br>即为<br><img data-src="/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/4.png" alt="公式"><br>这就是所谓的PID算法离散描述公式。还有一个增量型PID算法，下面来推导一下。<br>上面的公式描述了第k哥采样周期的结果，那么前一时刻也就是k-1哥采样周期可表示为：<br><img data-src="/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/5.png" alt="公式"><br>那么我们再来说第K个采样周期的增量，很显然就是U(k)-U(k-1)。于是我们用第k个采样周期公式减去第k-1个采样周期的公式，就得到了增量型PID算法的表示公式：<br><img data-src="/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/6.png" alt="公式"><br>当然，增量型PID必须记得一点，就是在记住U(k)&#x3D;U(k-1)+∆U(k)</p>
+<h3 id="PID控制器基本实现"><a href="#PID控制器基本实现" class="headerlink" title="PID控制器基本实现"></a>PID控制器基本实现</h3><p>完成了离散化后，我们就可以来实现它了。已经用离散化的数据公式表示出来后，再进型计算机编程已经不是问题了。接下来我们就使用C语言分别针对位置型公式和增量型公式来具体实现。</p>
+<h4 id="位置型PID简单实现"><a href="#位置型PID简单实现" class="headerlink" title="位置型PID简单实现"></a>位置型PID简单实现</h4><p>位置型PID的实现就是以前面的位置型公式为基础。这一节我们只是完成最简单的实现，也就是将前面的离散位置型PID公式的计算机语言化。<br>首先定义PID对象的结构体：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*定义结构体和公用体*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> setpoint;       <span class="comment">//设定值</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> proportiongain;     <span class="comment">//比例系数</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> integralgain;      <span class="comment">//积分系数</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> derivativegain;    <span class="comment">//微分系数</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> lasterror;     <span class="comment">//前一拍偏差</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> result; <span class="comment">//输出值</span></span><br><span class="line"></span><br><span class="line">  <span class="type">float</span> integral;<span class="comment">//积分值</span></span><br><span class="line"></span><br><span class="line">&#125;PID;</span><br></pre></td></tr></table></figure>
+<p>接下来实现PID控制器：</p>
+<pre><code class="c">void PIDRegulation(PID *vPID, float processValue)
+
+&#123;
+
+  float thisError;
+
+  thisError=vPID-&gt;setpoint-processValue;
+
+  vPID-&gt;integral+=thisError;
+
+  vPID-&gt;result=vPID-&gt;proportiongain*thisError+vPID-&gt;integralgain*vPID-&gt;integral+vPID-&gt;derivativegain*(thisError-vPID-&gt;lasterror);
+
+  vPID-&gt;lasterror=thisError;
+
+&#125;
+```c
+这就实现了一个最简单的位置型PID控制器，当然没有考虑任何干扰条件，仅仅只是对数学公式的计算机语言化。
+
+#### 增量型PID简单实现
+增量型PID的实现就是以前面的增量型公式为基础。这一节我们只是完成最简单的实现，也就是将前面的离散增量型PID公式的计算机语言化。
+
+首先定义PID对象的结构体：
+
+```c
+/*定义结构体和公用体*/
+
+typedef struct
+
+&#123;
+
+  float setpoint;       //设定值
+
+  float proportiongain;     //比例系数
+
+  float integralgain;      //积分系数
+
+  float derivativegain;    //微分系数
+
+  float lasterror;     //前一拍偏差
+
+  float preerror;     //前两拍偏差
+
+  float deadband;     //死区
+
+  float result; //输出值
+
+&#125;PID;
+<figure class="highlight xl"><table><tr><td class="code"><pre><span class="line">接下来实现PID控制器：</span><br><span class="line"></span><br><span class="line">``````c</span><br><span class="line">void PIDRegulation(PID *vPID, float processValue)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  float thisError;</span><br><span class="line"></span><br><span class="line">  float increment;</span><br><span class="line"></span><br><span class="line">  float pError,dError,iError;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">thisError</span>=vPID-&gt;</span>setpoint-processValue; <span class="comment">//得到偏差值</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">pError</span>=thisError-vPID-&gt;</span>lasterror;</span><br><span class="line"></span><br><span class="line">  iError=thisError;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">dError</span>=thisError-2*(vPID-&gt;</span><span class="function"><span class="title">lasterror</span>)+vPID-&gt;</span>preerror;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">increment</span>=vPID-&gt;</span><span class="function"><span class="title">proportiongain</span>*pError+vPID-&gt;</span><span class="function"><span class="title">integralgain</span>*iError+vPID-&gt;</span>derivativegain*dError;   <span class="comment">//增量计算</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">vPID</span>-&gt;</span><span class="function"><span class="title">preerror</span>=vPID-&gt;</span>lasterror;  <span class="comment">//存放偏差用于下次运算</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">vPID</span>-&gt;</span>lasterror=thisError;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">vPID</span>-&gt;</span>result+=increment;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+#### 基本特点
+前面讲述并且实现了PID控制器，包括位置型PID控制器和增量型PID控制器。界限来我们对这两种类型的控制器的特点作一个简单的描述。
+
+**位置型PID控制器的基本特点：**
+
+* 位置型PID控制的输出与整个过去的状态有关，用到了偏差的累加值，容易产生累积偏差。
+* 位置型PID适用于执行机构不带积分部件的对象。
+* 位置型的输出直接对应对象的输出，对系统的影响比较大。
+
+**增量型PID控制器的基本特点：**
+
+* 增量型PID算法不需要做累加，控制量增量的确定仅与最近几次偏差值有关，计算偏差的影响较小。
+* 增量型PID算法得出的是控制量的增量，对系统的影响相对较小。
+* 采用增量型PID算法易于实现手动到自动的无扰动切换。
+</code></pre>
 ]]></content>
       <categories>
         <category>项目</category>
@@ -33,18 +105,6 @@
       </categories>
       <tags>
         <tag>平衡车</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网站搭建第一天心得</title>
-    <url>/2023/10/02/test/</url>
-    <content><![CDATA[<h2 id="又是崩溃的一天"><a href="#又是崩溃的一天" class="headerlink" title="又是崩溃的一天"></a>又是崩溃的一天</h2><h2 id="这个故事告诉我们"><a href="#这个故事告诉我们" class="headerlink" title="这个故事告诉我们"></a>这个故事告诉我们</h2><p><strong>超出能力范围的事情</strong>不要做！！！！<br><code>c</code><br>test file;<br>helloworld!<br>&#96;&#96;&#96;&#96;&#96;&#96;</p>
-]]></content>
-      <categories>
-        <category>心得</category>
-      </categories>
-      <tags>
-        <tag>心得</tag>
       </tags>
   </entry>
   <entry>
@@ -81,40 +141,15 @@
       </tags>
   </entry>
   <entry>
-    <title>欧几里得算法</title>
-    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
-<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
-<span id="more"></span>
-
-<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
-<ol>
-<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
-</li>
-<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
-</li>
-<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
-</li>
-<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
-</li>
-</ol>
-<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
-<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
-<ul>
-<li>求解整数的最大公约数。</li>
-<li>判断两个整数是否互质（最大公约数为1）。</li>
-<li>求解不定方程的整数解，如贝祖等式。</li>
-<li>在密码学中用于生成加密密钥。</li>
-</ul>
-<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
-<p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+    <title>网站搭建第一天心得</title>
+    <url>/2023/10/02/test/</url>
+    <content><![CDATA[<h2 id="又是崩溃的一天"><a href="#又是崩溃的一天" class="headerlink" title="又是崩溃的一天"></a>又是崩溃的一天</h2><h2 id="这个故事告诉我们"><a href="#这个故事告诉我们" class="headerlink" title="这个故事告诉我们"></a>这个故事告诉我们</h2><p><strong>超出能力范围的事情</strong>不要做！！！！<br><code>c</code><br>test file;<br>helloworld!<br>&#96;&#96;&#96;&#96;&#96;&#96;</p>
 ]]></content>
       <categories>
-        <category>编程</category>
+        <category>心得</category>
       </categories>
       <tags>
-        <tag>算法</tag>
+        <tag>心得</tag>
       </tags>
   </entry>
   <entry>
@@ -146,6 +181,43 @@
 <p>要选出最优解不是一件容易的事，要证明局部最优为全局最优，要进行数学证明，否则就不能说明为全局最优。</p>
 <p>很多问题表面上看来用贪心算法可以找到最优解，实际上却把最优解给漏掉了。这就像现实生活中的“贪小便宜吃大亏”。所以在解决问题的时候，一定要谨慎使用此算法，一定要注意这个问题适不适合采用贪心算法。</p>
 <p>但是在很多大规模问题中，寻找最优解是一件相当费时耗力的事情，有时候付出大量人力物力财力后，回报并不与投入成正比。在这个时候选择相对最优的贪心算法就比较经济可行了。有的问题对最优的要求不是很高，在充分衡量付出和回报后，选择贪心算法未尝不是一种不错的选择。</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>欧几里得算法</title>
+    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
+<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
+<span id="more"></span>
+
+<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
+<ol>
+<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
+</li>
+<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
+</li>
+<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
+</li>
+<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
+</li>
+</ol>
+<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
+<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
+<ul>
+<li>求解整数的最大公约数。</li>
+<li>判断两个整数是否互质（最大公约数为1）。</li>
+<li>求解不定方程的整数解，如贝祖等式。</li>
+<li>在密码学中用于生成加密密钥。</li>
+</ul>
+<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
+<p>代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>编程</category>
