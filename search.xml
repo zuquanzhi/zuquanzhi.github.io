@@ -76,6 +76,18 @@
       </tags>
   </entry>
   <entry>
+    <title>网站搭建第一天心得</title>
+    <url>/2023/10/02/test/</url>
+    <content><![CDATA[<h2 id="又是崩溃的一天"><a href="#又是崩溃的一天" class="headerlink" title="又是崩溃的一天"></a>又是崩溃的一天</h2><h2 id="这个故事告诉我们"><a href="#这个故事告诉我们" class="headerlink" title="这个故事告诉我们"></a>这个故事告诉我们</h2><p><strong>超出能力范围的事情</strong>不要做！！！！<br><code>c</code><br>test file;<br>helloworld!<br>&#96;&#96;&#96;&#96;&#96;&#96;</p>
+]]></content>
+      <categories>
+        <category>心得</category>
+      </categories>
+      <tags>
+        <tag>心得</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>c语言中正则匹配的几种思路</title>
     <url>/2023/10/12/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF/</url>
     <content><![CDATA[<h1 id="关于正则匹配的几种思路"><a href="#关于正则匹配的几种思路" class="headerlink" title="关于正则匹配的几种思路"></a>关于正则匹配的几种思路</h1><p>注意：所谓正则表达指一整个字符串，而部分字符串<br>下面来看这样一个实例：<br><strong>写出一个程序，当输入“yuanshen”的时候，输出为“yes”；输入“no”的时候，输出为“no”</strong></p>
@@ -106,18 +118,6 @@
       </categories>
       <tags>
         <tag>正则匹配</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网站搭建第一天心得</title>
-    <url>/2023/10/02/test/</url>
-    <content><![CDATA[<h2 id="又是崩溃的一天"><a href="#又是崩溃的一天" class="headerlink" title="又是崩溃的一天"></a>又是崩溃的一天</h2><h2 id="这个故事告诉我们"><a href="#这个故事告诉我们" class="headerlink" title="这个故事告诉我们"></a>这个故事告诉我们</h2><p><strong>超出能力范围的事情</strong>不要做！！！！<br><code>c</code><br>test file;<br>helloworld!<br>&#96;&#96;&#96;&#96;&#96;&#96;</p>
-]]></content>
-      <categories>
-        <category>心得</category>
-      </categories>
-      <tags>
-        <tag>心得</tag>
       </tags>
   </entry>
   <entry>
@@ -204,43 +204,6 @@
       </tags>
   </entry>
   <entry>
-    <title>欧几里得算法</title>
-    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
-<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
-<span id="more"></span>
-
-<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
-<ol>
-<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
-</li>
-<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
-</li>
-<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
-</li>
-<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
-</li>
-</ol>
-<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
-<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
-<ul>
-<li>求解整数的最大公约数。</li>
-<li>判断两个整数是否互质（最大公约数为1）。</li>
-<li>求解不定方程的整数解，如贝祖等式。</li>
-<li>在密码学中用于生成加密密钥。</li>
-</ul>
-<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
-<p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>贪心算法</title>
     <url>/2023/10/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h1 id="一点关于贪心算法的思考"><a href="#一点关于贪心算法的思考" class="headerlink" title="一点关于贪心算法的思考"></a>一点关于贪心算法的思考</h1><h4 id="关于贪心算法，ChatGPT是这么定义的："><a href="#关于贪心算法，ChatGPT是这么定义的：" class="headerlink" title="关于贪心算法，ChatGPT是这么定义的："></a>关于贪心算法，ChatGPT是这么定义的：</h4><p>贪心算法（Greedy Algorithm）是一种求解最优化问题的算法范式，它在每一步选择当前状态下的最优解，最终期望通过一系列的最优选择达到全局最优解。贪心算法通常适用于那些具有最优子结构性质的问题，其中整体问题的最优解可以通过局部子问题的最优解得到。</p>
@@ -269,6 +232,43 @@
 <p>要选出最优解不是一件容易的事，要证明局部最优为全局最优，要进行数学证明，否则就不能说明为全局最优。</p>
 <p>很多问题表面上看来用贪心算法可以找到最优解，实际上却把最优解给漏掉了。这就像现实生活中的“贪小便宜吃大亏”。所以在解决问题的时候，一定要谨慎使用此算法，一定要注意这个问题适不适合采用贪心算法。</p>
 <p>但是在很多大规模问题中，寻找最优解是一件相当费时耗力的事情，有时候付出大量人力物力财力后，回报并不与投入成正比。在这个时候选择相对最优的贪心算法就比较经济可行了。有的问题对最优的要求不是很高，在充分衡量付出和回报后，选择贪心算法未尝不是一种不错的选择。</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>欧几里得算法</title>
+    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
+<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
+<span id="more"></span>
+
+<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
+<ol>
+<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
+</li>
+<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
+</li>
+<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
+</li>
+<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
+</li>
+</ol>
+<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
+<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
+<ul>
+<li>求解整数的最大公约数。</li>
+<li>判断两个整数是否互质（最大公约数为1）。</li>
+<li>求解不定方程的整数解，如贝祖等式。</li>
+<li>在密码学中用于生成加密密钥。</li>
+</ul>
+<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
+<p>代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>编程</category>
