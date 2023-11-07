@@ -6,7 +6,7 @@
   <link href="http://zuweicun.top/atom.xml" rel="self"/>
   
   <link href="http://zuweicun.top/"/>
-  <updated>2023-11-06T12:39:07.673Z</updated>
+  <updated>2023-11-07T12:21:29.928Z</updated>
   <id>http://zuweicun.top/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>插入排序</title>
+    <link href="http://zuweicun.top/2023/11/07/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"/>
+    <id>http://zuweicun.top/2023/11/07/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</id>
+    <published>2023-11-07T11:56:27.000Z</published>
+    <updated>2023-11-07T12:21:29.928Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><h3 id="一、概念及其介绍"><a href="#一、概念及其介绍" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>插入排序(InsertionSort)，一般也被称为直接插入排序。</p><p>对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动。</p><span id="more"></span><h3 id="二、适用说明"><a href="#二、适用说明" class="headerlink" title="二、适用说明"></a>二、适用说明</h3><p>插入排序的平均时间复杂度也是 **O(n^2)**，空间复杂度为常数阶 **O(1)**，具体时间复杂度和数组的有序性也是有关联的。</p><p>插入排序中，当待排序数组是有序时，是最优的情况，只需当前数跟前一个数比较一下就可以了，这时一共需要比较 <strong>N-1</strong> 次，时间复杂度为 **O(N)**。最坏的情况是待排序数组是逆序的，此时需要比较次数最多，最坏的情况是 **O(n^2)**。</p><h3 id="三、过程图示"><a href="#三、过程图示" class="headerlink" title="三、过程图示"></a>三、过程图示</h3><p>假设前面 <strong>n-1</strong>(其中 <strong>n&gt;&#x3D;2</strong>)个数已经是排好顺序的，现将第 <strong>n</strong> 个数插到前面已经排好的序列中，然后找到合适自己的位置，使得插入第n个数的这个序列也是排好顺序的。</p><p>按照此法对所有元素进行插入，直到整个序列排为有序的过程，称为插入排序。</p><p>从小到大的插入排序整个过程如图示：</p><p><strong>第一轮：</strong>从第二位置的 6 开始比较，比前面 7 小，交换位置。</p><p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-01.png" alt="img"></p><p><strong>第二轮：</strong>第三位置的 9 比前一位置的 7 大，无需交换位置。</p><p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-02.png" alt="img"></p><p><strong>第三轮：</strong>第四位置的 3 比前一位置的 9 小交换位置，依次往前比较。</p><p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-03.png" alt="img"></p><p><strong>第四轮：</strong>第五位置的 1 比前一位置的 9 小，交换位置，再依次往前比较。</p><p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-04.png" alt="img"></p><p>就这样依次比较到最后一个元素。</p><h3 id="四、C语言代码实现"><a href="#四、C语言代码实现" class="headerlink" title="四、C语言代码实现"></a>四、C语言代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[<span class="number">8</span>]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> temp=<span class="number">1</span>; <span class="comment">//定义交换中间变量</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> p=i;p&gt;<span class="number">0</span>;p--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[p]&lt;num[p<span class="number">-1</span>])&#123;<span class="comment">//判定是否小于前一个数</span></span><br><span class="line">                temp=num[p];</span><br><span class="line">                num[p]=num[p<span class="number">-1</span>];</span><br><span class="line">                num[p<span class="number">-1</span>]=temp;<span class="comment">//若小于，则两数交换</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);<span class="comment">//输出数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;插入排序&quot;&gt;&lt;a href=&quot;#插入排序&quot; class=&quot;headerlink&quot; title=&quot;插入排序&quot;&gt;&lt;/a&gt;插入排序&lt;/h1&gt;&lt;h3 id=&quot;一、概念及其介绍&quot;&gt;&lt;a href=&quot;#一、概念及其介绍&quot; class=&quot;headerlink&quot; title=&quot;一、概念及其介绍&quot;&gt;&lt;/a&gt;一、概念及其介绍&lt;/h3&gt;&lt;p&gt;插入排序(InsertionSort)，一般也被称为直接插入排序。&lt;/p&gt;
+&lt;p&gt;对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="http://zuweicun.top/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="排序" scheme="http://zuweicun.top/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>基于stm32的蓝牙循迹小车思路</title>
