@@ -6,7 +6,7 @@
   <link href="http://zuweicun.top/atom.xml" rel="self"/>
   
   <link href="http://zuweicun.top/"/>
-  <updated>2023-11-07T12:21:29.928Z</updated>
+  <updated>2023-11-07T14:19:11.960Z</updated>
   <id>http://zuweicun.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>希尔排序</title>
+    <link href="http://zuweicun.top/2023/11/07/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/"/>
+    <id>http://zuweicun.top/2023/11/07/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/</id>
+    <published>2023-11-07T12:24:07.000Z</published>
+    <updated>2023-11-07T14:19:11.960Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="一、概念及其介绍"><a href="#一、概念及其介绍" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>希尔排序(Shell Sort)是插入排序的一种，它是针对直接插入排序算法的改进。</p><p>希尔排序又称缩小增量排序，因 DL.Shell 于 1959 年提出而得名。</p><p>它通过比较相距一定间隔的元素来进行，各趟比较所用的距离随着算法的进行而减小，直到只比较相邻元素的最后一趟排序为止。</p><span id="more"></span><h3 id="二、适用说明"><a href="#二、适用说明" class="headerlink" title="二、适用说明"></a>二、适用说明</h3><p>希尔排序时间复杂度是 **O(n^(1.3-2))**，空间复杂度为常数阶 **O(1)**。希尔排序没有时间复杂度为 <strong>O(n(logn))</strong> 的快速排序算法快 ，因此对中等大小规模表现良好，但对规模非常大的数据排序不是最优选择，总之比一般 <strong>O(n^2 )</strong> 复杂度的算法快得多。</p><h3 id="三、过程图示"><a href="#三、过程图示" class="headerlink" title="三、过程图示"></a>三、过程图示</h3><p>希尔排序目的为了加快速度改进了插入排序，交换不相邻的元素对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。</p><p>在此我们选择增量 <strong>gap&#x3D;length&#x2F;2</strong>，缩小增量以 <strong>gap &#x3D; gap&#x2F;2</strong> 的方式，用序列 <strong>{n&#x2F;2,(n&#x2F;2)&#x2F;2…1}</strong> 来表示。</p><p>如图示例：</p><p>（1）初始增量第一趟 <strong>gap &#x3D; length&#x2F;2 &#x3D; 4</strong></p><p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-01.png" alt="img"></p><p>（2）第二趟，增量缩小为 2</p><p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-02.png" alt="img"></p><p>（3）第三趟，增量缩小为 1,得到最终排序结果</p><p>​                                                           <img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-03.png" alt="img"></p><h3 id="四、C语言代码示例"><a href="#四、C语言代码示例" class="headerlink" title="四、C语言代码示例"></a>四、C语言代码示例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> lenth 8</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[lenth]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> gap,j;<span class="comment">//定义增量，循环变量</span></span><br><span class="line">    <span class="keyword">for</span>(gap=lenth/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=gap;i&lt;lenth;i++)&#123;<span class="comment">//外层循环，gap每次缩小1/2</span></span><br><span class="line">            <span class="type">int</span> temp=num[i];<span class="comment">//将数组元素赋值给中间值</span></span><br><span class="line">            <span class="keyword">for</span>(j=i;j&gt;=gap&amp;&amp;temp&lt;num[j-gap];j-=gap)&#123;</span><br><span class="line">                num[j]=num[j-gap];</span><br><span class="line">            &#125;</span><br><span class="line">            num[j]=temp;<span class="comment">//判定若小于，两元素交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h3 id=&quot;一、概念及其介绍&quot;&gt;&lt;a href=&quot;#一、概念及其介绍&quot; class=&quot;headerlink&quot; title=&quot;一、概念及其介绍&quot;&gt;&lt;/a&gt;一、概念及其介绍&lt;/h3&gt;&lt;p&gt;希尔排序(Shell Sort)是插入排序的一种，它是针对直接插入排序算法的改进。&lt;/p&gt;
+&lt;p&gt;希尔排序又称缩小增量排序，因 DL.Shell 于 1959 年提出而得名。&lt;/p&gt;
+&lt;p&gt;它通过比较相距一定间隔的元素来进行，各趟比较所用的距离随着算法的进行而减小，直到只比较相邻元素的最后一趟排序为止。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="算法" scheme="http://zuweicun.top/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="排序" scheme="http://zuweicun.top/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>插入排序</title>
