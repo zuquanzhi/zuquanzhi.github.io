@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Self-balancing-bycycle</title>
-    <url>/2023/10/09/Self-balancing-bycycle/</url>
-    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>平衡车</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>c语言中正则匹配的几种思路</title>
     <url>/2023/10/12/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF/</url>
     <content><![CDATA[<h1 id="关于正则匹配的几种思路"><a href="#关于正则匹配的几种思路" class="headerlink" title="关于正则匹配的几种思路"></a>关于正则匹配的几种思路</h1><p>注意：所谓正则表达指一整个字符串，而部分字符串<br>下面来看这样一个实例：<br><strong>写出一个程序，当输入“yuanshen”的时候，输出为“yes”；输入“no”的时候，输出为“no”</strong></p>
@@ -46,15 +34,15 @@
       </tags>
   </entry>
   <entry>
-    <title>网站搭建第一天心得</title>
-    <url>/2023/10/02/test/</url>
-    <content><![CDATA[<h2 id="又是崩溃的一天"><a href="#又是崩溃的一天" class="headerlink" title="又是崩溃的一天"></a>又是崩溃的一天</h2><h2 id="这个故事告诉我们"><a href="#这个故事告诉我们" class="headerlink" title="这个故事告诉我们"></a>这个故事告诉我们</h2><p><strong>超出能力范围的事情</strong>不要做！！！！<br><code>c</code><br>test file;<br>helloworld!<br>&#96;&#96;&#96;&#96;&#96;&#96;</p>
-]]></content>
+    <title>Self-balancing-bycycle</title>
+    <url>/2023/10/09/Self-balancing-bycycle/</url>
+    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
+<span id="more"></span>]]></content>
       <categories>
-        <category>心得</category>
+        <category>项目</category>
       </categories>
       <tags>
-        <tag>心得</tag>
+        <tag>平衡车</tag>
       </tags>
   </entry>
   <entry>
@@ -118,6 +106,41 @@
       </categories>
       <tags>
         <tag>PID</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网站搭建第一天心得</title>
+    <url>/2023/10/02/test/</url>
+    <content><![CDATA[<h2 id="又是崩溃的一天"><a href="#又是崩溃的一天" class="headerlink" title="又是崩溃的一天"></a>又是崩溃的一天</h2><h2 id="这个故事告诉我们"><a href="#这个故事告诉我们" class="headerlink" title="这个故事告诉我们"></a>这个故事告诉我们</h2><p><strong>超出能力范围的事情</strong>不要做！！！！<br><code>c</code><br>test file;<br>helloworld!<br>&#96;&#96;&#96;&#96;&#96;&#96;</p>
+]]></content>
+      <categories>
+        <category>心得</category>
+      </categories>
+      <tags>
+        <tag>心得</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>冒泡排序</title>
+    <url>/2023/11/08/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><ul>
+<li><p>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端。</p>
+</li>
+<li><p>作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。冒泡排序还有一种优化算法，就是立一个 flag，当在一趟序列遍历中元素没有发生交换，则证明该序列已经有序。但这种改进对于提升性能来说并没有什么太大作用。</p>
+<span id="more"></span></li>
+</ul>
+<h3 id="1-算法步骤"><a href="#1-算法步骤" class="headerlink" title="1. 算法步骤"></a>1. 算法步骤</h3><p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
+<p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
+<p>针对所有的元素重复以上的步骤，除了最后一个。</p>
+<p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<h3 id="2-动图演示"><a href="#2-动图演示" class="headerlink" title="2. 动图演示"></a>2. 动图演示</h3><p><img data-src="https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif" alt="img"></p>
+<h3 id="3-什么时候最快"><a href="#3-什么时候最快" class="headerlink" title="3. 什么时候最快"></a>3. 什么时候最快</h3><p>当输入的数据已经是正序时（都已经是正序了，我还要你冒泡排序有何用啊）。</p>
+<h3 id="4-什么时候最慢"><a href="#4-什么时候最慢" class="headerlink" title="4. 什么时候最慢"></a>4. 什么时候最慢</h3><p>当输入的数据是反序时（写一个 for 循环反序输出数据不就行了，干嘛要用冒泡排序呢，我是闲的吗）。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 5</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        a[i] = rand() % <span class="number">101</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//初始化随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;<span class="comment">//数组输出函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">gudu</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> swapped; <span class="comment">// 用于标记是否发生交换</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swapped = <span class="number">0</span>; <span class="comment">// 每轮开始前重置为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; i; p++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[p] &gt; a[p + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="type">int</span> temp = a[p];</span><br><span class="line">                a[p] = a[p + <span class="number">1</span>];</span><br><span class="line">                a[p + <span class="number">1</span>] = temp;</span><br><span class="line">                swapped = <span class="number">1</span>; <span class="comment">// 发生交换</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!swapped) &#123;</span><br><span class="line">            <span class="comment">// 如果没有发生交换，说明已经排序完成</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    init(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    gudu(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sorted array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>排序</tag>
       </tags>
   </entry>
   <entry>
@@ -265,43 +288,6 @@
       </tags>
   </entry>
   <entry>
-    <title>贪心算法</title>
-    <url>/2023/10/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="一点关于贪心算法的思考"><a href="#一点关于贪心算法的思考" class="headerlink" title="一点关于贪心算法的思考"></a>一点关于贪心算法的思考</h1><h4 id="关于贪心算法，ChatGPT是这么定义的："><a href="#关于贪心算法，ChatGPT是这么定义的：" class="headerlink" title="关于贪心算法，ChatGPT是这么定义的："></a>关于贪心算法，ChatGPT是这么定义的：</h4><p>贪心算法（Greedy Algorithm）是一种求解最优化问题的算法范式，它在每一步选择当前状态下的最优解，最终期望通过一系列的最优选择达到全局最优解。贪心算法通常适用于那些具有最优子结构性质的问题，其中整体问题的最优解可以通过局部子问题的最优解得到。</p>
-<p>贪心算法的一般思想是按照某种规则，从问题的初始状态开始，通过一系列局部最优的选择，逐步逼近问题的全局最优解。每一步的选择不依赖于前面的选择，也不会影响以后的选择。因此，贪心算法通常是一个非常高效的算法，因为它不需要考虑所有可能的解决方案，只需关注当前的最优选择。</p>
-<span id="more"></span>
-<p><strong>显然，此算法是通过局部运算达到计算整体最优解的效果。</strong></p>
-<h4 id="举个生活中常见的实例："><a href="#举个生活中常见的实例：" class="headerlink" title="举个生活中常见的实例："></a>举个生活中常见的实例：</h4><p>假设有1元、2元、5元、10元、20元、50元、100元的纸币。现在要用这些钱来支付，至少要用多少张纸币？用贪心算法的思想，很显然，每一步尽可能用面值大的纸币即可。在日常生活中我们自然而然也是这么做的</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> m[<span class="number">7</span>]= &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">50</span>,<span class="number">100</span>&#125;; <span class="comment">//先有纸币的数额</span></span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line">	<span class="comment">//所找的金额</span></span><br><span class="line">	<span class="type">int</span> num;          <span class="comment">//所需纸币的张数</span></span><br><span class="line">    <span class="keyword">while</span>((	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;ret))!=EOF) &#123;</span><br><span class="line">		<span class="keyword">while</span>(ret&gt;<span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(ret&gt;=<span class="number">100</span>) &#123;</span><br><span class="line">                ret-=<span class="number">100</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">50</span>&amp;&amp;ret&lt;<span class="number">100</span>) &#123;</span><br><span class="line">                ret-=<span class="number">50</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">20</span>&amp;&amp;ret&lt;<span class="number">50</span>) &#123;</span><br><span class="line">                ret-=<span class="number">20</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">5</span>&amp;&amp;ret&lt;<span class="number">20</span>) &#123;</span><br><span class="line">                ret-=<span class="number">5</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">2</span>&amp;&amp;ret&lt;<span class="number">5</span>) &#123;</span><br><span class="line">                ret-=<span class="number">2</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">1</span>&amp;&amp;ret&lt;<span class="number">2</span>) &#123;</span><br><span class="line">                ret-=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			num++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,num);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="贪心算法的基本思路"><a href="#贪心算法的基本思路" class="headerlink" title="贪心算法的基本思路"></a>贪心算法的基本思路</h4><ol>
-<li>候选集合S<br>为了构造问题的解决方案，有一个候选集合C作为问题的可能解，问题的最终解均取自于候选集合C。</li>
-<li>解集合S<br>随着贪心选择的进行，解集合不断扩展，直到构成一个满足问题的完整解。</li>
-<li>解决函数solution<br>检查解集合是否构成问题的完整解。</li>
-<li>选择函数select<br>即贪心策略，这是贪心算法的关键，它指出哪个候选对象有希望构成成问题的解。</li>
-<li>可行函数feasible<br>检查解集合中加入一个候选对象是否可行，即解集合扩展后是否满足约束条件。</li>
-</ol>
-<p>对应的，</p>
-<h4 id="该算法存在的问题"><a href="#该算法存在的问题" class="headerlink" title="该算法存在的问题"></a>该算法存在的问题</h4><ul>
-<li><p>不能保证求得的最后解是最佳的</p>
-</li>
-<li><p>不能用来求最大值或最小值的问题</p>
-</li>
-<li><p>只能求满足某些约束条件的可行解的范围</p>
-</li>
-</ul>
-<p>要选出最优解不是一件容易的事，要证明局部最优为全局最优，要进行数学证明，否则就不能说明为全局最优。</p>
-<p>很多问题表面上看来用贪心算法可以找到最优解，实际上却把最优解给漏掉了。这就像现实生活中的“贪小便宜吃大亏”。所以在解决问题的时候，一定要谨慎使用此算法，一定要注意这个问题适不适合采用贪心算法。</p>
-<p>但是在很多大规模问题中，寻找最优解是一件相当费时耗力的事情，有时候付出大量人力物力财力后，回报并不与投入成正比。在这个时候选择相对最优的贪心算法就比较经济可行了。有的问题对最优的要求不是很高，在充分衡量付出和回报后，选择贪心算法未尝不是一种不错的选择。</p>
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>欧几里得算法</title>
     <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
@@ -330,6 +316,43 @@
 <p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
 <p>代码实现如下：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>贪心算法</title>
+    <url>/2023/10/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="一点关于贪心算法的思考"><a href="#一点关于贪心算法的思考" class="headerlink" title="一点关于贪心算法的思考"></a>一点关于贪心算法的思考</h1><h4 id="关于贪心算法，ChatGPT是这么定义的："><a href="#关于贪心算法，ChatGPT是这么定义的：" class="headerlink" title="关于贪心算法，ChatGPT是这么定义的："></a>关于贪心算法，ChatGPT是这么定义的：</h4><p>贪心算法（Greedy Algorithm）是一种求解最优化问题的算法范式，它在每一步选择当前状态下的最优解，最终期望通过一系列的最优选择达到全局最优解。贪心算法通常适用于那些具有最优子结构性质的问题，其中整体问题的最优解可以通过局部子问题的最优解得到。</p>
+<p>贪心算法的一般思想是按照某种规则，从问题的初始状态开始，通过一系列局部最优的选择，逐步逼近问题的全局最优解。每一步的选择不依赖于前面的选择，也不会影响以后的选择。因此，贪心算法通常是一个非常高效的算法，因为它不需要考虑所有可能的解决方案，只需关注当前的最优选择。</p>
+<span id="more"></span>
+<p><strong>显然，此算法是通过局部运算达到计算整体最优解的效果。</strong></p>
+<h4 id="举个生活中常见的实例："><a href="#举个生活中常见的实例：" class="headerlink" title="举个生活中常见的实例："></a>举个生活中常见的实例：</h4><p>假设有1元、2元、5元、10元、20元、50元、100元的纸币。现在要用这些钱来支付，至少要用多少张纸币？用贪心算法的思想，很显然，每一步尽可能用面值大的纸币即可。在日常生活中我们自然而然也是这么做的</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> m[<span class="number">7</span>]= &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">50</span>,<span class="number">100</span>&#125;; <span class="comment">//先有纸币的数额</span></span><br><span class="line">	<span class="type">int</span> ret;</span><br><span class="line">	<span class="comment">//所找的金额</span></span><br><span class="line">	<span class="type">int</span> num;          <span class="comment">//所需纸币的张数</span></span><br><span class="line">    <span class="keyword">while</span>((	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;ret))!=EOF) &#123;</span><br><span class="line">		<span class="keyword">while</span>(ret&gt;<span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(ret&gt;=<span class="number">100</span>) &#123;</span><br><span class="line">                ret-=<span class="number">100</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">50</span>&amp;&amp;ret&lt;<span class="number">100</span>) &#123;</span><br><span class="line">                ret-=<span class="number">50</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">20</span>&amp;&amp;ret&lt;<span class="number">50</span>) &#123;</span><br><span class="line">                ret-=<span class="number">20</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">5</span>&amp;&amp;ret&lt;<span class="number">20</span>) &#123;</span><br><span class="line">                ret-=<span class="number">5</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">2</span>&amp;&amp;ret&lt;<span class="number">5</span>) &#123;</span><br><span class="line">                ret-=<span class="number">2</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span>(ret&gt;=<span class="number">1</span>&amp;&amp;ret&lt;<span class="number">2</span>) &#123;</span><br><span class="line">                ret-=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			num++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,num);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="贪心算法的基本思路"><a href="#贪心算法的基本思路" class="headerlink" title="贪心算法的基本思路"></a>贪心算法的基本思路</h4><ol>
+<li>候选集合S<br>为了构造问题的解决方案，有一个候选集合C作为问题的可能解，问题的最终解均取自于候选集合C。</li>
+<li>解集合S<br>随着贪心选择的进行，解集合不断扩展，直到构成一个满足问题的完整解。</li>
+<li>解决函数solution<br>检查解集合是否构成问题的完整解。</li>
+<li>选择函数select<br>即贪心策略，这是贪心算法的关键，它指出哪个候选对象有希望构成成问题的解。</li>
+<li>可行函数feasible<br>检查解集合中加入一个候选对象是否可行，即解集合扩展后是否满足约束条件。</li>
+</ol>
+<p>对应的，</p>
+<h4 id="该算法存在的问题"><a href="#该算法存在的问题" class="headerlink" title="该算法存在的问题"></a>该算法存在的问题</h4><ul>
+<li><p>不能保证求得的最后解是最佳的</p>
+</li>
+<li><p>不能用来求最大值或最小值的问题</p>
+</li>
+<li><p>只能求满足某些约束条件的可行解的范围</p>
+</li>
+</ul>
+<p>要选出最优解不是一件容易的事，要证明局部最优为全局最优，要进行数学证明，否则就不能说明为全局最优。</p>
+<p>很多问题表面上看来用贪心算法可以找到最优解，实际上却把最优解给漏掉了。这就像现实生活中的“贪小便宜吃大亏”。所以在解决问题的时候，一定要谨慎使用此算法，一定要注意这个问题适不适合采用贪心算法。</p>
+<p>但是在很多大规模问题中，寻找最优解是一件相当费时耗力的事情，有时候付出大量人力物力财力后，回报并不与投入成正比。在这个时候选择相对最优的贪心算法就比较经济可行了。有的问题对最优的要求不是很高，在充分衡量付出和回报后，选择贪心算法未尝不是一种不错的选择。</p>
 ]]></content>
       <categories>
         <category>编程</category>
