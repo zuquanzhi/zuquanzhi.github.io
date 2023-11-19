@@ -64,15 +64,36 @@
       </tags>
   </entry>
   <entry>
-    <title>Self-balancing-bycycle</title>
-    <url>/2023/10/09/Self-balancing-bycycle/</url>
-    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
-<span id="more"></span>]]></content>
+    <title>c语言中正则匹配的几种思路</title>
+    <url>/2023/10/12/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF/</url>
+    <content><![CDATA[<h1 id="关于正则匹配的几种思路"><a href="#关于正则匹配的几种思路" class="headerlink" title="关于正则匹配的几种思路"></a>关于正则匹配的几种思路</h1><p>注意：所谓正则表达指一整个字符串，而部分字符串<br>下面来看这样一个实例：<br><strong>写出一个程序，当输入“yuanshen”的时候，输出为“yes”；输入“no”的时候，输出为“no”</strong></p>
+<span id="more"></span>
+
+
+<h2 id="输入示例：输出示例："><a href="#输入示例：输出示例：" class="headerlink" title="输入示例：输出示例："></a>输入示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yuanshen</span><br></pre></td></tr></table></figure><br>输出示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">yes</span></span><br></pre></td></tr></table></figure></h2><h2 id="输入示例：输出示例：-1"><a href="#输入示例：输出示例：-1" class="headerlink" title="输入示例：输出示例："></a>输入示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">qidong</span><br></pre></td></tr></table></figure><br>输出示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">no</span><br></pre></td></tr></table></figure></h2><p>输入示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">balaba</span><br></pre></td></tr></table></figure>
+<p>输出示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Error</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="思路一：无脑匹配"><a href="#思路一：无脑匹配" class="headerlink" title="思路一：无脑匹配"></a>思路一：无脑匹配</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    int i = 0;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; 9) &#123;</span><br><span class="line">        char c;</span><br><span class="line">        scanf(<span class="string">&quot;%c&quot;</span>, &amp;c);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        ans[i] = c;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    ans[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= 2 &amp;&amp; ans[0] == <span class="string">&#x27;y&#x27;</span> &amp;&amp; </span><br><span class="line">    ans[1] == <span class="string">&#x27;u&#x27;</span>&amp;&amp;ans[2] == <span class="string">&#x27;a&#x27;</span>&amp;&amp;ans[3] == <span class="string">&#x27;n&#x27;</span>&amp;&amp;ans[4] == <span class="string">&#x27;s&#x27;</span>&amp;&amp;</span><br><span class="line">    ans[5] == <span class="string">&#x27;h&#x27;</span>&amp;&amp;ans[6] == <span class="string">&#x27;e&#x27;</span>&amp;&amp;ans[7] == <span class="string">&#x27;n&#x27;</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">elif</span> (i &gt;= 2 &amp;&amp; ans[0] == <span class="string">&#x27;q&#x27;</span> &amp;&amp; </span><br><span class="line">    ans[1] == <span class="string">&#x27;i&#x27;</span>&amp;&amp;ans[2] == <span class="string">&#x27;d&#x27;</span>&amp;&amp;ans[3] == <span class="string">&#x27;o&#x27;</span>&amp;&amp;ans[4] == <span class="string">&#x27;n&#x27;</span>&amp;&amp;</span><br><span class="line">    ans[5] == <span class="string">&#x27;g&#x27;</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种思路看来有点麻烦（蠢），但是笔者作为初学者第一反应就是这样的。<br>首先创建了一个char类型数组，用while持续输入，if换行符作为结束条件，最后再加上“\0”结束输入。<br>匹配阶段则是用if挨个元素匹配。</p>
+<h4 id="总而言之，低效、麻烦而直观"><a href="#总而言之，低效、麻烦而直观" class="headerlink" title="总而言之，低效、麻烦而直观"></a><strong>总而言之，低效、麻烦而直观</strong></h4><h2 id="思路二：使用strcmp函数"><a href="#思路二：使用strcmp函数" class="headerlink" title="思路二：使用strcmp函数"></a>思路二：使用strcmp函数</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    int i = 0;</span><br><span class="line">    // Read characters into the array <span class="keyword">until</span> newline or reaching array size - 1</span><br><span class="line">    <span class="keyword">while</span> (i &lt; 9 &amp;&amp; scanf(<span class="string">&quot;%c&quot;</span>, &amp;ans[i]) == 1 &amp;&amp; ans[i] != <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Null-terminate the string</span><br><span class="line">    ans[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;yuanshen&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;qidong&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路二的输入方式与思路一大同小异，关键区别在于判断匹配的方式  </p>
+<h3 id="简单介绍一下使用到的strcmp函数："><a href="#简单介绍一下使用到的strcmp函数：" class="headerlink" title="简单介绍一下使用到的strcmp函数："></a>简单介绍一下使用到的strcmp函数：</h3><p>strcmp 函数用于比较两个字符串是否相等。它返回一个整数，用于表示比较结果。这个整数的含义如下：<br>-返回值小于 0：表示第一个字符串小于第二个字符串。<br>-返回值等于 0：表示两个字符串相等。<br>-返回值大于 0：表示第一个字符串大于第二个字符串。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">int strcmp(const char *str1, const char *str2) &#123;</span><br><span class="line">    <span class="keyword">while</span> (*str1 &amp;&amp; (*str1 == *str2)) &#123;</span><br><span class="line">        str1++;</span><br><span class="line">        str2++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> *(unsigned char *)str1 - *(unsigned char *)str2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上为strcmp函数的声明代码，采用指针达到字符串的匹配检测。</p>
+<h2 id="思路三："><a href="#思路三：" class="headerlink" title="思路三："></a>思路三：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    // Read a line of input into ans</span><br><span class="line">    fgets(ans, sizeof(ans), stdin);</span><br><span class="line"></span><br><span class="line">    // Remove newline character <span class="keyword">if</span> present</span><br><span class="line">    size_t len = strlen(ans);</span><br><span class="line">    <span class="keyword">if</span> (len &gt; 0 &amp;&amp; ans[len - 1] == <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        ans[len - 1] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Check <span class="keyword">if</span> ans starts with <span class="string">&quot;yuanshen&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;yuanshen&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(strncmp(ans, <span class="string">&quot;qidong&quot;</span>, 2) == 0)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码的基本思路是：<br>使用 fgets 函数读取用户输入的字符串，将其存储在名为 ans 的字符数组中，限制最大输入字符数为9。</p>
+<p>检查读取到的字符串的长度，如果大于0且最后一个字符是换行符（’\n’），则将该换行符替换为字符串终止符（’\0’），以确保字符串正确终止。</p>
+<p>使用 strncmp 函数比较 ans 字符串的前两个字符与预期字符串是否相等。如果相等，输出 “Yes”&#x2F;“No”，<br>否则输出 “Error”。</p>
+<p>（萌新勿骂）</p>
+]]></content>
       <categories>
-        <category>项目</category>
+        <category>编程</category>
       </categories>
       <tags>
-        <tag>平衡车</tag>
+        <tag>正则匹配</tag>
       </tags>
   </entry>
   <entry>
@@ -88,26 +109,52 @@
       </tags>
   </entry>
   <entry>
-    <title>冒泡排序</title>
-    <url>/2023/11/08/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><ul>
-<li><p>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端。</p>
-</li>
-<li><p>作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。冒泡排序还有一种优化算法，就是立一个 flag，当在一趟序列遍历中元素没有发生交换，则证明该序列已经有序。但这种改进对于提升性能来说并没有什么太大作用。</p>
-<span id="more"></span></li>
-</ul>
-<h3 id="1-算法步骤"><a href="#1-算法步骤" class="headerlink" title="1. 算法步骤"></a>1. 算法步骤</h3><p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
-<p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
-<p>针对所有的元素重复以上的步骤，除了最后一个。</p>
-<p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
-<h3 id="2-动图演示"><a href="#2-动图演示" class="headerlink" title="2. 动图演示"></a>2. 动图演示</h3><p><img data-src="https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif" alt="img"></p>
-<h3 id="3-什么时候最快"><a href="#3-什么时候最快" class="headerlink" title="3. 什么时候最快"></a>3. 什么时候最快</h3><p>当输入的数据已经是正序时（都已经是正序了，我还要你冒泡排序有何用啊）。</p>
-<h3 id="4-什么时候最慢"><a href="#4-什么时候最慢" class="headerlink" title="4. 什么时候最慢"></a>4. 什么时候最慢</h3><p>当输入的数据是反序时（写一个 for 循环反序输出数据不就行了，干嘛要用冒泡排序呢，我是闲的吗）。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 5</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        a[i] = rand() % <span class="number">101</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//初始化随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;<span class="comment">//数组输出函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">gudu</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> swapped; <span class="comment">// 用于标记是否发生交换</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swapped = <span class="number">0</span>; <span class="comment">// 每轮开始前重置为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; i; p++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[p] &gt; a[p + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="type">int</span> temp = a[p];</span><br><span class="line">                a[p] = a[p + <span class="number">1</span>];</span><br><span class="line">                a[p + <span class="number">1</span>] = temp;</span><br><span class="line">                swapped = <span class="number">1</span>; <span class="comment">// 发生交换</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!swapped) &#123;</span><br><span class="line">            <span class="comment">// 如果没有发生交换，说明已经排序完成</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    init(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    gudu(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sorted array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
+    <title>Self-balancing-bycycle</title>
+    <url>/2023/10/09/Self-balancing-bycycle/</url>
+    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
       <tags>
-        <tag>排序</tag>
+        <tag>平衡车</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>欧几里得算法</title>
+    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
+<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
+<span id="more"></span>
+
+<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
+<ol>
+<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
+</li>
+<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
+</li>
+<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
+</li>
+<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
+</li>
+</ol>
+<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
+<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
+<ul>
+<li>求解整数的最大公约数。</li>
+<li>判断两个整数是否互质（最大公约数为1）。</li>
+<li>求解不定方程的整数解，如贝祖等式。</li>
+<li>在密码学中用于生成加密密钥。</li>
+</ul>
+<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
+<p>代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -194,37 +241,9 @@
       </tags>
   </entry>
   <entry>
-    <title>希尔排序</title>
-    <url>/2023/11/07/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h3 id="一、概念及其介绍"><a href="#一、概念及其介绍" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>希尔排序(Shell Sort)是插入排序的一种，它是针对直接插入排序算法的改进。</p>
-<p>希尔排序又称缩小增量排序，因 DL.Shell 于 1959 年提出而得名。</p>
-<p>它通过比较相距一定间隔的元素来进行，各趟比较所用的距离随着算法的进行而减小，直到只比较相邻元素的最后一趟排序为止。</p>
-<span id="more"></span>
-
-<h3 id="二、适用说明"><a href="#二、适用说明" class="headerlink" title="二、适用说明"></a>二、适用说明</h3><p>希尔排序时间复杂度是 **O(n^(1.3-2))**，空间复杂度为常数阶 **O(1)**。希尔排序没有时间复杂度为 <strong>O(n(logn))</strong> 的快速排序算法快 ，因此对中等大小规模表现良好，但对规模非常大的数据排序不是最优选择，总之比一般 <strong>O(n^2 )</strong> 复杂度的算法快得多。</p>
-<h3 id="三、过程图示"><a href="#三、过程图示" class="headerlink" title="三、过程图示"></a>三、过程图示</h3><p>希尔排序目的为了加快速度改进了插入排序，交换不相邻的元素对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。</p>
-<p>在此我们选择增量 <strong>gap&#x3D;length&#x2F;2</strong>，缩小增量以 <strong>gap &#x3D; gap&#x2F;2</strong> 的方式，用序列 <strong>{n&#x2F;2,(n&#x2F;2)&#x2F;2…1}</strong> 来表示。</p>
-<p>如图示例：</p>
-<p>（1）初始增量第一趟 <strong>gap &#x3D; length&#x2F;2 &#x3D; 4</strong></p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-01.png" alt="img"></p>
-<p>（2）第二趟，增量缩小为 2</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-02.png" alt="img"></p>
-<p>（3）第三趟，增量缩小为 1,得到最终排序结果</p>
-<p>​                                                           <img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-03.png" alt="img"></p>
-<h3 id="四、C语言代码示例"><a href="#四、C语言代码示例" class="headerlink" title="四、C语言代码示例"></a>四、C语言代码示例</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> lenth 8</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[lenth]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> gap,j;<span class="comment">//定义增量，循环变量</span></span><br><span class="line">    <span class="keyword">for</span>(gap=lenth/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=gap;i&lt;lenth;i++)&#123;<span class="comment">//外层循环，gap每次缩小1/2</span></span><br><span class="line">            <span class="type">int</span> temp=num[i];<span class="comment">//将数组元素赋值给中间值</span></span><br><span class="line">            <span class="keyword">for</span>(j=i;j&gt;=gap&amp;&amp;temp&lt;num[j-gap];j-=gap)&#123;</span><br><span class="line">                num[j]=num[j-gap];</span><br><span class="line">            &#125;</span><br><span class="line">            num[j]=temp;<span class="comment">//判定若小于，两元素交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>排序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>插入排序</title>
-    <url>/2023/11/07/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><h3 id="一、概念及其介绍"><a href="#一、概念及其介绍" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>插入排序(InsertionSort)，一般也被称为直接插入排序。</p>
+    <title>排序</title>
+    <url>/2023/11/07/%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="一、概念及其介绍"><a href="#一、概念及其介绍" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>插入排序(InsertionSort)，一般也被称为直接插入排序。</p>
 <p>对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动。</p>
 <span id="more"></span>
 
@@ -244,65 +263,46 @@
 <p>就这样依次比较到最后一个元素。</p>
 <h3 id="四、C语言代码实现"><a href="#四、C语言代码实现" class="headerlink" title="四、C语言代码实现"></a>四、C语言代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[<span class="number">8</span>]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> temp=<span class="number">1</span>; <span class="comment">//定义交换中间变量</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> p=i;p&gt;<span class="number">0</span>;p--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[p]&lt;num[p<span class="number">-1</span>])&#123;<span class="comment">//判定是否小于前一个数</span></span><br><span class="line">                temp=num[p];</span><br><span class="line">                num[p]=num[p<span class="number">-1</span>];</span><br><span class="line">                num[p<span class="number">-1</span>]=temp;<span class="comment">//若小于，则两数交换</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);<span class="comment">//输出数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<hr>
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><h3 id="一、概念及其介绍-1"><a href="#一、概念及其介绍-1" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>希尔排序(Shell Sort)是插入排序的一种，它是针对直接插入排序算法的改进。</p>
+<p>希尔排序又称缩小增量排序，因 DL.Shell 于 1959 年提出而得名。</p>
+<p>它通过比较相距一定间隔的元素来进行，各趟比较所用的距离随着算法的进行而减小，直到只比较相邻元素的最后一趟排序为止。</p>
+<h3 id="二、适用说明-1"><a href="#二、适用说明-1" class="headerlink" title="二、适用说明"></a>二、适用说明</h3><p>希尔排序时间复杂度是 **O(n^(1.3-2))**，空间复杂度为常数阶 **O(1)**。希尔排序没有时间复杂度为 <strong>O(n(logn))</strong> 的快速排序算法快 ，因此对中等大小规模表现良好，但对规模非常大的数据排序不是最优选择，总之比一般 <strong>O(n^2 )</strong> 复杂度的算法快得多。</p>
+<h3 id="三、过程图示-1"><a href="#三、过程图示-1" class="headerlink" title="三、过程图示"></a>三、过程图示</h3><p>希尔排序目的为了加快速度改进了插入排序，交换不相邻的元素对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。</p>
+<p>在此我们选择增量 <strong>gap&#x3D;length&#x2F;2</strong>，缩小增量以 <strong>gap &#x3D; gap&#x2F;2</strong> 的方式，用序列 <strong>{n&#x2F;2,(n&#x2F;2)&#x2F;2…1}</strong> 来表示。</p>
+<p>如图示例：</p>
+<p>（1）初始增量第一趟 <strong>gap &#x3D; length&#x2F;2 &#x3D; 4</strong></p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-01.png" alt="img"></p>
+<p>（2）第二趟，增量缩小为 2</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-02.png" alt="img"></p>
+<p>（3）第三趟，增量缩小为 1,得到最终排序结果</p>
+<p>​                                                           <img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-03.png" alt="img"></p>
+<h3 id="四、C语言代码示例"><a href="#四、C语言代码示例" class="headerlink" title="四、C语言代码示例"></a>四、C语言代码示例</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> lenth 8</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[lenth]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> gap,j;<span class="comment">//定义增量，循环变量</span></span><br><span class="line">    <span class="keyword">for</span>(gap=lenth/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=gap;i&lt;lenth;i++)&#123;<span class="comment">//外层循环，gap每次缩小1/2</span></span><br><span class="line">            <span class="type">int</span> temp=num[i];<span class="comment">//将数组元素赋值给中间值</span></span><br><span class="line">            <span class="keyword">for</span>(j=i;j&gt;=gap&amp;&amp;temp&lt;num[j-gap];j-=gap)&#123;</span><br><span class="line">                num[j]=num[j-gap];</span><br><span class="line">            &#125;</span><br><span class="line">            num[j]=temp;<span class="comment">//判定若小于，两元素交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>排序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>欧几里得算法</title>
-    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
-<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
-<span id="more"></span>
-
-<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
-<ol>
-<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
-</li>
-<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
-</li>
-<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
-</li>
-<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
-</li>
-</ol>
-<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
-<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
-<ul>
-<li>求解整数的最大公约数。</li>
-<li>判断两个整数是否互质（最大公约数为1）。</li>
-<li>求解不定方程的整数解，如贝祖等式。</li>
-<li>在密码学中用于生成加密密钥。</li>
-</ul>
-<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
-<p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>选择排序</title>
-    <url>/2023/11/08/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
-<span id="more"></span>
-
+<hr>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
 <h3 id="1-算法步骤"><a href="#1-算法步骤" class="headerlink" title="1. 算法步骤"></a>1. 算法步骤</h3><p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。</p>
 <p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
 <p>重复第二步，直到所有元素均排序完毕。</p>
 <h3 id="2-动图演示"><a href="#2-动图演示" class="headerlink" title="2. 动图演示"></a>2. 动图演示</h3><p><img data-src="https://www.runoob.com/wp-content/uploads/2019/03/selectionSort.gif" alt="img"></p>
 <hr>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 5</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        a[i] = rand() % <span class="number">101</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//初始化随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;<span class="comment">//数组输出函数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a,<span class="type">int</span> *b)</span> <span class="comment">//交换两数</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="type">int</span> temp = *a;</span><br><span class="line">      *a = *b;</span><br><span class="line">      *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">choose</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="type">int</span> i,j;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span> ; i &lt; len - <span class="number">1</span> ; i++)</span><br><span class="line">      &#123;</span><br><span class="line">                <span class="type">int</span> min = i;</span><br><span class="line">                <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; len; j++)   <span class="comment">//走访未排序的元素</span></span><br><span class="line">                    <span class="keyword">if</span> (arr[j] &lt; arr[min])  <span class="comment">//找到目前最小值</span></span><br><span class="line">                        min = j;  <span class="comment">//记录最小值</span></span><br><span class="line">                swap(&amp;arr[min], &amp;arr[i]);  <span class="comment">//做交換</span></span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    init(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    choose(a,n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sorted array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ul>
+<li><p>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端。</p>
+</li>
+<li><p>作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。冒泡排序还有一种优化算法，就是立一个 flag，当在一趟序列遍历中元素没有发生交换，则证明该序列已经有序。但这种改进对于提升性能来说并没有什么太大作用。</p>
+</li>
+</ul>
+<h3 id="1-算法步骤-1"><a href="#1-算法步骤-1" class="headerlink" title="1. 算法步骤"></a>1. 算法步骤</h3><p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
+<p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
+<p>针对所有的元素重复以上的步骤，除了最后一个。</p>
+<p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<h3 id="2-动图演示-1"><a href="#2-动图演示-1" class="headerlink" title="2. 动图演示"></a>2. 动图演示</h3><p><img data-src="https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif" alt="img"></p>
+<h3 id="3-什么时候最快"><a href="#3-什么时候最快" class="headerlink" title="3. 什么时候最快"></a>3. 什么时候最快</h3><p>当输入的数据已经是正序时（都已经是正序了，我还要你冒泡排序有何用啊）。</p>
+<h3 id="4-什么时候最慢"><a href="#4-什么时候最慢" class="headerlink" title="4. 什么时候最慢"></a>4. 什么时候最慢</h3><p>当输入的数据是反序时（写一个 for 循环反序输出数据不就行了，干嘛要用冒泡排序呢，我是闲的吗）。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 5</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        a[i] = rand() % <span class="number">101</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//初始化随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;<span class="comment">//数组输出函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">gudu</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> swapped; <span class="comment">// 用于标记是否发生交换</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swapped = <span class="number">0</span>; <span class="comment">// 每轮开始前重置为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; i; p++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[p] &gt; a[p + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="type">int</span> temp = a[p];</span><br><span class="line">                a[p] = a[p + <span class="number">1</span>];</span><br><span class="line">                a[p + <span class="number">1</span>] = temp;</span><br><span class="line">                swapped = <span class="number">1</span>; <span class="comment">// 发生交换</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!swapped) &#123;</span><br><span class="line">            <span class="comment">// 如果没有发生交换，说明已经排序完成</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    init(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    gudu(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sorted array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -350,36 +350,46 @@
       </tags>
   </entry>
   <entry>
-    <title>c语言中正则匹配的几种思路</title>
-    <url>/2023/10/12/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF/</url>
-    <content><![CDATA[<h1 id="关于正则匹配的几种思路"><a href="#关于正则匹配的几种思路" class="headerlink" title="关于正则匹配的几种思路"></a>关于正则匹配的几种思路</h1><p>注意：所谓正则表达指一整个字符串，而部分字符串<br>下面来看这样一个实例：<br><strong>写出一个程序，当输入“yuanshen”的时候，输出为“yes”；输入“no”的时候，输出为“no”</strong></p>
+    <title>插入排序</title>
+    <url>/2023/11/19/%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="轮转数组"><a href="#轮转数组" class="headerlink" title="轮转数组"></a>轮转数组</h1><hr>
+<p><strong>题目：</strong></p>
+<p>给定一个整数数组 <code>nums</code>，将数组中的元素向右轮转 <code>k</code> 个位置，其中 <code>k</code> 是非负数。</p>
 <span id="more"></span>
 
+<p><strong>示例 1:</strong></p>
+<figure class="highlight nestedtext"><table><tr><td class="code"><pre><span class="line"><span class="attribute">输入</span><span class="punctuation">:</span> <span class="string">nums = [1,2,3,4,5,6,7], k = 3</span></span><br><span class="line"><span class="attribute">输出</span><span class="punctuation">:</span> <span class="string">[5,6,7,1,2,3,4]</span></span><br><span class="line"><span class="attribute">解释</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">向右轮转 1 步</span><span class="punctuation">:</span> <span class="string">[7,1,2,3,4,5,6]</span></span><br><span class="line"><span class="attribute">向右轮转 2 步</span><span class="punctuation">:</span> <span class="string">[6,7,1,2,3,4,5]</span></span><br><span class="line"><span class="attribute">向右轮转 3 步</span><span class="punctuation">:</span> <span class="string">[5,6,7,1,2,3,4]</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="输入示例：输出示例："><a href="#输入示例：输出示例：" class="headerlink" title="输入示例：输出示例："></a>输入示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yuanshen</span><br></pre></td></tr></table></figure><br>输出示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">yes</span></span><br></pre></td></tr></table></figure></h2><h2 id="输入示例：输出示例：-1"><a href="#输入示例：输出示例：-1" class="headerlink" title="输入示例：输出示例："></a>输入示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">qidong</span><br></pre></td></tr></table></figure><br>输出示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">no</span><br></pre></td></tr></table></figure></h2><p>输入示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">balaba</span><br></pre></td></tr></table></figure>
-<p>输出示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Error</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">输入：nums = [<span class="string">-1</span>,<span class="string">-100</span>,3,99], k = 2</span><br><span class="line">输出：[3,99,<span class="string">-1</span>,<span class="string">-100</span>]</span><br><span class="line">解释: </span><br><span class="line">向右轮转 1 步: [99,<span class="string">-1</span>,<span class="string">-100</span>,3]</span><br><span class="line">向右轮转 2 步: [3,99,<span class="string">-1</span>,<span class="string">-100</span>]</span><br></pre></td></tr></table></figure>
 
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>-231 &lt;= nums[i] &lt;= 231 - 1</code></li>
+<li><code>0 &lt;= k &lt;= 105</code></li>
+</ul>
+<p><strong>进阶：</strong></p>
+<ul>
+<li>尽可能想出更多的解决方案，至少有 <strong>三种</strong> 不同的方法可以解决这个问题。</li>
+<li>你可以使用空间复杂度为 <code>O(1)</code> 的 <strong>原地</strong> 算法解决这个问题吗？</li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">rotate</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">    k %= numsSize; <span class="comment">// 处理 k 大于数组大小的情况</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> count = numsSize; <span class="comment">// 循环次数</span></span><br><span class="line">    <span class="type">int</span> begin = <span class="number">0</span>; <span class="comment">// 循环开始的下标</span></span><br><span class="line">    <span class="type">int</span> tmp = nums[begin]; <span class="comment">// 循环开始的值</span></span><br><span class="line">    <span class="type">int</span> len = begin; <span class="comment">// 在循环中的当前下标</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环执行</span></span><br><span class="line">    <span class="keyword">while</span> (count-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">int</span> before = (len - k + numsSize) % numsSize; <span class="comment">// 计算下一个位置</span></span><br><span class="line"></span><br><span class="line">        nums[len] = nums[before]; <span class="comment">// 将上一个值移动到当前值</span></span><br><span class="line">        len = before;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果循环结束，将开始的值赋给结尾的值，进入下一个循环</span></span><br><span class="line">        <span class="keyword">if</span> (before == begin) &#123;</span><br><span class="line">            nums[len] = tmp;</span><br><span class="line">            begin = (begin + <span class="number">1</span>) % numsSize;</span><br><span class="line">            tmp = nums[begin];</span><br><span class="line">            len = begin;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="思路一：无脑匹配"><a href="#思路一：无脑匹配" class="headerlink" title="思路一：无脑匹配"></a>思路一：无脑匹配</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    int i = 0;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; 9) &#123;</span><br><span class="line">        char c;</span><br><span class="line">        scanf(<span class="string">&quot;%c&quot;</span>, &amp;c);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        ans[i] = c;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    ans[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= 2 &amp;&amp; ans[0] == <span class="string">&#x27;y&#x27;</span> &amp;&amp; </span><br><span class="line">    ans[1] == <span class="string">&#x27;u&#x27;</span>&amp;&amp;ans[2] == <span class="string">&#x27;a&#x27;</span>&amp;&amp;ans[3] == <span class="string">&#x27;n&#x27;</span>&amp;&amp;ans[4] == <span class="string">&#x27;s&#x27;</span>&amp;&amp;</span><br><span class="line">    ans[5] == <span class="string">&#x27;h&#x27;</span>&amp;&amp;ans[6] == <span class="string">&#x27;e&#x27;</span>&amp;&amp;ans[7] == <span class="string">&#x27;n&#x27;</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">elif</span> (i &gt;= 2 &amp;&amp; ans[0] == <span class="string">&#x27;q&#x27;</span> &amp;&amp; </span><br><span class="line">    ans[1] == <span class="string">&#x27;i&#x27;</span>&amp;&amp;ans[2] == <span class="string">&#x27;d&#x27;</span>&amp;&amp;ans[3] == <span class="string">&#x27;o&#x27;</span>&amp;&amp;ans[4] == <span class="string">&#x27;n&#x27;</span>&amp;&amp;</span><br><span class="line">    ans[5] == <span class="string">&#x27;g&#x27;</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种思路看来有点麻烦（蠢），但是笔者作为初学者第一反应就是这样的。<br>首先创建了一个char类型数组，用while持续输入，if换行符作为结束条件，最后再加上“\0”结束输入。<br>匹配阶段则是用if挨个元素匹配。</p>
-<h4 id="总而言之，低效、麻烦而直观"><a href="#总而言之，低效、麻烦而直观" class="headerlink" title="总而言之，低效、麻烦而直观"></a><strong>总而言之，低效、麻烦而直观</strong></h4><h2 id="思路二：使用strcmp函数"><a href="#思路二：使用strcmp函数" class="headerlink" title="思路二：使用strcmp函数"></a>思路二：使用strcmp函数</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    int i = 0;</span><br><span class="line">    // Read characters into the array <span class="keyword">until</span> newline or reaching array size - 1</span><br><span class="line">    <span class="keyword">while</span> (i &lt; 9 &amp;&amp; scanf(<span class="string">&quot;%c&quot;</span>, &amp;ans[i]) == 1 &amp;&amp; ans[i] != <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Null-terminate the string</span><br><span class="line">    ans[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;yuanshen&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;qidong&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>思路二的输入方式与思路一大同小异，关键区别在于判断匹配的方式  </p>
-<h3 id="简单介绍一下使用到的strcmp函数："><a href="#简单介绍一下使用到的strcmp函数：" class="headerlink" title="简单介绍一下使用到的strcmp函数："></a>简单介绍一下使用到的strcmp函数：</h3><p>strcmp 函数用于比较两个字符串是否相等。它返回一个整数，用于表示比较结果。这个整数的含义如下：<br>-返回值小于 0：表示第一个字符串小于第二个字符串。<br>-返回值等于 0：表示两个字符串相等。<br>-返回值大于 0：表示第一个字符串大于第二个字符串。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">int strcmp(const char *str1, const char *str2) &#123;</span><br><span class="line">    <span class="keyword">while</span> (*str1 &amp;&amp; (*str1 == *str2)) &#123;</span><br><span class="line">        str1++;</span><br><span class="line">        str2++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> *(unsigned char *)str1 - *(unsigned char *)str2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上为strcmp函数的声明代码，采用指针达到字符串的匹配检测。</p>
-<h2 id="思路三："><a href="#思路三：" class="headerlink" title="思路三："></a>思路三：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    // Read a line of input into ans</span><br><span class="line">    fgets(ans, sizeof(ans), stdin);</span><br><span class="line"></span><br><span class="line">    // Remove newline character <span class="keyword">if</span> present</span><br><span class="line">    size_t len = strlen(ans);</span><br><span class="line">    <span class="keyword">if</span> (len &gt; 0 &amp;&amp; ans[len - 1] == <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        ans[len - 1] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Check <span class="keyword">if</span> ans starts with <span class="string">&quot;yuanshen&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;yuanshen&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(strncmp(ans, <span class="string">&quot;qidong&quot;</span>, 2) == 0)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码的基本思路是：<br>使用 fgets 函数读取用户输入的字符串，将其存储在名为 ans 的字符数组中，限制最大输入字符数为9。</p>
-<p>检查读取到的字符串的长度，如果大于0且最后一个字符是换行符（’\n’），则将该换行符替换为字符串终止符（’\0’），以确保字符串正确终止。</p>
-<p>使用 strncmp 函数比较 ans 字符串的前两个字符与预期字符串是否相等。如果相等，输出 “Yes”&#x2F;“No”，<br>否则输出 “Error”。</p>
-<p>（萌新勿骂）</p>
+<hr>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><ol>
+<li>对 <code>k</code> 取余，处理 <code>k</code> 大于数组大小的情况，避免不必要的循环。</li>
+<li>使用变量 <code>begin</code> 记录当前循环的开始下标，<code>len</code> 记录在循环中的当前下标。</li>
+<li>循环执行，每次计算下一个位置 <code>before</code>，将上一个值移动到当前值。</li>
+<li>如果循环结束，将开始的值赋给结尾的值，进入下一个循环。</li>
+</ol>
+<p>这样，通过不断地将值从上一个位置移动到当前位置，实现数组的循环右移。</p>
 ]]></content>
       <categories>
-        <category>编程</category>
+        <category>题解</category>
       </categories>
       <tags>
-        <tag>正则匹配</tag>
+        <tag>LeeCode</tag>
       </tags>
   </entry>
 </search>
