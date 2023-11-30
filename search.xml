@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>LeetCode0238</title>
+    <url>/2023/11/22/LeetCode0238/</url>
+    <content><![CDATA[<h1 id="除自身以外数组的乘积"><a href="#除自身以外数组的乘积" class="headerlink" title="除自身以外数组的乘积"></a><a href="https://leetcode.cn/problems/product-of-array-except-self/">除自身以外数组的乘积</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code>，返回 <em>数组 <code>answer</code> ，其中 <code>answer[i]</code> 等于 <code>nums</code> 中除 <code>nums[i]</code> 之外其余各元素的乘积</em> 。</p>
+<p>题目数据 <strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32 位</strong> 整数范围内。</p>
+<p>请 <strong>不要使用除法，</strong>且在 <code>O(*n*)</code> 时间复杂度内完成此题。</p>
+<span id="more"></span>
+
+<p><strong>示例 1:</strong></p>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">1,2,3,4</span>]</span><br><span class="line">输出: [<span class="number">24,12,8,6</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: nums = <span class="comment">[-1,1,0,-3,3]</span></span><br><span class="line">输出: <span class="comment">[0,0,9,0,0]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 105</code></li>
+<li><code>-30 &lt;= nums[i] &lt;= 30</code></li>
+<li><strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32 位</strong> 整数范围内</li>
+</ul>
+<hr>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始我想得比较简单，认为只需要把所有元素的乘积求出，再在循环里一个个除就好。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span>* answer = (<span class="type">int</span>*)<span class="built_in">malloc</span>(numsSize * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (answer == <span class="literal">NULL</span>) &#123; <span class="comment">// 检查内存分配是否成功</span></span><br><span class="line">        *returnSize = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> product = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        product *= nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        answer[i] = product / nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>Line 16: Char 29: runtime error: division by zero [solution.c]</code>把我拉回了现实：只要有个0，这段代码全线崩盘，而且根本没有修改的余地，故舍弃此方法。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//除自身的乘积的的值 等于 左乘积 *  右乘积</span></span><br><span class="line">    <span class="type">int</span> leftPro[numsSize];</span><br><span class="line">    <span class="type">int</span> rightPro[numsSize];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//左乘积</span></span><br><span class="line">    leftPro[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        leftPro[i] =  leftPro[i<span class="number">-1</span>] *  nums[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//右乘积</span></span><br><span class="line">    rightPro[numsSize<span class="number">-1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = numsSize - <span class="number">1</span> - <span class="number">1</span>; i  &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        rightPro[i] =  rightPro[i+<span class="number">1</span>] *  nums[i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="type">int</span> * returnNums = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * numsSize);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        returnNums[i] = leftPro[i] * rightPro[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> returnNums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>正确的思路应该像是这样，分别求出左边和右边序列的乘积加以乘法。</p>
+<p>后来我在评论区看到这样一种思路：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> ra[<span class="number">100000</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++)&#123;</span><br><span class="line">        ra[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pre = <span class="number">1</span>, suf = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++)&#123;</span><br><span class="line">        pre *= nums[i - <span class="number">1</span>];</span><br><span class="line">        suf *= nums[numsSize - i];</span><br><span class="line">        ra[i] *= pre;</span><br><span class="line">        ra[numsSize - i - <span class="number">1</span>] *= suf;</span><br><span class="line">    &#125;</span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="keyword">return</span> ra;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：随心</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/product-of-array-except-self/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
+<p>（话说大佬都是不写注释的嘛）</p>
+<p>这种算法的思路大致如下：</p>
+<ul>
+<li>初始化数组<code>ra</code>的前缀和和后缀和都为1。</li>
+<li>遍历数组<code>nums</code>，从第二个元素开始（下标为1）。</li>
+<li>对于第<code>i</code>个元素，计算前缀和（即前面所有元素的乘积）并赋值给<code>pre</code>，计算后缀和（即后面所有元素的乘积）并赋值给<code>suf</code>。</li>
+<li>将前缀和和后缀和的乘积赋值给<code>ra[i]</code>，即<code>ra[i] = pre * suf</code>。</li>
+<li>将数组的长度赋值给返回值<code>*returnSize</code>，并返回动态分配的数组<code>ra</code>。</li>
+</ul>
+<p>这种算法好处在于：</p>
+<ol>
+<li><p>空间利用率高：使用了一个数组<code>ra</code>来存储每个元素与其他元素乘积的结果，避免了重复计算，提高了空间利用率。</p>
+</li>
+<li><p>计算效率高：通过计算前缀和和后缀和，减少了乘法操作的次数，提高了计算效率。</p>
+<p>(草怎么写得这么牛逼)</p>
+<p>**学到了有木有 **</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>718校内赛技术报告</title>
     <url>/2023/11/27/718%E6%A0%A1%E5%86%85%E8%B5%9B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A/</url>
     <content><![CDATA[<p>此篇博客用于记录校内赛的技术细节和感悟（屎山预警！！！）</p>
@@ -213,60 +270,42 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode0238</title>
-    <url>/2023/11/22/LeetCode0238/</url>
-    <content><![CDATA[<h1 id="除自身以外数组的乘积"><a href="#除自身以外数组的乘积" class="headerlink" title="除自身以外数组的乘积"></a><a href="https://leetcode.cn/problems/product-of-array-except-self/">除自身以外数组的乘积</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code>，返回 <em>数组 <code>answer</code> ，其中 <code>answer[i]</code> 等于 <code>nums</code> 中除 <code>nums[i]</code> 之外其余各元素的乘积</em> 。</p>
-<p>题目数据 <strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32 位</strong> 整数范围内。</p>
-<p>请 <strong>不要使用除法，</strong>且在 <code>O(*n*)</code> 时间复杂度内完成此题。</p>
+    <title>LeetCode0498</title>
+    <url>/2023/11/23/LeetCode0498/</url>
+    <content><![CDATA[<h1 id="对角线遍历"><a href="#对角线遍历" class="headerlink" title="对角线遍历"></a><a href="https://leetcode.cn/problems/diagonal-traverse/">对角线遍历</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个大小为 <code>m x n</code> 的矩阵 <code>mat</code> ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。</p>
 <span id="more"></span>
 
-<p><strong>示例 1:</strong></p>
-<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">1,2,3,4</span>]</span><br><span class="line">输出: [<span class="number">24,12,8,6</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>示例 1：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/04/10/diag1-grid.jpg" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：mat = <span class="comment">[<span class="comment">[1,2,3]</span>,<span class="comment">[4,5,6]</span>,<span class="comment">[7,8,9]</span>]</span></span><br><span class="line">输出：<span class="comment">[1,2,4,7,5,3,6,8,9]</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>示例 2:</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: nums = <span class="comment">[-1,1,0,-3,3]</span></span><br><span class="line">输出: <span class="comment">[0,0,9,0,0]</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：mat = <span class="string">[[1,2],[3,4]]</span></span><br><span class="line">输出：[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>2 &lt;= nums.length &lt;= 105</code></li>
-<li><code>-30 &lt;= nums[i] &lt;= 30</code></li>
-<li><strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32 位</strong> 整数范围内</li>
+<li><code>m == mat.length</code></li>
+<li><code>n == mat[i].length</code></li>
+<li><code>1 &lt;= m, n &lt;= 104</code></li>
+<li><code>1 &lt;= m * n &lt;= 104</code></li>
+<li><code>-105 &lt;= mat[i][j] &lt;= 105</code></li>
 </ul>
-<hr>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始我想得比较简单，认为只需要把所有元素的乘积求出，再在循环里一个个除就好。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span>* answer = (<span class="type">int</span>*)<span class="built_in">malloc</span>(numsSize * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (answer == <span class="literal">NULL</span>) &#123; <span class="comment">// 检查内存分配是否成功</span></span><br><span class="line">        *returnSize = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> product = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        product *= nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        answer[i] = product / nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>根据题目要求，矩阵按照对角线进行遍历。设矩阵的行数为 m, 矩阵的列数为 n, 我们仔细观察对角线遍历的规律可以得到如下信息:</p>
+<img data-src="C:\Users\祖全之\AppData\Roaming\Typora\typora-user-images\image-20231123183323953.png" alt="image-20231123183323953" style="zoom:80%;" />
 
-<p><code>Line 16: Char 29: runtime error: division by zero [solution.c]</code>把我拉回了现实：只要有个0，这段代码全线崩盘，而且根本没有修改的余地，故舍弃此方法。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//除自身的乘积的的值 等于 左乘积 *  右乘积</span></span><br><span class="line">    <span class="type">int</span> leftPro[numsSize];</span><br><span class="line">    <span class="type">int</span> rightPro[numsSize];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//左乘积</span></span><br><span class="line">    leftPro[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        leftPro[i] =  leftPro[i<span class="number">-1</span>] *  nums[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//右乘积</span></span><br><span class="line">    rightPro[numsSize<span class="number">-1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = numsSize - <span class="number">1</span> - <span class="number">1</span>; i  &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        rightPro[i] =  rightPro[i+<span class="number">1</span>] *  nums[i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="type">int</span> * returnNums = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * numsSize);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        returnNums[i] = leftPro[i] * rightPro[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> returnNums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>根据以上观察得出的结论，我们直接模拟遍历所有的对角线即可。</strong></p>
+<p>代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">findDiagonalOrder</span><span class="params">(<span class="type">int</span>** mat, <span class="type">int</span> matSize, <span class="type">int</span>* matnSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> m = matSize;</span><br><span class="line">    <span class="type">int</span> n = matnSize[<span class="number">0</span>];</span><br><span class="line">    <span class="type">int</span> *res = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * m * n);</span><br><span class="line">    <span class="type">int</span> pos = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历矩阵的所有对角线</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m + n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 如果对角线序号为奇数</span></span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="type">int</span> x = i &lt; n ? <span class="number">0</span> : i - n + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> y = i &lt; n ? i : n - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 遍历当前对角线并将元素存入结果数组</span></span><br><span class="line">            <span class="keyword">while</span> (x &lt; m &amp;&amp; y &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                res[pos] = mat[x][y];</span><br><span class="line">                pos++;</span><br><span class="line">                x++;</span><br><span class="line">                y--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123; <span class="comment">// 如果对角线序号为偶数</span></span><br><span class="line">            <span class="type">int</span> x = i &lt; m ? i : m - <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> y = i &lt; m ? <span class="number">0</span> : i - m + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 遍历当前对角线并将元素存入结果数组</span></span><br><span class="line">            <span class="keyword">while</span> (x &gt;= <span class="number">0</span> &amp;&amp; y &lt; n) &#123;</span><br><span class="line">                res[pos] = mat[x][y];</span><br><span class="line">                pos++;</span><br><span class="line">                x--;</span><br><span class="line">                y++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置返回的数组大小</span></span><br><span class="line">    *returnSize = m * n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>正确的思路应该像是这样，分别求出左边和右边序列的乘积加以乘法。</p>
-<p>后来我在评论区看到这样一种思路：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> ra[<span class="number">100000</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++)&#123;</span><br><span class="line">        ra[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pre = <span class="number">1</span>, suf = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++)&#123;</span><br><span class="line">        pre *= nums[i - <span class="number">1</span>];</span><br><span class="line">        suf *= nums[numsSize - i];</span><br><span class="line">        ra[i] *= pre;</span><br><span class="line">        ra[numsSize - i - <span class="number">1</span>] *= suf;</span><br><span class="line">    &#125;</span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="keyword">return</span> ra;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：随心</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/product-of-array-except-self/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
-
-<p>（话说大佬都是不写注释的嘛）</p>
-<p>这种算法的思路大致如下：</p>
-<ul>
-<li>初始化数组<code>ra</code>的前缀和和后缀和都为1。</li>
-<li>遍历数组<code>nums</code>，从第二个元素开始（下标为1）。</li>
-<li>对于第<code>i</code>个元素，计算前缀和（即前面所有元素的乘积）并赋值给<code>pre</code>，计算后缀和（即后面所有元素的乘积）并赋值给<code>suf</code>。</li>
-<li>将前缀和和后缀和的乘积赋值给<code>ra[i]</code>，即<code>ra[i] = pre * suf</code>。</li>
-<li>将数组的长度赋值给返回值<code>*returnSize</code>，并返回动态分配的数组<code>ra</code>。</li>
-</ul>
-<p>这种算法好处在于：</p>
-<ol>
-<li><p>空间利用率高：使用了一个数组<code>ra</code>来存储每个元素与其他元素乘积的结果，避免了重复计算，提高了空间利用率。</p>
-</li>
-<li><p>计算效率高：通过计算前缀和和后缀和，减少了乘法操作的次数，提高了计算效率。</p>
-<p>(草怎么写得这么牛逼)</p>
-<p>**学到了有木有 **</p>
-</li>
-</ol>
+<p><em>一看就会一做就废系列</em></p>
+<p>大体上把情况分为两种：奇数和偶数对角线——这两种对角线也代表着不同的遍历顺序（从下到上or从上到下）</p>
+<p>一边遍历一边把得到元素存到res数组里，得到新数组，及完成任务。</p>
 ]]></content>
       <categories>
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数组</tag>
+        <tag>二维数组</tag>
       </tags>
   </entry>
   <entry>
@@ -312,45 +351,6 @@
       </categories>
       <tags>
         <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode0498</title>
-    <url>/2023/11/23/LeetCode0498/</url>
-    <content><![CDATA[<h1 id="对角线遍历"><a href="#对角线遍历" class="headerlink" title="对角线遍历"></a><a href="https://leetcode.cn/problems/diagonal-traverse/">对角线遍历</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个大小为 <code>m x n</code> 的矩阵 <code>mat</code> ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/04/10/diag1-grid.jpg" alt="img"></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：mat = <span class="comment">[<span class="comment">[1,2,3]</span>,<span class="comment">[4,5,6]</span>,<span class="comment">[7,8,9]</span>]</span></span><br><span class="line">输出：<span class="comment">[1,2,4,7,5,3,6,8,9]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">输入：mat = <span class="string">[[1,2],[3,4]]</span></span><br><span class="line">输出：[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>m == mat.length</code></li>
-<li><code>n == mat[i].length</code></li>
-<li><code>1 &lt;= m, n &lt;= 104</code></li>
-<li><code>1 &lt;= m * n &lt;= 104</code></li>
-<li><code>-105 &lt;= mat[i][j] &lt;= 105</code></li>
-</ul>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>根据题目要求，矩阵按照对角线进行遍历。设矩阵的行数为 m, 矩阵的列数为 n, 我们仔细观察对角线遍历的规律可以得到如下信息:</p>
-<img data-src="C:\Users\祖全之\AppData\Roaming\Typora\typora-user-images\image-20231123183323953.png" alt="image-20231123183323953" style="zoom:80%;" />
-
-<p><strong>根据以上观察得出的结论，我们直接模拟遍历所有的对角线即可。</strong></p>
-<p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">findDiagonalOrder</span><span class="params">(<span class="type">int</span>** mat, <span class="type">int</span> matSize, <span class="type">int</span>* matnSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> m = matSize;</span><br><span class="line">    <span class="type">int</span> n = matnSize[<span class="number">0</span>];</span><br><span class="line">    <span class="type">int</span> *res = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * m * n);</span><br><span class="line">    <span class="type">int</span> pos = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历矩阵的所有对角线</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m + n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 如果对角线序号为奇数</span></span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="type">int</span> x = i &lt; n ? <span class="number">0</span> : i - n + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> y = i &lt; n ? i : n - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 遍历当前对角线并将元素存入结果数组</span></span><br><span class="line">            <span class="keyword">while</span> (x &lt; m &amp;&amp; y &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                res[pos] = mat[x][y];</span><br><span class="line">                pos++;</span><br><span class="line">                x++;</span><br><span class="line">                y--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123; <span class="comment">// 如果对角线序号为偶数</span></span><br><span class="line">            <span class="type">int</span> x = i &lt; m ? i : m - <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> y = i &lt; m ? <span class="number">0</span> : i - m + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 遍历当前对角线并将元素存入结果数组</span></span><br><span class="line">            <span class="keyword">while</span> (x &gt;= <span class="number">0</span> &amp;&amp; y &lt; n) &#123;</span><br><span class="line">                res[pos] = mat[x][y];</span><br><span class="line">                pos++;</span><br><span class="line">                x--;</span><br><span class="line">                y++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置返回的数组大小</span></span><br><span class="line">    *returnSize = m * n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><em>一看就会一做就废系列</em></p>
-<p>大体上把情况分为两种：奇数和偶数对角线——这两种对角线也代表着不同的遍历顺序（从下到上or从上到下）</p>
-<p>一边遍历一边把得到元素存到res数组里，得到新数组，及完成任务。</p>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>二维数组</tag>
       </tags>
   </entry>
   <entry>
@@ -431,30 +431,103 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode0206</title>
-    <url>/2023/11/30/Leetcode0206/</url>
-    <content><![CDATA[<h1 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a><a href="https://leetcode.cn/problems/reverse-linked-list/">反转链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
+    <title>Leetcode0203</title>
+    <url>/2023/11/30/Leetcode0203/</url>
+    <content><![CDATA[<h1 id="移除链表元素"><a href="#移除链表元素" class="headerlink" title="移除链表元素"></a><a href="https://leetcode.cn/problems/remove-linked-list-elements/">移除链表元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个链表的头节点 <code>head</code> 和一个整数 <code>val</code> ，请你删除链表中所有满足 <code>Node.val == val</code> 的节点，并返回 <strong>新的头节点</strong> 。</p>
 <span id="more"></span>
 
 <p><strong>示例 1：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="img"></p>
-<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="string">[1,2,3,4,5]</span></span><br><span class="line">输出：<span class="string">[5,4,3,2,1]</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg" alt="img"></p>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="string">[1,2,6,3,4,5,6]</span>, val = <span class="number">6</span></span><br><span class="line">输出：<span class="string">[1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg" alt="img"></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[1,2]</span></span><br><span class="line">输出：<span class="comment">[2,1]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[]</span>, val = 1</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 3：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[]</span></span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[7,7,7,7]</span>, val = 7</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li>链表中节点的数目范围是 <code>[0, 5000]</code></li>
-<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+<li>列表中的节点数目在范围 <code>[0, 104]</code> 内</li>
+<li><code>1 &lt;= Node.val &lt;= 50</code></li>
+<li><code>0 &lt;= val &lt;= 50</code></li>
 </ul>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>基本想法是把列表的首尾节点调换，即每一个指针都指向前一个节点。</p>
-<p>代码如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span><span class="literal">NULL</span>;<span class="comment">//创建一个空头节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span>=</span>head;<span class="comment">//创建curr用于遍历链表</span></span><br><span class="line">    <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">next</span> =</span>curr-&gt;next;</span><br><span class="line">        curr-&gt;next =prev;</span><br><span class="line">        prev =curr;<span class="comment">//把pre遍历到当前节点</span></span><br><span class="line">        curr=next;<span class="comment">//把当前指针遍历到下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始思路非常简单：检测到下一个节点是val，删除该节点。写出了下面这段蠢到家的代码：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span>=</span>head;</span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>仔细一看题：发现“<strong>新的头节点</strong>”还特意加粗了，看起来如果第一个节点就是空节点程序会直接寄掉。</p>
+<ol>
+<li><code>cur-&gt;next = cur-&gt;next-&gt;next;</code> 表示删除当前节点的下一个节点。这会导致无法处理连续相同值的节点。正确的做法是将当前节点的 <code>next</code> 指针直接指向下下个节点，而不是跳过一个节点。</li>
+<li>函数的返回值是链表的头指针 <code>head</code>，但是在删除节点的过程中，链表头部可能发生变化。因此，应该在删除节点后返回新的头指针。</li>
+</ol>
+<p>修改为以下程序：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">dummy</span> =</span> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> ListNode));</span><br><span class="line">    dummy-&gt;next = head;<span class="comment">//在头节点前创建一个空节点，用于解决其为val的情况</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> dummy;<span class="comment">//基操用cur遍历</span></span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next-&gt;val==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">newHead</span> =</span> dummy-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(dummy);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newHead;<span class="comment">//返回新的头节点，并释放dummy的空间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode0234</title>
+    <url>/2023/11/30/Leetcode0234/</url>
+    <content><![CDATA[<h1 id="回文链表"><a href="#回文链表" class="headerlink" title="回文链表"></a><a href="https://leetcode.cn/problems/palindrome-linked-list/">回文链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个单链表的头节点 <code>head</code> ，请你判断该链表是否为回文链表。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+ <span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2,2,1]</span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2]</span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点数目在范围<code>[1, 105]</code> 内</li>
+<li><code>0 &lt;= Node.val &lt;= 9</code></li>
+</ul>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><h3 id="法一：复制到数组"><a href="#法一：复制到数组" class="headerlink" title="法一：复制到数组"></a>法一：复制到数组</h3><p>小生不才，链表使用不够熟练，先用复制链表到数组的笨方法做出来一遍。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算链表长度</span></span><br><span class="line">    <span class="keyword">while</span>(cur) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态分配数组</span></span><br><span class="line">    <span class="type">int</span>* a = (<span class="type">int</span>*)<span class="built_in">malloc</span>(count * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!a) &#123;</span><br><span class="line">        <span class="comment">// 处理内存分配失败的情况</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新遍历链表，将值存入数组</span></span><br><span class="line">    cur = head;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        a[i] = cur-&gt;val;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查是否为回文</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count / <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] != a[count - <span class="number">1</span> - i]) &#123;</span><br><span class="line">            <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="法二：快慢指针"><a href="#法二：快慢指针" class="headerlink" title="法二：快慢指针"></a>法二：快慢指针</h3><p>这也是我想到的第二个方法。</p>
+<p>整个流程可以分为以下五个步骤：</p>
+<ol>
+<li><p>找到前半部分链表的尾节点。</p>
+</li>
+<li><p>反转后半部分链表。</p>
+</li>
+<li><p>判断是否回文。</p>
+</li>
+<li><p>恢复链表。</p>
+</li>
+<li><p>返回结果。</p>
+<p>执行步骤一，我们可以计算链表节点的数量，然后遍历链表找到前半部分的尾节点。</p>
+<p>我们也可以使用快慢指针在一次遍历中找到：慢指针一次走一步，快指针一次走两步，快慢指针同时出发。当快指针移动到链表的末尾时，慢指针恰好到链表的中间。通过慢指针将链表分为两部分。</p>
+<p>若链表有奇数个节点，则中间的节点应该看作是前半部分。</p>
+<p>步骤二可以使用[反转链表](<a href="http://zuweicun.top/2023/11/30/Leetcode0206/#more">Leetcode0206 | 全之の博客 (zuweicun.top)</a>)问题中的解决方法来反转链表的后半部分。</p>
+<p>步骤三比较两个部分的值，当后半部分到达末尾则比较完成，可以忽略计数情况中的中间节点。</p>
+<p>步骤四与步骤二使用的函数相同，再反转一次恢复链表本身。</p>
+<p>其代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span> <span class="literal">NULL</span>;<span class="comment">//创建空节点用于存放“前一个”数据</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span> =</span> head;<span class="comment">//基操curr遍历</span></span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">nextTemp</span> =</span> curr-&gt;next;</span><br><span class="line">        curr-&gt;next = prev;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = nextTemp;</span><br><span class="line">    &#125;<span class="comment">//反转函数</span></span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">endOfFirstHalf</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">fast</span> =</span> head;<span class="comment">//块指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">slow</span> =</span> head;<span class="comment">//慢指针</span></span><br><span class="line">    <span class="keyword">while</span> (fast-&gt;next != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;<span class="comment">//一次走两步</span></span><br><span class="line">        slow = slow-&gt;next;<span class="comment">//一次走一步</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;<span class="comment">//由于快慢指针的数量关系，slow返回的应该是链表半节点处</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;<span class="comment">//最终的bool类型判断函数</span></span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到前半部分链表的尾节点并反转后半部分链表</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">firstHalfEnd</span> =</span> endOfFirstHalf(head);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">secondHalfStart</span> =</span> reverseList(firstHalfEnd-&gt;next);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否回文</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p1</span> =</span> head;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p2</span> =</span> secondHalfStart;</span><br><span class="line">    <span class="type">bool</span> result = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (result &amp;&amp; p2 != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p1-&gt;val != p2-&gt;val) &#123;</span><br><span class="line">            result = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p1 = p1-&gt;next;</span><br><span class="line">        p2 = p2-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 还原链表并返回结果</span></span><br><span class="line">    firstHalfEnd-&gt;next = reverseList(secondHalfStart);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="法三：递归"><a href="#法三：递归" class="headerlink" title="法三：递归"></a>法三：递归</h3><p><em>这个递归来源于Leetcode官方题解，其风骚是我至今所遇最强。</em></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量，用于存储前半部分链表的指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">frontPointer</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归检查是否回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">recursivelyCheck</span><span class="params">(<span class="keyword">struct</span> ListNode* currentNode)</span> &#123;</span><br><span class="line">    <span class="comment">// 当前节点不为空时进行递归检查</span></span><br><span class="line">    <span class="keyword">if</span> (currentNode != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="comment">// 递归检查下一个节点，如果返回 false，则整体返回 false</span></span><br><span class="line">        <span class="keyword">if</span> (!recursivelyCheck(currentNode-&gt;next)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 检查当前节点的值是否与前半部分链表的节点值相等</span></span><br><span class="line">        <span class="keyword">if</span> (currentNode-&gt;val != frontPointer-&gt;val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前半部分链表指针移动到下一个节点</span></span><br><span class="line">        frontPointer = frontPointer-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 若所有节点都检查完毕，返回 true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查链表是否为回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="comment">// 初始化全局变量 frontPointer</span></span><br><span class="line">    frontPointer = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用递归检查函数</span></span><br><span class="line">    <span class="keyword">return</span> recursivelyCheck(head);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>isPalindrome</code> 函数设置 <code>frontPointer</code> 为链表头，并调用 <code>recursivelyCheck</code> 函数。</li>
+<li><code>recursivelyCheck</code> 函数首先检查当前节点是否为 <code>NULL</code>，如果是，则返回 <code>true</code>，因为链表的末尾已经达到。</li>
+<li>然后，<code>recursivelyCheck</code> 递归调用自己，传递当前节点的下一个节点。</li>
+<li>在递归返回之前，检查当前节点的值是否等于 <code>frontPointer</code> 指向的节点的值。如果不等，则返回 <code>false</code>，因为链表不是回文的。</li>
+<li>如果值相等，将 <code>frontPointer</code> 移动到下一个节点。</li>
+<li>最终，如果整个链表都被成功检查，并且没有发现值不相等的情况，那么整个函数返回 <code>true</code>，表示链表是回文的。</li>
+</ol>
+<p>这种方法的核心思想是使用递归从链表的末尾开始比较节点的值，同时使用 <code>frontPointer</code> 从链表的头部开始。这两个指针相向移动，逐一比较节点的值，如果在整个过程中没有找到不相等的节点，则链表被认为是回文的。</p>
+<p>下面是一种更加简洁的递归思路：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">frontPointer</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辅助函数，用于递归检查回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">recursivelyCheck</span><span class="params">(<span class="keyword">struct</span> ListNode* currentNode, <span class="keyword">struct</span> ListNode* prevNode)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (currentNode != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!recursivelyCheck(currentNode-&gt;next, currentNode)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 可以访问上一个节点 prevNode，进行需要的操作</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (currentNode-&gt;val != frontPointer-&gt;val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        frontPointer = frontPointer-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    frontPointer = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用递归检查函数时，将上一个节点设为 NULL</span></span><br><span class="line">    <span class="keyword">return</span> recursivelyCheck(head, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -487,6 +560,40 @@
 <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>根据题干描述，链表已经按照升序排列，即只需要判断前后两个节点是否相等从而确定删除与否即可。</p>
 <p>代码如下：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">deleteDuplicates</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!head) &#123;</span><br><span class="line">        <span class="keyword">return</span> head;<span class="comment">//即链表为空，没有重复元素可以删除。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="keyword">while</span> (cur-&gt;next) &#123;<span class="comment">//条件是当前节点的下一个节点不为空</span></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val == cur-&gt;next-&gt;val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode0206</title>
+    <url>/2023/11/30/Leetcode0206/</url>
+    <content><![CDATA[<h1 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a><a href="https://leetcode.cn/problems/reverse-linked-list/">反转链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你单链表的头节点 <code>head</code> ，请你反转链表，并返回反转后的链表。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="img"></p>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="string">[1,2,3,4,5]</span></span><br><span class="line">输出：<span class="string">[5,4,3,2,1]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[1,2]</span></span><br><span class="line">输出：<span class="comment">[2,1]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[]</span></span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目范围是 <code>[0, 5000]</code></li>
+<li><code>-5000 &lt;= Node.val &lt;= 5000</code></li>
+</ul>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>基本想法是把列表的首尾节点调换，即每一个指针都指向前一个节点。</p>
+<p>代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span><span class="literal">NULL</span>;<span class="comment">//创建一个空头节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span>=</span>head;<span class="comment">//创建curr用于遍历链表</span></span><br><span class="line">    <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">next</span> =</span>curr-&gt;next;</span><br><span class="line">        curr-&gt;next =prev;</span><br><span class="line">        prev =curr;<span class="comment">//把pre遍历到当前节点</span></span><br><span class="line">        curr=next;<span class="comment">//把当前指针遍历到下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -557,18 +664,6 @@
       </categories>
       <tags>
         <tag>PID</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self-balancing-bycycle</title>
-    <url>/2023/10/09/Self-balancing-bycycle/</url>
-    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>平衡车</tag>
       </tags>
   </entry>
   <entry>
@@ -656,6 +751,126 @@
       </tags>
   </entry>
   <entry>
+    <title>排序</title>
+    <url>/2023/11/07/%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="一、概念及其介绍"><a href="#一、概念及其介绍" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>插入排序(InsertionSort)，一般也被称为直接插入排序。</p>
+<p>对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动。</p>
+<span id="more"></span>
+
+<h3 id="二、适用说明"><a href="#二、适用说明" class="headerlink" title="二、适用说明"></a>二、适用说明</h3><p>插入排序的平均时间复杂度也是 **O(n^2)**，空间复杂度为常数阶 **O(1)**，具体时间复杂度和数组的有序性也是有关联的。</p>
+<p>插入排序中，当待排序数组是有序时，是最优的情况，只需当前数跟前一个数比较一下就可以了，这时一共需要比较 <strong>N-1</strong> 次，时间复杂度为 **O(N)**。最坏的情况是待排序数组是逆序的，此时需要比较次数最多，最坏的情况是 **O(n^2)**。</p>
+<h3 id="三、过程图示"><a href="#三、过程图示" class="headerlink" title="三、过程图示"></a>三、过程图示</h3><p>假设前面 <strong>n-1</strong>(其中 <strong>n&gt;&#x3D;2</strong>)个数已经是排好顺序的，现将第 <strong>n</strong> 个数插到前面已经排好的序列中，然后找到合适自己的位置，使得插入第n个数的这个序列也是排好顺序的。</p>
+<p>按照此法对所有元素进行插入，直到整个序列排为有序的过程，称为插入排序。</p>
+<p>从小到大的插入排序整个过程如图示：</p>
+<p><strong>第一轮：</strong>从第二位置的 6 开始比较，比前面 7 小，交换位置。</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-01.png" alt="img"></p>
+<p><strong>第二轮：</strong>第三位置的 9 比前一位置的 7 大，无需交换位置。</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-02.png" alt="img"></p>
+<p><strong>第三轮：</strong>第四位置的 3 比前一位置的 9 小交换位置，依次往前比较。</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-03.png" alt="img"></p>
+<p><strong>第四轮：</strong>第五位置的 1 比前一位置的 9 小，交换位置，再依次往前比较。</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-04.png" alt="img"></p>
+<p>就这样依次比较到最后一个元素。</p>
+<h3 id="四、C语言代码实现"><a href="#四、C语言代码实现" class="headerlink" title="四、C语言代码实现"></a>四、C语言代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[<span class="number">8</span>]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> temp=<span class="number">1</span>; <span class="comment">//定义交换中间变量</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> p=i;p&gt;<span class="number">0</span>;p--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[p]&lt;num[p<span class="number">-1</span>])&#123;<span class="comment">//判定是否小于前一个数</span></span><br><span class="line">                temp=num[p];</span><br><span class="line">                num[p]=num[p<span class="number">-1</span>];</span><br><span class="line">                num[p<span class="number">-1</span>]=temp;<span class="comment">//若小于，则两数交换</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);<span class="comment">//输出数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><h3 id="一、概念及其介绍-1"><a href="#一、概念及其介绍-1" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>希尔排序(Shell Sort)是插入排序的一种，它是针对直接插入排序算法的改进。</p>
+<p>希尔排序又称缩小增量排序，因 DL.Shell 于 1959 年提出而得名。</p>
+<p>它通过比较相距一定间隔的元素来进行，各趟比较所用的距离随着算法的进行而减小，直到只比较相邻元素的最后一趟排序为止。</p>
+<h3 id="二、适用说明-1"><a href="#二、适用说明-1" class="headerlink" title="二、适用说明"></a>二、适用说明</h3><p>希尔排序时间复杂度是 **O(n^(1.3-2))**，空间复杂度为常数阶 **O(1)**。希尔排序没有时间复杂度为 <strong>O(n(logn))</strong> 的快速排序算法快 ，因此对中等大小规模表现良好，但对规模非常大的数据排序不是最优选择，总之比一般 <strong>O(n^2 )</strong> 复杂度的算法快得多。</p>
+<h3 id="三、过程图示-1"><a href="#三、过程图示-1" class="headerlink" title="三、过程图示"></a>三、过程图示</h3><p>希尔排序目的为了加快速度改进了插入排序，交换不相邻的元素对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。</p>
+<p>在此我们选择增量 <strong>gap&#x3D;length&#x2F;2</strong>，缩小增量以 <strong>gap &#x3D; gap&#x2F;2</strong> 的方式，用序列 <strong>{n&#x2F;2,(n&#x2F;2)&#x2F;2…1}</strong> 来表示。</p>
+<p>如图示例：</p>
+<p>（1）初始增量第一趟 <strong>gap &#x3D; length&#x2F;2 &#x3D; 4</strong></p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-01.png" alt="img"></p>
+<p>（2）第二趟，增量缩小为 2</p>
+<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-02.png" alt="img"></p>
+<p>（3）第三趟，增量缩小为 1,得到最终排序结果</p>
+<p>​                                                           <img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-03.png" alt="img"></p>
+<h3 id="四、C语言代码示例"><a href="#四、C语言代码示例" class="headerlink" title="四、C语言代码示例"></a>四、C语言代码示例</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> lenth 8</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[lenth]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> gap,j;<span class="comment">//定义增量，循环变量</span></span><br><span class="line">    <span class="keyword">for</span>(gap=lenth/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=gap;i&lt;lenth;i++)&#123;<span class="comment">//外层循环，gap每次缩小1/2</span></span><br><span class="line">            <span class="type">int</span> temp=num[i];<span class="comment">//将数组元素赋值给中间值</span></span><br><span class="line">            <span class="keyword">for</span>(j=i;j&gt;=gap&amp;&amp;temp&lt;num[j-gap];j-=gap)&#123;</span><br><span class="line">                num[j]=num[j-gap];</span><br><span class="line">            &#125;</span><br><span class="line">            num[j]=temp;<span class="comment">//判定若小于，两元素交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
+<h3 id="1-算法步骤"><a href="#1-算法步骤" class="headerlink" title="1. 算法步骤"></a>1. 算法步骤</h3><p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。</p>
+<p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
+<p>重复第二步，直到所有元素均排序完毕。</p>
+<h3 id="2-动图演示"><a href="#2-动图演示" class="headerlink" title="2. 动图演示"></a>2. 动图演示</h3><p><img data-src="https://www.runoob.com/wp-content/uploads/2019/03/selectionSort.gif" alt="img"></p>
+<h3 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3.代码实现"></a>3.代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 5</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        a[i] = rand() % <span class="number">101</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//初始化随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;<span class="comment">//数组输出函数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a,<span class="type">int</span> *b)</span> <span class="comment">//交换两数</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="type">int</span> temp = *a;</span><br><span class="line">      *a = *b;</span><br><span class="line">      *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">choose</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="type">int</span> i,j;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span> ; i &lt; len - <span class="number">1</span> ; i++)</span><br><span class="line">      &#123;</span><br><span class="line">                <span class="type">int</span> min = i;</span><br><span class="line">                <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; len; j++)   <span class="comment">//走访未排序的元素</span></span><br><span class="line">                    <span class="keyword">if</span> (arr[j] &lt; arr[min])  <span class="comment">//找到目前最小值</span></span><br><span class="line">                        min = j;  <span class="comment">//记录最小值</span></span><br><span class="line">                swap(&amp;arr[min], &amp;arr[i]);  <span class="comment">//做交換</span></span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    init(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    choose(a,n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sorted array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ul>
+<li><p>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端。</p>
+</li>
+<li><p>作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。冒泡排序还有一种优化算法，就是立一个 flag，当在一趟序列遍历中元素没有发生交换，则证明该序列已经有序。但这种改进对于提升性能来说并没有什么太大作用。</p>
+</li>
+</ul>
+<h3 id="1-算法步骤-1"><a href="#1-算法步骤-1" class="headerlink" title="1. 算法步骤"></a>1. 算法步骤</h3><p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
+<p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
+<p>针对所有的元素重复以上的步骤，除了最后一个。</p>
+<p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<h3 id="2-动图演示-1"><a href="#2-动图演示-1" class="headerlink" title="2. 动图演示"></a>2. 动图演示</h3><p><img data-src="https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif" alt="img"></p>
+<h3 id="3-什么时候最快"><a href="#3-什么时候最快" class="headerlink" title="3. 什么时候最快"></a>3. 什么时候最快</h3><p>当输入的数据已经是正序时（都已经是正序了，我还要你冒泡排序有何用啊）。</p>
+<h3 id="4-什么时候最慢"><a href="#4-什么时候最慢" class="headerlink" title="4. 什么时候最慢"></a>4. 什么时候最慢</h3><p>当输入的数据是反序时（写一个 for 循环反序输出数据不就行了，干嘛要用冒泡排序呢，我是闲的吗）。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 5</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        a[i] = rand() % <span class="number">101</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//初始化随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;<span class="comment">//数组输出函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">gudu</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> swapped; <span class="comment">// 用于标记是否发生交换</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swapped = <span class="number">0</span>; <span class="comment">// 每轮开始前重置为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; i; p++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[p] &gt; a[p + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="type">int</span> temp = a[p];</span><br><span class="line">                a[p] = a[p + <span class="number">1</span>];</span><br><span class="line">                a[p + <span class="number">1</span>] = temp;</span><br><span class="line">                swapped = <span class="number">1</span>; <span class="comment">// 发生交换</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!swapped) &#123;</span><br><span class="line">            <span class="comment">// 如果没有发生交换，说明已经排序完成</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    init(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    gudu(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sorted array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self-balancing-bycycle</title>
+    <url>/2023/10/09/Self-balancing-bycycle/</url>
+    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>平衡车</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>欧几里得算法</title>
+    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
+<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
+<span id="more"></span>
+
+<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
+<ol>
+<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
+</li>
+<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
+</li>
+<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
+</li>
+<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
+</li>
+</ol>
+<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
+<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
+<ul>
+<li>求解整数的最大公约数。</li>
+<li>判断两个整数是否互质（最大公约数为1）。</li>
+<li>求解不定方程的整数解，如贝祖等式。</li>
+<li>在密码学中用于生成加密密钥。</li>
+</ul>
+<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
+<p>代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于stm32的蓝牙循迹小车思路</title>
     <url>/2023/11/05/%E5%9F%BA%E4%BA%8Estm32%E7%9A%84%E8%93%9D%E7%89%99%E5%BE%AA%E8%BF%B9%E5%B0%8F%E8%BD%A6%E6%80%9D%E8%B7%AF/</url>
     <content><![CDATA[<h2 id="一-概况："><a href="#一-概况：" class="headerlink" title="一. 概况："></a>一. 概况：</h2><ol>
@@ -736,114 +951,6 @@
       </categories>
       <tags>
         <tag>stm32</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>排序</title>
-    <url>/2023/11/07/%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><h3 id="一、概念及其介绍"><a href="#一、概念及其介绍" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>插入排序(InsertionSort)，一般也被称为直接插入排序。</p>
-<p>对于少量元素的排序，它是一个有效的算法。插入排序是一种最简单的排序方法，它的基本思想是将一个记录插入到已经排好序的有序表中，从而一个新的、记录数增 1 的有序表。在其实现过程使用双层循环，外层循环对除了第一个元素之外的所有元素，内层循环对当前元素前面有序表进行待插入位置查找，并进行移动。</p>
-<span id="more"></span>
-
-<h3 id="二、适用说明"><a href="#二、适用说明" class="headerlink" title="二、适用说明"></a>二、适用说明</h3><p>插入排序的平均时间复杂度也是 **O(n^2)**，空间复杂度为常数阶 **O(1)**，具体时间复杂度和数组的有序性也是有关联的。</p>
-<p>插入排序中，当待排序数组是有序时，是最优的情况，只需当前数跟前一个数比较一下就可以了，这时一共需要比较 <strong>N-1</strong> 次，时间复杂度为 **O(N)**。最坏的情况是待排序数组是逆序的，此时需要比较次数最多，最坏的情况是 **O(n^2)**。</p>
-<h3 id="三、过程图示"><a href="#三、过程图示" class="headerlink" title="三、过程图示"></a>三、过程图示</h3><p>假设前面 <strong>n-1</strong>(其中 <strong>n&gt;&#x3D;2</strong>)个数已经是排好顺序的，现将第 <strong>n</strong> 个数插到前面已经排好的序列中，然后找到合适自己的位置，使得插入第n个数的这个序列也是排好顺序的。</p>
-<p>按照此法对所有元素进行插入，直到整个序列排为有序的过程，称为插入排序。</p>
-<p>从小到大的插入排序整个过程如图示：</p>
-<p><strong>第一轮：</strong>从第二位置的 6 开始比较，比前面 7 小，交换位置。</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-01.png" alt="img"></p>
-<p><strong>第二轮：</strong>第三位置的 9 比前一位置的 7 大，无需交换位置。</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-02.png" alt="img"></p>
-<p><strong>第三轮：</strong>第四位置的 3 比前一位置的 9 小交换位置，依次往前比较。</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-03.png" alt="img"></p>
-<p><strong>第四轮：</strong>第五位置的 1 比前一位置的 9 小，交换位置，再依次往前比较。</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/InsertSort-04.png" alt="img"></p>
-<p>就这样依次比较到最后一个元素。</p>
-<h3 id="四、C语言代码实现"><a href="#四、C语言代码实现" class="headerlink" title="四、C语言代码实现"></a>四、C语言代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[<span class="number">8</span>]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> temp=<span class="number">1</span>; <span class="comment">//定义交换中间变量</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> p=i;p&gt;<span class="number">0</span>;p--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num[p]&lt;num[p<span class="number">-1</span>])&#123;<span class="comment">//判定是否小于前一个数</span></span><br><span class="line">                temp=num[p];</span><br><span class="line">                num[p]=num[p<span class="number">-1</span>];</span><br><span class="line">                num[p<span class="number">-1</span>]=temp;<span class="comment">//若小于，则两数交换</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);<span class="comment">//输出数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><h3 id="一、概念及其介绍-1"><a href="#一、概念及其介绍-1" class="headerlink" title="一、概念及其介绍"></a>一、概念及其介绍</h3><p>希尔排序(Shell Sort)是插入排序的一种，它是针对直接插入排序算法的改进。</p>
-<p>希尔排序又称缩小增量排序，因 DL.Shell 于 1959 年提出而得名。</p>
-<p>它通过比较相距一定间隔的元素来进行，各趟比较所用的距离随着算法的进行而减小，直到只比较相邻元素的最后一趟排序为止。</p>
-<h3 id="二、适用说明-1"><a href="#二、适用说明-1" class="headerlink" title="二、适用说明"></a>二、适用说明</h3><p>希尔排序时间复杂度是 **O(n^(1.3-2))**，空间复杂度为常数阶 **O(1)**。希尔排序没有时间复杂度为 <strong>O(n(logn))</strong> 的快速排序算法快 ，因此对中等大小规模表现良好，但对规模非常大的数据排序不是最优选择，总之比一般 <strong>O(n^2 )</strong> 复杂度的算法快得多。</p>
-<h3 id="三、过程图示-1"><a href="#三、过程图示-1" class="headerlink" title="三、过程图示"></a>三、过程图示</h3><p>希尔排序目的为了加快速度改进了插入排序，交换不相邻的元素对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。</p>
-<p>在此我们选择增量 <strong>gap&#x3D;length&#x2F;2</strong>，缩小增量以 <strong>gap &#x3D; gap&#x2F;2</strong> 的方式，用序列 <strong>{n&#x2F;2,(n&#x2F;2)&#x2F;2…1}</strong> 来表示。</p>
-<p>如图示例：</p>
-<p>（1）初始增量第一趟 <strong>gap &#x3D; length&#x2F;2 &#x3D; 4</strong></p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-01.png" alt="img"></p>
-<p>（2）第二趟，增量缩小为 2</p>
-<p><img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-02.png" alt="img"></p>
-<p>（3）第三趟，增量缩小为 1,得到最终排序结果</p>
-<p>​                                                           <img data-src="https://www.runoob.com/wp-content/uploads/2020/09/ShellSort-03.png" alt="img"></p>
-<h3 id="四、C语言代码示例"><a href="#四、C语言代码示例" class="headerlink" title="四、C语言代码示例"></a>四、C语言代码示例</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> lenth 8</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> num[lenth]=&#123;<span class="number">7</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">int</span> gap,j;<span class="comment">//定义增量，循环变量</span></span><br><span class="line">    <span class="keyword">for</span>(gap=lenth/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=gap;i&lt;lenth;i++)&#123;<span class="comment">//外层循环，gap每次缩小1/2</span></span><br><span class="line">            <span class="type">int</span> temp=num[i];<span class="comment">//将数组元素赋值给中间值</span></span><br><span class="line">            <span class="keyword">for</span>(j=i;j&gt;=gap&amp;&amp;temp&lt;num[j-gap];j-=gap)&#123;</span><br><span class="line">                num[j]=num[j-gap];</span><br><span class="line">            &#125;</span><br><span class="line">            num[j]=temp;<span class="comment">//判定若小于，两元素交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> q=<span class="number">0</span>;q&lt;<span class="number">8</span>;q++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,num[q]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>选择排序是一种简单直观的排序算法，无论什么数据进去都是 O(n²) 的时间复杂度。所以用到它的时候，数据规模越小越好。唯一的好处可能就是不占用额外的内存空间了吧。</p>
-<h3 id="1-算法步骤"><a href="#1-算法步骤" class="headerlink" title="1. 算法步骤"></a>1. 算法步骤</h3><p>首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置。</p>
-<p>再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。</p>
-<p>重复第二步，直到所有元素均排序完毕。</p>
-<h3 id="2-动图演示"><a href="#2-动图演示" class="headerlink" title="2. 动图演示"></a>2. 动图演示</h3><p><img data-src="https://www.runoob.com/wp-content/uploads/2019/03/selectionSort.gif" alt="img"></p>
-<h3 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3.代码实现"></a>3.代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 5</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        a[i] = rand() % <span class="number">101</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//初始化随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;<span class="comment">//数组输出函数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> *a,<span class="type">int</span> *b)</span> <span class="comment">//交换两数</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="type">int</span> temp = *a;</span><br><span class="line">      *a = *b;</span><br><span class="line">      *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">choose</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="type">int</span> i,j;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span> ; i &lt; len - <span class="number">1</span> ; i++)</span><br><span class="line">      &#123;</span><br><span class="line">                <span class="type">int</span> min = i;</span><br><span class="line">                <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; len; j++)   <span class="comment">//走访未排序的元素</span></span><br><span class="line">                    <span class="keyword">if</span> (arr[j] &lt; arr[min])  <span class="comment">//找到目前最小值</span></span><br><span class="line">                        min = j;  <span class="comment">//记录最小值</span></span><br><span class="line">                swap(&amp;arr[min], &amp;arr[i]);  <span class="comment">//做交換</span></span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    init(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    choose(a,n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sorted array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ul>
-<li><p>冒泡排序（Bubble Sort）也是一种简单直观的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢”浮”到数列的顶端。</p>
-</li>
-<li><p>作为最简单的排序算法之一，冒泡排序给我的感觉就像 Abandon 在单词书里出现的感觉一样，每次都在第一页第一位，所以最熟悉。冒泡排序还有一种优化算法，就是立一个 flag，当在一趟序列遍历中元素没有发生交换，则证明该序列已经有序。但这种改进对于提升性能来说并没有什么太大作用。</p>
-</li>
-</ul>
-<h3 id="1-算法步骤-1"><a href="#1-算法步骤-1" class="headerlink" title="1. 算法步骤"></a>1. 算法步骤</h3><p>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
-<p>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
-<p>针对所有的元素重复以上的步骤，除了最后一个。</p>
-<p>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
-<h3 id="2-动图演示-1"><a href="#2-动图演示-1" class="headerlink" title="2. 动图演示"></a>2. 动图演示</h3><p><img data-src="https://www.runoob.com/wp-content/uploads/2019/03/bubbleSort.gif" alt="img"></p>
-<h3 id="3-什么时候最快"><a href="#3-什么时候最快" class="headerlink" title="3. 什么时候最快"></a>3. 什么时候最快</h3><p>当输入的数据已经是正序时（都已经是正序了，我还要你冒泡排序有何用啊）。</p>
-<h3 id="4-什么时候最慢"><a href="#4-什么时候最慢" class="headerlink" title="4. 什么时候最慢"></a>4. 什么时候最慢</h3><p>当输入的数据是反序时（写一个 for 循环反序输出数据不就行了，干嘛要用冒泡排序呢，我是闲的吗）。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> n 5</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        a[i] = rand() % <span class="number">101</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="comment">//初始化随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;<span class="comment">//数组输出函数</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">gudu</span><span class="params">(<span class="type">int</span> a[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> swapped; <span class="comment">// 用于标记是否发生交换</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swapped = <span class="number">0</span>; <span class="comment">// 每轮开始前重置为0</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; i; p++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[p] &gt; a[p + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="type">int</span> temp = a[p];</span><br><span class="line">                a[p] = a[p + <span class="number">1</span>];</span><br><span class="line">                a[p + <span class="number">1</span>] = temp;</span><br><span class="line">                swapped = <span class="number">1</span>; <span class="comment">// 发生交换</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!swapped) &#123;</span><br><span class="line">            <span class="comment">// 如果没有发生交换，说明已经排序完成</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[n];</span><br><span class="line">    init(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    gudu(a);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Sorted array:\n&quot;</span>);</span><br><span class="line">    print(a);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>排序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>欧几里得算法</title>
-    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
-<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
-<span id="more"></span>
-
-<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
-<ol>
-<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
-</li>
-<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
-</li>
-<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
-</li>
-<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
-</li>
-</ol>
-<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
-<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
-<ul>
-<li>求解整数的最大公约数。</li>
-<li>判断两个整数是否互质（最大公约数为1）。</li>
-<li>求解不定方程的整数解，如贝祖等式。</li>
-<li>在密码学中用于生成加密密钥。</li>
-</ul>
-<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
-<p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
