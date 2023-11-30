@@ -397,6 +397,40 @@
       </tags>
   </entry>
   <entry>
+    <title>LeetCode66</title>
+    <url>/2023/11/19/LeetCode66/</url>
+    <content><![CDATA[<h1 id="加一"><a href="#加一" class="headerlink" title="加一"></a><a href="https://leetcode.cn/problems/plus-one/">加一</a></h1><hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[1,2,3]</span></span><br><span class="line">输出：<span class="comment">[1,2,4]</span></span><br><span class="line">解释：输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：digits = [<span class="number">4,3,2,1</span>]</span><br><span class="line">输出：[<span class="number">4,3,2,2</span>]</span><br><span class="line">解释：输入数组表示数字 <span class="number">4321</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[0]</span></span><br><span class="line">输出：<span class="comment">[1]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= digits.length &lt;= 100</code></li>
+<li><code>0 &lt;= digits[i] &lt;= 9</code></li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">plusOne</span><span class="params">(<span class="type">int</span>* digits, <span class="type">int</span> digitsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="comment">// 从数组的最后一位开始向前加一</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = digitsSize - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (digits[i] &lt; <span class="number">9</span>) &#123;</span><br><span class="line">            <span class="comment">// 当前位加一不产生进位，直接返回数组</span></span><br><span class="line">            digits[i]++;</span><br><span class="line">            *returnSize = digitsSize;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 当前位加一产生进位，将当前位设为0，继续向前一位加一</span></span><br><span class="line">            digits[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">// 如果遍历完成后，最高位仍然产生进位，需要在数组最前面添加一个新的元素1</span></span><br><span class="line">	<span class="type">int</span>* result = (<span class="type">int</span>*)<span class="built_in">malloc</span>((digitsSize + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	result[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= digitsSize; i++) &#123;</span><br><span class="line">    	result[i] = digits[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	*returnSize = digitsSize + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>s</p>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PID算法初探</title>
     <url>/2023/11/03/PID%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2/</url>
     <content><![CDATA[<h1 id="PID算法初探"><a href="#PID算法初探" class="headerlink" title="PID算法初探"></a>PID算法初探</h1><p>PID（比例-积分-微分）控制算法是一种用于调节控制系统的反馈控制算法。它是一种常见的控制系统设计方法，用于确保系统的输出与期望值（或参考信号）尽可能接近。PID控制算法基于三个主要参数，分别是比例增益（P）、积分时间（I）和微分时间（D）。</p>
@@ -472,40 +506,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode66</title>
-    <url>/2023/11/19/LeetCode66/</url>
-    <content><![CDATA[<h1 id="加一"><a href="#加一" class="headerlink" title="加一"></a><a href="https://leetcode.cn/problems/plus-one/">加一</a></h1><hr>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
-<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
-<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[1,2,3]</span></span><br><span class="line">输出：<span class="comment">[1,2,4]</span></span><br><span class="line">解释：输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：digits = [<span class="number">4,3,2,1</span>]</span><br><span class="line">输出：[<span class="number">4,3,2,2</span>]</span><br><span class="line">解释：输入数组表示数字 <span class="number">4321</span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[0]</span></span><br><span class="line">输出：<span class="comment">[1]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= digits.length &lt;= 100</code></li>
-<li><code>0 &lt;= digits[i] &lt;= 9</code></li>
-</ul>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">plusOne</span><span class="params">(<span class="type">int</span>* digits, <span class="type">int</span> digitsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="comment">// 从数组的最后一位开始向前加一</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = digitsSize - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (digits[i] &lt; <span class="number">9</span>) &#123;</span><br><span class="line">            <span class="comment">// 当前位加一不产生进位，直接返回数组</span></span><br><span class="line">            digits[i]++;</span><br><span class="line">            *returnSize = digitsSize;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 当前位加一产生进位，将当前位设为0，继续向前一位加一</span></span><br><span class="line">            digits[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">// 如果遍历完成后，最高位仍然产生进位，需要在数组最前面添加一个新的元素1</span></span><br><span class="line">	<span class="type">int</span>* result = (<span class="type">int</span>*)<span class="built_in">malloc</span>((digitsSize + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	result[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= digitsSize; i++) &#123;</span><br><span class="line">    	result[i] = digits[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	*returnSize = digitsSize + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>s</p>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>c语言中正则匹配的几种思路</title>
     <url>/2023/10/12/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF/</url>
     <content><![CDATA[<h1 id="关于正则匹配的几种思路"><a href="#关于正则匹配的几种思路" class="headerlink" title="关于正则匹配的几种思路"></a>关于正则匹配的几种思路</h1><p>注意：所谓正则表达指一整个字符串，而部分字符串<br>下面来看这样一个实例：<br><strong>写出一个程序，当输入“yuanshen”的时候，输出为“yes”；输入“no”的时候，输出为“no”</strong></p>
@@ -553,6 +553,37 @@
 ]]></content>
       <categories>
         <category>屎山</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>句子倒置</title>
+    <url>/2023/11/21/%E5%8F%A5%E5%AD%90%E5%80%92%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="句子倒置"><a href="#句子倒置" class="headerlink" title="句子倒置"></a>句子倒置</h1><hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个英语的语句，比如”London bridge is falling down”，把它完全倒装过来，”down falling is bridge London”，如何不使用额外的存储空间完成这个倒装过程？<br>常学习计算机算法的人在解决这个问题时，首先会想到把这个句子切割成一个个单词，然后把它们存到一个数组里，把这个数组顺序存入，逆序取出来就可以完成语句倒装的问题。但是，这种算法要额外地使用存储空间，因此不符合题目的要求。</p>
+<span id="more"></span>
+
+<p>我们可以考虑这样解决问题：<br>第一步，先将整个句子看成是一个完整的字符串，以字母为单位头尾对调，这样上面的句子就变成了下面这样一个乱七八糟的字符串：<br>“nwod gnillaf si egdirb nodnoL”<br>第二步，把用空格分割的每一个字串以字母为单位，头尾对调。比如第一个字串是nwod，头尾对调后是down，也就是原来句子中的最后一个单词。第二个字串是gnillaf，字母头尾对调后是falling，原来句子中倒数第二个单词。这样一个个地做，直到最后一个字串里的字母对调完毕。这样就得到了下面的倒装句子：<br>“down falling is bridge London.”</p>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>题目中已经给出了诱导式的方法：需要造两个轮子：<em>句子倒置</em>和<em>单词倒置</em>。</p>
+<ul>
+<li><p>单词倒置比较容易，可以在首尾各添一个指针逐渐向中间靠拢，每次两个指针各自指向的元素互换，从而达到倒置效果。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Word</span><span class="params">(<span class="type">char</span>* start, <span class="type">char</span>* end)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">        start++;</span><br><span class="line">        end--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>句子倒置也不算特别复杂，其根本原理是首先把整个句子倒置，再把句子拆分成为单词，以空格为分界，将每个单词再次倒置</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Sentence</span><span class="params">(<span class="type">char</span>* sentence)</span> &#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="built_in">strlen</span>(sentence);</span><br><span class="line">    <span class="type">char</span>* start = sentence;</span><br><span class="line">    Word(sentence, sentence + length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;=length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sentence[i] == <span class="string">&#x27; &#x27;</span> || sentence[i] == <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">            Word(start, sentence + i - <span class="number">1</span>);</span><br><span class="line">            start = sentence + i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Word</span><span class="params">(<span class="type">char</span>* start, <span class="type">char</span>* end)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">        start++;</span><br><span class="line">        end--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Sentence</span><span class="params">(<span class="type">char</span>* sentence)</span> &#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="built_in">strlen</span>(sentence);</span><br><span class="line">    <span class="type">char</span>* start = sentence;</span><br><span class="line">    Word(sentence, sentence + length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;=length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sentence[i] == <span class="string">&#x27; &#x27;</span> || sentence[i] == <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">            Word(start, sentence + i - <span class="number">1</span>);</span><br><span class="line">            start = sentence + i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">input</span><span class="params">(<span class="type">char</span>* <span class="built_in">string</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;c);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;\n&#x27;</span> || c == EOF) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span>[i] = c;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">string</span>[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> sentence[] = <span class="string">&quot;London bridge is falling down&quot;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original sentence: %s\n&quot;</span>, sentence);</span><br><span class="line">    Sentence(sentence);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Reversed sentence: %s\n&quot;</span>, sentence);</span><br><span class="line"><span class="comment">//    char string[100]=&#123;&#125;;</span></span><br><span class="line"><span class="comment">//    input(string);</span></span><br><span class="line"><span class="comment">//    Sentence(string);</span></span><br><span class="line"><span class="comment">//    printf(&quot;%s&quot;,string);</span></span><br><span class="line"><span class="comment">//    这个是可以自己输入字符串的倒置程序</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​	</p>
+]]></content>
+      <categories>
+        <category>题解</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -710,37 +741,6 @@
       </categories>
       <tags>
         <tag>排序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>句子倒置</title>
-    <url>/2023/11/21/%E5%8F%A5%E5%AD%90%E5%80%92%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="句子倒置"><a href="#句子倒置" class="headerlink" title="句子倒置"></a>句子倒置</h1><hr>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个英语的语句，比如”London bridge is falling down”，把它完全倒装过来，”down falling is bridge London”，如何不使用额外的存储空间完成这个倒装过程？<br>常学习计算机算法的人在解决这个问题时，首先会想到把这个句子切割成一个个单词，然后把它们存到一个数组里，把这个数组顺序存入，逆序取出来就可以完成语句倒装的问题。但是，这种算法要额外地使用存储空间，因此不符合题目的要求。</p>
-<span id="more"></span>
-
-<p>我们可以考虑这样解决问题：<br>第一步，先将整个句子看成是一个完整的字符串，以字母为单位头尾对调，这样上面的句子就变成了下面这样一个乱七八糟的字符串：<br>“nwod gnillaf si egdirb nodnoL”<br>第二步，把用空格分割的每一个字串以字母为单位，头尾对调。比如第一个字串是nwod，头尾对调后是down，也就是原来句子中的最后一个单词。第二个字串是gnillaf，字母头尾对调后是falling，原来句子中倒数第二个单词。这样一个个地做，直到最后一个字串里的字母对调完毕。这样就得到了下面的倒装句子：<br>“down falling is bridge London.”</p>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>题目中已经给出了诱导式的方法：需要造两个轮子：<em>句子倒置</em>和<em>单词倒置</em>。</p>
-<ul>
-<li><p>单词倒置比较容易，可以在首尾各添一个指针逐渐向中间靠拢，每次两个指针各自指向的元素互换，从而达到倒置效果。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Word</span><span class="params">(<span class="type">char</span>* start, <span class="type">char</span>* end)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">        start++;</span><br><span class="line">        end--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>句子倒置也不算特别复杂，其根本原理是首先把整个句子倒置，再把句子拆分成为单词，以空格为分界，将每个单词再次倒置</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Sentence</span><span class="params">(<span class="type">char</span>* sentence)</span> &#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="built_in">strlen</span>(sentence);</span><br><span class="line">    <span class="type">char</span>* start = sentence;</span><br><span class="line">    Word(sentence, sentence + length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;=length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sentence[i] == <span class="string">&#x27; &#x27;</span> || sentence[i] == <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">            Word(start, sentence + i - <span class="number">1</span>);</span><br><span class="line">            start = sentence + i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Word</span><span class="params">(<span class="type">char</span>* start, <span class="type">char</span>* end)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (start &lt; end) &#123;</span><br><span class="line">        <span class="type">char</span> temp = *start;</span><br><span class="line">        *start = *end;</span><br><span class="line">        *end = temp;</span><br><span class="line">        start++;</span><br><span class="line">        end--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Sentence</span><span class="params">(<span class="type">char</span>* sentence)</span> &#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="built_in">strlen</span>(sentence);</span><br><span class="line">    <span class="type">char</span>* start = sentence;</span><br><span class="line">    Word(sentence, sentence + length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;=length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sentence[i] == <span class="string">&#x27; &#x27;</span> || sentence[i] == <span class="string">&#x27;\0&#x27;</span>) &#123;</span><br><span class="line">            Word(start, sentence + i - <span class="number">1</span>);</span><br><span class="line">            start = sentence + i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">input</span><span class="params">(<span class="type">char</span>* <span class="built_in">string</span>)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%c&quot;</span>, &amp;c);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;\n&#x27;</span> || c == EOF) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">string</span>[i] = c;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">string</span>[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> sentence[] = <span class="string">&quot;London bridge is falling down&quot;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original sentence: %s\n&quot;</span>, sentence);</span><br><span class="line">    Sentence(sentence);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Reversed sentence: %s\n&quot;</span>, sentence);</span><br><span class="line"><span class="comment">//    char string[100]=&#123;&#125;;</span></span><br><span class="line"><span class="comment">//    input(string);</span></span><br><span class="line"><span class="comment">//    Sentence(string);</span></span><br><span class="line"><span class="comment">//    printf(&quot;%s&quot;,string);</span></span><br><span class="line"><span class="comment">//    这个是可以自己输入字符串的倒置程序</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>​	</p>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
