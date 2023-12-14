@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>LeetCode0238</title>
+    <url>/2023/11/22/LeetCode0238/</url>
+    <content><![CDATA[<h1 id="除自身以外数组的乘积"><a href="#除自身以外数组的乘积" class="headerlink" title="除自身以外数组的乘积"></a><a href="https://leetcode.cn/problems/product-of-array-except-self/">除自身以外数组的乘积</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code>，返回 <em>数组 <code>answer</code> ，其中 <code>answer[i]</code> 等于 <code>nums</code> 中除 <code>nums[i]</code> 之外其余各元素的乘积</em> 。</p>
+<p>题目数据 <strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32 位</strong> 整数范围内。</p>
+<p>请 <strong>不要使用除法，</strong>且在 <code>O(*n*)</code> 时间复杂度内完成此题。</p>
+<span id="more"></span>
+
+<p><strong>示例 1:</strong></p>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">1,2,3,4</span>]</span><br><span class="line">输出: [<span class="number">24,12,8,6</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: nums = <span class="comment">[-1,1,0,-3,3]</span></span><br><span class="line">输出: <span class="comment">[0,0,9,0,0]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 105</code></li>
+<li><code>-30 &lt;= nums[i] &lt;= 30</code></li>
+<li><strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32 位</strong> 整数范围内</li>
+</ul>
+<hr>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始我想得比较简单，认为只需要把所有元素的乘积求出，再在循环里一个个除就好。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span>* answer = (<span class="type">int</span>*)<span class="built_in">malloc</span>(numsSize * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (answer == <span class="literal">NULL</span>) &#123; <span class="comment">// 检查内存分配是否成功</span></span><br><span class="line">        *returnSize = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> product = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        product *= nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        answer[i] = product / nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>Line 16: Char 29: runtime error: division by zero [solution.c]</code>把我拉回了现实：只要有个0，这段代码全线崩盘，而且根本没有修改的余地，故舍弃此方法。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//除自身的乘积的的值 等于 左乘积 *  右乘积</span></span><br><span class="line">    <span class="type">int</span> leftPro[numsSize];</span><br><span class="line">    <span class="type">int</span> rightPro[numsSize];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//左乘积</span></span><br><span class="line">    leftPro[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        leftPro[i] =  leftPro[i<span class="number">-1</span>] *  nums[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//右乘积</span></span><br><span class="line">    rightPro[numsSize<span class="number">-1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = numsSize - <span class="number">1</span> - <span class="number">1</span>; i  &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        rightPro[i] =  rightPro[i+<span class="number">1</span>] *  nums[i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="type">int</span> * returnNums = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * numsSize);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        returnNums[i] = leftPro[i] * rightPro[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> returnNums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>正确的思路应该像是这样，分别求出左边和右边序列的乘积加以乘法。</p>
+<p>后来我在评论区看到这样一种思路：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> ra[<span class="number">100000</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++)&#123;</span><br><span class="line">        ra[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pre = <span class="number">1</span>, suf = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++)&#123;</span><br><span class="line">        pre *= nums[i - <span class="number">1</span>];</span><br><span class="line">        suf *= nums[numsSize - i];</span><br><span class="line">        ra[i] *= pre;</span><br><span class="line">        ra[numsSize - i - <span class="number">1</span>] *= suf;</span><br><span class="line">    &#125;</span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="keyword">return</span> ra;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：随心</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/product-of-array-except-self/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
+<p>（话说大佬都是不写注释的嘛）</p>
+<p>这种算法的思路大致如下：</p>
+<ul>
+<li>初始化数组<code>ra</code>的前缀和和后缀和都为1。</li>
+<li>遍历数组<code>nums</code>，从第二个元素开始（下标为1）。</li>
+<li>对于第<code>i</code>个元素，计算前缀和（即前面所有元素的乘积）并赋值给<code>pre</code>，计算后缀和（即后面所有元素的乘积）并赋值给<code>suf</code>。</li>
+<li>将前缀和和后缀和的乘积赋值给<code>ra[i]</code>，即<code>ra[i] = pre * suf</code>。</li>
+<li>将数组的长度赋值给返回值<code>*returnSize</code>，并返回动态分配的数组<code>ra</code>。</li>
+</ul>
+<p>这种算法好处在于：</p>
+<ol>
+<li><p>空间利用率高：使用了一个数组<code>ra</code>来存储每个元素与其他元素乘积的结果，避免了重复计算，提高了空间利用率。</p>
+</li>
+<li><p>计算效率高：通过计算前缀和和后缀和，减少了乘法操作的次数，提高了计算效率。</p>
+<p>(草怎么写得这么牛逼)</p>
+<p>**学到了有木有 **</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LeetCode0485</title>
     <url>/2023/11/21/LeetCode0485/</url>
     <content><![CDATA[<h1 id="最大连续-1-的个数"><a href="#最大连续-1-的个数" class="headerlink" title="最大连续 1 的个数"></a><a href="https://leetcode.cn/problems/max-consecutive-ones/">最大连续 1 的个数</a></h1><hr>
@@ -25,6 +82,51 @@
 <p>关键在于最大，使我引入了一个缓存变量tmp，用来实时更新“最大连击数”并不会占用1太多空间。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">findMaxConsecutiveOnes</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; numsSize &amp;&amp; nums[i] == <span class="number">1</span>) &#123;</span><br><span class="line">            tmp++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &lt; tmp) &#123;</span><br><span class="line">            count = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode0724</title>
+    <url>/2023/11/20/LeetCode0724/</url>
+    <content><![CDATA[<h1 id="寻找数组的中心下标"><a href="#寻找数组的中心下标" class="headerlink" title="寻找数组的中心下标"></a><a href="https://leetcode.cn/problems/find-pivot-index/">寻找数组的中心下标</a></h1><hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code> ，请计算数组的 <strong>中心下标</strong> 。</p>
+<p>数组 <strong>中心下标</strong> 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
+<p>如果中心下标位于数组最左端，那么左侧数之和视为 <code>0</code> ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。</p>
+<p>如果数组有多个中心下标，应该返回 <strong>最靠近左边</strong> 的那一个。如果数组不存在中心下标，返回 <code>-1</code> 。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1, 7, 3, 6, 5, 6]</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">中心下标是<span class="number"> 3 </span>。</span><br><span class="line">左侧数之和 sum = nums[0] + nums[1] + nums[2] =<span class="number"> 1 </span>+<span class="number"> 7 </span>+<span class="number"> 3 </span>=<span class="number"> 11 </span>，</span><br><span class="line">右侧数之和 sum = nums[4] + nums[5] =<span class="number"> 5 </span>+<span class="number"> 6 </span>=<span class="number"> 11 </span>，二者相等。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight fix"><table><tr><td class="code"><pre><span class="line"><span class="attr">输入：nums </span>=<span class="string"> [1, 2, 3]</span></span><br><span class="line"><span class="string">输出：-1</span></span><br><span class="line"><span class="string">解释：</span></span><br><span class="line"><span class="string">数组中不存在满足此条件的中心下标。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [2, 1, -1]</span><br><span class="line">输出：0</span><br><span class="line">解释：</span><br><span class="line">中心下标是<span class="number"> 0 </span>。</span><br><span class="line">左侧数之和 sum =<span class="number"> 0 </span>，（下标<span class="number"> 0 </span>左侧不存在元素），</span><br><span class="line">右侧数之和 sum = nums[1] + nums[2] =<span class="number"> 1 </span>+ -1 =<span class="number"> 0 </span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 104</code></li>
+<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
+</ul>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li>刚开始没什么具体思路，非常脑残地一点点计算出SUM(左右)，代码如下：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_left = <span class="number">0</span>, sum_right = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sum == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++)</span><br><span class="line">                sum_left += nums[j];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> p = i + <span class="number">1</span>; p &lt; numsSize; p++)</span><br><span class="line">                sum_right += nums[p];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (sum_left == sum_right)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 重置 sum_left 和 sum_right</span></span><br><span class="line">            sum_left = <span class="number">0</span>;</span><br><span class="line">            sum_right = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>中间那个重置千万别忘掉</strong></p>
+<ul>
+<li><p>在GPT的帮助下，我把代码重构了一下，主要是针对右侧sum的计算逻辑修改</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_left = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum_right = sum - sum_left - nums[i];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (sum_left == sum_right) &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sum_left += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这个逻辑中无需先预判[0]元素是否可以直接PASS（其实前一个也不用，写麻烦了），并且用全数列的sum-左sum-当前元素，少了一丢丢运算过程，更加简洁明了</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>题解</category>
@@ -213,108 +315,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode0238</title>
-    <url>/2023/11/22/LeetCode0238/</url>
-    <content><![CDATA[<h1 id="除自身以外数组的乘积"><a href="#除自身以外数组的乘积" class="headerlink" title="除自身以外数组的乘积"></a><a href="https://leetcode.cn/problems/product-of-array-except-self/">除自身以外数组的乘积</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code>，返回 <em>数组 <code>answer</code> ，其中 <code>answer[i]</code> 等于 <code>nums</code> 中除 <code>nums[i]</code> 之外其余各元素的乘积</em> 。</p>
-<p>题目数据 <strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32 位</strong> 整数范围内。</p>
-<p>请 <strong>不要使用除法，</strong>且在 <code>O(*n*)</code> 时间复杂度内完成此题。</p>
-<span id="more"></span>
-
-<p><strong>示例 1:</strong></p>
-<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入: nums = [<span class="number">1,2,3,4</span>]</span><br><span class="line">输出: [<span class="number">24,12,8,6</span>]</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入: nums = <span class="comment">[-1,1,0,-3,3]</span></span><br><span class="line">输出: <span class="comment">[0,0,9,0,0]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>2 &lt;= nums.length &lt;= 105</code></li>
-<li><code>-30 &lt;= nums[i] &lt;= 30</code></li>
-<li><strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在 <strong>32 位</strong> 整数范围内</li>
-</ul>
-<hr>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始我想得比较简单，认为只需要把所有元素的乘积求出，再在循环里一个个除就好。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span>* answer = (<span class="type">int</span>*)<span class="built_in">malloc</span>(numsSize * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (answer == <span class="literal">NULL</span>) &#123; <span class="comment">// 检查内存分配是否成功</span></span><br><span class="line">        *returnSize = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> product = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        product *= nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        answer[i] = product / nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><code>Line 16: Char 29: runtime error: division by zero [solution.c]</code>把我拉回了现实：只要有个0，这段代码全线崩盘，而且根本没有修改的余地，故舍弃此方法。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//除自身的乘积的的值 等于 左乘积 *  右乘积</span></span><br><span class="line">    <span class="type">int</span> leftPro[numsSize];</span><br><span class="line">    <span class="type">int</span> rightPro[numsSize];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//左乘积</span></span><br><span class="line">    leftPro[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        leftPro[i] =  leftPro[i<span class="number">-1</span>] *  nums[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//右乘积</span></span><br><span class="line">    rightPro[numsSize<span class="number">-1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = numsSize - <span class="number">1</span> - <span class="number">1</span>; i  &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        rightPro[i] =  rightPro[i+<span class="number">1</span>] *  nums[i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="type">int</span> * returnNums = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * numsSize);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; numsSize; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        returnNums[i] = leftPro[i] * rightPro[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> returnNums;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>正确的思路应该像是这样，分别求出左边和右边序列的乘积加以乘法。</p>
-<p>后来我在评论区看到这样一种思路：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Note: The returned array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> ra[<span class="number">100000</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* <span class="title function_">productExceptSelf</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span>* returnSize)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++)&#123;</span><br><span class="line">        ra[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> pre = <span class="number">1</span>, suf = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; numsSize; i++)&#123;</span><br><span class="line">        pre *= nums[i - <span class="number">1</span>];</span><br><span class="line">        suf *= nums[numsSize - i];</span><br><span class="line">        ra[i] *= pre;</span><br><span class="line">        ra[numsSize - i - <span class="number">1</span>] *= suf;</span><br><span class="line">    &#125;</span><br><span class="line">    *returnSize = numsSize;</span><br><span class="line">    <span class="keyword">return</span> ra;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：随心</span><br><span class="line">链接：https:<span class="comment">//leetcode.cn/problems/product-of-array-except-self/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
-
-<p>（话说大佬都是不写注释的嘛）</p>
-<p>这种算法的思路大致如下：</p>
-<ul>
-<li>初始化数组<code>ra</code>的前缀和和后缀和都为1。</li>
-<li>遍历数组<code>nums</code>，从第二个元素开始（下标为1）。</li>
-<li>对于第<code>i</code>个元素，计算前缀和（即前面所有元素的乘积）并赋值给<code>pre</code>，计算后缀和（即后面所有元素的乘积）并赋值给<code>suf</code>。</li>
-<li>将前缀和和后缀和的乘积赋值给<code>ra[i]</code>，即<code>ra[i] = pre * suf</code>。</li>
-<li>将数组的长度赋值给返回值<code>*returnSize</code>，并返回动态分配的数组<code>ra</code>。</li>
-</ul>
-<p>这种算法好处在于：</p>
-<ol>
-<li><p>空间利用率高：使用了一个数组<code>ra</code>来存储每个元素与其他元素乘积的结果，避免了重复计算，提高了空间利用率。</p>
-</li>
-<li><p>计算效率高：通过计算前缀和和后缀和，减少了乘法操作的次数，提高了计算效率。</p>
-<p>(草怎么写得这么牛逼)</p>
-<p>**学到了有木有 **</p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode0724</title>
-    <url>/2023/11/20/LeetCode0724/</url>
-    <content><![CDATA[<h1 id="寻找数组的中心下标"><a href="#寻找数组的中心下标" class="headerlink" title="寻找数组的中心下标"></a><a href="https://leetcode.cn/problems/find-pivot-index/">寻找数组的中心下标</a></h1><hr>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code> ，请计算数组的 <strong>中心下标</strong> 。</p>
-<p>数组 <strong>中心下标</strong> 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
-<p>如果中心下标位于数组最左端，那么左侧数之和视为 <code>0</code> ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。</p>
-<p>如果数组有多个中心下标，应该返回 <strong>最靠近左边</strong> 的那一个。如果数组不存在中心下标，返回 <code>-1</code> 。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1, 7, 3, 6, 5, 6]</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">中心下标是<span class="number"> 3 </span>。</span><br><span class="line">左侧数之和 sum = nums[0] + nums[1] + nums[2] =<span class="number"> 1 </span>+<span class="number"> 7 </span>+<span class="number"> 3 </span>=<span class="number"> 11 </span>，</span><br><span class="line">右侧数之和 sum = nums[4] + nums[5] =<span class="number"> 5 </span>+<span class="number"> 6 </span>=<span class="number"> 11 </span>，二者相等。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight fix"><table><tr><td class="code"><pre><span class="line"><span class="attr">输入：nums </span>=<span class="string"> [1, 2, 3]</span></span><br><span class="line"><span class="string">输出：-1</span></span><br><span class="line"><span class="string">解释：</span></span><br><span class="line"><span class="string">数组中不存在满足此条件的中心下标。</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [2, 1, -1]</span><br><span class="line">输出：0</span><br><span class="line">解释：</span><br><span class="line">中心下标是<span class="number"> 0 </span>。</span><br><span class="line">左侧数之和 sum =<span class="number"> 0 </span>，（下标<span class="number"> 0 </span>左侧不存在元素），</span><br><span class="line">右侧数之和 sum = nums[1] + nums[2] =<span class="number"> 1 </span>+ -1 =<span class="number"> 0 </span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 104</code></li>
-<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
-</ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>刚开始没什么具体思路，非常脑残地一点点计算出SUM(左右)，代码如下：</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_left = <span class="number">0</span>, sum_right = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sum == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++)</span><br><span class="line">                sum_left += nums[j];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> p = i + <span class="number">1</span>; p &lt; numsSize; p++)</span><br><span class="line">                sum_right += nums[p];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (sum_left == sum_right)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 重置 sum_left 和 sum_right</span></span><br><span class="line">            sum_left = <span class="number">0</span>;</span><br><span class="line">            sum_right = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>中间那个重置千万别忘掉</strong></p>
-<ul>
-<li><p>在GPT的帮助下，我把代码重构了一下，主要是针对右侧sum的计算逻辑修改</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_left = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum_right = sum - sum_left - nums[i];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (sum_left == sum_right) &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sum_left += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这个逻辑中无需先预判[0]元素是否可以直接PASS（其实前一个也不用，写麻烦了），并且用全数列的sum-左sum-当前元素，少了一丢丢运算过程，更加简洁明了</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Leetcode189</title>
     <url>/2023/11/19/LeetCode189/</url>
     <content><![CDATA[<h1 id="加一"><a href="#加一" class="headerlink" title="加一"></a><a href="https://leetcode.cn/problems/plus-one/">加一</a></h1><hr>
@@ -358,44 +358,37 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode0203</title>
-    <url>/2023/11/30/Leetcode0203/</url>
-    <content><![CDATA[<h1 id="移除链表元素"><a href="#移除链表元素" class="headerlink" title="移除链表元素"></a><a href="https://leetcode.cn/problems/remove-linked-list-elements/">移除链表元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个链表的头节点 <code>head</code> 和一个整数 <code>val</code> ，请你删除链表中所有满足 <code>Node.val == val</code> 的节点，并返回 <strong>新的头节点</strong> 。</p>
+    <title>LeetCode66</title>
+    <url>/2023/11/19/LeetCode66/</url>
+    <content><![CDATA[<h1 id="加一"><a href="#加一" class="headerlink" title="加一"></a><a href="https://leetcode.cn/problems/plus-one/">加一</a></h1><hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
 <span id="more"></span>
 
 <p><strong>示例 1：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg" alt="img"></p>
-<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="string">[1,2,6,3,4,5,6]</span>, val = <span class="number">6</span></span><br><span class="line">输出：<span class="string">[1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[1,2,3]</span></span><br><span class="line">输出：<span class="comment">[1,2,4]</span></span><br><span class="line">解释：输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[]</span>, val = 1</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：digits = [<span class="number">4,3,2,1</span>]</span><br><span class="line">输出：[<span class="number">4,3,2,2</span>]</span><br><span class="line">解释：输入数组表示数字 <span class="number">4321</span>。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 3：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[7,7,7,7]</span>, val = 7</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[0]</span></span><br><span class="line">输出：<span class="comment">[1]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li>列表中的节点数目在范围 <code>[0, 104]</code> 内</li>
-<li><code>1 &lt;= Node.val &lt;= 50</code></li>
-<li><code>0 &lt;= val &lt;= 50</code></li>
+<li><code>1 &lt;= digits.length &lt;= 100</code></li>
+<li><code>0 &lt;= digits[i] &lt;= 9</code></li>
 </ul>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始思路非常简单：检测到下一个节点是val，删除该节点。写出了下面这段蠢到家的代码：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span>=</span>head;</span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">plusOne</span><span class="params">(<span class="type">int</span>* digits, <span class="type">int</span> digitsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="comment">// 从数组的最后一位开始向前加一</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = digitsSize - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (digits[i] &lt; <span class="number">9</span>) &#123;</span><br><span class="line">            <span class="comment">// 当前位加一不产生进位，直接返回数组</span></span><br><span class="line">            digits[i]++;</span><br><span class="line">            *returnSize = digitsSize;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 当前位加一产生进位，将当前位设为0，继续向前一位加一</span></span><br><span class="line">            digits[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">// 如果遍历完成后，最高位仍然产生进位，需要在数组最前面添加一个新的元素1</span></span><br><span class="line">	<span class="type">int</span>* result = (<span class="type">int</span>*)<span class="built_in">malloc</span>((digitsSize + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	result[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= digitsSize; i++) &#123;</span><br><span class="line">    	result[i] = digits[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	*returnSize = digitsSize + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>仔细一看题：发现“<strong>新的头节点</strong>”还特意加粗了，看起来如果第一个节点就是空节点程序会直接寄掉。</p>
-<ol>
-<li><code>cur-&gt;next = cur-&gt;next-&gt;next;</code> 表示删除当前节点的下一个节点。这会导致无法处理连续相同值的节点。正确的做法是将当前节点的 <code>next</code> 指针直接指向下下个节点，而不是跳过一个节点。</li>
-<li>函数的返回值是链表的头指针 <code>head</code>，但是在删除节点的过程中，链表头部可能发生变化。因此，应该在删除节点后返回新的头指针。</li>
-</ol>
-<p>修改为以下程序：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">dummy</span> =</span> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> ListNode));</span><br><span class="line">    dummy-&gt;next = head;<span class="comment">//在头节点前创建一个空节点，用于解决其为val的情况</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> dummy;<span class="comment">//基操用cur遍历</span></span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next-&gt;val==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">newHead</span> =</span> dummy-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(dummy);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newHead;<span class="comment">//返回新的头节点，并释放dummy的空间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<p>s</p>
 ]]></content>
       <categories>
         <category>题解</category>
       </categories>
       <tags>
-        <tag>链表</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -435,6 +428,47 @@
       </categories>
       <tags>
         <tag>二维数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode0203</title>
+    <url>/2023/11/30/Leetcode0203/</url>
+    <content><![CDATA[<h1 id="移除链表元素"><a href="#移除链表元素" class="headerlink" title="移除链表元素"></a><a href="https://leetcode.cn/problems/remove-linked-list-elements/">移除链表元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个链表的头节点 <code>head</code> 和一个整数 <code>val</code> ，请你删除链表中所有满足 <code>Node.val == val</code> 的节点，并返回 <strong>新的头节点</strong> 。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg" alt="img"></p>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="string">[1,2,6,3,4,5,6]</span>, val = <span class="number">6</span></span><br><span class="line">输出：<span class="string">[1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[]</span>, val = 1</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[7,7,7,7]</span>, val = 7</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>列表中的节点数目在范围 <code>[0, 104]</code> 内</li>
+<li><code>1 &lt;= Node.val &lt;= 50</code></li>
+<li><code>0 &lt;= val &lt;= 50</code></li>
+</ul>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始思路非常简单：检测到下一个节点是val，删除该节点。写出了下面这段蠢到家的代码：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span>=</span>head;</span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>仔细一看题：发现“<strong>新的头节点</strong>”还特意加粗了，看起来如果第一个节点就是空节点程序会直接寄掉。</p>
+<ol>
+<li><code>cur-&gt;next = cur-&gt;next-&gt;next;</code> 表示删除当前节点的下一个节点。这会导致无法处理连续相同值的节点。正确的做法是将当前节点的 <code>next</code> 指针直接指向下下个节点，而不是跳过一个节点。</li>
+<li>函数的返回值是链表的头指针 <code>head</code>，但是在删除节点的过程中，链表头部可能发生变化。因此，应该在删除节点后返回新的头指针。</li>
+</ol>
+<p>修改为以下程序：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">dummy</span> =</span> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> ListNode));</span><br><span class="line">    dummy-&gt;next = head;<span class="comment">//在头节点前创建一个空节点，用于解决其为val的情况</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> dummy;<span class="comment">//基操用cur遍历</span></span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next-&gt;val==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">newHead</span> =</span> dummy-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(dummy);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newHead;<span class="comment">//返回新的头节点，并释放dummy的空间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -535,6 +569,39 @@
       </tags>
   </entry>
   <entry>
+    <title>c语言中正则匹配的几种思路</title>
+    <url>/2023/10/12/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF/</url>
+    <content><![CDATA[<h1 id="关于正则匹配的几种思路"><a href="#关于正则匹配的几种思路" class="headerlink" title="关于正则匹配的几种思路"></a>关于正则匹配的几种思路</h1><p>注意：所谓正则表达指一整个字符串，而部分字符串<br>下面来看这样一个实例：<br><strong>写出一个程序，当输入“yuanshen”的时候，输出为“yes”；输入“no”的时候，输出为“no”</strong></p>
+<span id="more"></span>
+
+
+<h2 id="输入示例：输出示例："><a href="#输入示例：输出示例：" class="headerlink" title="输入示例：输出示例："></a>输入示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yuanshen</span><br></pre></td></tr></table></figure><br>输出示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">yes</span></span><br></pre></td></tr></table></figure></h2><h2 id="输入示例：输出示例：-1"><a href="#输入示例：输出示例：-1" class="headerlink" title="输入示例：输出示例："></a>输入示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">qidong</span><br></pre></td></tr></table></figure><br>输出示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">no</span><br></pre></td></tr></table></figure></h2><p>输入示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">balaba</span><br></pre></td></tr></table></figure>
+<p>输出示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Error</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="思路一：无脑匹配"><a href="#思路一：无脑匹配" class="headerlink" title="思路一：无脑匹配"></a>思路一：无脑匹配</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    int i = 0;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; 9) &#123;</span><br><span class="line">        char c;</span><br><span class="line">        scanf(<span class="string">&quot;%c&quot;</span>, &amp;c);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        ans[i] = c;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    ans[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= 2 &amp;&amp; ans[0] == <span class="string">&#x27;y&#x27;</span> &amp;&amp; </span><br><span class="line">    ans[1] == <span class="string">&#x27;u&#x27;</span>&amp;&amp;ans[2] == <span class="string">&#x27;a&#x27;</span>&amp;&amp;ans[3] == <span class="string">&#x27;n&#x27;</span>&amp;&amp;ans[4] == <span class="string">&#x27;s&#x27;</span>&amp;&amp;</span><br><span class="line">    ans[5] == <span class="string">&#x27;h&#x27;</span>&amp;&amp;ans[6] == <span class="string">&#x27;e&#x27;</span>&amp;&amp;ans[7] == <span class="string">&#x27;n&#x27;</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">elif</span> (i &gt;= 2 &amp;&amp; ans[0] == <span class="string">&#x27;q&#x27;</span> &amp;&amp; </span><br><span class="line">    ans[1] == <span class="string">&#x27;i&#x27;</span>&amp;&amp;ans[2] == <span class="string">&#x27;d&#x27;</span>&amp;&amp;ans[3] == <span class="string">&#x27;o&#x27;</span>&amp;&amp;ans[4] == <span class="string">&#x27;n&#x27;</span>&amp;&amp;</span><br><span class="line">    ans[5] == <span class="string">&#x27;g&#x27;</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种思路看来有点麻烦（蠢），但是笔者作为初学者第一反应就是这样的。<br>首先创建了一个char类型数组，用while持续输入，if换行符作为结束条件，最后再加上“\0”结束输入。<br>匹配阶段则是用if挨个元素匹配。</p>
+<h4 id="总而言之，低效、麻烦而直观"><a href="#总而言之，低效、麻烦而直观" class="headerlink" title="总而言之，低效、麻烦而直观"></a><strong>总而言之，低效、麻烦而直观</strong></h4><h2 id="思路二：使用strcmp函数"><a href="#思路二：使用strcmp函数" class="headerlink" title="思路二：使用strcmp函数"></a>思路二：使用strcmp函数</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    int i = 0;</span><br><span class="line">    // Read characters into the array <span class="keyword">until</span> newline or reaching array size - 1</span><br><span class="line">    <span class="keyword">while</span> (i &lt; 9 &amp;&amp; scanf(<span class="string">&quot;%c&quot;</span>, &amp;ans[i]) == 1 &amp;&amp; ans[i] != <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Null-terminate the string</span><br><span class="line">    ans[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;yuanshen&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;qidong&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路二的输入方式与思路一大同小异，关键区别在于判断匹配的方式  </p>
+<h3 id="简单介绍一下使用到的strcmp函数："><a href="#简单介绍一下使用到的strcmp函数：" class="headerlink" title="简单介绍一下使用到的strcmp函数："></a>简单介绍一下使用到的strcmp函数：</h3><p>strcmp 函数用于比较两个字符串是否相等。它返回一个整数，用于表示比较结果。这个整数的含义如下：<br>-返回值小于 0：表示第一个字符串小于第二个字符串。<br>-返回值等于 0：表示两个字符串相等。<br>-返回值大于 0：表示第一个字符串大于第二个字符串。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">int strcmp(const char *str1, const char *str2) &#123;</span><br><span class="line">    <span class="keyword">while</span> (*str1 &amp;&amp; (*str1 == *str2)) &#123;</span><br><span class="line">        str1++;</span><br><span class="line">        str2++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> *(unsigned char *)str1 - *(unsigned char *)str2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上为strcmp函数的声明代码，采用指针达到字符串的匹配检测。</p>
+<h2 id="思路三："><a href="#思路三：" class="headerlink" title="思路三："></a>思路三：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    // Read a line of input into ans</span><br><span class="line">    fgets(ans, sizeof(ans), stdin);</span><br><span class="line"></span><br><span class="line">    // Remove newline character <span class="keyword">if</span> present</span><br><span class="line">    size_t len = strlen(ans);</span><br><span class="line">    <span class="keyword">if</span> (len &gt; 0 &amp;&amp; ans[len - 1] == <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        ans[len - 1] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Check <span class="keyword">if</span> ans starts with <span class="string">&quot;yuanshen&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;yuanshen&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(strncmp(ans, <span class="string">&quot;qidong&quot;</span>, 2) == 0)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码的基本思路是：<br>使用 fgets 函数读取用户输入的字符串，将其存储在名为 ans 的字符数组中，限制最大输入字符数为9。</p>
+<p>检查读取到的字符串的长度，如果大于0且最后一个字符是换行符（’\n’），则将该换行符替换为字符串终止符（’\0’），以确保字符串正确终止。</p>
+<p>使用 strncmp 函数比较 ans 字符串的前两个字符与预期字符串是否相等。如果相等，输出 “Yes”&#x2F;“No”，<br>否则输出 “Error”。</p>
+<p>（萌新勿骂）</p>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>正则匹配</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Leetcode83</title>
     <url>/2023/11/30/Leetcode83/</url>
     <content><![CDATA[<h1 id="删除排序链表中的重复元素"><a href="#删除排序链表中的重复元素" class="headerlink" title="删除排序链表中的重复元素"></a><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/">删除排序链表中的重复元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个已排序的链表的头 <code>head</code> ， <em>删除所有重复的元素，使每个元素只出现一次</em> 。返回 <em>已排序的链表</em> 。</p>
@@ -564,6 +631,18 @@
       </categories>
       <tags>
         <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Self-balancing-bycycle</title>
+    <url>/2023/10/09/Self-balancing-bycycle/</url>
+    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
+<span id="more"></span>]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>平衡车</tag>
       </tags>
   </entry>
   <entry>
@@ -627,74 +706,6 @@
       </categories>
       <tags>
         <tag>PID</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self-balancing-bycycle</title>
-    <url>/2023/10/09/Self-balancing-bycycle/</url>
-    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>平衡车</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>c语言中正则匹配的几种思路</title>
-    <url>/2023/10/12/c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E7%9A%84%E5%87%A0%E7%A7%8D%E6%80%9D%E8%B7%AF/</url>
-    <content><![CDATA[<h1 id="关于正则匹配的几种思路"><a href="#关于正则匹配的几种思路" class="headerlink" title="关于正则匹配的几种思路"></a>关于正则匹配的几种思路</h1><p>注意：所谓正则表达指一整个字符串，而部分字符串<br>下面来看这样一个实例：<br><strong>写出一个程序，当输入“yuanshen”的时候，输出为“yes”；输入“no”的时候，输出为“no”</strong></p>
-<span id="more"></span>
-
-
-<h2 id="输入示例：输出示例："><a href="#输入示例：输出示例：" class="headerlink" title="输入示例：输出示例："></a>输入示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yuanshen</span><br></pre></td></tr></table></figure><br>输出示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">yes</span></span><br></pre></td></tr></table></figure></h2><h2 id="输入示例：输出示例：-1"><a href="#输入示例：输出示例：-1" class="headerlink" title="输入示例：输出示例："></a>输入示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">qidong</span><br></pre></td></tr></table></figure><br>输出示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">no</span><br></pre></td></tr></table></figure></h2><p>输入示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">balaba</span><br></pre></td></tr></table></figure>
-<p>输出示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Error</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="思路一：无脑匹配"><a href="#思路一：无脑匹配" class="headerlink" title="思路一：无脑匹配"></a>思路一：无脑匹配</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    int i = 0;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; 9) &#123;</span><br><span class="line">        char c;</span><br><span class="line">        scanf(<span class="string">&quot;%c&quot;</span>, &amp;c);</span><br><span class="line">        <span class="keyword">if</span> (c == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="built_in">break</span>;</span><br><span class="line">        ans[i] = c;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    ans[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= 2 &amp;&amp; ans[0] == <span class="string">&#x27;y&#x27;</span> &amp;&amp; </span><br><span class="line">    ans[1] == <span class="string">&#x27;u&#x27;</span>&amp;&amp;ans[2] == <span class="string">&#x27;a&#x27;</span>&amp;&amp;ans[3] == <span class="string">&#x27;n&#x27;</span>&amp;&amp;ans[4] == <span class="string">&#x27;s&#x27;</span>&amp;&amp;</span><br><span class="line">    ans[5] == <span class="string">&#x27;h&#x27;</span>&amp;&amp;ans[6] == <span class="string">&#x27;e&#x27;</span>&amp;&amp;ans[7] == <span class="string">&#x27;n&#x27;</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">elif</span> (i &gt;= 2 &amp;&amp; ans[0] == <span class="string">&#x27;q&#x27;</span> &amp;&amp; </span><br><span class="line">    ans[1] == <span class="string">&#x27;i&#x27;</span>&amp;&amp;ans[2] == <span class="string">&#x27;d&#x27;</span>&amp;&amp;ans[3] == <span class="string">&#x27;o&#x27;</span>&amp;&amp;ans[4] == <span class="string">&#x27;n&#x27;</span>&amp;&amp;</span><br><span class="line">    ans[5] == <span class="string">&#x27;g&#x27;</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种思路看来有点麻烦（蠢），但是笔者作为初学者第一反应就是这样的。<br>首先创建了一个char类型数组，用while持续输入，if换行符作为结束条件，最后再加上“\0”结束输入。<br>匹配阶段则是用if挨个元素匹配。</p>
-<h4 id="总而言之，低效、麻烦而直观"><a href="#总而言之，低效、麻烦而直观" class="headerlink" title="总而言之，低效、麻烦而直观"></a><strong>总而言之，低效、麻烦而直观</strong></h4><h2 id="思路二：使用strcmp函数"><a href="#思路二：使用strcmp函数" class="headerlink" title="思路二：使用strcmp函数"></a>思路二：使用strcmp函数</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    int i = 0;</span><br><span class="line">    // Read characters into the array <span class="keyword">until</span> newline or reaching array size - 1</span><br><span class="line">    <span class="keyword">while</span> (i &lt; 9 &amp;&amp; scanf(<span class="string">&quot;%c&quot;</span>, &amp;ans[i]) == 1 &amp;&amp; ans[i] != <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Null-terminate the string</span><br><span class="line">    ans[i] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;yuanshen&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;qidong&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>思路二的输入方式与思路一大同小异，关键区别在于判断匹配的方式  </p>
-<h3 id="简单介绍一下使用到的strcmp函数："><a href="#简单介绍一下使用到的strcmp函数：" class="headerlink" title="简单介绍一下使用到的strcmp函数："></a>简单介绍一下使用到的strcmp函数：</h3><p>strcmp 函数用于比较两个字符串是否相等。它返回一个整数，用于表示比较结果。这个整数的含义如下：<br>-返回值小于 0：表示第一个字符串小于第二个字符串。<br>-返回值等于 0：表示两个字符串相等。<br>-返回值大于 0：表示第一个字符串大于第二个字符串。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">int strcmp(const char *str1, const char *str2) &#123;</span><br><span class="line">    <span class="keyword">while</span> (*str1 &amp;&amp; (*str1 == *str2)) &#123;</span><br><span class="line">        str1++;</span><br><span class="line">        str2++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> *(unsigned char *)str1 - *(unsigned char *)str2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上为strcmp函数的声明代码，采用指针达到字符串的匹配检测。</p>
-<h2 id="思路三："><a href="#思路三：" class="headerlink" title="思路三："></a>思路三：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">    char ans[10];</span><br><span class="line">    // Read a line of input into ans</span><br><span class="line">    fgets(ans, sizeof(ans), stdin);</span><br><span class="line"></span><br><span class="line">    // Remove newline character <span class="keyword">if</span> present</span><br><span class="line">    size_t len = strlen(ans);</span><br><span class="line">    <span class="keyword">if</span> (len &gt; 0 &amp;&amp; ans[len - 1] == <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">        ans[len - 1] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Check <span class="keyword">if</span> ans starts with <span class="string">&quot;yuanshen&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (strncmp(ans, <span class="string">&quot;yuanshen&quot;</span>, 2) == 0) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Yes\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(strncmp(ans, <span class="string">&quot;qidong&quot;</span>, 2) == 0)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;No\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码的基本思路是：<br>使用 fgets 函数读取用户输入的字符串，将其存储在名为 ans 的字符数组中，限制最大输入字符数为9。</p>
-<p>检查读取到的字符串的长度，如果大于0且最后一个字符是换行符（’\n’），则将该换行符替换为字符串终止符（’\0’），以确保字符串正确终止。</p>
-<p>使用 strncmp 函数比较 ans 字符串的前两个字符与预期字符串是否相等。如果相等，输出 “Yes”&#x2F;“No”，<br>否则输出 “Error”。</p>
-<p>（萌新勿骂）</p>
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>正则匹配</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>删除数字</title>
-    <url>/2023/12/09/%E5%88%A0%E9%99%A4%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<h1 id="删除数字-合并空格"><a href="#删除数字-合并空格" class="headerlink" title="删除数字&amp;&amp;合并空格"></a>删除数字&amp;&amp;合并空格</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><strong>从键盘接收一个字符串，由数字、大小写字母和空格组成。程序功能为去掉字符串中的所有数字，最后输出变更后的字符串。注意，并列的空格需要缩减为1个空格。比如键盘输入如下：</strong></p>
-<p><strong>（1）</strong>能够从键盘正确接收字符串；（2分）</p>
-<p><strong>（2）</strong>能够去除数字；（4分）</p>
-<p><strong>（3）</strong>能够合并并列的空格；（4分）</p>
-<p><strong>（4）</strong>能够输出变更后的字符串；（2分）</p>
-<p><strong>（5）</strong>程序能够全面正确运行；（3分）</p>
-<span id="more"></span>
-
-
-
-<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">input</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a string: &quot;</span>);</span><br><span class="line">    fgets(a, <span class="number">100</span>, <span class="built_in">stdin</span>); <span class="comment">// 使用fgets获取一行输入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> i, j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> spaceFlag = <span class="number">0</span>; <span class="comment">// 标志变量，用于检测空格连续性</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; a[i] != <span class="string">&#x27;\0&#x27;</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((a[i] &lt; <span class="string">&#x27;0&#x27;</span> || a[i] &gt; <span class="string">&#x27;9&#x27;</span>) &amp;&amp; a[i] != <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            a[j++] = a[i]; <span class="comment">// 将非数字字符和非空格字符移动到数组前部</span></span><br><span class="line">            spaceFlag = <span class="number">0</span>; <span class="comment">// 非空格字符出现时，重置空格连续性标志</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!spaceFlag) &#123;</span><br><span class="line">                a[j++] = <span class="string">&#x27; &#x27;</span>; <span class="comment">// 保留一个空格</span></span><br><span class="line">                spaceFlag = <span class="number">1</span>; <span class="comment">// 标记已经出现一个空格</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    a[j] = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">// 添加字符串结束标志</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> <span class="built_in">array</span>[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a string: &quot;</span>);</span><br><span class="line">    fgets(<span class="built_in">array</span>, <span class="number">100</span>, <span class="built_in">stdin</span>); <span class="comment">// 读取输入的字符串</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original string: %s\n&quot;</span>, <span class="built_in">array</span>);</span><br><span class="line"></span><br><span class="line">    delete(<span class="built_in">array</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After deleting and merging: %s\n&quot;</span>, <span class="built_in">array</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>屎山</category>
-      </categories>
-      <tags>
-        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -832,6 +843,61 @@
       </tags>
   </entry>
   <entry>
+    <title>删除数字</title>
+    <url>/2023/12/09/%E5%88%A0%E9%99%A4%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<h1 id="删除数字-合并空格"><a href="#删除数字-合并空格" class="headerlink" title="删除数字&amp;&amp;合并空格"></a>删除数字&amp;&amp;合并空格</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><strong>从键盘接收一个字符串，由数字、大小写字母和空格组成。程序功能为去掉字符串中的所有数字，最后输出变更后的字符串。注意，并列的空格需要缩减为1个空格。比如键盘输入如下：</strong></p>
+<p><strong>（1）</strong>能够从键盘正确接收字符串；（2分）</p>
+<p><strong>（2）</strong>能够去除数字；（4分）</p>
+<p><strong>（3）</strong>能够合并并列的空格；（4分）</p>
+<p><strong>（4）</strong>能够输出变更后的字符串；（2分）</p>
+<p><strong>（5）</strong>程序能够全面正确运行；（3分）</p>
+<span id="more"></span>
+
+
+
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">input</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a string: &quot;</span>);</span><br><span class="line">    fgets(a, <span class="number">100</span>, <span class="built_in">stdin</span>); <span class="comment">// 使用fgets获取一行输入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> i, j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> spaceFlag = <span class="number">0</span>; <span class="comment">// 标志变量，用于检测空格连续性</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; a[i] != <span class="string">&#x27;\0&#x27;</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((a[i] &lt; <span class="string">&#x27;0&#x27;</span> || a[i] &gt; <span class="string">&#x27;9&#x27;</span>) &amp;&amp; a[i] != <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            a[j++] = a[i]; <span class="comment">// 将非数字字符和非空格字符移动到数组前部</span></span><br><span class="line">            spaceFlag = <span class="number">0</span>; <span class="comment">// 非空格字符出现时，重置空格连续性标志</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!spaceFlag) &#123;</span><br><span class="line">                a[j++] = <span class="string">&#x27; &#x27;</span>; <span class="comment">// 保留一个空格</span></span><br><span class="line">                spaceFlag = <span class="number">1</span>; <span class="comment">// 标记已经出现一个空格</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    a[j] = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">// 添加字符串结束标志</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> <span class="built_in">array</span>[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a string: &quot;</span>);</span><br><span class="line">    fgets(<span class="built_in">array</span>, <span class="number">100</span>, <span class="built_in">stdin</span>); <span class="comment">// 读取输入的字符串</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original string: %s\n&quot;</span>, <span class="built_in">array</span>);</span><br><span class="line"></span><br><span class="line">    delete(<span class="built_in">array</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After deleting and merging: %s\n&quot;</span>, <span class="built_in">array</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>屎山</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>筛去重复元素</title>
+    <url>/2023/12/14/%E7%AD%9B%E5%8E%BB%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</url>
+    <content><![CDATA[<h1 id="筛去重复元素"><a href="#筛去重复元素" class="headerlink" title="筛去重复元素"></a>筛去重复元素</h1><p>最近发现这样一道题，大致意思是给定一个数组，其中元素仅有一个只出现一次，其余元素均出现两次，编写程序以找出这个数。</p>
+<p>这里可以用到异或运算。</p>
+<span id="more"></span>
+
+<p>异或运算法则如下：</p>
+<ol>
+<li><p>交换律：A ^ B &#x3D; B ^ A</p>
+</li>
+<li><p>结合律：A ^ (B ^ C) &#x3D; (A ^ B) ^ C</p>
+</li>
+<li><p><strong>恒等律：X ^ 0 &#x3D; X</strong></p>
+</li>
+<li><p><strong>归零律：X ^ X &#x3D; 0</strong></p>
+</li>
+<li><p>自反：A ^ B ^ B &#x3D; A ^ 0 &#x3D; A</p>
+<p>这里主要用到后三条性质，可以定义变量key，不断与数组元素进行异或运算，某种意义上达到对于数组的压缩储存。</p>
+</li>
+</ol>
+<p>代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> *<span class="built_in">array</span>,<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span> key=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">        key^=<span class="built_in">array</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> key;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="built_in">array</span>[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">9</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,func(<span class="built_in">array</span>,<span class="number">13</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>c语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>成绩单</title>
     <url>/2023/12/09/%E6%88%90%E7%BB%A9%E5%8D%95/</url>
     <content><![CDATA[<h1 id="TXT成绩单"><a href="#TXT成绩单" class="headerlink" title="TXT成绩单"></a>TXT成绩单</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><strong>一份班级成绩表存储在一个TXT文件中，每行由学号、姓名、数学成绩、英语成绩、C语言成绩组成，如下：</strong></p>
@@ -953,75 +1019,6 @@
       </tags>
   </entry>
   <entry>
-    <title>欧几里得算法</title>
-    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
-<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
-<span id="more"></span>
-
-<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
-<ol>
-<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
-</li>
-<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
-</li>
-<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
-</li>
-<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
-</li>
-</ol>
-<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
-<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
-<ul>
-<li>求解整数的最大公约数。</li>
-<li>判断两个整数是否互质（最大公约数为1）。</li>
-<li>求解不定方程的整数解，如贝祖等式。</li>
-<li>在密码学中用于生成加密密钥。</li>
-</ul>
-<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
-<p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>筛去重复元素</title>
-    <url>/2023/12/14/%E7%AD%9B%E5%8E%BB%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</url>
-    <content><![CDATA[<h1 id="筛去重复元素"><a href="#筛去重复元素" class="headerlink" title="筛去重复元素"></a>筛去重复元素</h1><p>最近发现这样一道题，大致意思是给定一个数组，其中元素仅有一个只出现一次，其余元素均出现两次，编写程序以找出这个数。</p>
-<p>这里可以用到异或运算。</p>
-<span id="more"></span>
-
-<p>异或运算法则如下：</p>
-<ol>
-<li><p>交换律：A ^ B &#x3D; B ^ A</p>
-</li>
-<li><p>结合律：A ^ (B ^ C) &#x3D; (A ^ B) ^ C</p>
-</li>
-<li><p><strong>恒等律：X ^ 0 &#x3D; X</strong></p>
-</li>
-<li><p><strong>归零律：X ^ X &#x3D; 0</strong></p>
-</li>
-<li><p>自反：A ^ B ^ B &#x3D; A ^ 0 &#x3D; A</p>
-<p>这里主要用到后三条性质，可以定义变量key，不断与数组元素进行异或运算，某种意义上达到对于数组的压缩储存。</p>
-</li>
-</ol>
-<p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> *<span class="built_in">array</span>,<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span> key=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">        key^=<span class="built_in">array</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> key;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="built_in">array</span>[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">9</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,func(<span class="built_in">array</span>,<span class="number">13</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>c语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>贪心算法</title>
     <url>/2023/10/25/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h1 id="一点关于贪心算法的思考"><a href="#一点关于贪心算法的思考" class="headerlink" title="一点关于贪心算法的思考"></a>一点关于贪心算法的思考</h1><h4 id="关于贪心算法，ChatGPT是这么定义的："><a href="#关于贪心算法，ChatGPT是这么定义的：" class="headerlink" title="关于贪心算法，ChatGPT是这么定义的："></a>关于贪心算法，ChatGPT是这么定义的：</h4><p>贪心算法（Greedy Algorithm）是一种求解最优化问题的算法范式，它在每一步选择当前状态下的最优解，最终期望通过一系列的最优选择达到全局最优解。贪心算法通常适用于那些具有最优子结构性质的问题，其中整体问题的最优解可以通过局部子问题的最优解得到。</p>
@@ -1097,37 +1094,40 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode66</title>
-    <url>/2023/11/19/LeetCode66/</url>
-    <content><![CDATA[<h1 id="加一"><a href="#加一" class="headerlink" title="加一"></a><a href="https://leetcode.cn/problems/plus-one/">加一</a></h1><hr>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
-<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
-<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+    <title>欧几里得算法</title>
+    <url>/2023/10/25/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>最近发现了这样一种求最大公约数的算法，因此写此篇博客记录一下</p>
+<h2 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h2><p>欧几里德算法，也称为辗转相除法，是一种用于计算两个整数的最大公约数（GCD，Greatest Common Divisor）的经典算法。这个算法的名字来源于古希腊数学家欧几里德（Euclid），他在公元前300年左右的《几何原本》一书中首次描述了这一算法。</p>
 <span id="more"></span>
 
-<p><strong>示例 1：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[1,2,3]</span></span><br><span class="line">输出：<span class="comment">[1,2,4]</span></span><br><span class="line">解释：输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：digits = [<span class="number">4,3,2,1</span>]</span><br><span class="line">输出：[<span class="number">4,3,2,2</span>]</span><br><span class="line">解释：输入数组表示数字 <span class="number">4321</span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[0]</span></span><br><span class="line">输出：<span class="comment">[1]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
+<p>欧几里德算法的核心思想是通过不断取两个整数的余数，将问题规模不断减小，直到找到它们的公约数。算法的步骤如下：</p>
+<ol>
+<li><p>假设有两个整数 a 和 b，其中 a &gt; b。</p>
+</li>
+<li><p>计算 a 除以 b 的余数，记为 r（r &#x3D; a % b）。</p>
+</li>
+<li><p>如果 r 等于 0，则 b 即为最大公约数，算法结束。否则，将 a 的值更新为 b，将 b 的值更新为 r，然后回到步骤 2。</p>
+</li>
+<li><p>重复步骤 2 和 3 直到余数 r 等于 0。此时，b 的值即为最大公约数。</p>
+</li>
+</ol>
+<p>欧几里德算法的关键观察是，两个整数的最大公约数等于其中较小的整数和这两个整数相除的余数的最大公约数。这个观察使得算法能够快速而有效地找到最大公约数，而且不需要枚举所有可能的因子。</p>
+<p>欧几里德算法在计算机科学和数学领域中具有广泛的应用，包括：</p>
 <ul>
-<li><code>1 &lt;= digits.length &lt;= 100</code></li>
-<li><code>0 &lt;= digits[i] &lt;= 9</code></li>
+<li>求解整数的最大公约数。</li>
+<li>判断两个整数是否互质（最大公约数为1）。</li>
+<li>求解不定方程的整数解，如贝祖等式。</li>
+<li>在密码学中用于生成加密密钥。</li>
 </ul>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">plusOne</span><span class="params">(<span class="type">int</span>* digits, <span class="type">int</span> digitsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="comment">// 从数组的最后一位开始向前加一</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = digitsSize - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (digits[i] &lt; <span class="number">9</span>) &#123;</span><br><span class="line">            <span class="comment">// 当前位加一不产生进位，直接返回数组</span></span><br><span class="line">            digits[i]++;</span><br><span class="line">            *returnSize = digitsSize;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 当前位加一产生进位，将当前位设为0，继续向前一位加一</span></span><br><span class="line">            digits[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">// 如果遍历完成后，最高位仍然产生进位，需要在数组最前面添加一个新的元素1</span></span><br><span class="line">	<span class="type">int</span>* result = (<span class="type">int</span>*)<span class="built_in">malloc</span>((digitsSize + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	result[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= digitsSize; i++) &#123;</span><br><span class="line">    	result[i] = digits[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	*returnSize = digitsSize + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>s</p>
+<p>欧几里德算法是一种高效的算法，其时间复杂度是 O(log(min(a, b)))，其中 a 和 b 是输入的两个整数。这使得它成为解决大整数问题的首选方法。</p>
+<p>代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> a;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> (b,a%b);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>数组</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>
