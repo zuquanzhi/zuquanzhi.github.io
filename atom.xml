@@ -6,7 +6,7 @@
   <link href="http://zuweicun.top/atom.xml" rel="self"/>
   
   <link href="http://zuweicun.top/"/>
-  <updated>2023-12-19T03:41:40.179Z</updated>
+  <updated>2023-12-19T03:54:21.300Z</updated>
   <id>http://zuweicun.top/</id>
   
   <author>
@@ -21,12 +21,12 @@
     <link href="http://zuweicun.top/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/"/>
     <id>http://zuweicun.top/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/</id>
     <published>2023-12-19T03:35:38.000Z</published>
-    <updated>2023-12-19T03:41:40.179Z</updated>
+    <updated>2023-12-19T03:54:21.300Z</updated>
     
-    <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <script id="hbeData" type="hbeData" data-hmacdigest="91c0d0bdf0366c78e6141293319bcb417f9086094637063d5ff369bca8f4f63c">b8301b296958a523cd48c2d371e4216a6a49e7617e5a9c4e6ce4bcccc468ca54e1af6ff77405467aeb9521b391455e5d76eb3c29082356f6e2dc6fabf489bedd1570e356dc73c712c5c09032feeaf5a27c09a106b575980afaad843398194ea25c013be763d898b76dd9f206c14bd1cd49a6f896426217aefa60e6c66d602a79a83dda71f00150fe96ecba3cedd693c209256abee1459a81259e0e0b4143725bff3abcf9a8c4fe0267bca34ae8582e00d93454d25f6f20b4099bf4aa64357b17caa45ce717d7dcaac4e91f83022b6535bc30e6fafec7d262ad415098dfface7a99bff51e5cd0fc0944336437153fd294</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码（班级）：</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <content type="html"><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容.">  <script id="hbeData" type="hbeData" data-hmacdigest="91c0d0bdf0366c78e6141293319bcb417f9086094637063d5ff369bca8f4f63c">b8301b296958a523cd48c2d371e4216a6a49e7617e5a9c4e6ce4bcccc468ca54e1af6ff77405467aeb9521b391455e5d76eb3c29082356f6e2dc6fabf489bedd1570e356dc73c712c5c09032feeaf5a27c09a106b575980afaad843398194ea25c013be763d898b76dd9f206c14bd1cd49a6f896426217aefa60e6c66d602a79a83dda71f00150fe96ecba3cedd693c209256abee1459a81259e0e0b4143725bff3abcf9a8c4fe0267bca34ae8582e00d93454d25f6f20b4099bf4aa64357b17caa45ce717d7dcaac4e91f83022b6535bc30e6fafec7d262ad415098dfface7a99bff51e5cd0fc0944336437153fd294</script>  <div class="hbe hbe-content">    <div class="hbe hbe-input hbe-input-default">      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好, 这里需要密码.</span>      </label>    </div>  </div></div><script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
     
     
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    <summary type="html">这里有东西被加密了，需要输入密码查看哦。</summary>
     
     
     
