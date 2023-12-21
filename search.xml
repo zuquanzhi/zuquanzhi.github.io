@@ -58,19 +58,52 @@
       </tags>
   </entry>
   <entry>
+    <title>LeetCode0485</title>
+    <url>/2023/11/21/LeetCode0485/</url>
+    <content><![CDATA[<h1 id="最大连续-1-的个数"><a href="#最大连续-1-的个数" class="headerlink" title="最大连续 1 的个数"></a><a href="https://leetcode.cn/problems/max-consecutive-ones/">最大连续 1 的个数</a></h1><hr>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个二进制数组 <code>nums</code> ， 计算其中最大连续 <code>1</code> 的个数。</p>
+ <span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1,1,0,1,1,1]</span><br><span class="line">输出：3</span><br><span class="line">解释：开头的两位和最后的三位都是连续<span class="number"> 1 </span>，所以最大连续<span class="number"> 1 </span>的个数是 3.</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="string">[1,0,1,1,0,1]</span></span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><p><code>1 &lt;= nums.length &lt;= 105</code></p>
+</li>
+<li><p><code>nums[i]</code> 不是 <code>0</code> 就是 <code>1</code>.</p>
+</li>
+</ul>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>本题中存在两个技术点：连续数和最大。</p>
+<p>连续数是比较好求的，只需要条件判定再加上计数器就可以做到。</p>
+<p>关键在于最大，使我引入了一个缓存变量tmp，用来实时更新“最大连击数”并不会占用1太多空间。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">findMaxConsecutiveOnes</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; numsSize &amp;&amp; nums[i] == <span class="number">1</span>) &#123;</span><br><span class="line">            tmp++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &lt; tmp) &#123;</span><br><span class="line">            count = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>718校内赛技术报告</title>
     <url>/2023/11/27/718%E6%A0%A1%E5%86%85%E8%B5%9B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A/</url>
     <content><![CDATA[<p>此篇博客用于记录校内赛的技术细节和感悟（屎山预警！！！）</p>
 <span id="more"></span>
 
 <h1 id="1-硬件"><a href="#1-硬件" class="headerlink" title="1. 硬件"></a>1. 硬件</h1><h2 id="1-1-红外对管"><a href="#1-1-红外对管" class="headerlink" title="1.1 红外对管"></a>1.1 红外对管</h2><p>排布见下图：</p>
-<p><img data-src="/2023/11/27/718%E6%A0%A1%E5%86%85%E8%B5%9B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A/1.png" alt="红外对管排布"></p>
+<p><img data-src="/2023/11/27/718%E6%A0%A1%E5%86%85%E8%B5%9B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A/2.png" alt="红外对管排布"></p>
 <p>其中4 5作为循迹灯，其余全部用于路口判断。</p>
 <h3 id="1-1-1-循迹"><a href="#1-1-1-循迹" class="headerlink" title="1.1.1 循迹"></a>1.1.1 循迹</h3><p>利用左右循迹灯实现循迹，使用了PID算法，只使用了P和D，详细说明见2.1。</p>
 <h3 id="1-1-2-路口判断逻辑"><a href="#1-1-2-路口判断逻辑" class="headerlink" title="1.1.2 路口判断逻辑"></a>1.1.2 路口判断逻辑</h3><p>利用1 2 3 0四个红外对管实现对路口的识别。</p>
 <p>另外规定ADC的值&gt;1900为完全踩上线，ADC的值小于lowx为完全没踩上线，ADC的值大于lowx+200（需要大些）为正在踩上线。</p>
 <p>我们对路口的分类如下：</p>
-<p><img data-src="/2023/11/27/718%E6%A0%A1%E5%86%85%E8%B5%9B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A/2.png" alt="公式"></p>
+<p><img data-src="/2023/11/27/718%E6%A0%A1%E5%86%85%E8%B5%9B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A/1.png" alt="公式"></p>
 <h2 id="1-2-机械臂"><a href="#1-2-机械臂" class="headerlink" title="1.2 机械臂"></a>1.2 机械臂</h2><p>构成：亚克力板，三个MG90S舵机，胶带，热熔胶，夹子，螺丝，螺母。</p>
 <p>自由度：3</p>
 <p>设计想法：为了便于能量块的夹取和定点投放</p>
@@ -237,73 +270,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode0485</title>
-    <url>/2023/11/21/LeetCode0485/</url>
-    <content><![CDATA[<h1 id="最大连续-1-的个数"><a href="#最大连续-1-的个数" class="headerlink" title="最大连续 1 的个数"></a><a href="https://leetcode.cn/problems/max-consecutive-ones/">最大连续 1 的个数</a></h1><hr>
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个二进制数组 <code>nums</code> ， 计算其中最大连续 <code>1</code> 的个数。</p>
- <span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1,1,0,1,1,1]</span><br><span class="line">输出：3</span><br><span class="line">解释：开头的两位和最后的三位都是连续<span class="number"> 1 </span>，所以最大连续<span class="number"> 1 </span>的个数是 3.</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2:</strong></p>
-<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="string">[1,0,1,1,0,1]</span></span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><p><code>1 &lt;= nums.length &lt;= 105</code></p>
-</li>
-<li><p><code>nums[i]</code> 不是 <code>0</code> 就是 <code>1</code>.</p>
-</li>
-</ul>
-<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>本题中存在两个技术点：连续数和最大。</p>
-<p>连续数是比较好求的，只需要条件判定再加上计数器就可以做到。</p>
-<p>关键在于最大，使我引入了一个缓存变量tmp，用来实时更新“最大连击数”并不会占用1太多空间。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">findMaxConsecutiveOnes</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; numsSize &amp;&amp; nums[i] == <span class="number">1</span>) &#123;</span><br><span class="line">            tmp++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &lt; tmp) &#123;</span><br><span class="line">            count = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode66</title>
-    <url>/2023/11/19/LeetCode66/</url>
-    <content><![CDATA[<h1 id="加一"><a href="#加一" class="headerlink" title="加一"></a><a href="https://leetcode.cn/problems/plus-one/">加一</a></h1><hr>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
-<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
-<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[1,2,3]</span></span><br><span class="line">输出：<span class="comment">[1,2,4]</span></span><br><span class="line">解释：输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：digits = [<span class="number">4,3,2,1</span>]</span><br><span class="line">输出：[<span class="number">4,3,2,2</span>]</span><br><span class="line">解释：输入数组表示数字 <span class="number">4321</span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[0]</span></span><br><span class="line">输出：<span class="comment">[1]</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= digits.length &lt;= 100</code></li>
-<li><code>0 &lt;= digits[i] &lt;= 9</code></li>
-</ul>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">plusOne</span><span class="params">(<span class="type">int</span>* digits, <span class="type">int</span> digitsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="comment">// 从数组的最后一位开始向前加一</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = digitsSize - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (digits[i] &lt; <span class="number">9</span>) &#123;</span><br><span class="line">            <span class="comment">// 当前位加一不产生进位，直接返回数组</span></span><br><span class="line">            digits[i]++;</span><br><span class="line">            *returnSize = digitsSize;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 当前位加一产生进位，将当前位设为0，继续向前一位加一</span></span><br><span class="line">            digits[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">// 如果遍历完成后，最高位仍然产生进位，需要在数组最前面添加一个新的元素1</span></span><br><span class="line">	<span class="type">int</span>* result = (<span class="type">int</span>*)<span class="built_in">malloc</span>((digitsSize + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	result[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= digitsSize; i++) &#123;</span><br><span class="line">    	result[i] = digits[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	*returnSize = digitsSize + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>s</p>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode0498</title>
     <url>/2023/11/23/LeetCode0498/</url>
     <content><![CDATA[<h1 id="对角线遍历"><a href="#对角线遍历" class="headerlink" title="对角线遍历"></a><a href="https://leetcode.cn/problems/diagonal-traverse/">对角线遍历</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个大小为 <code>m x n</code> 的矩阵 <code>mat</code> ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。</p>
@@ -343,44 +309,48 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode0203</title>
-    <url>/2023/11/30/Leetcode0203/</url>
-    <content><![CDATA[<h1 id="移除链表元素"><a href="#移除链表元素" class="headerlink" title="移除链表元素"></a><a href="https://leetcode.cn/problems/remove-linked-list-elements/">移除链表元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个链表的头节点 <code>head</code> 和一个整数 <code>val</code> ，请你删除链表中所有满足 <code>Node.val == val</code> 的节点，并返回 <strong>新的头节点</strong> 。</p>
+    <title>LeetCode0724</title>
+    <url>/2023/11/20/LeetCode0724/</url>
+    <content><![CDATA[<h1 id="寻找数组的中心下标"><a href="#寻找数组的中心下标" class="headerlink" title="寻找数组的中心下标"></a><a href="https://leetcode.cn/problems/find-pivot-index/">寻找数组的中心下标</a></h1><hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code> ，请计算数组的 <strong>中心下标</strong> 。</p>
+<p>数组 <strong>中心下标</strong> 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
+<p>如果中心下标位于数组最左端，那么左侧数之和视为 <code>0</code> ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。</p>
+<p>如果数组有多个中心下标，应该返回 <strong>最靠近左边</strong> 的那一个。如果数组不存在中心下标，返回 <code>-1</code> 。</p>
 <span id="more"></span>
 
 <p><strong>示例 1：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg" alt="img"></p>
-<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="string">[1,2,6,3,4,5,6]</span>, val = <span class="number">6</span></span><br><span class="line">输出：<span class="string">[1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1, 7, 3, 6, 5, 6]</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">中心下标是<span class="number"> 3 </span>。</span><br><span class="line">左侧数之和 sum = nums[0] + nums[1] + nums[2] =<span class="number"> 1 </span>+<span class="number"> 7 </span>+<span class="number"> 3 </span>=<span class="number"> 11 </span>，</span><br><span class="line">右侧数之和 sum = nums[4] + nums[5] =<span class="number"> 5 </span>+<span class="number"> 6 </span>=<span class="number"> 11 </span>，二者相等。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[]</span>, val = 1</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight fix"><table><tr><td class="code"><pre><span class="line"><span class="attr">输入：nums </span>=<span class="string"> [1, 2, 3]</span></span><br><span class="line"><span class="string">输出：-1</span></span><br><span class="line"><span class="string">解释：</span></span><br><span class="line"><span class="string">数组中不存在满足此条件的中心下标。</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 3：</strong></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[7,7,7,7]</span>, val = 7</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [2, 1, -1]</span><br><span class="line">输出：0</span><br><span class="line">解释：</span><br><span class="line">中心下标是<span class="number"> 0 </span>。</span><br><span class="line">左侧数之和 sum =<span class="number"> 0 </span>，（下标<span class="number"> 0 </span>左侧不存在元素），</span><br><span class="line">右侧数之和 sum = nums[1] + nums[2] =<span class="number"> 1 </span>+ -1 =<span class="number"> 0 </span>。</span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li>列表中的节点数目在范围 <code>[0, 104]</code> 内</li>
-<li><code>1 &lt;= Node.val &lt;= 50</code></li>
-<li><code>0 &lt;= val &lt;= 50</code></li>
+<li><code>1 &lt;= nums.length &lt;= 104</code></li>
+<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
 </ul>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始思路非常简单：检测到下一个节点是val，删除该节点。写出了下面这段蠢到家的代码：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span>=</span>head;</span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li>刚开始没什么具体思路，非常脑残地一点点计算出SUM(左右)，代码如下：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_left = <span class="number">0</span>, sum_right = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sum == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++)</span><br><span class="line">                sum_left += nums[j];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> p = i + <span class="number">1</span>; p &lt; numsSize; p++)</span><br><span class="line">                sum_right += nums[p];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (sum_left == sum_right)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 重置 sum_left 和 sum_right</span></span><br><span class="line">            sum_left = <span class="number">0</span>;</span><br><span class="line">            sum_right = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>仔细一看题：发现“<strong>新的头节点</strong>”还特意加粗了，看起来如果第一个节点就是空节点程序会直接寄掉。</p>
-<ol>
-<li><code>cur-&gt;next = cur-&gt;next-&gt;next;</code> 表示删除当前节点的下一个节点。这会导致无法处理连续相同值的节点。正确的做法是将当前节点的 <code>next</code> 指针直接指向下下个节点，而不是跳过一个节点。</li>
-<li>函数的返回值是链表的头指针 <code>head</code>，但是在删除节点的过程中，链表头部可能发生变化。因此，应该在删除节点后返回新的头指针。</li>
-</ol>
-<p>修改为以下程序：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">dummy</span> =</span> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> ListNode));</span><br><span class="line">    dummy-&gt;next = head;<span class="comment">//在头节点前创建一个空节点，用于解决其为val的情况</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> dummy;<span class="comment">//基操用cur遍历</span></span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next-&gt;val==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">newHead</span> =</span> dummy-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(dummy);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newHead;<span class="comment">//返回新的头节点，并释放dummy的空间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>中间那个重置千万别忘掉</strong></p>
+<ul>
+<li><p>在GPT的帮助下，我把代码重构了一下，主要是针对右侧sum的计算逻辑修改</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_left = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum_right = sum - sum_left - nums[i];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (sum_left == sum_right) &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sum_left += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p>这个逻辑中无需先预判[0]元素是否可以直接PASS（其实前一个也不用，写麻烦了），并且用全数列的sum-左sum-当前元素，少了一丢丢运算过程，更加简洁明了</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>题解</category>
       </categories>
       <tags>
-        <tag>链表</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -427,29 +397,135 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode83</title>
-    <url>/2023/11/30/Leetcode83/</url>
-    <content><![CDATA[<h1 id="删除排序链表中的重复元素"><a href="#删除排序链表中的重复元素" class="headerlink" title="删除排序链表中的重复元素"></a><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/">删除排序链表中的重复元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个已排序的链表的头 <code>head</code> ， <em>删除所有重复的元素，使每个元素只出现一次</em> 。返回 <em>已排序的链表</em> 。</p>
+    <title>LeetCode66</title>
+    <url>/2023/11/19/LeetCode66/</url>
+    <content><![CDATA[<h1 id="加一"><a href="#加一" class="headerlink" title="加一"></a><a href="https://leetcode.cn/problems/plus-one/">加一</a></h1><hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
+<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
+<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
 <span id="more"></span>
 
 <p><strong>示例 1：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/01/04/list1.jpg" alt="img"></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[1,1,2]</span></span><br><span class="line">输出：<span class="comment">[1,2]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[1,2,3]</span></span><br><span class="line">输出：<span class="comment">[1,2,4]</span></span><br><span class="line">解释：输入数组表示数字 123。</span><br></pre></td></tr></table></figure>
 
 <p><strong>示例 2：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/01/04/list2.jpg" alt="img"></p>
-<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[1,1,2,3,3]</span></span><br><span class="line">输出：<span class="comment">[1,2,3]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">输入：digits = [<span class="number">4,3,2,1</span>]</span><br><span class="line">输出：[<span class="number">4,3,2,2</span>]</span><br><span class="line">解释：输入数组表示数字 <span class="number">4321</span>。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：digits = <span class="comment">[0]</span></span><br><span class="line">输出：<span class="comment">[1]</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>提示：</strong></p>
 <ul>
-<li>链表中节点数目在范围 <code>[0, 300]</code> 内</li>
-<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
-<li>题目数据保证链表已经按升序 <strong>排列</strong></li>
+<li><code>1 &lt;= digits.length &lt;= 100</code></li>
+<li><code>0 &lt;= digits[i] &lt;= 9</code></li>
 </ul>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>根据题干描述，链表已经按照升序排列，即只需要判断前后两个节点是否相等从而确定删除与否即可。</p>
-<p>代码如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">deleteDuplicates</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!head) &#123;</span><br><span class="line">        <span class="keyword">return</span> head;<span class="comment">//即链表为空，没有重复元素可以删除。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="keyword">while</span> (cur-&gt;next) &#123;<span class="comment">//条件是当前节点的下一个节点不为空</span></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val == cur-&gt;next-&gt;val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">plusOne</span><span class="params">(<span class="type">int</span>* digits, <span class="type">int</span> digitsSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="comment">// 从数组的最后一位开始向前加一</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = digitsSize - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (digits[i] &lt; <span class="number">9</span>) &#123;</span><br><span class="line">            <span class="comment">// 当前位加一不产生进位，直接返回数组</span></span><br><span class="line">            digits[i]++;</span><br><span class="line">            *returnSize = digitsSize;</span><br><span class="line">            <span class="keyword">return</span> digits;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 当前位加一产生进位，将当前位设为0，继续向前一位加一</span></span><br><span class="line">            digits[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">// 如果遍历完成后，最高位仍然产生进位，需要在数组最前面添加一个新的元素1</span></span><br><span class="line">	<span class="type">int</span>* result = (<span class="type">int</span>*)<span class="built_in">malloc</span>((digitsSize + <span class="number">1</span>) * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	result[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= digitsSize; i++) &#123;</span><br><span class="line">    	result[i] = digits[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	*returnSize = digitsSize + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>s</p>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode0203</title>
+    <url>/2023/11/30/Leetcode0203/</url>
+    <content><![CDATA[<h1 id="移除链表元素"><a href="#移除链表元素" class="headerlink" title="移除链表元素"></a><a href="https://leetcode.cn/problems/remove-linked-list-elements/">移除链表元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个链表的头节点 <code>head</code> 和一个整数 <code>val</code> ，请你删除链表中所有满足 <code>Node.val == val</code> 的节点，并返回 <strong>新的头节点</strong> 。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/03/06/removelinked-list.jpg" alt="img"></p>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="string">[1,2,6,3,4,5,6]</span>, val = <span class="number">6</span></span><br><span class="line">输出：<span class="string">[1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[]</span>, val = 1</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[7,7,7,7]</span>, val = 7</span><br><span class="line">输出：<span class="comment">[]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>列表中的节点数目在范围 <code>[0, 104]</code> 内</li>
+<li><code>1 &lt;= Node.val &lt;= 50</code></li>
+<li><code>0 &lt;= val &lt;= 50</code></li>
+</ul>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>刚开始思路非常简单：检测到下一个节点是val，删除该节点。写出了下面这段蠢到家的代码：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span>=</span>head;</span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>仔细一看题：发现“<strong>新的头节点</strong>”还特意加粗了，看起来如果第一个节点就是空节点程序会直接寄掉。</p>
+<ol>
+<li><code>cur-&gt;next = cur-&gt;next-&gt;next;</code> 表示删除当前节点的下一个节点。这会导致无法处理连续相同值的节点。正确的做法是将当前节点的 <code>next</code> 指针直接指向下下个节点，而不是跳过一个节点。</li>
+<li>函数的返回值是链表的头指针 <code>head</code>，但是在删除节点的过程中，链表头部可能发生变化。因此，应该在删除节点后返回新的头指针。</li>
+</ol>
+<p>修改为以下程序：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">dummy</span> =</span> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> ListNode));</span><br><span class="line">    dummy-&gt;next = head;<span class="comment">//在头节点前创建一个空节点，用于解决其为val的情况</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> dummy;<span class="comment">//基操用cur遍历</span></span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next-&gt;val==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">newHead</span> =</span> dummy-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(dummy);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newHead;<span class="comment">//返回新的头节点，并释放dummy的空间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode0234</title>
+    <url>/2023/11/30/Leetcode0234/</url>
+    <content><![CDATA[<h1 id="回文链表"><a href="#回文链表" class="headerlink" title="回文链表"></a><a href="https://leetcode.cn/problems/palindrome-linked-list/">回文链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个单链表的头节点 <code>head</code> ，请你判断该链表是否为回文链表。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+ <span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2,2,1]</span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2]</span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点数目在范围<code>[1, 105]</code> 内</li>
+<li><code>0 &lt;= Node.val &lt;= 9</code></li>
+</ul>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><h3 id="法一：复制到数组"><a href="#法一：复制到数组" class="headerlink" title="法一：复制到数组"></a>法一：复制到数组</h3><p>小生不才，链表使用不够熟练，先用复制链表到数组的笨方法做出来一遍。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算链表长度</span></span><br><span class="line">    <span class="keyword">while</span>(cur) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态分配数组</span></span><br><span class="line">    <span class="type">int</span>* a = (<span class="type">int</span>*)<span class="built_in">malloc</span>(count * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!a) &#123;</span><br><span class="line">        <span class="comment">// 处理内存分配失败的情况</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新遍历链表，将值存入数组</span></span><br><span class="line">    cur = head;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        a[i] = cur-&gt;val;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查是否为回文</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count / <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] != a[count - <span class="number">1</span> - i]) &#123;</span><br><span class="line">            <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="法二：快慢指针"><a href="#法二：快慢指针" class="headerlink" title="法二：快慢指针"></a>法二：快慢指针</h3><p>这也是我想到的第二个方法。</p>
+<p>整个流程可以分为以下五个步骤：</p>
+<ol>
+<li><p>找到前半部分链表的尾节点。</p>
+</li>
+<li><p>反转后半部分链表。</p>
+</li>
+<li><p>判断是否回文。</p>
+</li>
+<li><p>恢复链表。</p>
+</li>
+<li><p>返回结果。</p>
+<p>执行步骤一，我们可以计算链表节点的数量，然后遍历链表找到前半部分的尾节点。</p>
+<p>我们也可以使用快慢指针在一次遍历中找到：慢指针一次走一步，快指针一次走两步，快慢指针同时出发。当快指针移动到链表的末尾时，慢指针恰好到链表的中间。通过慢指针将链表分为两部分。</p>
+<p>若链表有奇数个节点，则中间的节点应该看作是前半部分。</p>
+<p>步骤二可以使用[反转链表](<a href="http://zuweicun.top/2023/11/30/Leetcode0206/#more">Leetcode0206 | 全之の博客 (zuweicun.top)</a>)问题中的解决方法来反转链表的后半部分。</p>
+<p>步骤三比较两个部分的值，当后半部分到达末尾则比较完成，可以忽略计数情况中的中间节点。</p>
+<p>步骤四与步骤二使用的函数相同，再反转一次恢复链表本身。</p>
+<p>其代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span> <span class="literal">NULL</span>;<span class="comment">//创建空节点用于存放“前一个”数据</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span> =</span> head;<span class="comment">//基操curr遍历</span></span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">nextTemp</span> =</span> curr-&gt;next;</span><br><span class="line">        curr-&gt;next = prev;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = nextTemp;</span><br><span class="line">    &#125;<span class="comment">//反转函数</span></span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">endOfFirstHalf</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">fast</span> =</span> head;<span class="comment">//块指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">slow</span> =</span> head;<span class="comment">//慢指针</span></span><br><span class="line">    <span class="keyword">while</span> (fast-&gt;next != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;<span class="comment">//一次走两步</span></span><br><span class="line">        slow = slow-&gt;next;<span class="comment">//一次走一步</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;<span class="comment">//由于快慢指针的数量关系，slow返回的应该是链表半节点处</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;<span class="comment">//最终的bool类型判断函数</span></span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到前半部分链表的尾节点并反转后半部分链表</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">firstHalfEnd</span> =</span> endOfFirstHalf(head);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">secondHalfStart</span> =</span> reverseList(firstHalfEnd-&gt;next);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否回文</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p1</span> =</span> head;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p2</span> =</span> secondHalfStart;</span><br><span class="line">    <span class="type">bool</span> result = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (result &amp;&amp; p2 != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p1-&gt;val != p2-&gt;val) &#123;</span><br><span class="line">            result = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p1 = p1-&gt;next;</span><br><span class="line">        p2 = p2-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 还原链表并返回结果</span></span><br><span class="line">    firstHalfEnd-&gt;next = reverseList(secondHalfStart);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="法三：递归"><a href="#法三：递归" class="headerlink" title="法三：递归"></a>法三：递归</h3><p><em>这个递归来源于Leetcode官方题解，其风骚是我至今所遇最强。</em></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量，用于存储前半部分链表的指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">frontPointer</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归检查是否回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">recursivelyCheck</span><span class="params">(<span class="keyword">struct</span> ListNode* currentNode)</span> &#123;</span><br><span class="line">    <span class="comment">// 当前节点不为空时进行递归检查</span></span><br><span class="line">    <span class="keyword">if</span> (currentNode != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="comment">// 递归检查下一个节点，如果返回 false，则整体返回 false</span></span><br><span class="line">        <span class="keyword">if</span> (!recursivelyCheck(currentNode-&gt;next)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 检查当前节点的值是否与前半部分链表的节点值相等</span></span><br><span class="line">        <span class="keyword">if</span> (currentNode-&gt;val != frontPointer-&gt;val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前半部分链表指针移动到下一个节点</span></span><br><span class="line">        frontPointer = frontPointer-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 若所有节点都检查完毕，返回 true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查链表是否为回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="comment">// 初始化全局变量 frontPointer</span></span><br><span class="line">    frontPointer = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用递归检查函数</span></span><br><span class="line">    <span class="keyword">return</span> recursivelyCheck(head);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><code>isPalindrome</code> 函数设置 <code>frontPointer</code> 为链表头，并调用 <code>recursivelyCheck</code> 函数。</li>
+<li><code>recursivelyCheck</code> 函数首先检查当前节点是否为 <code>NULL</code>，如果是，则返回 <code>true</code>，因为链表的末尾已经达到。</li>
+<li>然后，<code>recursivelyCheck</code> 递归调用自己，传递当前节点的下一个节点。</li>
+<li>在递归返回之前，检查当前节点的值是否等于 <code>frontPointer</code> 指向的节点的值。如果不等，则返回 <code>false</code>，因为链表不是回文的。</li>
+<li>如果值相等，将 <code>frontPointer</code> 移动到下一个节点。</li>
+<li>最终，如果整个链表都被成功检查，并且没有发现值不相等的情况，那么整个函数返回 <code>true</code>，表示链表是回文的。</li>
+</ol>
+<p>这种方法的核心思想是使用递归从链表的末尾开始比较节点的值，同时使用 <code>frontPointer</code> 从链表的头部开始。这两个指针相向移动，逐一比较节点的值，如果在整个过程中没有找到不相等的节点，则链表被认为是回文的。</p>
 ]]></content>
       <categories>
         <category>题解</category>
@@ -483,6 +559,38 @@
 <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>基本想法是把列表的首尾节点调换，即每一个指针都指向前一个节点。</p>
 <p>代码如下：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span><span class="literal">NULL</span>;<span class="comment">//创建一个空头节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span>=</span>head;<span class="comment">//创建curr用于遍历链表</span></span><br><span class="line">    <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">next</span> =</span>curr-&gt;next;</span><br><span class="line">        curr-&gt;next =prev;</span><br><span class="line">        prev =curr;<span class="comment">//把pre遍历到当前节点</span></span><br><span class="line">        curr=next;<span class="comment">//把当前指针遍历到下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode83</title>
+    <url>/2023/11/30/Leetcode83/</url>
+    <content><![CDATA[<h1 id="删除排序链表中的重复元素"><a href="#删除排序链表中的重复元素" class="headerlink" title="删除排序链表中的重复元素"></a><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/">删除排序链表中的重复元素</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个已排序的链表的头 <code>head</code> ， <em>删除所有重复的元素，使每个元素只出现一次</em> 。返回 <em>已排序的链表</em> 。</p>
+<span id="more"></span>
+
+<p><strong>示例 1：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/01/04/list1.jpg" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[1,1,2]</span></span><br><span class="line">输出：<span class="comment">[1,2]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img data-src="https://assets.leetcode.com/uploads/2021/01/04/list2.jpg" alt="img"></p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">输入：head = <span class="comment">[1,1,2,3,3]</span></span><br><span class="line">输出：<span class="comment">[1,2,3]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点数目在范围 <code>[0, 300]</code> 内</li>
+<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+<li>题目数据保证链表已经按升序 <strong>排列</strong></li>
+</ul>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>根据题干描述，链表已经按照升序排列，即只需要判断前后两个节点是否相等从而确定删除与否即可。</p>
+<p>代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">deleteDuplicates</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!head) &#123;</span><br><span class="line">        <span class="keyword">return</span> head;<span class="comment">//即链表为空，没有重复元素可以删除。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="keyword">while</span> (cur-&gt;next) &#123;<span class="comment">//条件是当前节点的下一个节点不为空</span></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val == cur-&gt;next-&gt;val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -556,66 +664,15 @@
       </tags>
   </entry>
   <entry>
-    <title>Leetcode0234</title>
-    <url>/2023/11/30/Leetcode0234/</url>
-    <content><![CDATA[<h1 id="回文链表"><a href="#回文链表" class="headerlink" title="回文链表"></a><a href="https://leetcode.cn/problems/palindrome-linked-list/">回文链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个单链表的头节点 <code>head</code> ，请你判断该链表是否为回文链表。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
- <span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="img"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2,2,1]</span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<p><img data-src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" alt="img"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2]</span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表中节点数目在范围<code>[1, 105]</code> 内</li>
-<li><code>0 &lt;= Node.val &lt;= 9</code></li>
-</ul>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><h3 id="法一：复制到数组"><a href="#法一：复制到数组" class="headerlink" title="法一：复制到数组"></a>法一：复制到数组</h3><p>小生不才，链表使用不够熟练，先用复制链表到数组的笨方法做出来一遍。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算链表长度</span></span><br><span class="line">    <span class="keyword">while</span>(cur) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态分配数组</span></span><br><span class="line">    <span class="type">int</span>* a = (<span class="type">int</span>*)<span class="built_in">malloc</span>(count * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!a) &#123;</span><br><span class="line">        <span class="comment">// 处理内存分配失败的情况</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新遍历链表，将值存入数组</span></span><br><span class="line">    cur = head;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        a[i] = cur-&gt;val;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查是否为回文</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count / <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] != a[count - <span class="number">1</span> - i]) &#123;</span><br><span class="line">            <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="法二：快慢指针"><a href="#法二：快慢指针" class="headerlink" title="法二：快慢指针"></a>法二：快慢指针</h3><p>这也是我想到的第二个方法。</p>
-<p>整个流程可以分为以下五个步骤：</p>
-<ol>
-<li><p>找到前半部分链表的尾节点。</p>
-</li>
-<li><p>反转后半部分链表。</p>
-</li>
-<li><p>判断是否回文。</p>
-</li>
-<li><p>恢复链表。</p>
-</li>
-<li><p>返回结果。</p>
-<p>执行步骤一，我们可以计算链表节点的数量，然后遍历链表找到前半部分的尾节点。</p>
-<p>我们也可以使用快慢指针在一次遍历中找到：慢指针一次走一步，快指针一次走两步，快慢指针同时出发。当快指针移动到链表的末尾时，慢指针恰好到链表的中间。通过慢指针将链表分为两部分。</p>
-<p>若链表有奇数个节点，则中间的节点应该看作是前半部分。</p>
-<p>步骤二可以使用[反转链表](<a href="http://zuweicun.top/2023/11/30/Leetcode0206/#more">Leetcode0206 | 全之の博客 (zuweicun.top)</a>)问题中的解决方法来反转链表的后半部分。</p>
-<p>步骤三比较两个部分的值，当后半部分到达末尾则比较完成，可以忽略计数情况中的中间节点。</p>
-<p>步骤四与步骤二使用的函数相同，再反转一次恢复链表本身。</p>
-<p>其代码如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span> <span class="literal">NULL</span>;<span class="comment">//创建空节点用于存放“前一个”数据</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span> =</span> head;<span class="comment">//基操curr遍历</span></span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">nextTemp</span> =</span> curr-&gt;next;</span><br><span class="line">        curr-&gt;next = prev;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = nextTemp;</span><br><span class="line">    &#125;<span class="comment">//反转函数</span></span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">endOfFirstHalf</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">fast</span> =</span> head;<span class="comment">//块指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">slow</span> =</span> head;<span class="comment">//慢指针</span></span><br><span class="line">    <span class="keyword">while</span> (fast-&gt;next != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;<span class="comment">//一次走两步</span></span><br><span class="line">        slow = slow-&gt;next;<span class="comment">//一次走一步</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;<span class="comment">//由于快慢指针的数量关系，slow返回的应该是链表半节点处</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;<span class="comment">//最终的bool类型判断函数</span></span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到前半部分链表的尾节点并反转后半部分链表</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">firstHalfEnd</span> =</span> endOfFirstHalf(head);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">secondHalfStart</span> =</span> reverseList(firstHalfEnd-&gt;next);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否回文</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p1</span> =</span> head;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p2</span> =</span> secondHalfStart;</span><br><span class="line">    <span class="type">bool</span> result = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (result &amp;&amp; p2 != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p1-&gt;val != p2-&gt;val) &#123;</span><br><span class="line">            result = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p1 = p1-&gt;next;</span><br><span class="line">        p2 = p2-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 还原链表并返回结果</span></span><br><span class="line">    firstHalfEnd-&gt;next = reverseList(secondHalfStart);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="法三：递归"><a href="#法三：递归" class="headerlink" title="法三：递归"></a>法三：递归</h3><p><em>这个递归来源于Leetcode官方题解，其风骚是我至今所遇最强。</em></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量，用于存储前半部分链表的指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">frontPointer</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归检查是否回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">recursivelyCheck</span><span class="params">(<span class="keyword">struct</span> ListNode* currentNode)</span> &#123;</span><br><span class="line">    <span class="comment">// 当前节点不为空时进行递归检查</span></span><br><span class="line">    <span class="keyword">if</span> (currentNode != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="comment">// 递归检查下一个节点，如果返回 false，则整体返回 false</span></span><br><span class="line">        <span class="keyword">if</span> (!recursivelyCheck(currentNode-&gt;next)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 检查当前节点的值是否与前半部分链表的节点值相等</span></span><br><span class="line">        <span class="keyword">if</span> (currentNode-&gt;val != frontPointer-&gt;val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前半部分链表指针移动到下一个节点</span></span><br><span class="line">        frontPointer = frontPointer-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 若所有节点都检查完毕，返回 true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查链表是否为回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="comment">// 初始化全局变量 frontPointer</span></span><br><span class="line">    frontPointer = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用递归检查函数</span></span><br><span class="line">    <span class="keyword">return</span> recursivelyCheck(head);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><code>isPalindrome</code> 函数设置 <code>frontPointer</code> 为链表头，并调用 <code>recursivelyCheck</code> 函数。</li>
-<li><code>recursivelyCheck</code> 函数首先检查当前节点是否为 <code>NULL</code>，如果是，则返回 <code>true</code>，因为链表的末尾已经达到。</li>
-<li>然后，<code>recursivelyCheck</code> 递归调用自己，传递当前节点的下一个节点。</li>
-<li>在递归返回之前，检查当前节点的值是否等于 <code>frontPointer</code> 指向的节点的值。如果不等，则返回 <code>false</code>，因为链表不是回文的。</li>
-<li>如果值相等，将 <code>frontPointer</code> 移动到下一个节点。</li>
-<li>最终，如果整个链表都被成功检查，并且没有发现值不相等的情况，那么整个函数返回 <code>true</code>，表示链表是回文的。</li>
-</ol>
-<p>这种方法的核心思想是使用递归从链表的末尾开始比较节点的值，同时使用 <code>frontPointer</code> 从链表的头部开始。这两个指针相向移动，逐一比较节点的值，如果在整个过程中没有找到不相等的节点，则链表被认为是回文的。</p>
-]]></content>
+    <title>Self-balancing-bycycle</title>
+    <url>/2023/10/09/Self-balancing-bycycle/</url>
+    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
+<span id="more"></span>]]></content>
       <categories>
-        <category>题解</category>
+        <category>项目</category>
       </categories>
       <tags>
-        <tag>链表</tag>
+        <tag>平衡车</tag>
       </tags>
   </entry>
   <entry>
@@ -649,18 +706,6 @@
       </categories>
       <tags>
         <tag>正则匹配</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self-balancing-bycycle</title>
-    <url>/2023/10/09/Self-balancing-bycycle/</url>
-    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。</p>
-<span id="more"></span>]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>平衡车</tag>
       </tags>
   </entry>
   <entry>
@@ -892,22 +937,6 @@
       </tags>
   </entry>
   <entry>
-    <title>文件基本操作</title>
-    <url>/2023/12/10/%E6%96%87%E4%BB%B6%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h3 id="文件基本操作"><a href="#文件基本操作" class="headerlink" title="文件基本操作"></a>文件基本操作</h3><p>（临时抱佛脚，捞捞）</p>
-<span id="more"></span>
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    FILE *file; <span class="comment">// 文件指针</span></span><br><span class="line">    <span class="type">char</span> filename[] = <span class="string">&quot;example.txt&quot;</span>; <span class="comment">// 文件名</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开文件以进行读写操作（如果文件不存在，则创建新文件）</span></span><br><span class="line">    file = fopen(filename, <span class="string">&quot;w+&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (file == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法打开文件 %s\n&quot;</span>, filename);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写入数据到文件</span></span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;这是一个文件操作示例。\n&quot;</span>);</span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;欢迎使用 C 语言进行文件操作！\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将文件指针移到文件开头</span></span><br><span class="line">    fseek(file, <span class="number">0</span>, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从文件中读取内容并输出到屏幕上</span></span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">while</span> (fgets(buffer, <span class="keyword">sizeof</span>(buffer), file) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, buffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭文件</span></span><br><span class="line">    fclose(file);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>成绩单</title>
     <url>/2023/12/09/%E6%88%90%E7%BB%A9%E5%8D%95/</url>
     <content><![CDATA[<h1 id="TXT成绩单"><a href="#TXT成绩单" class="headerlink" title="TXT成绩单"></a>TXT成绩单</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><strong>一份班级成绩表存储在一个TXT文件中，每行由学号、姓名、数学成绩、英语成绩、C语言成绩组成，如下：</strong></p>
@@ -936,6 +965,54 @@
 ]]></content>
       <categories>
         <category>屎山</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>筛去重复元素</title>
+    <url>/2023/12/14/%E7%AD%9B%E5%8E%BB%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</url>
+    <content><![CDATA[<h1 id="筛去重复元素"><a href="#筛去重复元素" class="headerlink" title="筛去重复元素"></a>筛去重复元素</h1><p>最近发现这样一道题，大致意思是给定一个数组，其中元素仅有一个只出现一次，其余元素均出现两次，编写程序以找出这个数。</p>
+<p>这里可以用到异或运算。</p>
+<span id="more"></span>
+
+<p>异或运算法则如下：</p>
+<ol>
+<li><p>交换律：A ^ B &#x3D; B ^ A</p>
+</li>
+<li><p>结合律：A ^ (B ^ C) &#x3D; (A ^ B) ^ C</p>
+</li>
+<li><p><strong>恒等律：X ^ 0 &#x3D; X</strong></p>
+</li>
+<li><p><strong>归零律：X ^ X &#x3D; 0</strong></p>
+</li>
+<li><p>自反：A ^ B ^ B &#x3D; A ^ 0 &#x3D; A</p>
+<p>这里主要用到后三条性质，可以定义变量key，不断与数组元素进行异或运算，某种意义上达到对于数组的压缩储存。</p>
+</li>
+</ol>
+<p>代码实现如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> *<span class="built_in">array</span>,<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span> key=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">        key^=<span class="built_in">array</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> key;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="built_in">array</span>[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">9</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,func(<span class="built_in">array</span>,<span class="number">13</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>c语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件基本操作</title>
+    <url>/2023/12/10/%E6%96%87%E4%BB%B6%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h3 id="文件基本操作"><a href="#文件基本操作" class="headerlink" title="文件基本操作"></a>文件基本操作</h3><p>（临时抱佛脚，捞捞）</p>
+<span id="more"></span>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    FILE *file; <span class="comment">// 文件指针</span></span><br><span class="line">    <span class="type">char</span> filename[] = <span class="string">&quot;example.txt&quot;</span>; <span class="comment">// 文件名</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开文件以进行读写操作（如果文件不存在，则创建新文件）</span></span><br><span class="line">    file = fopen(filename, <span class="string">&quot;w+&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (file == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法打开文件 %s\n&quot;</span>, filename);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写入数据到文件</span></span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;这是一个文件操作示例。\n&quot;</span>);</span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;欢迎使用 C 语言进行文件操作！\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将文件指针移到文件开头</span></span><br><span class="line">    fseek(file, <span class="number">0</span>, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从文件中读取内容并输出到屏幕上</span></span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">while</span> (fgets(buffer, <span class="keyword">sizeof</span>(buffer), file) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, buffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭文件</span></span><br><span class="line">    fclose(file);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>笔记</category>
       </categories>
       <tags>
         <tag>C语言</tag>
@@ -1001,35 +1078,16 @@
       </tags>
   </entry>
   <entry>
-    <title>筛去重复元素</title>
-    <url>/2023/12/14/%E7%AD%9B%E5%8E%BB%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</url>
-    <content><![CDATA[<h1 id="筛去重复元素"><a href="#筛去重复元素" class="headerlink" title="筛去重复元素"></a>筛去重复元素</h1><p>最近发现这样一道题，大致意思是给定一个数组，其中元素仅有一个只出现一次，其余元素均出现两次，编写程序以找出这个数。</p>
-<p>这里可以用到异或运算。</p>
-<span id="more"></span>
-
-<p>异或运算法则如下：</p>
-<ol>
-<li><p>交换律：A ^ B &#x3D; B ^ A</p>
-</li>
-<li><p>结合律：A ^ (B ^ C) &#x3D; (A ^ B) ^ C</p>
-</li>
-<li><p><strong>恒等律：X ^ 0 &#x3D; X</strong></p>
-</li>
-<li><p><strong>归零律：X ^ X &#x3D; 0</strong></p>
-</li>
-<li><p>自反：A ^ B ^ B &#x3D; A ^ 0 &#x3D; A</p>
-<p>这里主要用到后三条性质，可以定义变量key，不断与数组元素进行异或运算，某种意义上达到对于数组的压缩储存。</p>
-</li>
-</ol>
-<p>代码实现如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> *<span class="built_in">array</span>,<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span> key=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">        key^=<span class="built_in">array</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> key;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="built_in">array</span>[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">9</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,func(<span class="built_in">array</span>,<span class="number">13</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+    <title>蹭饭图</title>
+    <url>/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/</url>
+    <content><![CDATA[<h2 id="19班蹭饭图"><a href="#19班蹭饭图" class="headerlink" title="19班蹭饭图"></a>19班蹭饭图</h2><p><img data-src="/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/19%E8%B9%AD%E9%A5%AD%E5%9B%BE.png" alt="19班蹭饭图"></p>
+<h2 id="20班蹭饭图"><a href="#20班蹭饭图" class="headerlink" title="20班蹭饭图"></a>20班蹭饭图</h2><p><img data-src="/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/20%E8%B9%AD%E9%A5%AD%E5%9B%BE.png" alt="20班蹭饭图"></p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>蹭饭图</category>
       </categories>
       <tags>
-        <tag>c语言</tag>
+        <tag>蹭饭图</tag>
       </tags>
   </entry>
   <entry>
@@ -1083,64 +1141,6 @@
       </categories>
       <tags>
         <tag>c语言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>蹭饭图</title>
-    <url>/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/</url>
-    <content><![CDATA[<h2 id="19班蹭饭图"><a href="#19班蹭饭图" class="headerlink" title="19班蹭饭图"></a>19班蹭饭图</h2><p><img data-src="/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/19%E8%B9%AD%E9%A5%AD%E5%9B%BE.png" alt="19班蹭饭图"></p>
-<h2 id="20班蹭饭图"><a href="#20班蹭饭图" class="headerlink" title="20班蹭饭图"></a>20班蹭饭图</h2><p><img data-src="/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/20%E8%B9%AD%E9%A5%AD%E5%9B%BE.png" alt="20班蹭饭图"></p>
-]]></content>
-      <categories>
-        <category>蹭饭图</category>
-      </categories>
-      <tags>
-        <tag>蹭饭图</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LeetCode0724</title>
-    <url>/2023/11/20/LeetCode0724/</url>
-    <content><![CDATA[<h1 id="寻找数组的中心下标"><a href="#寻找数组的中心下标" class="headerlink" title="寻找数组的中心下标"></a><a href="https://leetcode.cn/problems/find-pivot-index/">寻找数组的中心下标</a></h1><hr>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code> ，请计算数组的 <strong>中心下标</strong> 。</p>
-<p>数组 <strong>中心下标</strong> 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
-<p>如果中心下标位于数组最左端，那么左侧数之和视为 <code>0</code> ，因为在下标的左侧不存在元素。这一点对于中心下标位于数组最右端同样适用。</p>
-<p>如果数组有多个中心下标，应该返回 <strong>最靠近左边</strong> 的那一个。如果数组不存在中心下标，返回 <code>-1</code> 。</p>
-<span id="more"></span>
-
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1, 7, 3, 6, 5, 6]</span><br><span class="line">输出：3</span><br><span class="line">解释：</span><br><span class="line">中心下标是<span class="number"> 3 </span>。</span><br><span class="line">左侧数之和 sum = nums[0] + nums[1] + nums[2] =<span class="number"> 1 </span>+<span class="number"> 7 </span>+<span class="number"> 3 </span>=<span class="number"> 11 </span>，</span><br><span class="line">右侧数之和 sum = nums[4] + nums[5] =<span class="number"> 5 </span>+<span class="number"> 6 </span>=<span class="number"> 11 </span>，二者相等。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight fix"><table><tr><td class="code"><pre><span class="line"><span class="attr">输入：nums </span>=<span class="string"> [1, 2, 3]</span></span><br><span class="line"><span class="string">输出：-1</span></span><br><span class="line"><span class="string">解释：</span></span><br><span class="line"><span class="string">数组中不存在满足此条件的中心下标。</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [2, 1, -1]</span><br><span class="line">输出：0</span><br><span class="line">解释：</span><br><span class="line">中心下标是<span class="number"> 0 </span>。</span><br><span class="line">左侧数之和 sum =<span class="number"> 0 </span>，（下标<span class="number"> 0 </span>左侧不存在元素），</span><br><span class="line">右侧数之和 sum = nums[1] + nums[2] =<span class="number"> 1 </span>+ -1 =<span class="number"> 0 </span>。</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 104</code></li>
-<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
-</ul>
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>刚开始没什么具体思路，非常脑残地一点点计算出SUM(左右)，代码如下：</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_left = <span class="number">0</span>, sum_right = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sum == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i; j++)</span><br><span class="line">                sum_left += nums[j];</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> p = i + <span class="number">1</span>; p &lt; numsSize; p++)</span><br><span class="line">                sum_right += nums[p];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (sum_left == sum_right)</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 重置 sum_left 和 sum_right</span></span><br><span class="line">            sum_left = <span class="number">0</span>;</span><br><span class="line">            sum_right = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>中间那个重置千万别忘掉</strong></p>
-<ul>
-<li><p>在GPT的帮助下，我把代码重构了一下，主要是针对右侧sum的计算逻辑修改</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pivotIndex</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_left = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum_right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        sum_right = sum - sum_left - nums[i];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (sum_left == sum_right) &#123;</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sum_left += nums[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这个逻辑中无需先预判[0]元素是否可以直接PASS（其实前一个也不用，写麻烦了），并且用全数列的sum-左sum-当前元素，少了一丢丢运算过程，更加简洁明了</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
       </tags>
   </entry>
 </search>
