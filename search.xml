@@ -2136,4 +2136,22 @@
         <tag>蹭饭图</tag>
       </tags>
   </entry>
+  <entry>
+    <title>离散数学（1）</title>
+    <url>/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="离散数学基础"><a href="#离散数学基础" class="headerlink" title="离散数学基础"></a>离散数学基础</h1><p>本来是打算一点点肝的，谁知道讲这么快，干脆就一晚上肝完吧</p>
+<span id="more"></span>
+
+<h2 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h2><h3 id="基本定理"><a href="#基本定理" class="headerlink" title="基本定理"></a>基本定理</h3><p>看了下定义：大抵是说一个集合到自身的一一对应，<br>这句简单的话透露出一个信息：置换这种运算应该是自闭的，也就是说没有每个元素必然被一个元素指向，自身也指向一个元素（或自身）。<img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711624643658.png" alt="1711624643658"><br>按照我目前的理解，大概就是说r是使γ置换成自身的最小次数，在此之前咋换都不行。<br><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711625730481.png" alt="1711625730481"><br>这个定理大概是说反正没有重复数字，可以瞎jb换，也不会影响什么。<br><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711625796751.png" alt="1711625796751"><br><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711625891397.png" alt="1711625891397"><br>PS：这里的个数指置换中元素的个数</p>
+<h3 id="二元和n元运算"><a href="#二元和n元运算" class="headerlink" title="二元和n元运算"></a>二元和n元运算</h3><p><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711626677152.png" alt="1711626677152"><br>本来这个二元运算的概念没太理解，知道看到了这张图<br><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711627084928.png" alt="1711627084928"><br>忽然间理解了奥义：两个加数（乘数）分别是二进制数域，运算之后的结过依然属于二进制数，这就是二元运算；相似地一一对应的那种函数就是一元运算了，以此类推。<br><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711627187999.png" alt="1711627187999"><br>值得注意的是二元运算并不都符合结合律，交换律，分配率那些。。。</p>
+<p><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711627256797.png" alt="1711627256797"><br>其实同构的代数系本质上是一样的，冤案对象的命名不同而已。</p>
+<h2 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h2><p><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711627941430.png" alt="1711627941430"><br>这一段，我感觉纯是写了段废话，有种强塞定理的感觉<br><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711628062245.png" alt="1711628062245"><br>（数论概念，贴一下吧）<br><img data-src="/2024/03/28/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%881%EF%BC%89/1711629032644.png" alt="1711629032644"></p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3>]]></content>
+      <categories>
+        <category>数学基础</category>
+      </categories>
+      <tags>
+        <tag>离散数学</tag>
+      </tags>
+  </entry>
 </search>
