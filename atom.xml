@@ -6,7 +6,7 @@
   <link href="http://zuweicun.top/atom.xml" rel="self"/>
   
   <link href="http://zuweicun.top/"/>
-  <updated>2024-03-28T14:03:17.265Z</updated>
+  <updated>2024-03-30T09:30:25.723Z</updated>
   <id>http://zuweicun.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>离散数学（2）</title>
+    <link href="http://zuweicun.top/2024/03/30/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%882%EF%BC%89/"/>
+    <id>http://zuweicun.top/2024/03/30/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6%EF%BC%882%EF%BC%89/</id>
+    <published>2024-03-30T03:34:30.000Z</published>
+    <updated>2024-03-30T09:30:25.723Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="离散数学基础（2）"><a href="#离散数学基础（2）" class="headerlink" title="离散数学基础（2）"></a>离散数学基础（2）</h2><p>本篇博客简单理解一下各种映射的本质</p><span id="more"></span><p>对于一个映射A→B：</p><ul><li><p>单射：</p><ul><li>类似于函数的一一对应性质，不包括多对一的情况。限制于A集合，即B集合可以有元未被映射</li><li><img data-src="https://pic3.zhimg.com/80/v2-070562850aaee357be93a2a67c794a36_1440w.webp" alt="img"></li></ul></li><li><p>满射：</p><ul><li>即把B中的所有元都用上，主要限制于B集合，即A集合可以不指向B的元</li><li><img data-src="https://pic4.zhimg.com/80/v2-a7d76ec834eee4adb7df74857a3b8a07_1440w.webp" alt="img"></li></ul></li><li><p>双射：</p><ul><li>既是单射又是满射，严格的一一对应关系。</li><li><img data-src="https://pic2.zhimg.com/80/v2-c13f789dab192de9ca2ed763995a956d_1440w.webp" alt="img"></li></ul></li></ul><p>接着是逆映射的概念：</p><p>只有双射才可以定义逆映射。类比于函数的可逆函数。</p><p>复合映射：</p><p>类比于复合函数。</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;离散数学基础（2）&quot;&gt;&lt;a href=&quot;#离散数学基础（2）&quot; class=&quot;headerlink&quot; title=&quot;离散数学基础（2）&quot;&gt;&lt;/a&gt;离散数学基础（2）&lt;/h2&gt;&lt;p&gt;本篇博客简单理解一下各种映射的本质&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数学基础" scheme="http://zuweicun.top/categories/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="离散数学" scheme="http://zuweicun.top/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>离散数学（1）</title>
@@ -436,27 +457,6 @@
     
     
     <category term="寻迹车 蓝牙" scheme="http://zuweicun.top/tags/%E5%AF%BB%E8%BF%B9%E8%BD%A6-%E8%93%9D%E7%89%99/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode0498</title>
-    <link href="http://zuweicun.top/2023/11/23/LeetCode0498/"/>
-    <id>http://zuweicun.top/2023/11/23/LeetCode0498/</id>
-    <published>2023-11-23T10:27:43.000Z</published>
-    <updated>2023-11-23T10:59:59.412Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="对角线遍历"><a href="#对角线遍历" class="headerlink" title="对角线遍历"></a><a href="https://leetcode.cn/problems/diagonal-traverse/">对角线遍历</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个大小为 <code>m x n</code> 的矩阵 <code>mat</code> ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。</p><span id="more"></span><p><strong>示例 1：</strong></p><p><img data-src="https://assets.leetcode.com/uploads/2021/04/10/diag1-grid.jpg" alt="img"></p><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：mat = <span class="comment">[<span class="comment">[1,2,3]</span>,<span class="comment">[4,5,6]</span>,<span class="comment">[7,8,9]</span>]</span></span><br><span class="line">输出：<span class="comment">[1,2,4,7,5,3,6,8,9]</span></span><br></pre></td></tr></table></figure><p><strong>示例 2：</strong></p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：mat = <span class="string">[[1,2],[3,4]]</span></span><br><span class="line">输出：[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure><p><strong>提示：</strong></p><ul><li><code>m == mat.length</code></li><li><code>n == mat[i].length</code></li><li><code>1 &lt;= m, n &lt;= 104</code></li><li><code>1 &lt;= m * n &lt;= 104</code></li><li><code>-105 &lt;= mat[i][j] &lt;= 105</code></li></ul><h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>根据题目要求，矩阵按照对角线进行遍历。设矩阵的行数为 m, 矩阵的列数为 n, 我们仔细观察对角线遍历的规律可以得到如下信息:</p><img data-src="C:\Users\祖全之\AppData\Roaming\Typora\typora-user-images\image-20231123183323953.png" alt="image-20231123183323953" style="zoom:80%;" /><p><strong>根据以上观察得出的结论，我们直接模拟遍历所有的对角线即可。</strong></p><p>代码实现如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* <span class="title function_">findDiagonalOrder</span><span class="params">(<span class="type">int</span>** mat, <span class="type">int</span> matSize, <span class="type">int</span>* matnSize, <span class="type">int</span>* returnSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> m = matSize;</span><br><span class="line">    <span class="type">int</span> n = matnSize[<span class="number">0</span>];</span><br><span class="line">    <span class="type">int</span> *res = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>) * m * n);</span><br><span class="line">    <span class="type">int</span> pos = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历矩阵的所有对角线</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m + n - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// 如果对角线序号为奇数</span></span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="type">int</span> x = i &lt; n ? <span class="number">0</span> : i - n + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> y = i &lt; n ? i : n - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 遍历当前对角线并将元素存入结果数组</span></span><br><span class="line">            <span class="keyword">while</span> (x &lt; m &amp;&amp; y &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                res[pos] = mat[x][y];</span><br><span class="line">                pos++;</span><br><span class="line">                x++;</span><br><span class="line">                y--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123; <span class="comment">// 如果对角线序号为偶数</span></span><br><span class="line">            <span class="type">int</span> x = i &lt; m ? i : m - <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> y = i &lt; m ? <span class="number">0</span> : i - m + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 遍历当前对角线并将元素存入结果数组</span></span><br><span class="line">            <span class="keyword">while</span> (x &gt;= <span class="number">0</span> &amp;&amp; y &lt; n) &#123;</span><br><span class="line">                res[pos] = mat[x][y];</span><br><span class="line">                pos++;</span><br><span class="line">                x--;</span><br><span class="line">                y++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置返回的数组大小</span></span><br><span class="line">    *returnSize = m * n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><em>一看就会一做就废系列</em></p><p>大体上把情况分为两种：奇数和偶数对角线——这两种对角线也代表着不同的遍历顺序（从下到上or从上到下）</p><p>一边遍历一边把得到元素存到res数组里，得到新数组，及完成任务。</p>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;对角线遍历&quot;&gt;&lt;a href=&quot;#对角线遍历&quot; class=&quot;headerlink&quot; title=&quot;对角线遍历&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://leetcode.cn/problems/diagonal-traverse/&quot;&gt;对角线遍历&lt;/a&gt;&lt;/h1&gt;&lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;给你一个大小为 &lt;code&gt;m x n&lt;/code&gt; 的矩阵 &lt;code&gt;mat&lt;/code&gt; ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="题解" scheme="http://zuweicun.top/categories/%E9%A2%98%E8%A7%A3/"/>
-    
-    
-    <category term="二维数组" scheme="http://zuweicun.top/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
