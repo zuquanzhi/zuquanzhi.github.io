@@ -1,0 +1,11 @@
+- class_name: 友链
+  class_desc: 贴一些大帅哥的博客
+  link_list:
+  - name: cmzの博客
+    link: https://cmzcc.github.io/
+    avatar: /img/cmz.jpg
+    descr: 明哲哥哥真是太帅辣
+  - name: dhrの博客
+    link: https://TheRiddler-EdwardNygma.github.io
+    avatar: /img/dhr.jpg
+    descr: 洪锐哥哥一点也不能吃辣

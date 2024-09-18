@@ -1,0 +1,37 @@
+<div class="tags" id="myTags">
+  <canvas width="500" height="500" id="my3DTags">
+    <p>Anything in here will be replaced on browsers that support the canvas element</p>
+  </canvas>
+</div>
+<div class="tags" id="tags">
+  <ul style="display: none">
+    {{ tagcloud({
+        min_font   : theme.tagcloud.min,
+        max_font   : theme.tagcloud.max,
+        amount     : theme.tagcloud.amount,
+        color      : true,
+        start_color: theme.tagcloud.start,
+        end_color  : theme.tagcloud.end})
+    }}
+  </ul>
+</div>
+<script type="text/javascript" src="/js/tagcanvas.js"></script>
+<script type="text/javascript" >
+  window.onload = function() {
+    try {
+      TagCanvas.Start('my3DTags','tags',{
+        textFont: 'Georgia,Optima',
+        textColour: null,
+        outlineColour: 'black',
+        weight: true,
+        reverse: true,
+        depth: 0.8,
+        maxSpeed: 0.05,
+        bgRadius: 1,
+        freezeDecel: true
+      });
+    } catch(e) {
+      document.getElementById('myTags').style.display = 'none';
+    }
+  };
+</script>

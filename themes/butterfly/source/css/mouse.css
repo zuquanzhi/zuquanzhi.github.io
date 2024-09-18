@@ -1,0 +1,60 @@
+/* 全局默认鼠标指针 */
+body,
+html {
+	cursor: url('./mouse/normal.cur'),auto !important;
+}
+/* 悬停图片时的鼠标指针 */
+img { 
+	cursor: url('./mouse/normal.cur'), auto !important;
+}
+/* 悬停图片弹出窗口时的鼠标指针 */
+.fancybox__slide{
+	cursor: url('./mouse/normal.cur'), auto !important;
+}
+.carousel__slide{
+	cursor: url('./mouse/normal.cur'), auto !important;
+}
+/* 选择链接标签时的鼠标指针 */
+a:hover,#site-name:hover {
+    cursor: url('./mouse/ayuda.cur'), auto !important;
+}
+/* 选择代码框展开和复制按钮时的鼠标指针 */
+.copy-button:hover,.expand:hover {
+    cursor: url('./mouse/ayuda.cur'), auto !important;
+}
+/* 选中输入框时的鼠标指针 */
+input:hover, textarea:hover {
+    cursor: url('./mouse/texto.cur'), auto;
+}
+/* 悬停按钮时的鼠标指针 */
+button:hover,.scroll-down-effects:hover {
+    cursor: url('./mouse/ayuda.cur'), auto;
+}
+/* 悬停页脚链接标签（例如页脚徽标）时的鼠标指针 */
+#footer-wrap a:hover {
+    cursor: url('./mouse/ayuda.cur'), auto;
+}
+/* 悬停页码时的鼠标指针 */
+#pagination .page-number:hover {
+    cursor: url('./mouse/ayuda.cur'), auto;
+}
+/* 悬停菜单栏时的鼠标指针 */
+#nav .site-page:hover {
+    cursor: url('./mouse/normal.cur'), auto !important;
+}
+/* 悬停滚动条的鼠标指针（只对Chrome有效） */
+::-webkit-scrollbar:hover{
+	cursor: url('./mouse/normal.cur'), auto!important;
+}
+/* 悬停评论按钮的鼠标指针（我使用的是Gitalk/Valine） */
+.switch-btn,.switch-btn:before,.gt-user-inner,.gt-ico,.gt-user-name,.gt-btn,.vbtn,svg,.at_button{
+	cursor: url('./mouse/ayuda.cur'), auto !important;
+}
+/* 悬停非链接文本时的鼠标指针 */
+h1,h2,h3,h4,h5,h6,#subtitle,.content,.line,.post-content p,.post-content li{
+	cursor: url('./mouse/texto.cur'), auto;
+}
+/* 悬停文章日期 */
+.post-meta-date:hover,.post-meta-date-created:hover{
+	cursor: url('./mouse/ayuda.cur'), auto!important;
+}
