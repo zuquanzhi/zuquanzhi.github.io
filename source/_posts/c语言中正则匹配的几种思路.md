@@ -1,7 +1,7 @@
 ---
 title: c语言中正则匹配的几种思路
 tags: 正则匹配
-categories: 编程
+categories: 算法
 abbrlink: 15536
 date: 2023-10-12 22:00:19
 ---

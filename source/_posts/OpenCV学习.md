@@ -1,7 +1,7 @@
 ---
 title: OpenCV学习
 tags: OpenCV
-categories: OpenCV
+categories: 718
 abbrlink: 48272
 date: 2024-01-12 23:57:55
 cover: https://imgapi.jinghuashang.cn/random?9
