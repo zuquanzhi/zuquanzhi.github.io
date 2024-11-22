@@ -13,6 +13,7 @@ menu:
   Archives: /archives/ || fas fa-archive
   Tags: /tags/ || fas fa-tags
   Categories: /categories/ || fas fa-folder-open
+  Cloud: /cloud/ || fas fa-cloud
   Pictures: /Pictures/ || fas fa-images
   # List||fas fa-list:
   #   Music: /music/ || fas fa-music
