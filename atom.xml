@@ -454,27 +454,24 @@
   </entry>
   
   <entry>
-    <title>蹭饭图</title>
-    <link href="http://zuweicun.top/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/"/>
-    <id>http://zuweicun.top/2023/12/19/%E8%B9%AD%E9%A5%AD%E5%9B%BE/</id>
-    <published>2023-12-19T03:35:38.000Z</published>
-    <updated>2024-09-18T06:28:55.386Z</updated>
+    <title>筛去重复元素</title>
+    <link href="http://zuweicun.top/2023/12/14/%E7%AD%9B%E5%8E%BB%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/"/>
+    <id>http://zuweicun.top/2023/12/14/%E7%AD%9B%E5%8E%BB%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</id>
+    <published>2023-12-14T12:32:50.000Z</published>
+    <updated>2024-09-20T02:06:41.307Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="19班蹭饭图"><a href="#19班蹭饭图" class="headerlink" title="19班蹭饭图"></a>19班蹭饭图</h2><p><img src="19蹭饭图.png" alt="19班蹭饭图"></p><h2 id="20班蹭饭图"><a href="#20班蹭饭图" class="headerlink" title="20班蹭饭图"></a>20班蹭饭图</h2><p><img src="20蹭饭图.png" alt="20班蹭饭图"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="筛去重复元素"><a href="#筛去重复元素" class="headerlink" title="筛去重复元素"></a>筛去重复元素</h1><p>最近发现这样一道题，大致意思是给定一个数组，其中元素仅有一个只出现一次，其余元素均出现两次，编写程序以找出这个数。</p><p>这里可以用到异或运算。</p><span id="more"></span><p>异或运算法则如下：</p><ol><li><p>交换律：A ^ B = B ^ A</p></li><li><p>结合律：A ^ (B ^ C) = (A ^ B) ^ C</p></li><li><p><strong>恒等律：X ^ 0 = X</strong></p></li><li><p><strong>归零律：X ^ X = 0</strong></p></li><li><p>自反：A ^ B ^ B = A ^ 0 = A</p><p>这里主要用到后三条性质，可以定义变量key，不断与数组元素进行异或运算，某种意义上达到对于数组的压缩储存。</p></li></ol><p>代码实现如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">func</span><span class="params">(<span class="type">int</span> *<span class="built_in">array</span>,<span class="type">int</span> num)</span>&#123;</span><br><span class="line">    <span class="type">int</span> key=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">        key^=<span class="built_in">array</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> key;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="built_in">array</span>[]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">9</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,func(<span class="built_in">array</span>,<span class="number">13</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;h2 id=&quot;19班蹭饭图&quot;&gt;&lt;a href=&quot;#19班蹭饭图&quot; class=&quot;headerlink&quot; title=&quot;19班蹭饭图&quot;&gt;&lt;/a&gt;19班蹭饭图&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;19蹭饭图.png&quot; alt=&quot;19班蹭饭图&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;20班蹭饭图&quot;</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;筛去重复元素&quot;&gt;&lt;a href=&quot;#筛去重复元素&quot; class=&quot;headerlink&quot; title=&quot;筛去重复元素&quot;&gt;&lt;/a&gt;筛去重复元素&lt;/h1&gt;&lt;p&gt;最近发现这样一道题，大致意思是给定一个数组，其中元素仅有一个只出现一次，其余元素均出现两次，编写程序以找出这个数。&lt;/p&gt;
+&lt;p&gt;这里可以用到异或运算。&lt;/p&gt;</summary>
     
     
     
-    <category term="蹭饭图" scheme="http://zuweicun.top/categories/%E8%B9%AD%E9%A5%AD%E5%9B%BE/"/>
+    <category term="数据结构与算法" scheme="http://zuweicun.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="蹭饭图" scheme="http://zuweicun.top/tags/%E8%B9%AD%E9%A5%AD%E5%9B%BE/"/>
+    <category term="c语言" scheme="http://zuweicun.top/tags/c%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
