@@ -238,7 +238,7 @@ aside:
       link: https://github.com/zuquanzhi
   card_announcement:
     enable: true
-    content: 'Welcome to my blog!'
+    content: 'Follow 再看 ，养成习惯 '
   card_recent_post:
     enable: true
     limit: 5 # if set 0 will show all
