@@ -9,6 +9,14 @@
     link: https://TheRiddler-EdwardNygma.github.io
     avatar: /img/dhr.jpg
     descr: 洪锐哥哥一点也不能吃辣
+  - name: pshの博客
+    link: https://ruakker.moe
+    avatar: /img/psh.png
+    descr: 学弟太强辣
+  - name: Albertの主页
+    link: https://www.evolutionz.com.cn/
+    avatar: /img/zz.jpg
+    descr: Hero战队机械强者
 - class_name: Tools
   class_desc: 放一些常用的工具
   link_list:
