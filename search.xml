@@ -4007,7 +4007,7 @@ run(**vars(opt))
 <h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>假设，你是一位 C语言工程师，你现在想要让 agent 自动完成一个项目的编译，那么执行流程如下：<br><img src="image-3.png" alt="">  </p>
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
 <li><a href="https://kirigaya.cn/blog/article?seq=299">锦恢的博客</a></li>
-<li><a href="https://guangzhengli.com/blog/zh/model-context-protocol#mcp-%E7%9A%84%E4%B8%80%E4%BA%9B%E8%B5%84%E6%BA%90"></a></li>
+<li><a href="https://guangzhengli.com/blog/zh/model-context-protocol#mcp-%E7%9A%84%E4%B8%80%E4%BA%9B%E8%B5%84%E6%BA%90">MCP终极指南</a></li>
 </ul>
 ]]></content>
       <categories>
