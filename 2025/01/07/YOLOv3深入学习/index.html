@@ -1,0 +1,1119 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>YOLOv3深入学习 | 全之の博客</title><meta name="author" content="ZU Weicun"><meta name="copyright" content="ZU Weicun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="鉴于yolov3对于目标识别界的重大开创性，跳过1、2两个版本直接学习yolov3，同时也作为后续版本的基石入门。  主要原理1. YOLOv3的核心思想YOLOv3（You Only Look Once version 3）是一种单阶段目标检测算法，其核心思想是将目标检测问题转化为一个回归问题。与传统的两阶段检测方法（如R-CNN系列）不同，YOLOv3通过单次前向传播直接预测目标的边界框和类别"><meta property="og:type" content="article"><meta property="og:title" content="YOLOv3深入学习"><meta property="og:url" content="http://zuweicun.top/2025/01/07/YOLOv3%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/index.html"><meta property="og:site_name" content="全之の博客"><meta property="og:description" content="鉴于yolov3对于目标识别界的重大开创性，跳过1、2两个版本直接学习yolov3，同时也作为后续版本的基石入门。  主要原理1. YOLOv3的核心思想YOLOv3（You Only Look Once version 3）是一种单阶段目标检测算法，其核心思想是将目标检测问题转化为一个回归问题。与传统的两阶段检测方法（如R-CNN系列）不同，YOLOv3通过单次前向传播直接预测目标的边界框和类别"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://imgapi.jinghuashang.cn/random?39"><meta property="article:published_time" content="2025-01-07T08:30:02.000Z"><meta property="article:modified_time" content="2025-04-10T15:15:25.125Z"><meta property="article:author" content="ZU Weicun"><meta property="article:tag" content="YOLO 目标识别"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://imgapi.jinghuashang.cn/random?39"><link rel="shortcut icon" href="/img/logo.png"><link rel="canonical" href="http://zuweicun.top/2025/01/07/YOLOv3%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ZU Weicun","link":"链接: ","source":"来源: 全之の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"YOLOv3深入学习",isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2025-04-10 23:15:25"}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/transpancy.css"><link rel="stylesheet" href="/css/mouse.css"><script src="/live2d-widget/autoload.js"></script><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="全之の博客" type="application/atom+xml"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/cloud/"><i class="fa-fw fas fa-cloud"></i><span> Cloud</span></a></div><div class="menus_item"><a class="site-page" href="/Pictures/"><i class="fa-fw fas fa-images"></i><span> Pictures</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://imgapi.jinghuashang.cn/random?39)"><nav id="nav"><span id="blog-info"><a href="/" title="全之の博客"><span class="site-name">全之の博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/cloud/"><i class="fa-fw fas fa-cloud"></i><span> Cloud</span></a></div><div class="menus_item"><a class="site-page" href="/Pictures/"><i class="fa-fw fas fa-images"></i><span> Pictures</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">YOLOv3深入学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-07T08:30:02.000Z" title="发表于 2025-01-07 16:30:02">2025-01-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-10T15:15:25.125Z" title="更新于 2025-04-10 23:15:25">2025-04-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/RoboMaster/">RoboMaster</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/RoboMaster/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" data-flag-title="YOLOv3深入学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>鉴于yolov3对于目标识别界的重大开创性，跳过1、2两个版本直接学习yolov3，同时也作为后续版本的基石入门。</p><hr><h2 id="主要原理"><a href="#主要原理" class="headerlink" title="主要原理"></a>主要原理</h2><h3 id="1-YOLOv3的核心思想"><a href="#1-YOLOv3的核心思想" class="headerlink" title="1. YOLOv3的核心思想"></a>1. YOLOv3的核心思想</h3><p>YOLOv3（You Only Look Once version 3）是一种单阶段目标检测算法，其核心思想是将目标检测问题转化为一个回归问题。与传统的两阶段检测方法（如R-CNN系列）不同，YOLOv3通过单次前向传播直接预测目标的边界框和类别概率，从而实现高效的目标检测。</p><p>YOLOv3的主要特点包括：</p><ul><li><strong>单次前向传播</strong>：输入图像经过一次网络前向传播即可得到检测结果。</li><li><strong>多尺度预测</strong>：通过不同尺度的特征图检测不同大小的目标。</li><li><strong>锚点机制</strong>：使用预定义的锚点（anchors）来辅助预测边界框。</li></ul><hr><h3 id="2-YOLOv3的网络结构"><a href="#2-YOLOv3的网络结构" class="headerlink" title="2. YOLOv3的网络结构"></a>2. YOLOv3的网络结构</h3><p>YOLOv3的网络结构可以分为三个部分：<strong>Backbone（骨干网络）</strong>、<strong>Neck（特征融合部分）**</strong>和<strong>**Head（检测头）</strong>。</p><h4 id="2-1-Backbone：Darknet-53"><a href="#2-1-Backbone：Darknet-53" class="headerlink" title="2.1 Backbone：Darknet-53"></a>2.1 Backbone：Darknet-53</h4><p>YOLOv3的骨干网络是Darknet-53，它是一个包含53个卷积层的深度卷积神经网络。Darknet-53借鉴了ResNet的思想，使用了残差连接（Residual Connections）来缓解深层网络的梯度消失问题。</p><p>Darknet-53的主要特点：</p><ul><li>使用1x1和3x3卷积层提取特征。</li><li>使用残差块（Residual Block）来构建深层网络。</li><li>输出三个不同尺度的特征图（13x13、26x26、52x52），用于多尺度预测。</li></ul><h4 id="2-2-Neck：特征金字塔网络（FPN）"><a href="#2-2-Neck：特征金字塔网络（FPN）" class="headerlink" title="2.2 Neck：特征金字塔网络（FPN）"></a>2.2 Neck：特征金字塔网络（FPN）</h4><p>YOLOv3通过特征金字塔网络（Feature Pyramid Network, FPN）实现多尺度特征融合。FPN将深层特征图（包含语义信息）与浅层特征图（包含细节信息）进行融合，从而增强网络对不同尺度目标的检测能力。</p><p>FPN的工作流程：</p><ul><li>从深层特征图开始，逐步上采样并与浅层特征图融合。</li><li>最终生成三个不同尺度的特征图（13x13、26x26、52x52），分别用于检测大、中、小目标。</li></ul><h4 id="2-3-Head：检测头"><a href="#2-3-Head：检测头" class="headerlink" title="2.3 Head：检测头"></a>2.3 Head：检测头</h4><p>检测头是YOLOv3的输出部分，负责预测边界框和类别概率。每个尺度的特征图都会预测固定数量的边界框（通常是3个），每个边界框包含以下信息：</p><ul><li>边界框的中心坐标（x, y）。</li><li>边界框的宽度和高度（w, h）。</li><li>目标存在的置信度（confidence）。</li><li>类别概率（class probabilities）。</li></ul><hr><h3 id="3-多尺度预测"><a href="#3-多尺度预测" class="headerlink" title="3. 多尺度预测"></a>3. 多尺度预测</h3><p>YOLOv3在三个不同尺度的特征图上进行预测：</p><ul><li><strong>13x13特征图</strong>：用于检测大目标。</li><li><strong>26x26特征图</strong>：用于检测中等目标。</li><li><strong>52x52特征图</strong>：用于检测小目标。</li></ul><p>每个尺度的特征图会被划分为若干网格（grid cell），每个网格负责预测固定数量的边界框。例如，13x13特征图会被划分为13x13个网格，每个网格预测3个边界框。</p><hr><h3 id="4-锚点机制"><a href="#4-锚点机制" class="headerlink" title="4. 锚点机制"></a>4. 锚点机制</h3><p>YOLOv3使用锚点（anchors）来辅助预测边界框。锚点是一组预定义的边界框尺寸，用于帮助网络更好地预测不同大小和形状的目标。</p><p>锚点的作用：</p><ul><li>每个尺度的特征图使用不同的锚点尺寸。例如，13x13特征图使用较大的锚点，52x52特征图使用较小的锚点。</li><li>网络预测的边界框是基于锚点的偏移量，而不是直接预测边界框的绝对坐标。</li></ul><hr><h3 id="5-边界框的编码与解码"><a href="#5-边界框的编码与解码" class="headerlink" title="5. 边界框的编码与解码"></a>5. 边界框的编码与解码</h3><p>YOLOv3通过编码和解码的方式将预测的边界框与真实边界框进行匹配。</p><h4 id="5-1-编码（Encoding）"><a href="#5-1-编码（Encoding）" class="headerlink" title="5.1 编码（Encoding）"></a>5.1 编码（Encoding）</h4><p>在训练时，需要将真实的边界框（ground truth）编码为网络输出的格式。</p><p>假设我们有一个真实的边界框$ (x, y, w, h) $，对应的锚点为$ (p_w, p_h) $，则编码后的边界框为：</p><ul><li>$ tx = (x - cx) / stride $</li><li>$ ty = (y - cy) / stride $</li><li>$ tw = log(w / p_w) $</li><li>$ th = log(h / p_h) $</li></ul><p>其中，$ (cx, cy) $是当前网格的左上角坐标，$ (tx, ty) $是中心偏移量，$ (tw, th) $是缩放比例，$ stride $是特征图的步长。</p><h4 id="5-2-解码（Decoding）"><a href="#5-2-解码（Decoding）" class="headerlink" title="5.2 解码（Decoding）"></a>5.2 解码（Decoding）</h4><p>在推理时，需要将网络输出的边界框解码为实际的坐标。假设网络输出为$ (tx, ty, tw, th) $，对应的锚点为$ (p_w, p_h) $，则解码后的边界框为：</p><ul><li>$ x = (sigmoid(tx) + cx) * stride $</li><li>$ y = (sigmoid(ty) + cy) * stride $</li><li>$ w = exp(tw) * p_w $</li><li>$ h = exp(th) * p_h $</li></ul><hr><h3 id="6-损失函数"><a href="#6-损失函数" class="headerlink" title="6. 损失函数"></a>6. 损失函数</h3><p>YOLOv3的损失函数由三部分组成：</p><ul><li><strong>定位损失（Localization Loss）</strong>：计算预测边界框与真实边界框之间的误差，通常使用均方误差（MSE）。</li><li><strong>置信度损失（Confidence Loss）</strong>：计算预测的置信度与真实值之间的误差，通常使用二元交叉熵（Binary Cross-Entropy）。</li><li><strong>分类损失（Classification Loss）</strong>：计算预测的类别概率与真实类别之间的误差，通常使用交叉熵（Cross-Entropy）。</li></ul><hr><h3 id="7-训练与推理"><a href="#7-训练与推理" class="headerlink" title="7. 训练与推理"></a>7. 训练与推理</h3><h4 id="7-1-训练"><a href="#7-1-训练" class="headerlink" title="7.1 训练"></a>7.1 训练</h4><p>在训练时，YOLOv3通过以下步骤进行优化：</p><ol><li>输入图像经过网络前向传播，得到三个尺度的预测结果。</li><li>将预测结果与真实标签进行匹配，计算损失。</li><li>使用反向传播更新网络参数。</li></ol><h4 id="7-2-推理"><a href="#7-2-推理" class="headerlink" title="7.2 推理"></a>7.2 推理</h4><p>在推理时，YOLOv3通过以下步骤生成检测结果：</p><ol><li>输入图像经过网络前向传播，得到三个尺度的预测结果。</li><li>对预测的边界框进行解码，得到实际的坐标。</li><li>使用非极大值抑制（NMS）去除重叠的边界框，得到最终的检测结果。</li></ol><hr><h2 id="细节实现"><a href="#细节实现" class="headerlink" title="细节实现"></a>细节实现</h2><h3 id="1-网络输出的结构"><a href="#1-网络输出的结构" class="headerlink" title="1. 网络输出的结构"></a>1. 网络输出的结构</h3><p>YOLOv3的网络输出是三个尺度的特征图（13x13、26x26、52x52），每个尺度的特征图会预测固定数量的边界框（通常是3个）。每个边界框的输出包含以下信息：</p><ul><li><strong>边界框的中心坐标偏移量（tx, ty）</strong>：相对于当前网格的偏移量。</li><li><strong>边界框的宽度和高度缩放量（tw, th）</strong>：相对于锚点的缩放量。</li><li><strong>目标存在的置信度（confidence）</strong>：表示当前边界框包含目标的概率。</li><li><strong>类别概率（class probabilities）</strong>：表示目标属于每个类别的概率。</li></ul><p>假设每个尺度预测3个边界框，类别数为C，则每个尺度的输出维度为：</p><ul><li>13x13尺度的输出维度：<code>13 x 13 x 3 x (5 + C)</code></li><li>26x26尺度的输出维度：<code>26 x 26 x 3 x (5 + C)</code></li><li>52x52尺度的输出维度：<code>52 x 52 x 3 x (5 + C)</code></li></ul><p>其中，<code>5</code>表示边界框的4个坐标值（tx, ty, tw, th）和1个置信度，<code>C</code>表示类别数。</p><hr><h3 id="2-后处理计算"><a href="#2-后处理计算" class="headerlink" title="2. 后处理计算"></a>2. 后处理计算</h3><p>后处理计算的目的是将网络的原始输出转换为实际的边界框坐标和类别信息。具体步骤如下：</p><h4 id="2-1-解码边界框坐标"><a href="#2-1-解码边界框坐标" class="headerlink" title="2.1 解码边界框坐标"></a>2.1 解码边界框坐标</h4><p>网络的输出是边界框的偏移量和缩放量，需要通过解码将其转换为实际的边界框坐标。</p><p>假设网络的输出为$ (tx, ty, tw, th) $，对应的锚点为$ (a_w, a_h) $，当前网格的左上角坐标为$ (cx, cy) $，特征图的步长为$ stride $，则解码后的边界框坐标为：</p><ul><li><strong>中心坐标</strong>：<ul><li>$ x = (sigmoid(tx) + cx) * stride $</li><li>$ y = (sigmoid(ty) + cy) * stride $</li></ul></li><li><strong>宽度和高度</strong>：<ul><li>$ w = exp(tw) * p_w $</li><li>$ h = exp(th) * p_h $</li></ul></li></ul><p>其中，$ sigmoid $函数用于将偏移量限制在0到1之间，确保边界框的中心位于当前网格内。</p><h4 id="2-2-计算置信度和类别概率"><a href="#2-2-计算置信度和类别概率" class="headerlink" title="2.2 计算置信度和类别概率"></a>2.2 计算置信度和类别概率</h4><p>网络的输出还包括置信度和类别概率，需要通过以下步骤进行处理：</p><ul><li><strong>置信度</strong>：直接使用$ sigmoid $函数将输出值转换为概率值，表示当前边界框包含目标的概率。</li><li><strong>类别概率</strong>：对每个类别的输出值应用$ sigmoid $函数，得到每个类别的概率值。</li></ul><h4 id="2-3-过滤低置信度的边界框"><a href="#2-3-过滤低置信度的边界框" class="headerlink" title="2.3 过滤低置信度的边界框"></a>2.3 过滤低置信度的边界框</h4><p>为了减少计算量，通常会过滤掉置信度低于某个阈值（如0.5）的边界框。只有置信度高于阈值的边界框才会进入下一步处理。</p><h4 id="2-4-非极大值抑制（NMS）"><a href="#2-4-非极大值抑制（NMS）" class="headerlink" title="2.4 非极大值抑制（NMS）"></a>2.4 非极大值抑制（NMS）</h4><p>非极大值抑制（Non-Maximum Suppression, NMS）用于去除重叠的边界框，保留最优的检测结果。NMS的具体步骤如下：</p><ol><li>对所有边界框按置信度从高到低排序。</li><li>选择置信度最高的边界框，将其加入最终结果列表。</li><li>计算该边界框与其余边界框的交并比（IoU）。</li><li>删除IoU高于某个阈值（如0.5）的边界框。</li><li>重复步骤2-4，直到所有边界框都被处理。</li></ol><hr><h3 id="3-置信度的计算"><a href="#3-置信度的计算" class="headerlink" title="3. 置信度的计算"></a>3. 置信度的计算</h3><p>置信度（confidence）是网络输出的一个重要部分，表示当前边界框包含目标的概率。置信度的计算步骤如下：</p><ol><li><strong>网络输出</strong>：网络输出的置信度是一个标量值（通常记为$ t_conf $），范围是任意的（未经过激活函数处理）。</li><li><strong>Sigmoid激活</strong>：为了将置信度转换为概率值，需要对$ t_conf $应用Sigmoid函数：<br>$ \text{confidence} = \sigma(t_conf) = \frac{1}{1 + e^{-t_conf}} $<br>这样，置信度的值被限制在0到1之间。</li><li><strong>置信度的意义</strong>：置信度表示当前边界框内是否存在目标。如果置信度接近1，说明边界框内很可能存在目标；如果接近0，则说明边界框内很可能没有目标。</li></ol><hr><h3 id="3-1-类别概率的计算"><a href="#3-1-类别概率的计算" class="headerlink" title="3.1 类别概率的计算"></a>3.1 类别概率的计算</h3><p>类别概率（class probabilities）表示目标属于每个类别的概率。</p><ol><li><strong>网络输出</strong>：网络输出的类别概率是一个长度为$ C $的向量（$ C $为类别数），记为$ t_class $。每个值表示对应类别的得分（未经过激活函数处理）。</li><li><strong>Sigmoid激活</strong>：对$ t_class $中的每个值应用$ Sigmoid $函数，将其转换为概率值：<br>$ \text{class_prob}_i = \sigma(t_class_i) = \frac{1}{1 + e^{-t_class_i}} $<br>这样，每个类别的概率值被限制在0到1之间。</li><li><strong>类别概率的意义</strong>：$ class_prob_i $表示目标属于第$ i $个类别的概率。YOLOv3使用$ Sigmoid $函数而不是$ Softmax $函数，因此每个类别的概率是独立的，可以同时预测多个类别（适用于多标签分类任务）。</li></ol><p><img src="https://cdn.nlark.com/yuque/0/2025/png/39221021/1736055615050-19591ae5-d726-49fa-9129-d6f5e1fd6af6.png" alt=""></p><hr><h3 id="3-2-过滤低置信度的边界框"><a href="#3-2-过滤低置信度的边界框" class="headerlink" title="3.2 过滤低置信度的边界框"></a>3.2 过滤低置信度的边界框</h3><p>在得到置信度和类别概率后，通常需要过滤掉低置信度的边界框，以减少计算量并提高检测结果的可靠性。具体步骤如下：</p><ol><li><strong>设置置信度阈值</strong>：通常设置一个置信度阈值（如0.5），只有置信度高于该阈值的边界框才会被保留。</li><li><strong>过滤边界框</strong>：遍历所有边界框，保留置信度高于阈值的边界框，丢弃低于阈值的边界框。</li></ol><hr><h3 id="3-3-非极大值抑制（NMS）"><a href="#3-3-非极大值抑制（NMS）" class="headerlink" title="3.3 非极大值抑制（NMS）"></a>3.3 非极大值抑制（NMS）</h3><p>非极大值抑制（Non-Maximum Suppression, NMS）是目标检测中常用的后处理步骤，用于去除重叠的边界框，保留最优的检测结果。NMS的具体步骤如下：</p><ol><li><strong>按置信度排序</strong>：将所有边界框按置信度从高到低排序。</li><li><strong>选择最高置信度的边界框</strong>：从排序后的列表中选择置信度最高的边界框，将其加入最终结果列表。</li><li><strong>计算交并比（IoU）</strong>：计算该边界框与其余所有边界框的交并比（Intersection over Union, IoU）。IoU的计算公式为：<br>$ \text{IoU} = \frac{\text{Area of Intersection}}{\text{Area of Union}} $<br>其中，<code>Area of Intersection</code>是两个边界框的交集面积，<code>Area of Union</code>是两个边界框的并集面积。</li><li><strong>去除重叠边界框</strong>：删除与当前边界框IoU高于某个阈值（如0.5）的边界框。</li><li><strong>重复步骤2-4</strong>：重复上述过程，直到所有边界框都被处理。</li></ol><hr><h3 id="3-具体示例"><a href="#3-具体示例" class="headerlink" title="3. 具体示例"></a>3. 具体示例</h3><p>假设我们有一个13x13尺度的输出，类别数为80，锚点为<code>(10, 13), (16, 30), (33, 23)</code>，特征图的步长为32。</p><h4 id="3-1-网络输出"><a href="#3-1-网络输出" class="headerlink" title="3.1 网络输出"></a>3.1 网络输出</h4><p>网络的输出维度为<code>13 x 13 x 3 x 85</code>，其中<code>85 = 5 + 80</code>（5表示边界框的4个坐标值和1个置信度，80表示类别数）。</p><h4 id="3-2-解码边界框"><a href="#3-2-解码边界框" class="headerlink" title="3.2 解码边界框"></a>3.2 解码边界框</h4><p>对于每个网格和每个锚点，解码边界框的步骤如下：</p><ol><li>提取$ (tx, ty, tw, th) $和置信度、类别概率。</li><li>使用$ Sigmoid $函数计算中心坐标偏移量：<ul><li>$ x = (\sigma(tx) + cx) \times 32 $</li><li>$ y = (\sigma(ty) + cy) \times 32 $</li></ul></li><li>使用指数函数计算宽度和高度：<ul><li>$ w = \exp(tw) \times a_w $</li><li>$ h = \exp(th) \times a_h $</li></ul></li><li>将边界框坐标转换为$ (x_min, y_min, x_max, y_max) $格式：<ul><li>$ x_{\text{min}} = x - w / 2 $</li><li>$ y_{\text{min}} = y - h / 2 $</li><li>$ x_{\text{max}} = x + w / 2 $</li><li>$ y_{\text{max}} = y + h / 2 $</li></ul></li></ol><h4 id="3-3-置信度和类别概率的计算"><a href="#3-3-置信度和类别概率的计算" class="headerlink" title="3.3 置信度和类别概率的计算"></a>3.3 置信度和类别概率的计算</h4><ol><li>对置信度$ t_conf $应用$ Sigmoid $函数：<br>$ \text{confidence} = \sigma(t_conf) $</li><li>对类别概率$ t_class $应用$ Sigmoid $函数：<br>$ \text{class_prob}_i = \sigma(t_class_i) $</li></ol><h4 id="3-4-过滤和NMS"><a href="#3-4-过滤和NMS" class="headerlink" title="3.4 过滤和NMS"></a>3.4 过滤和NMS</h4><ol><li>过滤掉置信度低于0.5的边界框。</li><li>对剩余的边界框按置信度排序。</li><li>使用NMS去除重叠的边界框，保留最优的检测结果。</li></ol><h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><hr><h3 id="1-网络架构：Darknet-53"><a href="#1-网络架构：Darknet-53" class="headerlink" title="1. 网络架构：Darknet-53"></a>1. 网络架构：Darknet-53</h3><p>YOLOv3的骨干网络是Darknet-53，这是一个53层的卷积神经网络（CNN），借鉴了ResNet的残差结构，但设计更为轻量化和高效。</p><h4 id="1-1-Darknet-53的结构"><a href="#1-1-Darknet-53的结构" class="headerlink" title="1.1 Darknet-53的结构"></a>1.1 Darknet-53的结构</h4><ul><li><strong>输入</strong>：YOLOv3的输入图像尺寸通常为416x416（或其他尺寸，如608x608）。</li><li><strong>卷积层</strong>：Darknet-53主要由卷积层、批量归一化（Batch Normalization）和Leaky ReLU激活函数组成。<ul><li>卷积层：使用3x3和1x1卷积核，3x3卷积用于提取特征，1x1卷积用于调整通道数。</li><li>批量归一化：加速训练并提高模型稳定性。</li><li>Leaky ReLU：激活函数，公式为 $ f(x) = \max(x, 0.1x) $，避免梯度消失。</li></ul></li><li><strong>残差块（Residual Block）</strong>：Darknet-53的核心组件是残差块，每个残差块包含两个3x3卷积层和一个跳跃连接（Shortcut Connection）。<ul><li>跳跃连接将输入直接加到输出上，缓解梯度消失问题，使网络能够训练得更深。</li><li>Darknet-53共有23个残差块。</li></ul></li></ul><h4 id="1-2-Darknet-53的特点"><a href="#1-2-Darknet-53的特点" class="headerlink" title="1.2 Darknet-53的特点"></a>1.2 Darknet-53的特点</h4><ul><li><strong>深度</strong>：53层网络，比YOLOv2的Darknet-19更深，但比ResNet-152更轻量。</li><li><strong>效率</strong>：Darknet-53在ImageNet分类任务上达到了与ResNet-152相当的精度，但速度更快。</li><li><strong>多尺度特征提取</strong>：Darknet-53通过不同层提取不同尺度的特征，为后续的多尺度预测提供支持。</li></ul><hr><h3 id="2-多尺度预测"><a href="#2-多尺度预测" class="headerlink" title="2. 多尺度预测"></a>2. 多尺度预测</h3><p>YOLOv3在三个不同尺度的特征图上进行目标检测，分别对应13x13、26x26和52x52的特征图。这种多尺度设计使其能够检测不同大小的目标。</p><h4 id="2-1-特征金字塔网络（FPN）"><a href="#2-1-特征金字塔网络（FPN）" class="headerlink" title="2.1 特征金字塔网络（FPN）"></a>2.1 特征金字塔网络（FPN）</h4><p>YOLOv3借鉴了特征金字塔网络（Feature Pyramid Network, FPN）的思想，通过上采样和特征融合实现多尺度预测。</p><ul><li><strong>上采样（Upsampling）</strong>：将低分辨率的特征图通过插值方法（如双线性插值）放大到高分辨率。</li><li><strong>特征融合</strong>：将上采样后的特征图与来自浅层的特征图进行拼接（Concatenation），结合低级特征（细节信息）和高级特征（语义信息）。<ul><li>例如，13x13的特征图通过上采样得到26x26的特征图，然后与Darknet-53中间层的26x26特征图拼接。</li></ul></li></ul><h4 id="2-2-三个尺度的预测"><a href="#2-2-三个尺度的预测" class="headerlink" title="2.2 三个尺度的预测"></a>2.2 三个尺度的预测</h4><ul><li><strong>13x13特征图</strong>：用于检测大目标。</li><li><strong>26x26特征图</strong>：用于检测中等目标。</li><li><strong>52x52特征图</strong>：用于检测小目标。</li></ul><p>每个尺度的特征图都会输出预测结果，包括边界框坐标、置信度和类别概率。</p><hr><h3 id="3-锚框（Anchor-Boxes）机制"><a href="#3-锚框（Anchor-Boxes）机制" class="headerlink" title="3. 锚框（Anchor Boxes）机制"></a>3. 锚框（Anchor Boxes）机制</h3><p>YOLOv3使用锚框（Anchor Boxes）来预测目标的边界框。锚框是预定义的边界框，用于捕捉不同形状和尺寸的目标。</p><h4 id="3-1-锚框的选择"><a href="#3-1-锚框的选择" class="headerlink" title="3.1 锚框的选择"></a>3.1 锚框的选择</h4><ul><li><strong>K-means聚类</strong>：YOLOv3使用K-means聚类算法从训练数据集中自动学习锚框的尺寸。<ul><li>对训练集中所有目标的边界框进行聚类，得到9个聚类中心（即9个锚框）。</li><li>这些锚框被分配到三个尺度上，每个尺度分配3个锚框。</li></ul></li><li><strong>锚框的尺寸</strong>：不同尺度的锚框尺寸不同，例如：<ul><li>13x13尺度的锚框较大，适合检测大目标。</li><li>52x52尺度的锚框较小，适合检测小目标。</li></ul></li></ul><h4 id="3-2-锚框的预测"><a href="#3-2-锚框的预测" class="headerlink" title="3.2 锚框的预测"></a>3.2 锚框的预测</h4><ul><li>每个网格单元（Grid Cell）预测3个边界框，每个边界框对应一个锚框。</li><li>每个边界框预测以下内容：<ul><li>边界框坐标（x, y, w, h）：x和y是中心点坐标，w和h是宽度和高度。</li><li>置信度（Confidence）：表示边界框内是否包含目标，以及预测框的准确性。</li><li>类别概率（Class Probabilities）：表示目标属于每个类别的概率。</li></ul></li></ul><hr><h3 id="4-损失函数"><a href="#4-损失函数" class="headerlink" title="4. 损失函数"></a>4. 损失函数</h3><p>以下是YOLOv3中三个损失计算函数的详细公式和解释：</p><hr><h4 id="1-坐标损失（Coordinate-Loss）"><a href="#1-坐标损失（Coordinate-Loss）" class="headerlink" title="1. 坐标损失（Coordinate Loss）"></a>1. 坐标损失（Coordinate Loss）</h4><p>坐标损失用于衡量预测的边界框坐标（中心点 (x, y) 和宽高 (w, h)）与真实边界框坐标之间的差异。YOLOv3使用均方误差（MSE）来计算坐标损失。</p><h5 id="公式："><a href="#公式：" class="headerlink" title="公式："></a>公式：</h5><p><img src="https://cdn.nlark.com/yuque/0/2025/png/39221021/1736056982107-a76914d6-e67e-4dc2-a3a9-70c511955a5f.png" alt=""></p><h5 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h5><ul><li>$ S^2 $：网格单元的数量（例如，13x13、26x26、52x52）。</li><li>$ B $：每个网格单元预测的边界框数量（YOLOv3中 ( B = 3 )）。</li><li>$ \mathbb{1}_{ij}^{\text{obj}} $：指示函数，表示第 ( i ) 个网格单元的第 ( j ) 个边界框是否负责检测目标（如果是则为1，否则为0）。</li><li>$ x_i, y_i $：预测的边界框中心点坐标。</li><li>$ \hat{x}_i, \hat{y}_i $：真实的边界框中心点坐标。</li><li>$ w_i, h_i $：预测的边界框宽度和高度。</li><li>$ \hat{w}_i, \hat{h}_i $：真实的边界框宽度和高度。</li><li>$ \lambda_{\text{coord}} $：坐标损失的权重（通常设置为5）。</li></ul><hr><h4 id="2-置信度损失（Confidence-Loss）"><a href="#2-置信度损失（Confidence-Loss）" class="headerlink" title="2. 置信度损失（Confidence Loss）"></a>2. 置信度损失（Confidence Loss）</h4><p>置信度损失用于衡量预测的置信度（即边界框内是否包含目标）与真实值之间的差异。YOLOv3使用二分类交叉熵损失来计算置信度损失。</p><h5 id="公式：-1"><a href="#公式：-1" class="headerlink" title="公式："></a>公式：</h5><p><img src="https://cdn.nlark.com/yuque/0/2025/png/39221021/1736056991829-7210b841-2fa5-4cf0-b402-bc9756a8a691.png" alt=""></p><h5 id="参数说明：-1"><a href="#参数说明：-1" class="headerlink" title="参数说明："></a>参数说明：</h5><ul><li>$ \hat{C}_i $：预测的置信度（即边界框内包含目标的概率）。</li><li>$ \mathbb{1}_{ij}^{\text{obj}} $：指示函数，表示第 ( i ) 个网格单元的第 ( j ) 个边界框是否负责检测目标（如果是则为1，否则为0）。</li><li>对于负样本（不包含目标的边界框），置信度损失仅计算 $ \log(1 - \hat{C}_i) $。</li></ul><hr><h4 id="3-类别损失（Class-Loss）"><a href="#3-类别损失（Class-Loss）" class="headerlink" title="3. 类别损失（Class Loss）"></a>3. 类别损失（Class Loss）</h4><p>类别损失用于衡量预测的类别概率与真实类别之间的差异。YOLOv3使用多分类交叉熵损失来计算类别损失。</p><h5 id="公式：-2"><a href="#公式：-2" class="headerlink" title="公式："></a>公式：</h5><p><img src="https://cdn.nlark.com/yuque/0/2025/png/39221021/1736057000321-c51f7efd-2012-429e-8635-d4b10122b037.png" alt=""></p><h5 id="参数说明：-2"><a href="#参数说明：-2" class="headerlink" title="参数说明："></a>参数说明：</h5><ul><li>$ p_i(c) $：真实的类别概率（如果是类别$ c $则为1，否则为0）。</li><li>$ \hat{p}_i(c) $：预测的类别概率（通过$ Sigmoid $函数输出）。</li><li>$ \mathbb{1}_{ij}^{\text{obj}} $：指示函数，表示第 $ i $个网格单元的第$ j $个边界框是否负责检测目标（如果是则为1，否则为0）。</li><li>$ c $：类别索引， $ \text{classes} $是所有类别的集合。</li></ul><hr><h4 id="4-总损失函数"><a href="#4-总损失函数" class="headerlink" title="4. 总损失函数"></a>4. 总损失函数</h4><p>YOLOv3的总损失函数是上述三个损失函数的加权和：<br><img src="https://cdn.nlark.com/yuque/0/2025/png/39221021/1736057096661-f17820de-b536-4b52-b14d-c2b662de9c8d.png" alt=""></p><h5 id="参数说明：-3"><a href="#参数说明：-3" class="headerlink" title="参数说明："></a>参数说明：</h5><ul><li>总损失函数是坐标损失、置信度损失和类别损失的总和。</li><li>每个损失函数的权重可以通过超参数调整（例如，坐标损失的权重 $ \lambda_{\text{coord}} $ 通常设置为5）。</li></ul><hr><h3 id="5-训练与推理"><a href="#5-训练与推理" class="headerlink" title="5. 训练与推理"></a>5. 训练与推理</h3><h4 id="5-1-训练"><a href="#5-1-训练" class="headerlink" title="5.1 训练"></a>5.1 训练</h4><ul><li><strong>数据增强</strong>：使用随机裁剪、翻转、颜色抖动等技术增强数据。</li><li><strong>损失优化</strong>：通过反向传播优化损失函数，更新网络参数。</li><li><strong>预训练</strong>：Darknet-53通常在ImageNet数据集上进行预训练，然后在目标检测任务上进行微调。</li></ul><h4 id="5-2-推理"><a href="#5-2-推理" class="headerlink" title="5.2 推理"></a>5.2 推理</h4><ul><li><strong>输入图像</strong>：将图像调整为固定尺寸（如416x416）并输入网络。</li><li><strong>预测输出</strong>：网络输出三个尺度的预测结果。</li><li><strong>非极大值抑制（NMS）</strong>：去除重叠的边界框，保留置信度最高的预测框。</li></ul><hr><h2 id="代码阅读（汉化）"><a href="#代码阅读（汉化）" class="headerlink" title="代码阅读（汉化）"></a>代码阅读（汉化）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ultralytics YOLOv3 🚀, AGPL-3.0 license</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">使用自定义数据集训练YOLOv3模型。模型和数据集会自动从最新的YOLOv3版本下载。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">单GPU训练用法:</span></span><br><span class="line"><span class="string">    $ python train.py --data coco128.yaml --weights yolov5s.pt --img 640  # 从预训练模型开始训练（推荐）</span></span><br><span class="line"><span class="string">    $ python train.py --data coco128.yaml --weights &#x27;&#x27; --cfg yolov5s.yaml --img 640  # 从零开始训练</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">多GPU DDP训练用法:</span></span><br><span class="line"><span class="string">    $ python -m torch.distributed.run --nproc_per_node 4 --master_port 1 train.py --data coco128.yaml --weights yolov5s.pt --img 640 --device 0,1,2,3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">模型:     https://github.com/ultralytics/yolov5/tree/master/models</span></span><br><span class="line"><span class="string">数据集:   https://github.com/ultralytics/yolov5/tree/master/data</span></span><br><span class="line"><span class="string">教程:   https://docs.ultralytics.com/yolov5/tutorials/train_custom_data</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> copy <span class="keyword">import</span> deepcopy</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">import</span> comet_ml  <span class="comment"># 必须在torch之前导入（如果已安装）</span></span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    comet_ml = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.distributed <span class="keyword">as</span> dist</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line"><span class="keyword">from</span> torch.optim <span class="keyword">import</span> lr_scheduler</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"></span><br><span class="line">FILE = Path(__file__).resolve()</span><br><span class="line">ROOT = FILE.parents[<span class="number">0</span>]  <span class="comment"># YOLOv3根目录</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">str</span>(ROOT) <span class="keyword">not</span> <span class="keyword">in</span> sys.path:</span><br><span class="line">    sys.path.append(<span class="built_in">str</span>(ROOT))  <span class="comment"># 将ROOT添加到PATH</span></span><br><span class="line">ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  <span class="comment"># 相对路径</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> val <span class="keyword">as</span> validate  <span class="comment"># 用于epoch结束时的mAP计算</span></span><br><span class="line"><span class="keyword">from</span> models.experimental <span class="keyword">import</span> attempt_load</span><br><span class="line"><span class="keyword">from</span> models.yolo <span class="keyword">import</span> Model</span><br><span class="line"><span class="keyword">from</span> utils.autoanchor <span class="keyword">import</span> check_anchors</span><br><span class="line"><span class="keyword">from</span> utils.autobatch <span class="keyword">import</span> check_train_batch_size</span><br><span class="line"><span class="keyword">from</span> utils.callbacks <span class="keyword">import</span> Callbacks</span><br><span class="line"><span class="keyword">from</span> utils.dataloaders <span class="keyword">import</span> create_dataloader</span><br><span class="line"><span class="keyword">from</span> utils.downloads <span class="keyword">import</span> attempt_download, is_url</span><br><span class="line"><span class="keyword">from</span> utils.general <span class="keyword">import</span> (</span><br><span class="line">    LOGGER,</span><br><span class="line">    TQDM_BAR_FORMAT,</span><br><span class="line">    check_amp,</span><br><span class="line">    check_dataset,</span><br><span class="line">    check_file,</span><br><span class="line">    check_git_info,</span><br><span class="line">    check_git_status,</span><br><span class="line">    check_img_size,</span><br><span class="line">    check_requirements,</span><br><span class="line">    check_suffix,</span><br><span class="line">    check_yaml,</span><br><span class="line">    colorstr,</span><br><span class="line">    get_latest_run,</span><br><span class="line">    increment_path,</span><br><span class="line">    init_seeds,</span><br><span class="line">    intersect_dicts,</span><br><span class="line">    labels_to_class_weights,</span><br><span class="line">    labels_to_image_weights,</span><br><span class="line">    methods,</span><br><span class="line">    one_cycle,</span><br><span class="line">    print_args,</span><br><span class="line">    print_mutation,</span><br><span class="line">    strip_optimizer,</span><br><span class="line">    yaml_save,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> utils.loggers <span class="keyword">import</span> Loggers</span><br><span class="line"><span class="keyword">from</span> utils.loggers.comet.comet_utils <span class="keyword">import</span> check_comet_resume</span><br><span class="line"><span class="keyword">from</span> utils.loss <span class="keyword">import</span> ComputeLoss</span><br><span class="line"><span class="keyword">from</span> utils.metrics <span class="keyword">import</span> fitness</span><br><span class="line"><span class="keyword">from</span> utils.plots <span class="keyword">import</span> plot_evolve</span><br><span class="line"><span class="keyword">from</span> utils.torch_utils <span class="keyword">import</span> (</span><br><span class="line">    EarlyStopping,</span><br><span class="line">    ModelEMA,</span><br><span class="line">    de_parallel,</span><br><span class="line">    select_device,</span><br><span class="line">    smart_DDP,</span><br><span class="line">    smart_optimizer,</span><br><span class="line">    smart_resume,</span><br><span class="line">    torch_distributed_zero_first,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">LOCAL_RANK = <span class="built_in">int</span>(os.getenv(<span class="string">&quot;LOCAL_RANK&quot;</span>, -<span class="number">1</span>))  <span class="comment"># https://pytorch.org/docs/stable/elastic/run.html</span></span><br><span class="line">RANK = <span class="built_in">int</span>(os.getenv(<span class="string">&quot;RANK&quot;</span>, -<span class="number">1</span>))</span><br><span class="line">WORLD_SIZE = <span class="built_in">int</span>(os.getenv(<span class="string">&quot;WORLD_SIZE&quot;</span>, <span class="number">1</span>))</span><br><span class="line">GIT_INFO = check_git_info()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">hyp, opt, device, callbacks</span>):  <span class="comment"># hyp是路径/to/hyp.yaml或hyp字典</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    在自定义数据集上训练YOLOv3模型并管理训练过程。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">        hyp (str | dict): 超参数yaml文件的路径或超参数字典。</span></span><br><span class="line"><span class="string">        opt (argparse.Namespace): 包含训练选项的解析命令行参数。</span></span><br><span class="line"><span class="string">        device (torch.device): 加载和训练模型的设备。</span></span><br><span class="line"><span class="string">        callbacks (Callbacks): 处理训练生命周期各个阶段的回调函数。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回:</span></span><br><span class="line"><span class="string">        None</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    单GPU训练用法:</span></span><br><span class="line"><span class="string">        $ python train.py --data coco128.yaml --weights yolov5s.pt --img 640  # 从预训练模型开始训练（推荐）</span></span><br><span class="line"><span class="string">        $ python train.py --data coco128.yaml --weights &#x27;&#x27; --cfg yolov5s.yaml --img 640  # 从零开始训练</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    多GPU DDP训练用法:</span></span><br><span class="line"><span class="string">        $ python -m torch.distributed.run --nproc_per_node 4 --master_port 1 train.py --data coco128.yaml --weights</span></span><br><span class="line"><span class="string">            yolov5s.pt --img 640 --device 0,1,2,3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    模型: https://github.com/ultralytics/yolov5/tree/master/models</span></span><br><span class="line"><span class="string">    数据集: https://github.com/ultralytics/yolov5/tree/master/data</span></span><br><span class="line"><span class="string">    教程: https://docs.ultralytics.com/yolov5/tutorials/train_custom_data</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    示例:</span></span><br><span class="line"><span class="string">        ```python</span></span><br><span class="line"><span class="string">        from ultralytics import train</span></span><br><span class="line"><span class="string">        import argparse</span></span><br><span class="line"><span class="string">        import torch</span></span><br><span class="line"><span class="string">        from utils.callbacks import Callbacks</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        # 示例用法</span></span><br><span class="line"><span class="string">        args = argparse.Namespace(</span></span><br><span class="line"><span class="string">            data=&#x27;coco128.yaml&#x27;,</span></span><br><span class="line"><span class="string">            weights=&#x27;yolov5s.pt&#x27;,</span></span><br><span class="line"><span class="string">            cfg=&#x27;yolov5s.yaml&#x27;,</span></span><br><span class="line"><span class="string">            img_size=640,</span></span><br><span class="line"><span class="string">            epochs=50,</span></span><br><span class="line"><span class="string">            batch_size=16,</span></span><br><span class="line"><span class="string">            device=&#x27;0&#x27;</span></span><br><span class="line"><span class="string">        )</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        device = torch.device(f&#x27;cuda:&#123;args.device&#125;&#x27; if torch.cuda.is_available() else &#x27;cpu&#x27;)</span></span><br><span class="line"><span class="string">        callbacks = Callbacks()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        train(hyp=&#x27;hyp.scratch.yaml&#x27;, opt=args, device=device, callbacks=callbacks)</span></span><br></pre></td></tr></table></figure><pre><code>&quot;&quot;&quot;
+save_dir, epochs, batch_size, weights, single_cls, evolve, data, cfg, resume, noval, nosave, workers, freeze = (
+    Path(opt.save_dir),
+    opt.epochs,
+    opt.batch_size,
+    opt.weights,
+    opt.single_cls,
+    opt.evolve,
+    opt.data,
+    opt.cfg,
+    opt.resume,
+    opt.noval,
+    opt.nosave,
+    opt.workers,
+    opt.freeze,
+)
+callbacks.run(&quot;on_pretrain_routine_start&quot;)
+
+# 目录
+w = save_dir / &quot;weights&quot;  # 权重目录
+(w.parent if evolve else w).mkdir(parents=True, exist_ok=True)  # 创建目录
+last, best = w / &quot;last.pt&quot;, w / &quot;best.pt&quot;
+
+# 超参数
+if isinstance(hyp, str):
+    with open(hyp, errors=&quot;ignore&quot;) as f:
+        hyp = yaml.safe_load(f)  # 加载超参数字典
+LOGGER.info(colorstr(&quot;超参数: &quot;) + &quot;, &quot;.join(f&quot;&#123;k&#125;=&#123;v&#125;&quot; for k, v in hyp.items()))
+opt.hyp = hyp.copy()  # 保存超参数到检查点
+
+# 保存运行设置
+if not evolve:
+    yaml_save(save_dir / &quot;hyp.yaml&quot;, hyp)
+    yaml_save(save_dir / &quot;opt.yaml&quot;, vars(opt))
+
+# 日志记录器
+data_dict = None
+if RANK in &#123;-1, 0&#125;:
+    loggers = Loggers(save_dir, weights, opt, hyp, LOGGER)  # 日志记录器实例
+
+    # 注册动作
+    for k in methods(loggers):
+        callbacks.register_action(k, callback=getattr(loggers, k))
+
+    # 处理自定义数据集工件链接
+    data_dict = loggers.remote_dataset
+    if resume:  # 如果从远程工件恢复运行
+        weights, epochs, hyp, batch_size = opt.weights, opt.epochs, opt.hyp, opt.batch_size
+
+# 配置
+plots = not evolve and not opt.noplots  # 创建图表
+cuda = device.type != &quot;cpu&quot;
+init_seeds(opt.seed + 1 + RANK, deterministic=True)
+with torch_distributed_zero_first(LOCAL_RANK):
+    data_dict = data_dict or check_dataset(data)  # 检查是否为None
+train_path, val_path = data_dict[&quot;train&quot;], data_dict[&quot;val&quot;]
+nc = 1 if single_cls else int(data_dict[&quot;nc&quot;])  # 类别数量
+names = &#123;0: &quot;item&quot;&#125; if single_cls and len(data_dict[&quot;names&quot;]) != 1 else data_dict[&quot;names&quot;]  # 类别名称
+is_coco = isinstance(val_path, str) and val_path.endswith(&quot;coco/val2017.txt&quot;)  # COCO数据集
+
+# 模型
+check_suffix(weights, &quot;.pt&quot;)  # 检查权重
+pretrained = weights.endswith(&quot;.pt&quot;)
+if pretrained:
+    with torch_distributed_zero_first(LOCAL_RANK):
+        weights = attempt_download(weights)  # 如果本地没有找到则下载
+    ckpt = torch.load(weights, map_location=&quot;cpu&quot;)  # 将检查点加载到CPU以避免CUDA内存泄漏
+    model = Model(cfg or ckpt[&quot;model&quot;].yaml, ch=3, nc=nc, anchors=hyp.get(&quot;anchors&quot;)).to(device)  # 创建模型
+    exclude = [&quot;anchor&quot;] if (cfg or hyp.get(&quot;anchors&quot;)) and not resume else []  # 排除键
+    csd = ckpt[&quot;model&quot;].float().state_dict()  # 检查点状态字典为FP32
+    csd = intersect_dicts(csd, model.state_dict(), exclude=exclude)  # 交集
+    model.load_state_dict(csd, strict=False)  # 加载
+    LOGGER.info(f&quot;从 &#123;weights&#125; 转移了 &#123;len(csd)&#125;/&#123;len(model.state_dict())&#125; 项&quot;)  # 报告
+else:
+    model = Model(cfg, ch=3, nc=nc, anchors=hyp.get(&quot;anchors&quot;)).to(device)  # 创建模型
+amp = check_amp(model)  # 检查AMP
+
+# 冻结
+freeze = [f&quot;model.&#123;x&#125;.&quot; for x in (freeze if len(freeze) &gt; 1 else range(freeze[0]))]  # 冻结的层
+for k, v in model.named_parameters():
+    v.requires_grad = True  # 训练所有层
+    # v.register_hook(lambda x: torch.nan_to_num(x))  # NaN转为0（注释掉以避免训练结果不稳定）
+    if any(x in k for x in freeze):
+        LOGGER.info(f&quot;冻结 &#123;k&#125;&quot;)
+        v.requires_grad = False
+
+# 图像大小
+gs = max(int(model.stride.max()), 32)  # 网格大小（最大步幅）
+imgsz = check_img_size(opt.imgsz, gs, floor=gs * 2)  # 验证imgsz是gs的倍数
+
+# 批量大小
+if RANK == -1 and batch_size == -1:  # 仅限单GPU，估计最佳批量大小
+    batch_size = check_train_batch_size(model, imgsz, amp)
+    loggers.on_params_update(&#123;&quot;batch_size&quot;: batch_size&#125;)
+
+# 优化器
+nbs = 64  # 名义批量大小
+accumulate = max(round(nbs / batch_size), 1)  # 在优化前累积损失
+hyp[&quot;weight_decay&quot;] *= batch_size * accumulate / nbs  # 缩放权重衰减
+optimizer = smart_optimizer(model, opt.optimizer, hyp[&quot;lr0&quot;], hyp[&quot;momentum&quot;], hyp[&quot;weight_decay&quot;])
+
+# 学习率调度器
+if opt.cos_lr:
+    lf = one_cycle(1, hyp[&quot;lrf&quot;], epochs)  # 余弦 1-&gt;hyp[&#39;lrf&#39;]
+else:
+
+    def lf(x):
+        &quot;&quot;&quot;线性学习率调度器函数，根据epoch比例计算衰减。&quot;&quot;&quot;
+        return (1 - x / epochs) * (1.0 - hyp[&quot;lrf&quot;]) + hyp[&quot;lrf&quot;]  # 线性
+
+scheduler = lr_scheduler.LambdaLR(optimizer, lr_lambda=lf)  # plot_lr_scheduler(optimizer, scheduler, epochs)
+
+# EMA
+ema = ModelEMA(model) if RANK in &#123;-1, 0&#125; else None
+
+# 恢复
+best_fitness, start_epoch = 0.0, 0
+if pretrained:
+    if resume:
+        best_fitness, start_epoch, epochs = smart_resume(ckpt, optimizer, ema, weights, epochs, resume)
+    del ckpt, csd
+
+# DP模式
+if cuda and RANK == -1 and torch.cuda.device_count() &gt; 1:
+    LOGGER.warning(
+        &quot;警告 ⚠️ 不推荐使用DP模式，建议使用torch.distributed.run以获得最佳DDP多GPU结果。\n&quot;
+        &quot;请参阅多GPU教程：https://docs.ultralytics.com/yolov5/tutorials/multi_gpu_training 以开始使用。&quot;
+    )
+    model = torch.nn.DataParallel(model)
+
+# SyncBatchNorm
+if opt.sync_bn and cuda and RANK != -1:
+    model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model).to(device)
+    LOGGER.info(&quot;使用 SyncBatchNorm()&quot;)
+
+# 训练数据加载器
+train_loader, dataset = create_dataloader(
+    train_path,
+    imgsz,
+    batch_size // WORLD_SIZE,
+    gs,
+    single_cls,
+    hyp=hyp,
+    augment=True,
+    cache=None if opt.cache == &quot;val&quot; else opt.cache,
+    rect=opt.rect,
+    rank=LOCAL_RANK,
+    workers=workers,
+    image_weights=opt.image_weights,
+    quad=opt.quad,
+    prefix=colorstr(&quot;训练: &quot;),
+    shuffle=True,
+    seed=opt.seed,
+)
+labels = np.concatenate(dataset.labels, 0)
+mlc = int(labels[:, 0].max())  # 最大标签类别
+assert mlc &lt; nc, f&quot;标签类别 &#123;mlc&#125; 超过了 &#123;data&#125; 中的 nc=&#123;nc&#125;。可能的类别标签是 0-&#123;nc - 1&#125;&quot;
+
+# 进程0
+if RANK in &#123;-1, 0&#125;:
+    val_loader = create_dataloader(
+        val_path,
+        imgsz,
+        batch_size // WORLD_SIZE * 2,
+        gs,
+        single_cls,
+        hyp=hyp,
+        cache=None if noval else opt.cache,
+        rect=True,
+        rank=-1,
+        workers=workers * 2,
+        pad=0.5,
+        prefix=colorstr(&quot;验证: &quot;),
+    )[0]
+
+    if not resume:
+        if not opt.noautoanchor:
+            check_anchors(dataset, model=model, thr=hyp[&quot;anchor_t&quot;], imgsz=imgsz)  # 运行AutoAnchor
+        model.half().float()  # 预降低锚点精度
+
+    callbacks.run(&quot;on_pretrain_routine_end&quot;, labels, names)
+
+# DDP模式
+if cuda and RANK != -1:
+    model = smart_DDP(model)
+
+# 模型属性
+nl = de_parallel(model).model[-1].nl  # 检测层数量（用于缩放超参数）
+hyp[&quot;box&quot;] *= 3 / nl  # 按层缩放
+hyp[&quot;cls&quot;] *= nc / 80 * 3 / nl  # 按类别和层缩放
+hyp[&quot;obj&quot;] *= (imgsz / 640) ** 2 * 3 / nl  # 按图像大小和层缩放
+hyp[&quot;label_smoothing&quot;] = opt.label_smoothing
+model.nc = nc  # 将类别数量附加到模型
+model.hyp = hyp  # 将超参数附加到模型
+model.class_weights = labels_to_class_weights(dataset.labels, nc).to(device) * nc  # 将类别权重附加到模型
+model.names = names
+
+# 开始训练
+t0 = time.time()
+nb = len(train_loader)  # 批次数量
+nw = max(round(hyp[&quot;warmup_epochs&quot;] * nb), 100)  # 预热迭代次数，最大（3个epoch，100次迭代）
+# nw = min(nw, (epochs - start_epoch) / 2 * nb)  # 将预热限制在训练的一半以下
+last_opt_step = -1
+maps = np.zeros(nc)  # 每个类别的mAP
+results = (0, 0, 0, 0, 0, 0, 0)  # P, R, mAP@.5, mAP@.5-.95, val_loss(box, obj, cls)
+scheduler.last_epoch = start_epoch - 1  # 不要移动
+scaler = torch.cuda.amp.GradScaler(enabled=amp)
+stopper, stop = EarlyStopping(patience=opt.patience), False
+compute_loss = ComputeLoss(model)  # 初始化损失类
+callbacks.run(&quot;on_train_start&quot;)
+LOGGER.info(
+    f&#39;图像大小 &#123;imgsz&#125; 训练, &#123;imgsz&#125; 验证\n&#39;
+    f&#39;使用 &#123;train_loader.num_workers * WORLD_SIZE&#125; 个数据加载器工作进程\n&#39;
+    f&quot;记录结果到 &#123;colorstr(&#39;bold&#39;, save_dir)&#125;\n&quot;
+    f&#39;开始训练 &#123;epochs&#125; 个epoch...&#39;
+)
+for epoch in range(start_epoch, epochs):  # epoch ------------------------------------------------------------------
+    callbacks.run(&quot;on_train_epoch_start&quot;)
+    model.train()
+
+    # 更新图像权重（可选，仅限单GPU）
+    if opt.image_weights:
+        cw = model.class_weights.cpu().numpy() * (1 - maps) ** 2 / nc  # 类别权重
+        iw = labels_to_image_weights(dataset.labels, nc=nc, class_weights=cw)  # 图像权重
+        dataset.indices = random.choices(range(dataset.n), weights=iw, k=dataset.n)  # 随机加权索引
+
+    # 更新马赛克边框（可选）
+    # b = int(random.uniform(0.25 * imgsz, 0.75 * imgsz + gs) // gs * gs)
+    # dataset.mosaic_border = [b - imgsz, -b]  # 高度，宽度边框
+
+    mloss = torch.zeros(3, device=device)  # 平均损失
+    if RANK != -1:
+        train_loader.sampler.set_epoch(epoch)
+    pbar = enumerate(train_loader)
+    LOGGER.info((&quot;\n&quot; + &quot;%11s&quot; * 7) % (&quot;Epoch&quot;, &quot;GPU_mem&quot;, &quot;box_loss&quot;, &quot;obj_loss&quot;, &quot;cls_loss&quot;, &quot;Instances&quot;, &quot;Size&quot;))
+    if RANK in &#123;-1, 0&#125;:
+        pbar = tqdm(pbar, total=nb, bar_format=TQDM_BAR_FORMAT)  # 进度条
+    optimizer.zero_grad()
+    for i, (imgs, targets, paths, _) in pbar:  # batch -------------------------------------------------------------
+        callbacks.run(&quot;on_train_batch_start&quot;)
+        ni = i + nb * epoch  # 自训练开始以来的集成批次数量
+        imgs = imgs.to(device, non_blocking=True).float() / 255  # uint8转为float32，0-255转为0.0-1.0
+
+        # 预热
+        if ni &lt;= nw:
+            xi = [0, nw]  # x插值
+            # compute_loss.gr = np.interp(ni, xi, [0.0, 1.0])  # iou损失比率（obj_loss = 1.0或iou）
+            accumulate = max(1, np.interp(ni, xi, [1, nbs / batch_size]).round())
+            for j, x in enumerate(optimizer.param_groups):
+                # bias lr从0.1下降到lr0，其他lr从0.0上升到lr0
+                x[&quot;lr&quot;] = np.interp(ni, xi, [hyp[&quot;warmup_bias_lr&quot;] if j == 0 else 0.0, x[&quot;initial_lr&quot;] * lf(epoch)])
+                if &quot;momentum&quot; in x:
+                    x[&quot;momentum&quot;] = np.interp(ni, xi, [hyp[&quot;warmup_momentum&quot;], hyp[&quot;momentum&quot;]])
+
+        # 多尺度
+        if opt.multi_scale:
+            sz = random.randrange(int(imgsz * 0.5), int(imgsz * 1.5) + gs) // gs * gs  # 大小
+            sf = sz / max(imgs.shape[2:])  # 缩放因子
+            if sf != 1:
+                ns = [math.ceil(x * sf / gs) * gs for x in imgs.shape[2:]]  # 新形状（拉伸到gs倍数）
+                imgs = nn.functional.interpolate(imgs, size=ns, mode=&quot;bilinear&quot;, align_corners=False)
+
+        # 前向传播
+        with torch.cuda.amp.autocast(amp):
+            pred = model(imgs)  # 前向传播
+            loss, loss_items = compute_loss(pred, targets.to(device))  # 损失按批量大小缩放
+            if RANK != -1:
+                loss *= WORLD_SIZE  # 在DDP模式下梯度在设备间平均
+            if opt.quad:
+                loss *= 4.0
+
+        # 反向传播
+        scaler.scale(loss).backward()
+
+        # 优化 - https://pytorch.org/docs/master/notes/amp_examples.html
+        if ni - last_opt_step &gt;= accumulate:
+            scaler.unscale_(optimizer)  # 取消梯度缩放
+            torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=10.0)  # 梯度裁剪
+            scaler.step(optimizer)  # 优化器步骤
+            scaler.update()
+            optimizer.zero_grad()
+            if ema:
+                ema.update(model)
+            last_opt_step = ni
+
+        # 日志
+        if RANK in &#123;-1, 0&#125;:
+            mloss = (mloss * i + loss_items) / (i + 1)  # 更新平均损失
+            mem = f&quot;&#123;torch.cuda.memory_reserved() / 1E9 if torch.cuda.is_available() else 0:.3g&#125;G&quot;  # (GB)
+            pbar.set_description(
+                (&quot;%11s&quot; * 2 + &quot;%11.4g&quot; * 5)
+                % (f&quot;&#123;epoch&#125;/&#123;epochs - 1&#125;&quot;, mem, *mloss, targets.shape[0], imgs.shape[-1])
+            )
+            callbacks.run(&quot;on_train_batch_end&quot;, model, ni, imgs, targets, paths, list(mloss))
+            if callbacks.stop_training:
+                return
+        # 结束批次 ------------------------------------------------------------------------------------------------
+
+    # 学习率调度器
+    lr = [x[&quot;lr&quot;] for x in optimizer.param_groups]  # 用于日志记录器
+    scheduler.step()
+
+    if RANK in &#123;-1, 0&#125;:
+        # mAP
+        callbacks.run(&quot;on_train_epoch_end&quot;, epoch=epoch)
+        ema.update_attr(model, include=[&quot;yaml&quot;, &quot;nc&quot;, &quot;hyp&quot;, &quot;names&quot;, &quot;stride&quot;, &quot;class_weights&quot;])
+        final_epoch = (epoch + 1 == epochs) or stopper.possible_stop
+        if not noval or final_epoch:  # 计算mAP
+            results, maps, _ = validate.run(
+                data_dict,
+                batch_size=batch_size // WORLD_SIZE * 2,
+                imgsz=imgsz,
+                half=amp,
+                model=ema.ema,
+                single_cls=single_cls,
+                dataloader=val_loader,
+                save_dir=save_dir,
+                plots=False,
+                callbacks=callbacks,
+                compute_loss=compute_loss,
+            )
+
+        # 更新最佳mAP
+        fi = fitness(np.array(results).reshape(1, -1))  # [P, R, mAP@.5, mAP@.5-.95]的加权组合
+        stop = stopper(epoch=epoch, fitness=fi)  # 早停检查
+        if fi &gt; best_fitness:
+            best_fitness = fi
+        log_vals = list(mloss) + list(results) + lr
+        callbacks.run(&quot;on_fit_epoch_end&quot;, log_vals, epoch, best_fitness, fi)
+
+        # 保存模型
+        if (not nosave) or (final_epoch and not evolve):  # 如果保存
+            ckpt = &#123;
+                &quot;epoch&quot;: epoch,
+                &quot;best_fitness&quot;: best_fitness,
+                &quot;model&quot;: deepcopy(de_parallel(model)).half(),
+                &quot;ema&quot;: deepcopy(ema.ema).half(),
+                &quot;updates&quot;: ema.updates,
+                &quot;optimizer&quot;: optimizer.state_dict(),
+                &quot;opt&quot;: vars(opt),
+                &quot;git&quot;: GIT_INFO,  # &#123;remote, branch, commit&#125; 如果是git仓库
+                &quot;date&quot;: datetime.now().isoformat(),
+            &#125;
+
+            # 保存最后、最佳并删除
+            torch.save(ckpt, last)
+            if best_fitness == fi:
+                torch.save(ckpt, best)
+            if opt.save_period &gt; 0 and epoch % opt.save_period == 0:
+                torch.save(ckpt, w / f&quot;epoch&#123;epoch&#125;.pt&quot;)
+            del ckpt
+            callbacks.run(&quot;on_model_save&quot;, last, epoch, final_epoch, best_fitness, fi)
+
+    # 早停
+    if RANK != -1:  # 如果是DDP训练
+        broadcast_list = [stop if RANK == 0 else None]
+        dist.broadcast_object_list(broadcast_list, 0)  # 将&#39;stop&#39;广播到所有rank
+        if RANK != 0:
+            stop = broadcast_list[0]
+    if stop:
+        break  # 必须中断所有DDP rank
+
+    # 结束epoch ----------------------------------------------------------------------------------------------------
+# 结束训练 -----------------------------------------------------------------------------------------------------
+if RANK in &#123;-1, 0&#125;:
+    LOGGER.info(f&quot;\n&#123;epoch - start_epoch + 1&#125; 个epoch在 &#123;(time.time() - t0) / 3600:.3f&#125; 小时内完成。&quot;)
+    for f in last, best:
+        if f.exists():
+            strip_optimizer(f)  # 去除优化器
+            if f is best:
+                LOGGER.info(f&quot;\n验证 &#123;f&#125;...&quot;)
+                results, _, _ = validate.run(
+                    data_dict,
+                    batch_size=batch_size // WORLD_SIZE * 2,
+                    imgsz=imgsz,
+                    model=attempt_load(f, device).half(),
+                    iou_thres=0.65 if is_coco else 0.60,  # 最佳pycocotools在iou 0.65
+                    single_cls=single_cls,
+                    dataloader=val_loader,
+                    save_dir=save_dir,
+                    save_json=is_coco,
+                    verbose=True,
+                    plots=plots,
+                    callbacks=callbacks,
+                    compute_loss=compute_loss,
+                )  # 使用图表验证最佳模型
+                if is_coco:
+                    callbacks.run(&quot;on_fit_epoch_end&quot;, list(mloss) + list(results) + lr, epoch, best_fitness, fi)
+
+    callbacks.run(&quot;on_train_end&quot;, last, best, epoch, results)
+
+torch.cuda.empty_cache()
+return results
+</code></pre><p>def parse_opt(known=False):<br>“””<br>解析命令行参数以配置YOLO模型的训练。</p><pre><code>参数:
+    known (bool): 仅解析已知参数的标志，默认为False。
+
+返回:
+    (argparse.Namespace): 解析后的命令行参数。
+
+示例:
+    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">options = parse_opt()</span><br><span class="line"><span class="built_in">print</span>(options.weights)</span><br></pre></td></tr></table></figure>
+
+注意:
+    * 默认权重路径为 &#39;yolov3-tiny.pt&#39;。
+    * 设置 `known` 为True以仅解析已知参数，适用于部分参数解析。
+
+参考:
+    * 模型: https://github.com/ultralytics/yolov5/tree/master/models
+    * 数据集: https://github.com/ultralytics/yolov5/tree/master/data
+    * 训练教程: https://docs.ultralytics.com/yolov5/tutorials/train_custom_data
+&quot;&quot;&quot;
+parser = argparse.ArgumentParser()
+parser.add_argument(&quot;--weights&quot;, type=str, default=ROOT / &quot;yolov3-tiny.pt&quot;, help=&quot;初始权重路径&quot;)
+parser.add_argument(&quot;--cfg&quot;, type=str, default=&quot;&quot;, help=&quot;模型yaml路径&quot;)
+parser.add_argument(&quot;--data&quot;, type=str, default=ROOT / &quot;data/coco128.yaml&quot;, help=&quot;数据集yaml路径&quot;)
+parser.add_argument(&quot;--hyp&quot;, type=str, default=ROOT / &quot;data/hyps/hyp.scratch-low.yaml&quot;, help=&quot;超参数路径&quot;)
+parser.add_argument(&quot;--epochs&quot;, type=int, default=100, help=&quot;总训练epoch数&quot;)
+parser.add_argument(&quot;--batch-size&quot;, type=int, default=16, help=&quot;所有GPU的总批量大小，-1表示自动批量&quot;)
+parser.add_argument(&quot;--imgsz&quot;, &quot;--img&quot;, &quot;--img-size&quot;, type=int, default=640, help=&quot;训练、验证图像大小（像素）&quot;)
+parser.add_argument(&quot;--rect&quot;, action=&quot;store_true&quot;, help=&quot;矩形训练&quot;)
+parser.add_argument(&quot;--resume&quot;, nargs=&quot;?&quot;, const=True, default=False, help=&quot;恢复最近的训练&quot;)
+parser.add_argument(&quot;--nosave&quot;, action=&quot;store_true&quot;, help=&quot;仅保存最终检查点&quot;)
+parser.add_argument(&quot;--noval&quot;, action=&quot;store_true&quot;, help=&quot;仅在最终epoch验证&quot;)
+parser.add_argument(&quot;--noautoanchor&quot;, action=&quot;store_true&quot;, help=&quot;禁用AutoAnchor&quot;)
+parser.add_argument(&quot;--noplots&quot;, action=&quot;store_true&quot;, help=&quot;不保存任何图表文件&quot;)
+parser.add_argument(&quot;--evolve&quot;, type=int, nargs=&quot;?&quot;, const=300, help=&quot;超参数进化x代&quot;)
+parser.add_argument(&quot;--bucket&quot;, type=str, default=&quot;&quot;, help=&quot;gsutil存储桶&quot;)
+parser.add_argument(&quot;--cache&quot;, type=str, nargs=&quot;?&quot;, const=&quot;ram&quot;, help=&quot;图像缓存 ram/disk&quot;)
+parser.add_argument(&quot;--image-weights&quot;, action=&quot;store_true&quot;, help=&quot;使用加权图像选择进行训练&quot;)
+parser.add_argument(&quot;--device&quot;, default=&quot;&quot;, help=&quot;cuda设备，例如 0 或 0,1,2,3 或 cpu&quot;)
+parser.add_argument(&quot;--multi-scale&quot;, action=&quot;store_true&quot;, help=&quot;图像大小变化 +/- 50%%&quot;)
+parser.add_argument(&quot;--single-cls&quot;, action=&quot;store_true&quot;, help=&quot;将多类数据训练为单类&quot;)
+parser.add_argument(&quot;--optimizer&quot;, type=str, choices=[&quot;SGD&quot;, &quot;Adam&quot;, &quot;AdamW&quot;], default=&quot;SGD&quot;, help=&quot;优化器&quot;)
+parser.add_argument(&quot;--sync-bn&quot;, action=&quot;store_true&quot;, help=&quot;使用SyncBatchNorm，仅在DDP模式下可用&quot;)
+parser.add_argument(&quot;--workers&quot;, type=int, default=8, help=&quot;最大数据加载器工作进程数（DDP模式下每rank）&quot;)
+parser.add_argument(&quot;--project&quot;, default=ROOT / &quot;runs/train&quot;, help=&quot;保存到project/name&quot;)
+parser.add_argument(&quot;--name&quot;, default=&quot;exp&quot;, help=&quot;保存到project/name&quot;)
+parser.add_argument(&quot;--exist-ok&quot;, action=&quot;store_true&quot;, help=&quot;允许现有project/name，不递增&quot;)
+parser.add_argument(&quot;--quad&quot;, action=&quot;store_true&quot;, help=&quot;四倍数据加载器&quot;)
+parser.add_argument(&quot;--cos-lr&quot;, action=&quot;store_true&quot;, help=&quot;余弦学习率调度器&quot;)
+parser.add_argument(&quot;--label-smoothing&quot;, type=float, default=0.0, help=&quot;标签平滑epsilon&quot;)
+parser.add_argument(&quot;--patience&quot;, type=int, default=100, help=&quot;早停耐心（无改进的epoch数）&quot;)
+parser.add_argument(&quot;--freeze&quot;, nargs=&quot;+&quot;, type=int, default=[0], help=&quot;冻结层：backbone=10, first3=0 1 2&quot;)
+parser.add_argument(&quot;--save-period&quot;, type=int, default=-1, help=&quot;每x个epoch保存检查点（如果小于1则禁用）&quot;)
+parser.add_argument(&quot;--seed&quot;, type=int, default=0, help=&quot;全局训练种子&quot;)
+parser.add_argument(&quot;--local_rank&quot;, type=int, default=-1, help=&quot;自动DDP多GPU参数，不要修改&quot;)
+
+# 日志记录器参数
+parser.add_argument(&quot;--entity&quot;, default=None, help=&quot;实体&quot;)
+parser.add_argument(&quot;--upload_dataset&quot;, nargs=&quot;?&quot;, const=True, default=False, help=&#39;上传数据，&quot;val&quot;选项&#39;)
+parser.add_argument(&quot;--bbox_interval&quot;, type=int, default=-1, help=&quot;设置边界框图像记录间隔&quot;)
+parser.add_argument(&quot;--artifact_alias&quot;, type=str, default=&quot;latest&quot;, help=&quot;数据集工件的版本&quot;)
+
+return parser.parse_known_args()[0] if known else parser.parse_args()
+</code></pre><p>def main(opt, callbacks=Callbacks()):<br>“””<br>主训练/进化脚本，处理模型检查、DDP设置、训练和超参数进化。</p><pre><code>参数:
+    opt (argparse.Namespace): 解析后的命令行选项。
+    callbacks (Callbacks, 可选): 处理训练事件的回调对象。默认为Callbacks()。
+
+返回:
+    None
+
+异常:
+    AssertionError: 如果某些约束被违反（例如，当特定选项与DDP训练不兼容时）。
+
+注意:
+   - 有关使用DDP进行多GPU训练的教程：https://docs.ultralytics.com/yolov5/tutorials/multi_gpu_training
+
+示例:
+    单GPU训练:
+    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python train.py --data coco128.yaml --weights yolov5s.pt --img <span class="number">640</span>  <span class="comment"># 从预训练模型开始训练（推荐）</span></span><br><span class="line">$ python train.py --data coco128.yaml --weights <span class="string">&#x27;&#x27;</span> --cfg yolov5s.yaml --img <span class="number">640</span>  <span class="comment"># 从零开始训练</span></span><br></pre></td></tr></table></figure>
+
+    多GPU DDP训练:
+    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python -m torch.distributed.run --nproc_per_node <span class="number">4</span> --master_port <span class="number">1</span> train.py --data coco128.yaml \</span><br><span class="line">--weights yolov5s.pt --img <span class="number">640</span> --device <span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+    模型: https://github.com/ultralytics/yolov5/tree/master/models
+    数据集: https://github.com/ultralytics/yolov5/tree/master/data
+    教程: https://docs.ultralytics.com/yolov5/tutorials/train_custom_data
+&quot;&quot;&quot;
+if RANK in &#123;-1, 0&#125;:
+    print_args(vars(opt))
+    check_git_status()
+    check_requirements(ROOT / &quot;requirements.txt&quot;)
+
+# 恢复（从指定或最近的last.pt）
+if opt.resume and not check_comet_resume(opt) and not opt.evolve:
+    last = Path(check_file(opt.resume) if isinstance(opt.resume, str) else get_latest_run())
+    opt_yaml = last.parent.parent / &quot;opt.yaml&quot;  # 训练选项yaml
+    opt_data = opt.data  # 原始数据集
+    if opt_yaml.is_file():
+        with open(opt_yaml, errors=&quot;ignore&quot;) as f:
+            d = yaml.safe_load(f)
+    else:
+        d = torch.load(last, map_location=&quot;cpu&quot;)[&quot;opt&quot;]
+    opt = argparse.Namespace(**d)  # 替换
+    opt.cfg, opt.weights, opt.resume = &quot;&quot;, str(last), True  # 恢复
+    if is_url(opt_data):
+        opt.data = check_file(opt_data)  # 避免HUB恢复认证超时
+else:
+    opt.data, opt.cfg, opt.hyp, opt.weights, opt.project = (
+        check_file(opt.data),
+        check_yaml(opt.cfg),
+        check_yaml(opt.hyp),
+        str(opt.weights),
+        str(opt.project),
+    )  # 检查
+    assert len(opt.cfg) or len(opt.weights), &quot;必须指定 --cfg 或 --weights&quot;
+    if opt.evolve:
+        if opt.project == str(ROOT / &quot;runs/train&quot;):  # 如果默认项目名称，重命名为runs/evolve
+            opt.project = str(ROOT / &quot;runs/evolve&quot;)
+        opt.exist_ok, opt.resume = opt.resume, False  # 将resume传递给exist_ok并禁用resume
+    if opt.name == &quot;cfg&quot;:
+        opt.name = Path(opt.cfg).stem  # 使用model.yaml作为名称
+    opt.save_dir = str(increment_path(Path(opt.project) / opt.name, exist_ok=opt.exist_ok))
+
+# DDP模式
+device = select_device(opt.device, batch_size=opt.batch_size)
+if LOCAL_RANK != -1:
+    msg = &quot;与YOLOv3多GPU DDP训练不兼容&quot;
+    assert not opt.image_weights, f&quot;--image-weights &#123;msg&#125;&quot;
+    assert not opt.evolve, f&quot;--evolve &#123;msg&#125;&quot;
+    assert opt.batch_size != -1, f&quot;自动批量 --batch-size -1 &#123;msg&#125;, 请传递有效的 --batch-size&quot;
+    assert opt.batch_size % WORLD_SIZE == 0, f&quot;--batch-size &#123;opt.batch_size&#125; 必须是 WORLD_SIZE 的倍数&quot;
+    assert torch.cuda.device_count() &gt; LOCAL_RANK, &quot;DDP命令的CUDA设备不足&quot;
+    torch.cuda.set_device(LOCAL_RANK)
+    device = torch.device(&quot;cuda&quot;, LOCAL_RANK)
+    dist.init_process_group(backend=&quot;nccl&quot; if dist.is_nccl_available() else &quot;gloo&quot;)
+
+# 训练
+if not opt.evolve:
+    train(opt.hyp, opt, device, callbacks)
+
+# 超参数进化（可选）
+else:
+    # 超参数进化元数据（突变比例0-1，下限，上限）
+    meta = &#123;
+        &quot;lr0&quot;: (1, 1e-5, 1e-1),  # 初始学习率（SGD=1E-2, Adam=1E-3）
+        &quot;lrf&quot;: (1, 0.01, 1.0),  # 最终OneCycleLR学习率（lr0 * lrf）
+        &quot;momentum&quot;: (0.3, 0.6, 0.98),  # SGD动量/Adam beta1
+        &quot;weight_decay&quot;: (1, 0.0, 0.001),  # 优化器权重衰减
+        &quot;warmup_epochs&quot;: (1, 0.0, 5.0),  # 预热epoch数（可以是小数）
+        &quot;warmup_momentum&quot;: (1, 0.0, 0.95),  # 预热初始动量
+        &quot;warmup_bias_lr&quot;: (1, 0.0, 0.2),  # 预热初始偏差学习率
+        &quot;box&quot;: (1, 0.02, 0.2),  # 框损失增益
+        &quot;cls&quot;: (1, 0.2, 4.0),  # 类别损失增益
+        &quot;cls_pw&quot;: (1, 0.5, 2.0),  # 类别BCELoss正样本权重
+        &quot;obj&quot;: (1, 0.2, 4.0),  # 目标损失增益（按像素缩放）
+        &quot;obj_pw&quot;: (1, 0.5, 2.0),  # 目标BCELoss正样本权重
+        &quot;iou_t&quot;: (0, 0.1, 0.7),  # IoU训练阈值
+        &quot;anchor_t&quot;: (1, 2.0, 8.0),  # 锚点倍数阈值
+        &quot;anchors&quot;: (2, 2.0, 10.0),  # 每个输出网格的锚点数量（0表示忽略）
+        &quot;fl_gamma&quot;: (0, 0.0, 2.0),  # 焦点损失gamma（efficientDet默认gamma=1.5）
+        &quot;hsv_h&quot;: (1, 0.0, 0.1),  # 图像HSV-Hue增强（比例）
+        &quot;hsv_s&quot;: (1, 0.0, 0.9),  # 图像HSV-Saturation增强（比例）
+        &quot;hsv_v&quot;: (1, 0.0, 0.9),  # 图像HSV-Value增强（比例）
+        &quot;degrees&quot;: (1, 0.0, 45.0),  # 图像旋转（+/- 度）
+        &quot;translate&quot;: (1, 0.0, 0.9),  # 图像平移（+/- 比例）
+        &quot;scale&quot;: (1, 0.0, 0.9),  # 图像缩放（+/- 增益）
+        &quot;shear&quot;: (1, 0.0, 10.0),  # 图像剪切（+/- 度）
+        &quot;perspective&quot;: (0, 0.0, 0.001),  # 图像透视（+/- 比例），范围0-0.001
+        &quot;flipud&quot;: (1, 0.0, 1.0),  # 图像上下翻转（概率）
+        &quot;fliplr&quot;: (0, 0.0, 1.0),  # 图像左右翻转（概率）
+        &quot;mosaic&quot;: (1, 0.0, 1.0),  # 图像马赛克（概率）
+        &quot;mixup&quot;: (1, 0.0, 1.0),  # 图像混合（概率）
+        &quot;copy_paste&quot;: (1, 0.0, 1.0),
+    &#125;  # 分段复制粘贴（概率）
+
+    with open(opt.hyp, errors=&quot;ignore&quot;) as f:
+        hyp = yaml.safe_load(f)  # 加载超参数字典
+        if &quot;anchors&quot; not in hyp:  # 如果hyp.yaml中注释了anchors
+            hyp[&quot;anchors&quot;] = 3
+    if opt.noautoanchor:
+        del hyp[&quot;anchors&quot;], meta[&quot;anchors&quot;]
+    opt.noval, opt.nosave, save_dir = True, True, Path(opt.save_dir)  # 仅在最终epoch验证/保存
+    # ei = [isinstance(x, (int, float)) for x in hyp.values()]  # 可进化的索引
+    evolve_yaml, evolve_csv = save_dir / &quot;hyp_evolve.yaml&quot;, save_dir / &quot;evolve.csv&quot;
+    if opt.bucket:
+        # 如果存在则下载evolve.csv
+        subprocess.run(
+            [
+                &quot;gsutil&quot;,
+                &quot;cp&quot;,
+                f&quot;gs://&#123;opt.bucket&#125;/evolve.csv&quot;,
+                str(evolve_csv),
+            ]
+        )
+
+    for _ in range(opt.evolve):  # 进化代数
+        if evolve_csv.exists():  # 如果evolve.csv存在：选择最佳超参数并突变
+            # 选择父代
+            parent = &quot;single&quot;  # 父代选择方法：&#39;single&#39; 或 &#39;weighted&#39;
+            x = np.loadtxt(evolve_csv, ndmin=2, delimiter=&quot;,&quot;, skiprows=1)
+            n = min(5, len(x))  # 考虑的前n个结果
+            x = x[np.argsort(-fitness(x))][:n]  # 前n个突变
+            w = fitness(x) - fitness(x).min() + 1e-6  # 权重（总和 &gt; 0）
+            if parent == &quot;single&quot; or len(x) == 1:
+                # x = x[random.randint(0, n - 1)]  # 随机选择
+                x = x[random.choices(range(n), weights=w)[0]]  # 加权选择
+            elif parent == &quot;weighted&quot;:
+                x = (x * w.reshape(n, 1)).sum(0) / w.sum()  # 加权组合
+
+            # 突变
+            mp, s = 0.8, 0.2  # 突变概率，sigma
+            npr = np.random
+            npr.seed(int(time.time()))
+            g = np.array([meta[k][0] for k in hyp.keys()])  # 增益 0-1
+            ng = len(meta)
+            v = np.ones(ng)
+            while all(v == 1):  # 突变直到发生变化（防止重复）
+                v = (g * (npr.random(ng) &lt; mp) * npr.randn(ng) * npr.random() * s + 1).clip(0.3, 3.0)
+            for i, k in enumerate(hyp.keys()):  # plt.hist(v.ravel(), 300)
+                hyp[k] = float(x[i + 7] * v[i])  # 突变
+
+        # 限制在范围内
+        for k, v in meta.items():
+            hyp[k] = max(hyp[k], v[1])  # 下限
+            hyp[k] = min(hyp[k], v[2])  # 上限
+            hyp[k] = round(hyp[k], 5)  # 有效数字
+
+        # 训练突变
+        results = train(hyp.copy(), opt, device, callbacks)
+        callbacks = Callbacks()
+        # 写入突变结果
+        keys = (
+            &quot;metrics/precision&quot;,
+            &quot;metrics/recall&quot;,
+            &quot;metrics/mAP_0.5&quot;,
+            &quot;metrics/mAP_0.5:0.95&quot;,
+            &quot;val/box_loss&quot;,
+            &quot;val/obj_loss&quot;,
+            &quot;val/cls_loss&quot;,
+        )
+        print_mutation(keys, results, hyp.copy(), save_dir, opt.bucket)
+
+    # 绘制结果
+    plot_evolve(evolve_csv)
+    LOGGER.info(
+        f&#39;超参数进化完成 &#123;opt.evolve&#125; 代\n&#39;
+        f&quot;结果保存到 &#123;colorstr(&#39;bold&#39;, save_dir)&#125;\n&quot;
+        f&#39;使用示例: $ python train.py --hyp &#123;evolve_yaml&#125;&#39;
+    )
+</code></pre><p>def run(**kwargs):<br>“””<br>使用指定配置运行YOLOv3模型的训练过程。</p><pre><code>参数:
+    data (str): 数据集YAML文件的路径。
+    weights (str): 预训练权重文件的路径或 &#39;&#39; 表示从零开始训练。
+    cfg (str): 模型配置文件的路径。
+    hyp (str): 超参数YAML文件的路径。
+    epochs (int): 总训练epoch数。
+    batch_size (int): 所有GPU的总批量大小。
+    imgsz (int): 训练和验证的图像大小（像素）。
+    rect (bool): 使用矩形训练以更好地保留宽高比。
+    resume (bool | str): 如果为True，则恢复最近的训练，如果为字符串，则从特定检查点恢复训练。
+    nosave (bool): 仅保存最终检查点，不保存中间检查点。
+    noval (bool): 仅在最终epoch验证模型性能。
+    noautoanchor (bool): 禁用自动锚点生成。
+    noplots (bool): 不保存任何图表。
+    evolve (int): 超参数进化的代数。
+    bucket (str): 用于保存运行工件的Google Cloud Storage存储桶名称。
+    cache (str | None): 缓存图像以加快训练速度（&#39;ram&#39; 或 &#39;disk&#39;）。
+    image_weights (bool): 使用加权图像选择进行训练。
+    device (str): 用于训练的设备，例如 &#39;0&#39; 表示第一个GPU或 &#39;cpu&#39; 表示CPU。
+    multi_scale (bool): 使用多尺度训练。
+    single_cls (bool): 将多类数据集训练为单类。
+    optimizer (str): 使用的优化器（&#39;SGD&#39;, &#39;Adam&#39;, 或 &#39;AdamW&#39;）。
+    sync_bn (bool): 使用同步批归一化（仅在DDP模式下可用）。
+    workers (int): 最大数据加载器工作进程数（DDP模式下每rank）。
+    project (str): 输出目录的位置。
+    name (str): 运行的唯一名称。
+    exist_ok (bool): 允许现有输出目录。
+    quad (bool): 使用四倍数据加载器。
+    cos_lr (bool): 使用余弦学习率调度器。
+    label_smoothing (float): 标签平滑epsilon。
+    patience (int): 早停耐心（无改进的epoch数）。
+    freeze (list[int]): 冻结的层列表，例如 [0] 表示仅冻结第一层。
+    save_period (int): 每 &#39;save_period&#39; 个epoch保存检查点（如果小于1则禁用）。
+    seed (int): 全局训练种子以确保可重复性。
+    local_rank (int): 用于自动DDP多GPU参数解析，不要修改。
+
+返回:
+    None
+
+示例:
+    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> run</span><br><span class="line">run(data=<span class="string">&#x27;coco128.yaml&#x27;</span>, weights=<span class="string">&#x27;yolov5m.pt&#x27;</span>, imgsz=<span class="number">320</span>, epochs=<span class="number">100</span>, batch_size=<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+
+注意:
+    - 确保数据集YAML文件和初始权重可访问。
+    - 参考 [Ultralytics YOLOv5 仓库](https://github.com/ultralytics/yolov5) 获取模型和数据配置。
+    - 使用 [训练教程](https://docs.ultralytics.com/yolov5/tutorials/train_custom_data) 进行自定义数据集训练。
+&quot;&quot;&quot;
+opt = parse_opt(True)
+for k, v in kwargs.items():
+    setattr(opt, k, v)
+main(opt)
+return opt
+</code></pre><p>if <strong>name</strong> == “<strong>main</strong>“:<br>opt = parse_opt()<br>main(opt)<br></p><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"><span class="meta"># Ultralytics YOLOv3 🚀, AGPL-3.0 license</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">在图像、视频、目录、通配符、YouTube、网络摄像头、流媒体等上运行 YOLOv3 检测推理。</span><br><span class="line"></span><br><span class="line">用法 - 来源:</span><br><span class="line">    $ python detect.py --weights yolov5s.pt --source <span class="number">0</span>                               <span class="meta"># 网络摄像头</span></span><br><span class="line">                                                     img.jpg                         <span class="meta"># 图像</span></span><br><span class="line">                                                     vid.mp4                         <span class="meta"># 视频</span></span><br><span class="line">                                                     screen                          <span class="meta"># 截图</span></span><br><span class="line">                                                     path/                           <span class="meta"># 目录</span></span><br><span class="line">                                                     list.txt                        <span class="meta"># 图像列表</span></span><br><span class="line">                                                     list.streams                    <span class="meta"># 流媒体列表</span></span><br><span class="line">                                                     &#x27;path/*.jpg&#x27;                    <span class="meta"># 通配符</span></span><br><span class="line">                                                     &#x27;https://youtu.be/LNwODJXcvt4&#x27;  <span class="meta"># YouTube</span></span><br><span class="line">                                                     &#x27;rtsp://example.com/media.mp4&#x27;  <span class="meta"># RTSP, RTMP, HTTP 流</span></span><br><span class="line"></span><br><span class="line">用法 - 格式:</span><br><span class="line">    $ python detect.py --weights yolov5s.pt                 <span class="meta"># PyTorch</span></span><br><span class="line">                                 yolov5s.torchscript        <span class="meta"># TorchScript</span></span><br><span class="line">                                 yolov5s.onnx               <span class="meta"># ONNX Runtime 或 OpenCV DNN with --dnn</span></span><br><span class="line">                                 yolov5s_openvino_model     <span class="meta"># OpenVINO</span></span><br><span class="line">                                 yolov5s.engine             <span class="meta"># TensorRT</span></span><br><span class="line">                                 yolov5s.mlmodel            <span class="meta"># CoreML (macOS-only)</span></span><br><span class="line">                                 yolov5s_saved_model        <span class="meta"># TensorFlow SavedModel</span></span><br><span class="line">                                 yolov5s.pb                 <span class="meta"># TensorFlow GraphDef</span></span><br><span class="line">                                 yolov5s.tflite             <span class="meta"># TensorFlow Lite</span></span><br><span class="line">                                 yolov5s_edgetpu.tflite     <span class="meta"># TensorFlow Edge TPU</span></span><br><span class="line">                                 yolov5s_paddle_model       <span class="meta"># PaddlePaddle</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">import argparse</span><br><span class="line">import os</span><br><span class="line">import platform</span><br><span class="line">import sys</span><br><span class="line">from pathlib import Path</span><br><span class="line"></span><br><span class="line">import torch</span><br><span class="line"></span><br><span class="line">FILE = Path(__file__).resolve()</span><br><span class="line">ROOT = FILE.parents[<span class="number">0</span>]  <span class="meta"># YOLOv3 根目录</span></span><br><span class="line">if str(ROOT) not in sys.path:</span><br><span class="line">    sys.path.append(str(ROOT))  <span class="meta"># 将 ROOT 添加到 PATH</span></span><br><span class="line">ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  <span class="meta"># 相对路径</span></span><br><span class="line"></span><br><span class="line">from ultralytics.utils.plotting import Annotator, colors, save_one_box</span><br><span class="line"></span><br><span class="line">from models.common import DetectMultiBackend</span><br><span class="line">from utils.dataloaders import IMG_FORMATS, VID_FORMATS, LoadImages, LoadScreenshots, LoadStreams</span><br><span class="line">from utils.general import (</span><br><span class="line">    LOGGER,</span><br><span class="line">    Profile,</span><br><span class="line">    check_file,</span><br><span class="line">    check_img_size,</span><br><span class="line">    check_imshow,</span><br><span class="line">    check_requirements,</span><br><span class="line">    colorstr,</span><br><span class="line">    cv2,</span><br><span class="line">    increment_path,</span><br><span class="line">    non_max_suppression,</span><br><span class="line">    print_args,</span><br><span class="line">    scale_boxes,</span><br><span class="line">    strip_optimizer,</span><br><span class="line">    xyxy2xywh,</span><br><span class="line">)</span><br><span class="line">from utils.torch_utils import select_device, smart_inference_mode</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@smart_inference_mode()</span><br><span class="line">def run(</span><br><span class="line">    weights=ROOT / <span class="string">&quot;yolov5s.pt&quot;</span>,  <span class="meta"># 模型路径或 Triton URL</span></span><br><span class="line">    source=ROOT / <span class="string">&quot;data/images&quot;</span>,  <span class="meta"># 文件/目录/URL/通配符/截图/0(网络摄像头)</span></span><br><span class="line">    data=ROOT / <span class="string">&quot;data/coco128.yaml&quot;</span>,  <span class="meta"># 数据集.yaml 路径</span></span><br><span class="line">    imgsz=(<span class="number">640</span>, <span class="number">640</span>),  <span class="meta"># 推理尺寸 (高度, 宽度)</span></span><br><span class="line">    conf_thres=<span class="number">0.25</span>,  <span class="meta"># 置信度阈值</span></span><br><span class="line">    iou_thres=<span class="number">0.45</span>,  <span class="meta"># NMS IOU 阈值</span></span><br><span class="line">    max_det=<span class="number">1000</span>,  <span class="meta"># 每张图像的最大检测数</span></span><br><span class="line">    device=<span class="string">&quot;&quot;</span>,  <span class="meta"># CUDA 设备，例如 0 或 0,1,2,3 或 cpu</span></span><br><span class="line">    view_img=False,  <span class="meta"># 显示结果</span></span><br><span class="line">    save_txt=False,  <span class="meta"># 将结果保存到 *.txt</span></span><br><span class="line">    save_conf=False,  <span class="meta"># 在 --save-txt 标签中保存置信度</span></span><br><span class="line">    save_crop=False,  <span class="meta"># 保存裁剪的预测框</span></span><br><span class="line">    nosave=False,  <span class="meta"># 不保存图像/视频</span></span><br><span class="line">    classes=None,  <span class="meta"># 按类别过滤：--class 0 或 --class 0 2 3</span></span><br><span class="line">    agnostic_nms=False,  <span class="meta"># 类别无关的 NMS</span></span><br><span class="line">    augment=False,  <span class="meta"># 增强推理</span></span><br><span class="line">    visualize=False,  <span class="meta"># 可视化特征</span></span><br><span class="line">    update=False,  <span class="meta"># 更新所有模型</span></span><br><span class="line">    project=ROOT / <span class="string">&quot;runs/detect&quot;</span>,  <span class="meta"># 将结果保存到 project/name</span></span><br><span class="line">    name=<span class="string">&quot;exp&quot;</span>,  <span class="meta"># 将结果保存到 project/name</span></span><br><span class="line">    exist_ok=False,  <span class="meta"># 允许现有 project/name，不递增</span></span><br><span class="line">    line_thickness=<span class="number">3</span>,  <span class="meta"># 边界框厚度 (像素)</span></span><br><span class="line">    hide_labels=False,  <span class="meta"># 隐藏标签</span></span><br><span class="line">    hide_conf=False,  <span class="meta"># 隐藏置信度</span></span><br><span class="line">    half=False,  <span class="meta"># 使用 FP16 半精度推理</span></span><br><span class="line">    dnn=False,  <span class="meta"># 使用 OpenCV DNN 进行 ONNX 推理</span></span><br><span class="line">    vid_stride=<span class="number">1</span>,  <span class="meta"># 视频帧率步长</span></span><br><span class="line">):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line">    在各种输入源（如图像、视频、流媒体、YouTube URL）上运行 YOLOv3 检测推理。</span><br><span class="line"></span><br><span class="line">    参数:</span><br><span class="line">        weights (str <span class="string">| Path): 模型权重文件路径或 Triton URL (默认: &#x27;yolov5s.pt&#x27;)。</span></span><br><span class="line">        source (str <span class="string">| Path): 输入数据源，如文件、目录、URL、通配符模式或设备标识符 (默认: &#x27;data/images&#x27;)。</span></span><br><span class="line">        data (str <span class="string">| Path): 数据集 YAML 文件路径 (默认: &#x27;data/coco128.yaml&#x27;)。</span></span><br><span class="line">        imgsz (tuple[int, int]): 推理尺寸，格式为 (高度, 宽度) (默认: (<span class="number">640</span>, <span class="number">640</span>))。</span><br><span class="line">        conf_thres (float): 检测的置信度阈值 (默认: <span class="number">0.25</span>)。</span><br><span class="line">        iou_thres (float): 非最大抑制 (NMS) 的交并比 (IOU) 阈值 (默认: <span class="number">0.45</span>)。</span><br><span class="line">        max_det (int): 每张图像的最大检测数 (默认: <span class="number">1000</span>)。</span><br><span class="line">        device (str): CUDA 设备标识符，例如 &#x27;0&#x27;, &#x27;0,1,2,3&#x27;, 或 &#x27;cpu&#x27; (默认: &#x27;&#x27;)。</span><br><span class="line">        view_img (bool): 是否在推理过程中显示结果 (默认: False)。</span><br><span class="line">        save_txt (bool): 是否将检测结果保存到文本文件 (默认: False)。</span><br><span class="line">        save_conf (bool): 是否在文本标签中保存检测置信度 (默认: False)。</span><br><span class="line">        save_crop (bool): 是否保存裁剪的检测框 (默认: False)。</span><br><span class="line">        nosave (bool): 是否防止保存带有检测结果的图像或视频 (默认: False)。</span><br><span class="line">        classes (list[int] <span class="string">| None): 按类别索引过滤，例如 [0, 2, 3] (默认: None)。</span></span><br><span class="line">        agnostic_nms (bool): 是否执行类别无关的 NMS (默认: False)。</span><br><span class="line">        augment (bool): 是否应用增强推理 (默认: False)。</span><br><span class="line">        visualize (bool): 是否可视化特征图 (默认: False)。</span><br><span class="line">        update (bool): 是否更新所有模型 (默认: False)。</span><br><span class="line">        project (str <span class="string">| Path): 结果保存的项目目录路径 (默认: &#x27;runs/detect&#x27;)。</span></span><br><span class="line">        name (str): 项目目录中的特定运行名称 (默认: &#x27;exp&#x27;)。</span><br><span class="line">        exist_ok (bool): 是否允许现有 project/name 目录而不递增运行索引 (默认: False)。</span><br><span class="line">        line_thickness (int): 边界框线条的厚度 (像素) (默认: <span class="number">3</span>)。</span><br><span class="line">        hide_labels (bool): 是否在结果中隐藏标签 (默认: False)。</span><br><span class="line">        hide_conf (bool): 是否在结果中隐藏置信度 (默认: False)。</span><br><span class="line">        half (bool): 是否使用半精度 (FP16) 进行推理 (默认: False)。</span><br><span class="line">        dnn (bool): 是否使用 OpenCV DNN 进行 ONNX 推理 (默认: False)。</span><br><span class="line">        vid_stride (int): 视频帧率的步长 (默认: <span class="number">1</span>)。</span><br><span class="line"></span><br><span class="line">    返回:</span><br><span class="line">        None</span><br><span class="line"></span><br><span class="line">    注意:</span><br><span class="line">        该函数支持多种输入源，如图像文件、视频文件、目录、URL 模式、网络摄像头流和 YouTube 链接。它还支持多种模型格式，包括 PyTorch、ONNX、OpenVINO、TensorRT、CoreML、TensorFlow、PaddlePaddle 等。结果可以实时显示或保存到指定目录。使用命令行参数修改函数的行为。</span><br><span class="line"></span><br><span class="line">    示例:</span><br><span class="line">        ```python</span><br><span class="line">        <span class="meta"># 在图像上运行 YOLOv3 推理</span></span><br><span class="line">        run(weights=&#x27;yolov5s.pt&#x27;, source=&#x27;data/images/bus.jpg&#x27;)</span><br><span class="line"></span><br><span class="line">        <span class="meta"># 在视频上运行 YOLOv3 推理</span></span><br><span class="line">        run(weights=&#x27;yolov5s.pt&#x27;, source=&#x27;data/videos/video.mp4&#x27;, view_img=True)</span><br><span class="line"></span><br><span class="line">        <span class="meta"># 在网络摄像头上运行 YOLOv3 推理</span></span><br><span class="line">        run(weights=&#x27;yolov5s.pt&#x27;, source=&#x27;0&#x27;, view_img=True)</span><br></pre></td></tr></table></figure><br>“””<br>source = str(source)<br>save_img = not nosave and not source.endswith(“.txt”) # 保存推理图像<br>is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)<br>is_url = source.lower().startswith((“rtsp://“, “rtmp://“, “http://“, “https://“))<br>webcam = source.isnumeric() or source.endswith(“.streams”) or (is_url and not is_file)<br>screenshot = source.lower().startswith(“screen”)<br>if is_url and is_file:<br>source = check_file(source) # 下载<p></p><pre><code># 目录
+save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # 递增运行
+(save_dir / &quot;labels&quot; if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # 创建目录
+
+# 加载模型
+device = select_device(device)
+model = DetectMultiBackend(weights, device=device, dnn=dnn, data=data, fp16=half)
+stride, names, pt = model.stride, model.names, model.pt
+imgsz = check_img_size(imgsz, s=stride)  # 检查图像尺寸
+
+# 数据加载器
+bs = 1  # 批量大小
+if webcam:
+    view_img = check_imshow(warn=True)
+    dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt, vid_stride=vid_stride)
+    bs = len(dataset)
+elif screenshot:
+    dataset = LoadScreenshots(source, img_size=imgsz, stride=stride, auto=pt)
+else:
+    dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt, vid_stride=vid_stride)
+vid_path, vid_writer = [None] * bs, [None] * bs
+
+# 运行推理
+model.warmup(imgsz=(1 if pt or model.triton else bs, 3, *imgsz))  # 预热
+seen, windows, dt = 0, [], (Profile(), Profile(), Profile())
+for path, im, im0s, vid_cap, s in dataset:
+    with dt[0]:
+        im = torch.from_numpy(im).to(model.device)
+        im = im.half() if model.fp16 else im.float()  # uint8 转换为 fp16/32
+        im /= 255  # 0 - 255 转换为 0.0 - 1.0
+        if len(im.shape) == 3:
+            im = im[None]  # 扩展为批量维度
+
+    # 推理
+    with dt[1]:
+        visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
+        pred = model(im, augment=augment, visualize=visualize)
+
+    # NMS
+    with dt[2]:
+        pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det)
+
+    # 第二阶段分类器 (可选)
+    # pred = utils.general.apply_classifier(pred, classifier_model, im, im0s)
+
+    # 处理预测结果
+    for i, det in enumerate(pred):  # 每张图像
+        seen += 1
+        if webcam:  # 批量大小 &gt;= 1
+            p, im0, frame = path[i], im0s[i].copy(), dataset.count
+            s += f&quot;&#123;i&#125;: &quot;
+        else:
+            p, im0, frame = path, im0s.copy(), getattr(dataset, &quot;frame&quot;, 0)
+
+        p = Path(p)  # 转换为 Path
+        save_path = str(save_dir / p.name)  # im.jpg
+        txt_path = str(save_dir / &quot;labels&quot; / p.stem) + (&quot;&quot; if dataset.mode == &quot;image&quot; else f&quot;_&#123;frame&#125;&quot;)  # im.txt
+        s += &quot;&#123;:g&#125;x&#123;:g&#125; &quot;.format(*im.shape[2:])  # 打印字符串
+        gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # 归一化增益 whwh
+        imc = im0.copy() if save_crop else im0  # 用于保存裁剪
+        annotator = Annotator(im0, line_width=line_thickness, example=str(names))
+        if len(det):
+            # 将框从 img_size 缩放到 im0 尺寸
+            det[:, :4] = scale_boxes(im.shape[2:], det[:, :4], im0.shape).round()
+
+            # 打印结果
+            for c in det[:, 5].unique():
+                n = (det[:, 5] == c).sum()  # 每个类别的检测数
+                s += f&quot;&#123;n&#125; &#123;names[int(c)]&#125;&#123;&#39;s&#39; * (n &gt; 1)&#125;, &quot;  # 添加到字符串
+
+            # 写入结果
+            for *xyxy, conf, cls in reversed(det):
+                if save_txt:  # 写入文件
+                    xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # 归一化 xywh
+                    line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # 标签格式
+                    with open(f&quot;&#123;txt_path&#125;.txt&quot;, &quot;a&quot;) as f:
+                        f.write((&quot;%g &quot; * len(line)).rstrip() % line + &quot;\n&quot;)
+
+                if save_img or save_crop or view_img:  # 添加边界框到图像
+                    c = int(cls)  # 整数类别
+                    label = None if hide_labels else (names[c] if hide_conf else f&quot;&#123;names[c]&#125; &#123;conf:.2f&#125;&quot;)
+                    annotator.box_label(xyxy, label, color=colors(c, True))
+                if save_crop:
+                    save_one_box(xyxy, imc, file=save_dir / &quot;crops&quot; / names[c] / f&quot;&#123;p.stem&#125;.jpg&quot;, BGR=True)
+
+        # 流式结果
+        im0 = annotator.result()
+        if view_img:
+            if platform.system() == &quot;Linux&quot; and p not in windows:
+                windows.append(p)
+                cv2.namedWindow(str(p), cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)  # 允许窗口调整大小 (Linux)
+                cv2.resizeWindow(str(p), im0.shape[1], im0.shape[0])
+            cv2.imshow(str(p), im0)
+            cv2.waitKey(1)  # 1 毫秒
+
+        # 保存结果 (带检测的图像)
+        if save_img:
+            if dataset.mode == &quot;image&quot;:
+                cv2.imwrite(save_path, im0)
+            else:  # &#39;video&#39; 或 &#39;stream&#39;
+                if vid_path[i] != save_path:  # 新视频
+                    vid_path[i] = save_path
+                    if isinstance(vid_writer[i], cv2.VideoWriter):
+                        vid_writer[i].release()  # 释放之前的视频写入器
+                    if vid_cap:  # 视频
+                        fps = vid_cap.get(cv2.CAP_PROP_FPS)
+                        w = int(vid_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+                        h = int(vid_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+                    else:  # 流
+                        fps, w, h = 30, im0.shape[1], im0.shape[0]
+                    save_path = str(Path(save_path).with_suffix(&quot;.mp4&quot;))  # 强制结果视频为 *.mp4 后缀
+                    vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*&quot;mp4v&quot;), fps, (w, h))
+                vid_writer[i].write(im0)
+
+    # 打印时间 (仅推理)
+    LOGGER.info(f&quot;&#123;s&#125;&#123;&#39;&#39; if len(det) else &#39;(no detections), &#39;&#125;&#123;dt[1].dt * 1E3:.1f&#125;ms&quot;)
+
+# 打印结果
+t = tuple(x.t / seen * 1e3 for x in dt)  # 每张图像的速度
+LOGGER.info(f&quot;Speed: %.1fms 预处理, %.1fms 推理, %.1fms NMS 每张图像 at shape &#123;(1, 3, *imgsz)&#125;&quot; % t)
+if save_txt or save_img:
+    s = f&quot;\n&#123;len(list(save_dir.glob(&#39;labels/*.txt&#39;)))&#125; 标签保存到 &#123;save_dir / &#39;labels&#39;&#125;&quot; if save_txt else &quot;&quot;
+    LOGGER.info(f&quot;结果保存到 &#123;colorstr(&#39;bold&#39;, save_dir)&#125;&#123;s&#125;&quot;)
+if update:
+    strip_optimizer(weights[0])  # 更新模型 (修复 SourceChangeWarning)
+</code></pre><p>def parse_opt():<br>“””<br>解析并返回用于运行 YOLOv3 模型检测的命令行选项。</p><pre><code>参数:
+    --weights (list[str]): 模型路径或 Triton URL。默认: ROOT / &quot;yolov3-tiny.pt&quot;。
+    --source (str): 输入数据源，如文件/目录/URL/通配符/截图/0(网络摄像头)。默认: ROOT / &quot;data/images&quot;。
+    --data (str): 可选的数据集.yaml 路径。默认: ROOT / &quot;data/coco128.yaml&quot;。
+    --imgsz (list[int]): 推理尺寸，格式为高度, 宽度。接受多个值。默认: [640]。
+    --conf-thres (float): 预测的置信度阈值。默认: 0.25。
+    --iou-thres (float): 非最大抑制 (NMS) 的交并比 (IoU) 阈值。默认: 0.45。
+    --max-det (int): 每张图像的最大检测数。默认: 1000。
+    --device (str): CUDA 设备标识符，例如 &quot;0&quot; 或 &quot;0,1,2,3&quot; 或 &quot;cpu&quot;。默认: &quot;&quot; (自动选择)。
+    --view-img (bool): 显示结果。默认: False。
+    --save-txt (bool): 将结果保存到 *.txt 文件。默认: False。
+    --save-conf (bool): 在文本标签中保存置信度分数。默认: False。
+    --save-crop (bool): 保存裁剪的预测框。默认: False。
+    --nosave (bool): 不保存带有检测结果的图像/视频。默认: False。
+    --classes (list[int] | None): 按类别过滤结果，例如 [0, 2, 3]。默认: None。
+    --agnostic-nms (bool): 执行类别无关的 NMS。默认: False。
+    --augment (bool): 应用增强推理。默认: False。
+    --visualize (bool): 可视化特征图。默认: False。
+    --update (bool): 更新所有模型。默认: False。
+    --project (str): 保存结果的目录；结果保存到 &quot;project/name&quot;。默认: ROOT / &quot;runs/detect&quot;。
+    --name (str): 特定运行的名称；结果保存到 &quot;project/name&quot;。默认: &quot;exp&quot;。
+    --exist-ok (bool): 允许结果保存到现有目录而不递增。默认: False。
+    --line-thickness (int): 边界框线条的厚度 (像素)。默认: 3。
+    --hide-labels (bool): 隐藏检测结果中的标签。默认: False。
+    --hide-conf (bool): 隐藏标签中的置信度分数。默认: False。
+    --half (bool): 使用 FP16 半精度推理。默认: False。
+    --dnn (bool): 使用 OpenCV DNN 后端进行 ONNX 推理。默认: False。
+    --vid-stride (int): 视频输入的帧率步长。默认: 1。
+
+返回:
+    argparse.Namespace: 解析的命令行参数，用于 YOLOv3 推理配置。
+
+示例:
+    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">options = parse_opt()</span><br><span class="line">run(**<span class="built_in">vars</span>(options))</span><br></pre></td></tr></table></figure>
+&quot;&quot;&quot;
+parser = argparse.ArgumentParser()
+parser.add_argument(
+    &quot;--weights&quot;, nargs=&quot;+&quot;, type=str, default=ROOT / &quot;yolov3-tiny.pt&quot;, help=&quot;模型路径或 triton URL&quot;
+)
+parser.add_argument(&quot;--source&quot;, type=str, default=ROOT / &quot;data/images&quot;, help=&quot;文件/目录/URL/通配符/截图/0(网络摄像头)&quot;)
+parser.add_argument(&quot;--data&quot;, type=str, default=ROOT / &quot;data/coco128.yaml&quot;, help=&quot;(可选) 数据集.yaml 路径&quot;)
+parser.add_argument(&quot;--imgsz&quot;, &quot;--img&quot;, &quot;--img-size&quot;, nargs=&quot;+&quot;, type=int, default=[640], help=&quot;推理尺寸 h,w&quot;)
+parser.add_argument(&quot;--conf-thres&quot;, type=float, default=0.25, help=&quot;置信度阈值&quot;)
+parser.add_argument(&quot;--iou-thres&quot;, type=float, default=0.45, help=&quot;NMS IoU 阈值&quot;)
+parser.add_argument(&quot;--max-det&quot;, type=int, default=1000, help=&quot;每张图像的最大检测数&quot;)
+parser.add_argument(&quot;--device&quot;, default=&quot;&quot;, help=&quot;cuda 设备，例如 0 或 0,1,2,3 或 cpu&quot;)
+parser.add_argument(&quot;--view-img&quot;, action=&quot;store_true&quot;, help=&quot;显示结果&quot;)
+parser.add_argument(&quot;--save-txt&quot;, action=&quot;store_true&quot;, help=&quot;将结果保存到 *.txt&quot;)
+parser.add_argument(&quot;--save-conf&quot;, action=&quot;store_true&quot;, help=&quot;在 --save-txt 标签中保存置信度&quot;)
+parser.add_argument(&quot;--save-crop&quot;, action=&quot;store_true&quot;, help=&quot;保存裁剪的预测框&quot;)
+parser.add_argument(&quot;--nosave&quot;, action=&quot;store_true&quot;, help=&quot;不保存图像/视频&quot;)
+parser.add_argument(&quot;--classes&quot;, nargs=&quot;+&quot;, type=int, help=&quot;按类别过滤：--classes 0 或 --classes 0 2 3&quot;)
+parser.add_argument(&quot;--agnostic-nms&quot;, action=&quot;store_true&quot;, help=&quot;类别无关的 NMS&quot;)
+parser.add_argument(&quot;--augment&quot;, action=&quot;store_true&quot;, help=&quot;增强推理&quot;)
+parser.add_argument(&quot;--visualize&quot;, action=&quot;store_true&quot;, help=&quot;可视化特征&quot;)
+parser.add_argument(&quot;--update&quot;, action=&quot;store_true&quot;, help=&quot;更新所有模型&quot;)
+parser.add_argument(&quot;--project&quot;, default=ROOT / &quot;runs/detect&quot;, help=&quot;将结果保存到 project/name&quot;)
+parser.add_argument(&quot;--name&quot;, default=&quot;exp&quot;, help=&quot;将结果保存到 project/name&quot;)
+parser.add_argument(&quot;--exist-ok&quot;, action=&quot;store_true&quot;, help=&quot;允许现有 project/name 目录而不递增&quot;)
+parser.add_argument(&quot;--line-thickness&quot;, default=3, type=int, help=&quot;边界框厚度 (像素)&quot;)
+parser.add_argument(&quot;--hide-labels&quot;, default=False, action=&quot;store_true&quot;, help=&quot;隐藏标签&quot;)
+parser.add_argument(&quot;--hide-conf&quot;, default=False, action=&quot;store_true&quot;, help=&quot;隐藏置信度&quot;)
+parser.add_argument(&quot;--half&quot;, action=&quot;store_true&quot;, help=&quot;使用 FP16 半精度推理&quot;)
+parser.add_argument(&quot;--dnn&quot;, action=&quot;store_true&quot;, help=&quot;使用 OpenCV DNN 进行 ONNX 推理&quot;)
+parser.add_argument(&quot;--vid-stride&quot;, type=int, default=1, help=&quot;视频帧率步长&quot;)
+opt = parser.parse_args()
+opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1  # 扩展
+print_args(vars(opt))
+return opt
+</code></pre><p>def main(opt):<br>“””<br>运行 YOLO 模型的入口点；检查需求并使用解析的选项调用 <code>run</code>。</p><pre><code>参数:
+    opt (argparse.Namespace): 解析的命令行选项，包括：
+        - weights (str | list of str): 模型权重路径或 Triton 服务器 URL。
+        - source (str): 输入源，可以是文件、目录、URL、通配符、截图或网络摄像头索引。
+        - data (str): 数据集配置文件路径 (.yaml)。
+        - imgsz (tuple of int): 推理图像尺寸，格式为 (高度, 宽度)。
+        - conf_thres (float): 检测的置信度阈值。
+        - iou_thres (float): 非最大抑制 (NMS) 的交并比 (IoU) 阈值。
+        - max_det (int): 每张图像的最大检测数。
+        - device (str): 运行推理的设备；选项为 CUDA 设备 id(s) 或 &#39;cpu&#39;。
+        - view_img (bool): 显示推理结果的标志。
+        - save_txt (bool): 将检测结果保存为 .txt 格式。
+        - save_conf (bool): 在 .txt 标签中保存检测置信度。
+        - save_crop (bool): 保存裁剪的边界框预测。
+        - nosave (bool): 不保存带有检测结果的图像/视频。
+        - classes (list of int): 按类别过滤结果，例如 --class 0 2 3。
+        - agnostic_nms (bool): 使用类别无关的 NMS。
+        - augment (bool): 启用增强推理。
+        - visualize (bool): 可视化特征图。
+        - update (bool): 在推理过程中更新模型。
+        - project (str): 保存结果的目录。
+        - name (str): 结果目录的名称。
+        - exist_ok (bool): 允许现有 project/name 目录而不递增。
+        - line_thickness (int): 边界框线条的厚度。
+        - hide_labels (bool): 在边界框上隐藏类别标签。
+        - hide_conf (bool): 在边界框上隐藏置信度分数。
+        - half (bool): 使用 FP16 半精度推理。
+        - dnn (bool): 使用 OpenCV DNN 后端进行 ONNX 推理。
+        - vid_stride (int): 视频帧率步长。
+
+返回:
+    None
+
+示例:
+    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    opt = parse_opt()</span><br><span class="line">    main(opt)</span><br></pre></td></tr></table></figure>
+
+注意:
+    将此函数作为使用 YOLO 进行对象检测的入口点，支持多种输入源，如图像、视频、目录、网络摄像头、流媒体等。该函数确保检查所有需求，并通过调用 `run` 函数启动检测过程。
+&quot;&quot;&quot;
+check_requirements(ROOT / &quot;requirements.txt&quot;, exclude=(&quot;tensorboard&quot;, &quot;thop&quot;))
+run(**vars(opt))
+</code></pre><p>if <strong>name</strong> == “<strong>main</strong>“:<br>opt = parse_opt()<br>main(opt)<br>```</p></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://zuweicun.top">ZU Weicun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://zuweicun.top/2025/01/07/YOLOv3%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/">http://zuweicun.top/2025/01/07/YOLOv3%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://zuweicun.top" target="_blank">全之の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/YOLO-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB/">YOLO 目标识别</a></div><div class="post_share"><div class="social-share" data-image="https://imgapi.jinghuashang.cn/random?39" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/02/23/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E5%90%88%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8frp%E8%BD%AC%E5%8F%91%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="树莓派配合公网服务器frp转发实现内网穿透"><img class="cover" src="https://imgapi.jinghuashang.cn/random?245" onerror='onerror=null,src="/img/404.jpg"' alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">树莓派配合公网服务器frp转发实现内网穿透</div></div></a></div><div class="next-post pull-right"><a href="/2024/11/16/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0/" title="近世代数"><img class="cover" src="https://imgapi.jinghuashang.cn/random?4" onerror='onerror=null,src="/img/404.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">近世代数</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info__name">ZU Weicun</div><div class="author-info__description">My personal blog is a lively corner where I document my journey of self-improvement, continuous learning, and share the highs and lows of my life's adventures. It's a digital diary where I enthusiastically capture the steps I take to better myself, the invaluable lessons I've learned, and a platform to express my thoughts and experiences.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">34</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zuquanzhi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zuquanzhi" target="_blank" title="Github"><i class="fab fa-github" style="color:#24292e"></i></a><a class="social-icon" href="/zuweicun@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color:#4a7dbe"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Follow 再看 ，养成习惯</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">主要原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-YOLOv3%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-number">1.1.</span> <span class="toc-text">1. YOLOv3的核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-YOLOv3%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">2. YOLOv3的网络结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Backbone%EF%BC%9ADarknet-53"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 Backbone：Darknet-53</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-Neck%EF%BC%9A%E7%89%B9%E5%BE%81%E9%87%91%E5%AD%97%E5%A1%94%E7%BD%91%E7%BB%9C%EF%BC%88FPN%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 Neck：特征金字塔网络（FPN）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-Head%EF%BC%9A%E6%A3%80%E6%B5%8B%E5%A4%B4"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 Head：检测头</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%A4%9A%E5%B0%BA%E5%BA%A6%E9%A2%84%E6%B5%8B"><span class="toc-number">1.3.</span> <span class="toc-text">3. 多尺度预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%94%9A%E7%82%B9%E6%9C%BA%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">4. 锚点机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%BE%B9%E7%95%8C%E6%A1%86%E7%9A%84%E7%BC%96%E7%A0%81%E4%B8%8E%E8%A7%A3%E7%A0%81"><span class="toc-number">1.5.</span> <span class="toc-text">5. 边界框的编码与解码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E7%BC%96%E7%A0%81%EF%BC%88Encoding%EF%BC%89"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 编码（Encoding）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E8%A7%A3%E7%A0%81%EF%BC%88Decoding%EF%BC%89"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 解码（Decoding）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">1.6.</span> <span class="toc-text">6. 损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86"><span class="toc-number">1.7.</span> <span class="toc-text">7. 训练与推理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-%E8%AE%AD%E7%BB%83"><span class="toc-number">1.7.1.</span> <span class="toc-text">7.1 训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-2-%E6%8E%A8%E7%90%86"><span class="toc-number">1.7.2.</span> <span class="toc-text">7.2 推理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%86%E8%8A%82%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">细节实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">1. 网络输出的结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%90%8E%E5%A4%84%E7%90%86%E8%AE%A1%E7%AE%97"><span class="toc-number">2.2.</span> <span class="toc-text">2. 后处理计算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E8%A7%A3%E7%A0%81%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9D%90%E6%A0%87"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 解码边界框坐标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E8%AE%A1%E7%AE%97%E7%BD%AE%E4%BF%A1%E5%BA%A6%E5%92%8C%E7%B1%BB%E5%88%AB%E6%A6%82%E7%8E%87"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 计算置信度和类别概率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-%E8%BF%87%E6%BB%A4%E4%BD%8E%E7%BD%AE%E4%BF%A1%E5%BA%A6%E7%9A%84%E8%BE%B9%E7%95%8C%E6%A1%86"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.3 过滤低置信度的边界框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-%E9%9D%9E%E6%9E%81%E5%A4%A7%E5%80%BC%E6%8A%91%E5%88%B6%EF%BC%88NMS%EF%BC%89"><span class="toc-number">2.2.4.</span> <span class="toc-text">2.4 非极大值抑制（NMS）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BD%AE%E4%BF%A1%E5%BA%A6%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">2.3.</span> <span class="toc-text">3. 置信度的计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%B1%BB%E5%88%AB%E6%A6%82%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">2.4.</span> <span class="toc-text">3.1 类别概率的计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%BF%87%E6%BB%A4%E4%BD%8E%E7%BD%AE%E4%BF%A1%E5%BA%A6%E7%9A%84%E8%BE%B9%E7%95%8C%E6%A1%86"><span class="toc-number">2.5.</span> <span class="toc-text">3.2 过滤低置信度的边界框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E9%9D%9E%E6%9E%81%E5%A4%A7%E5%80%BC%E6%8A%91%E5%88%B6%EF%BC%88NMS%EF%BC%89"><span class="toc-number">2.6.</span> <span class="toc-text">3.3 非极大值抑制（NMS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%85%B7%E4%BD%93%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.7.</span> <span class="toc-text">3. 具体示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E7%BD%91%E7%BB%9C%E8%BE%93%E5%87%BA"><span class="toc-number">2.7.1.</span> <span class="toc-text">3.1 网络输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E8%A7%A3%E7%A0%81%E8%BE%B9%E7%95%8C%E6%A1%86"><span class="toc-number">2.7.2.</span> <span class="toc-text">3.2 解码边界框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E7%BD%AE%E4%BF%A1%E5%BA%A6%E5%92%8C%E7%B1%BB%E5%88%AB%E6%A6%82%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">2.7.3.</span> <span class="toc-text">3.3 置信度和类别概率的计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E8%BF%87%E6%BB%A4%E5%92%8CNMS"><span class="toc-number">2.7.4.</span> <span class="toc-text">3.4 过滤和NMS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">网络结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%EF%BC%9ADarknet-53"><span class="toc-number">3.1.</span> <span class="toc-text">1. 网络架构：Darknet-53</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Darknet-53%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.1.</span> <span class="toc-text">1.1 Darknet-53的结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-Darknet-53%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">3.1.2.</span> <span class="toc-text">1.2 Darknet-53的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%9A%E5%B0%BA%E5%BA%A6%E9%A2%84%E6%B5%8B"><span class="toc-number">3.2.</span> <span class="toc-text">2. 多尺度预测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E7%89%B9%E5%BE%81%E9%87%91%E5%AD%97%E5%A1%94%E7%BD%91%E7%BB%9C%EF%BC%88FPN%EF%BC%89"><span class="toc-number">3.2.1.</span> <span class="toc-text">2.1 特征金字塔网络（FPN）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E4%B8%89%E4%B8%AA%E5%B0%BA%E5%BA%A6%E7%9A%84%E9%A2%84%E6%B5%8B"><span class="toc-number">3.2.2.</span> <span class="toc-text">2.2 三个尺度的预测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%94%9A%E6%A1%86%EF%BC%88Anchor-Boxes%EF%BC%89%E6%9C%BA%E5%88%B6"><span class="toc-number">3.3.</span> <span class="toc-text">3. 锚框（Anchor Boxes）机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E9%94%9A%E6%A1%86%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">3.3.1.</span> <span class="toc-text">3.1 锚框的选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E9%94%9A%E6%A1%86%E7%9A%84%E9%A2%84%E6%B5%8B"><span class="toc-number">3.3.2.</span> <span class="toc-text">3.2 锚框的预测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">3.4.</span> <span class="toc-text">4. 损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9D%90%E6%A0%87%E6%8D%9F%E5%A4%B1%EF%BC%88Coordinate-Loss%EF%BC%89"><span class="toc-number">3.4.1.</span> <span class="toc-text">1. 坐标损失（Coordinate Loss）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%EF%BC%9A"><span class="toc-number">3.4.1.1.</span> <span class="toc-text">公式：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-number">3.4.1.2.</span> <span class="toc-text">参数说明：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BD%AE%E4%BF%A1%E5%BA%A6%E6%8D%9F%E5%A4%B1%EF%BC%88Confidence-Loss%EF%BC%89"><span class="toc-number">3.4.2.</span> <span class="toc-text">2. 置信度损失（Confidence Loss）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%EF%BC%9A-1"><span class="toc-number">3.4.2.1.</span> <span class="toc-text">公式：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A-1"><span class="toc-number">3.4.2.2.</span> <span class="toc-text">参数说明：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%B1%BB%E5%88%AB%E6%8D%9F%E5%A4%B1%EF%BC%88Class-Loss%EF%BC%89"><span class="toc-number">3.4.3.</span> <span class="toc-text">3. 类别损失（Class Loss）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%EF%BC%9A-2"><span class="toc-number">3.4.3.1.</span> <span class="toc-text">公式：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A-2"><span class="toc-number">3.4.3.2.</span> <span class="toc-text">参数说明：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%80%BB%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">3.4.4.</span> <span class="toc-text">4. 总损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E%EF%BC%9A-3"><span class="toc-number">3.4.4.1.</span> <span class="toc-text">参数说明：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%AE%AD%E7%BB%83%E4%B8%8E%E6%8E%A8%E7%90%86"><span class="toc-number">3.5.</span> <span class="toc-text">5. 训练与推理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E8%AE%AD%E7%BB%83"><span class="toc-number">3.5.1.</span> <span class="toc-text">5.1 训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E6%8E%A8%E7%90%86"><span class="toc-number">3.5.2.</span> <span class="toc-text">5.2 推理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%EF%BC%88%E6%B1%89%E5%8C%96%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">代码阅读（汉化）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/04/11/Agent%E6%97%B6%E4%BB%A3%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD-MCP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/" title="Agent时代基础设施--MCP协议介绍">Agent时代基础设施--MCP协议介绍</a><time datetime="2025-04-10T16:00:06.000Z" title="发表于 2025-04-11 00:00:06">2025-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/03/16/%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%E7%9A%84%E6%8C%87%E6%A0%87%E9%80%9F%E9%80%9A/" title="一文教你学会看多目标检测中的指标"><img src="https://imgapi.jinghuashang.cn/random?87" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="一文教你学会看多目标检测中的指标"></a><div class="content"><a class="title" href="/2025/03/16/%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%E7%9A%84%E6%8C%87%E6%A0%87%E9%80%9F%E9%80%9A/" title="一文教你学会看多目标检测中的指标">一文教你学会看多目标检测中的指标</a><time datetime="2025-03-15T16:18:59.000Z" title="发表于 2025-03-16 00:18:59">2025-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/02/23/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E5%90%88%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8frp%E8%BD%AC%E5%8F%91%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="树莓派配合公网服务器frp转发实现内网穿透"><img src="https://imgapi.jinghuashang.cn/random?245" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="树莓派配合公网服务器frp转发实现内网穿透"></a><div class="content"><a class="title" href="/2025/02/23/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E5%90%88%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8frp%E8%BD%AC%E5%8F%91%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="树莓派配合公网服务器frp转发实现内网穿透">树莓派配合公网服务器frp转发实现内网穿透</a><time datetime="2025-02-22T16:16:45.000Z" title="发表于 2025-02-23 00:16:45">2025-02-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/01/07/YOLOv3%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/" title="YOLOv3深入学习"><img src="https://imgapi.jinghuashang.cn/random?39" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="YOLOv3深入学习"></a><div class="content"><a class="title" href="/2025/01/07/YOLOv3%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/" title="YOLOv3深入学习">YOLOv3深入学习</a><time datetime="2025-01-07T08:30:02.000Z" title="发表于 2025-01-07 16:30:02">2025-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/11/16/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0/" title="近世代数"><img src="https://imgapi.jinghuashang.cn/random?4" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="近世代数"></a><div class="content"><a class="title" href="/2024/11/16/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0/" title="近世代数">近世代数</a><time datetime="2024-11-16T13:30:20.000Z" title="发表于 2024-11-16 21:30:20">2024-11-16</time></div></div></div></div></div></div></main><footer id="footer" style="background:url(/img/footer_bg.jpg)"><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">真的不想上早八！！！</p><div class="bg-ad"><div>中午吃点啥好捏</div><div class="btn-xz-box"></div></div></div></div></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="/js/tw_cn.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span> 数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
