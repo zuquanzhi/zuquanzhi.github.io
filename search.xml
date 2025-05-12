@@ -344,35 +344,6 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode0485</title>
-    <url>/2023/11/21/LeetCode0485/</url>
-    <content><![CDATA[<h1 id="最大连续-1-的个数"><a href="#最大连续-1-的个数" class="headerlink" title="最大连续 1 的个数"></a><a href="https://leetcode.cn/problems/max-consecutive-ones/">最大连续 1 的个数</a></h1><hr>
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个二进制数组 <code>nums</code> ， 计算其中最大连续 <code>1</code> 的个数。</p>
- <span id="more"></span>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1,1,0,1,1,1]</span><br><span class="line">输出：3</span><br><span class="line">解释：开头的两位和最后的三位都是连续<span class="number"> 1 </span>，所以最大连续<span class="number"> 1 </span>的个数是 3.</span><br></pre></td></tr></table></figure>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="string">[1,0,1,1,0,1]</span></span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p><strong>提示：</strong></p>
-<ul>
-<li><p><code>1 &lt;= nums.length &lt;= 105</code></p>
-</li>
-<li><p><code>nums[i]</code> 不是 <code>0</code> 就是 <code>1</code>.</p>
-</li>
-</ul>
-<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>本题中存在两个技术点：连续数和最大。</p>
-<p>连续数是比较好求的，只需要条件判定再加上计数器就可以做到。</p>
-<p>关键在于最大，使我引入了一个缓存变量tmp，用来实时更新“最大连击数”并不会占用1太多空间。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">findMaxConsecutiveOnes</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; numsSize &amp;&amp; nums[i] == <span class="number">1</span>) &#123;</span><br><span class="line">            tmp++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &lt; tmp) &#123;</span><br><span class="line">            count = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode0498</title>
     <url>/2023/11/23/LeetCode0498/</url>
     <content><![CDATA[<h1 id="对角线遍历"><a href="#对角线遍历" class="headerlink" title="对角线遍历"></a><a href="https://leetcode.cn/problems/diagonal-traverse/">对角线遍历</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个大小为 <code>m x n</code> 的矩阵 <code>mat</code> ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。</p>
@@ -404,6 +375,35 @@
       </categories>
       <tags>
         <tag>二维数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode0485</title>
+    <url>/2023/11/21/LeetCode0485/</url>
+    <content><![CDATA[<h1 id="最大连续-1-的个数"><a href="#最大连续-1-的个数" class="headerlink" title="最大连续 1 的个数"></a><a href="https://leetcode.cn/problems/max-consecutive-ones/">最大连续 1 的个数</a></h1><hr>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个二进制数组 <code>nums</code> ， 计算其中最大连续 <code>1</code> 的个数。</p>
+ <span id="more"></span>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">输入：nums = [1,1,0,1,1,1]</span><br><span class="line">输出：3</span><br><span class="line">解释：开头的两位和最后的三位都是连续<span class="number"> 1 </span>，所以最大连续<span class="number"> 1 </span>的个数是 3.</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight accesslog"><table><tr><td class="code"><pre><span class="line">输入：nums = <span class="string">[1,0,1,1,0,1]</span></span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><p><code>1 &lt;= nums.length &lt;= 105</code></p>
+</li>
+<li><p><code>nums[i]</code> 不是 <code>0</code> 就是 <code>1</code>.</p>
+</li>
+</ul>
+<h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>本题中存在两个技术点：连续数和最大。</p>
+<p>连续数是比较好求的，只需要条件判定再加上计数器就可以做到。</p>
+<p>关键在于最大，使我引入了一个缓存变量tmp，用来实时更新“最大连击数”并不会占用1太多空间。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">findMaxConsecutiveOnes</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; numsSize &amp;&amp; nums[i] == <span class="number">1</span>) &#123;</span><br><span class="line">            tmp++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &lt; tmp) &#123;</span><br><span class="line">            count = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -569,6 +569,65 @@
 <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>基本想法是把列表的首尾节点调换，即每一个指针都指向前一个节点。</p>
 <p>代码如下：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span><span class="literal">NULL</span>;<span class="comment">//创建一个空头节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span>=</span>head;<span class="comment">//创建curr用于遍历链表</span></span><br><span class="line">    <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">next</span> =</span>curr-&gt;next;</span><br><span class="line">        curr-&gt;next =prev;</span><br><span class="line">        prev =curr;<span class="comment">//把pre遍历到当前节点</span></span><br><span class="line">        curr=next;<span class="comment">//把当前指针遍历到下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Leetcode0234</title>
+    <url>/2023/11/30/Leetcode0234/</url>
+    <content><![CDATA[<h1 id="回文链表"><a href="#回文链表" class="headerlink" title="回文链表"></a><a href="https://leetcode.cn/problems/palindrome-linked-list/">回文链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个单链表的头节点 <code>head</code> ，请你判断该链表是否为回文链表。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+ <span id="more"></span>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2,2,1]</span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" alt="img"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2]</span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点数目在范围<code>[1, 105]</code> 内</li>
+<li><code>0 &lt;= Node.val &lt;= 9</code></li>
+</ul>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><h3 id="法一：复制到数组"><a href="#法一：复制到数组" class="headerlink" title="法一：复制到数组"></a>法一：复制到数组</h3><p>小生不才，链表使用不够熟练，先用复制链表到数组的笨方法做出来一遍。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算链表长度</span></span><br><span class="line">    <span class="keyword">while</span>(cur) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态分配数组</span></span><br><span class="line">    <span class="type">int</span>* a = (<span class="type">int</span>*)<span class="built_in">malloc</span>(count * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!a) &#123;</span><br><span class="line">        <span class="comment">// 处理内存分配失败的情况</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新遍历链表，将值存入数组</span></span><br><span class="line">    cur = head;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        a[i] = cur-&gt;val;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查是否为回文</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count / <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] != a[count - <span class="number">1</span> - i]) &#123;</span><br><span class="line">            <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="法二：快慢指针"><a href="#法二：快慢指针" class="headerlink" title="法二：快慢指针"></a>法二：快慢指针</h3><p>这也是我想到的第二个方法。</p>
+<p>整个流程可以分为以下五个步骤：</p>
+<ol>
+<li><p>找到前半部分链表的尾节点。</p>
+</li>
+<li><p>反转后半部分链表。</p>
+</li>
+<li><p>判断是否回文。</p>
+</li>
+<li><p>恢复链表。</p>
+</li>
+<li><p>返回结果。</p>
+</li>
+</ol>
+<p>   执行步骤一，我们可以计算链表节点的数量，然后遍历链表找到前半部分的尾节点。</p>
+<p>   我们也可以使用快慢指针在一次遍历中找到：慢指针一次走一步，快指针一次走两步，快慢指针同时出发。当快指针移动到链表的末尾时，慢指针恰好到链表的中间。通过慢指针将链表分为两部分。</p>
+<p>   若链表有奇数个节点，则中间的节点应该看作是前半部分。</p>
+<p>   步骤二可以使用<a href="[Leetcode0206 | 全之の博客 (zuweicun.top">反转链表</a>](<a href="http://zuweicun.top/2023/11/30/Leetcode0206/#more))问题中的解决方法来反转链表的后半部分。">http://zuweicun.top/2023/11/30/Leetcode0206/#more))问题中的解决方法来反转链表的后半部分。</a></p>
+<p>   步骤三比较两个部分的值，当后半部分到达末尾则比较完成，可以忽略计数情况中的中间节点。</p>
+<p>   步骤四与步骤二使用的函数相同，再反转一次恢复链表本身。</p>
+<p>   其代码如下：</p>
+   <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span> <span class="literal">NULL</span>;<span class="comment">//创建空节点用于存放“前一个”数据</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span> =</span> head;<span class="comment">//基操curr遍历</span></span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">nextTemp</span> =</span> curr-&gt;next;</span><br><span class="line">        curr-&gt;next = prev;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = nextTemp;</span><br><span class="line">    &#125;<span class="comment">//反转函数</span></span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">endOfFirstHalf</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">fast</span> =</span> head;<span class="comment">//块指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">slow</span> =</span> head;<span class="comment">//慢指针</span></span><br><span class="line">    <span class="keyword">while</span> (fast-&gt;next != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;<span class="comment">//一次走两步</span></span><br><span class="line">        slow = slow-&gt;next;<span class="comment">//一次走一步</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;<span class="comment">//由于快慢指针的数量关系，slow返回的应该是链表半节点处</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;<span class="comment">//最终的bool类型判断函数</span></span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到前半部分链表的尾节点并反转后半部分链表</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">firstHalfEnd</span> =</span> endOfFirstHalf(head);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">secondHalfStart</span> =</span> reverseList(firstHalfEnd-&gt;next);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否回文</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p1</span> =</span> head;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p2</span> =</span> secondHalfStart;</span><br><span class="line">    <span class="type">bool</span> result = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (result &amp;&amp; p2 != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p1-&gt;val != p2-&gt;val) &#123;</span><br><span class="line">            result = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p1 = p1-&gt;next;</span><br><span class="line">        p2 = p2-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 还原链表并返回结果</span></span><br><span class="line">    firstHalfEnd-&gt;next = reverseList(secondHalfStart);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="法三：递归"><a href="#法三：递归" class="headerlink" title="法三：递归"></a>法三：递归</h3><p><em>这个递归来源于Leetcode官方题解，其风骚是我至今所遇最强。</em></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量，用于存储前半部分链表的指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">frontPointer</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归检查是否回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">recursivelyCheck</span><span class="params">(<span class="keyword">struct</span> ListNode* currentNode)</span> &#123;</span><br><span class="line">    <span class="comment">// 当前节点不为空时进行递归检查</span></span><br><span class="line">    <span class="keyword">if</span> (currentNode != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="comment">// 递归检查下一个节点，如果返回 false，则整体返回 false</span></span><br><span class="line">        <span class="keyword">if</span> (!recursivelyCheck(currentNode-&gt;next)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 检查当前节点的值是否与前半部分链表的节点值相等</span></span><br><span class="line">        <span class="keyword">if</span> (currentNode-&gt;val != frontPointer-&gt;val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前半部分链表指针移动到下一个节点</span></span><br><span class="line">        frontPointer = frontPointer-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 若所有节点都检查完毕，返回 true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查链表是否为回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="comment">// 初始化全局变量 frontPointer</span></span><br><span class="line">    frontPointer = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用递归检查函数</span></span><br><span class="line">    <span class="keyword">return</span> recursivelyCheck(head);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>isPalindrome</code> 函数设置 <code>frontPointer</code> 为链表头，并调用 <code>recursivelyCheck</code> 函数。</li>
+<li><code>recursivelyCheck</code> 函数首先检查当前节点是否为 <code>NULL</code>，如果是，则返回 <code>true</code>，因为链表的末尾已经达到。</li>
+<li>然后，<code>recursivelyCheck</code> 递归调用自己，传递当前节点的下一个节点。</li>
+<li>在递归返回之前，检查当前节点的值是否等于 <code>frontPointer</code> 指向的节点的值。如果不等，则返回 <code>false</code>，因为链表不是回文的。</li>
+<li>如果值相等，将 <code>frontPointer</code> 移动到下一个节点。</li>
+<li>最终，如果整个链表都被成功检查，并且没有发现值不相等的情况，那么整个函数返回 <code>true</code>，表示链表是回文的。</li>
+</ol>
+<p>这种方法的核心思想是使用递归从链表的末尾开始比较节点的值，同时使用 <code>frontPointer</code> 从链表的头部开始。这两个指针相向移动，逐一比较节点的值，如果在整个过程中没有找到不相等的节点，则链表被认为是回文的。</p>
 ]]></content>
       <categories>
         <category>题解</category>
@@ -783,6 +842,19 @@
       </tags>
   </entry>
   <entry>
+    <title>Self-balancing-bycycle</title>
+    <url>/2023/10/09/Self-balancing-bycycle/</url>
+    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。<br><span id="more"></span></p>
+<p>烂尾了，直接贴代码了<br><a href="https://github.com/zuquanzhi/Self_Balance_Bycicle">https://github.com/zuquanzhi/Self_Balance_Bycicle</a></p>
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>平衡车</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ROS1初步</title>
     <url>/2024/03/11/ROS1%E5%88%9D%E6%AD%A5/</url>
     <content><![CDATA[<p><a name="J4y9t"></a></p>
@@ -845,78 +917,6 @@
       </categories>
       <tags>
         <tag>ROS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self-balancing-bycycle</title>
-    <url>/2023/10/09/Self-balancing-bycycle/</url>
-    <content><![CDATA[<p><em>项目简介：由于这是我负责的项目，仅以此篇博客用于记录项目的研究方向，思路，进度等。</em><br>未完待续。。。<br><span id="more"></span></p>
-<p>烂尾了，直接贴代码了<br><a href="https://github.com/zuquanzhi/Self_Balance_Bycicle">https://github.com/zuquanzhi/Self_Balance_Bycicle</a></p>
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>平衡车</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Leetcode0234</title>
-    <url>/2023/11/30/Leetcode0234/</url>
-    <content><![CDATA[<h1 id="回文链表"><a href="#回文链表" class="headerlink" title="回文链表"></a><a href="https://leetcode.cn/problems/palindrome-linked-list/">回文链表</a></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个单链表的头节点 <code>head</code> ，请你判断该链表是否为回文链表。如果是，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
- <span id="more"></span>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="img"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2,2,1]</span><br><span class="line">输出：<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p><strong>示例 2：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2021/03/03/pal2linked-list.jpg" alt="img"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="built_in">head</span> = [1,2]</span><br><span class="line">输出：<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p><strong>提示：</strong></p>
-<ul>
-<li>链表中节点数目在范围<code>[1, 105]</code> 内</li>
-<li><code>0 &lt;= Node.val &lt;= 9</code></li>
-</ul>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><h3 id="法一：复制到数组"><a href="#法一：复制到数组" class="headerlink" title="法一：复制到数组"></a>法一：复制到数组</h3><p>小生不才，链表使用不够熟练，先用复制链表到数组的笨方法做出来一遍。</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算链表长度</span></span><br><span class="line">    <span class="keyword">while</span>(cur) &#123;</span><br><span class="line">        count++;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态分配数组</span></span><br><span class="line">    <span class="type">int</span>* a = (<span class="type">int</span>*)<span class="built_in">malloc</span>(count * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!a) &#123;</span><br><span class="line">        <span class="comment">// 处理内存分配失败的情况</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新遍历链表，将值存入数组</span></span><br><span class="line">    cur = head;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        a[i] = cur-&gt;val;</span><br><span class="line">        cur = cur-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查是否为回文</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; count / <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] != a[count - <span class="number">1</span> - i]) &#123;</span><br><span class="line">            <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(a);  <span class="comment">// 释放动态分配的数组内存</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="法二：快慢指针"><a href="#法二：快慢指针" class="headerlink" title="法二：快慢指针"></a>法二：快慢指针</h3><p>这也是我想到的第二个方法。</p>
-<p>整个流程可以分为以下五个步骤：</p>
-<ol>
-<li><p>找到前半部分链表的尾节点。</p>
-</li>
-<li><p>反转后半部分链表。</p>
-</li>
-<li><p>判断是否回文。</p>
-</li>
-<li><p>恢复链表。</p>
-</li>
-<li><p>返回结果。</p>
-</li>
-</ol>
-<p>   执行步骤一，我们可以计算链表节点的数量，然后遍历链表找到前半部分的尾节点。</p>
-<p>   我们也可以使用快慢指针在一次遍历中找到：慢指针一次走一步，快指针一次走两步，快慢指针同时出发。当快指针移动到链表的末尾时，慢指针恰好到链表的中间。通过慢指针将链表分为两部分。</p>
-<p>   若链表有奇数个节点，则中间的节点应该看作是前半部分。</p>
-<p>   步骤二可以使用<a href="[Leetcode0206 | 全之の博客 (zuweicun.top">反转链表</a>](<a href="http://zuweicun.top/2023/11/30/Leetcode0206/#more))问题中的解决方法来反转链表的后半部分。">http://zuweicun.top/2023/11/30/Leetcode0206/#more))问题中的解决方法来反转链表的后半部分。</a></p>
-<p>   步骤三比较两个部分的值，当后半部分到达末尾则比较完成，可以忽略计数情况中的中间节点。</p>
-<p>   步骤四与步骤二使用的函数相同，再反转一次恢复链表本身。</p>
-<p>   其代码如下：</p>
-   <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span> <span class="literal">NULL</span>;<span class="comment">//创建空节点用于存放“前一个”数据</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span> =</span> head;<span class="comment">//基操curr遍历</span></span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">nextTemp</span> =</span> curr-&gt;next;</span><br><span class="line">        curr-&gt;next = prev;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = nextTemp;</span><br><span class="line">    &#125;<span class="comment">//反转函数</span></span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">endOfFirstHalf</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">fast</span> =</span> head;<span class="comment">//块指针</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">slow</span> =</span> head;<span class="comment">//慢指针</span></span><br><span class="line">    <span class="keyword">while</span> (fast-&gt;next != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;<span class="comment">//一次走两步</span></span><br><span class="line">        slow = slow-&gt;next;<span class="comment">//一次走一步</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;<span class="comment">//由于快慢指针的数量关系，slow返回的应该是链表半节点处</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;<span class="comment">//最终的bool类型判断函数</span></span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到前半部分链表的尾节点并反转后半部分链表</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">firstHalfEnd</span> =</span> endOfFirstHalf(head);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">secondHalfStart</span> =</span> reverseList(firstHalfEnd-&gt;next);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否回文</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p1</span> =</span> head;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">p2</span> =</span> secondHalfStart;</span><br><span class="line">    <span class="type">bool</span> result = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">while</span> (result &amp;&amp; p2 != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p1-&gt;val != p2-&gt;val) &#123;</span><br><span class="line">            result = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p1 = p1-&gt;next;</span><br><span class="line">        p2 = p2-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 还原链表并返回结果</span></span><br><span class="line">    firstHalfEnd-&gt;next = reverseList(secondHalfStart);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="法三：递归"><a href="#法三：递归" class="headerlink" title="法三：递归"></a>法三：递归</h3><p><em>这个递归来源于Leetcode官方题解，其风骚是我至今所遇最强。</em></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 全局变量，用于存储前半部分链表的指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">frontPointer</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归检查是否回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">recursivelyCheck</span><span class="params">(<span class="keyword">struct</span> ListNode* currentNode)</span> &#123;</span><br><span class="line">    <span class="comment">// 当前节点不为空时进行递归检查</span></span><br><span class="line">    <span class="keyword">if</span> (currentNode != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="comment">// 递归检查下一个节点，如果返回 false，则整体返回 false</span></span><br><span class="line">        <span class="keyword">if</span> (!recursivelyCheck(currentNode-&gt;next)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 检查当前节点的值是否与前半部分链表的节点值相等</span></span><br><span class="line">        <span class="keyword">if</span> (currentNode-&gt;val != frontPointer-&gt;val) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 前半部分链表指针移动到下一个节点</span></span><br><span class="line">        frontPointer = frontPointer-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 若所有节点都检查完毕，返回 true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查链表是否为回文</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">isPalindrome</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="comment">// 初始化全局变量 frontPointer</span></span><br><span class="line">    frontPointer = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用递归检查函数</span></span><br><span class="line">    <span class="keyword">return</span> recursivelyCheck(head);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ol>
-<li><code>isPalindrome</code> 函数设置 <code>frontPointer</code> 为链表头，并调用 <code>recursivelyCheck</code> 函数。</li>
-<li><code>recursivelyCheck</code> 函数首先检查当前节点是否为 <code>NULL</code>，如果是，则返回 <code>true</code>，因为链表的末尾已经达到。</li>
-<li>然后，<code>recursivelyCheck</code> 递归调用自己，传递当前节点的下一个节点。</li>
-<li>在递归返回之前，检查当前节点的值是否等于 <code>frontPointer</code> 指向的节点的值。如果不等，则返回 <code>false</code>，因为链表不是回文的。</li>
-<li>如果值相等，将 <code>frontPointer</code> 移动到下一个节点。</li>
-<li>最终，如果整个链表都被成功检查，并且没有发现值不相等的情况，那么整个函数返回 <code>true</code>，表示链表是回文的。</li>
-</ol>
-<p>这种方法的核心思想是使用递归从链表的末尾开始比较节点的值，同时使用 <code>frontPointer</code> 从链表的头部开始。这两个指针相向移动，逐一比较节点的值，如果在整个过程中没有找到不相等的节点，则链表被认为是回文的。</p>
-]]></content>
-      <categories>
-        <category>题解</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -1370,6 +1370,57 @@ PE_{(pos, 2i)} = \sin \left( \frac{pos}{10000^{2i/d}} \right), \quad PE_{(pos, 2
       </categories>
       <tags>
         <tag>命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vim从入门到入土</title>
+    <url>/2024/10/15/vim%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/</url>
+    <content><![CDATA[<p>首先声明我的vscode坚定拥护者身份，奈何十年老古董实在带不动，不得不重新捡起vim开始朴素（装逼）生活。<br><span id="more"></span></p>
+<h2 id="1-什么是-Vim？"><a href="#1-什么是-Vim？" class="headerlink" title="1. 什么是 Vim？"></a>1. 什么是 Vim？</h2><p>Vim 是一个强大的文本编辑器，基于经典的 vi 编辑器。它的核心设计理念是高效编辑文本，特别适合程序员和技术用户 <strong>(高逼格用户)</strong>。</p>
+<p>与大多数文本编辑器不同，Vim 的操作基于模式切换，它拥有多个操作模式，使你能够在插入、编辑、命令等操作之间快速切换。</p>
+<p><strong><em>Vim vs Vi：Vim 是 vi 的增强版，提供了更多的功能，如多级撤销、语法高亮、扩展的脚本支持等。</em></strong></p>
+<h2 id="2-Vim-的主要模式"><a href="#2-Vim-的主要模式" class="headerlink" title="2. Vim 的主要模式"></a>2. Vim 的主要模式</h2><p>Vim 的操作基于不同的模式，主要有以下几种模式：<br><strong>1.普通模式 (Normal Mode)：</strong><br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">默认进入的模式，用于导航和操作文本。</span><br><span class="line">进入方式：启动 Vim 后默认进入，或按 Esc 回到普通模式。</span><br><span class="line">常用命令：</span><br><span class="line">h：向左移动光标。</span><br><span class="line">j：向下移动光标。</span><br><span class="line">k：向上移动光标。</span><br><span class="line">l：向右移动光标。</span><br><span class="line"><span class="selector-tag">dd</span>：删除当前行。</span><br><span class="line">yy：复制当前行。</span><br><span class="line"><span class="selector-tag">p</span>：在光标之后粘贴。</span><br></pre></td></tr></table></figure><br><strong>2.插入模式 (Insert Mode)：</strong><br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">用于编辑文本，类似于普通文本编辑器的输入状态。</span><br><span class="line">进入方式：按 <span class="selector-tag">i</span> 或 <span class="selector-tag">a</span> 进入。</span><br><span class="line">退出方式：按 Esc 退出插入模式，回到普通模式。</span><br></pre></td></tr></table></figure><br><strong>3.可视模式 (Visual Mode)：</strong></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">用于选择文本块。</span><br><span class="line">进入方式：按 v 进入。</span><br><span class="line">常用操作：</span><br><span class="line">y：复制选中的文本。</span><br><span class="line">d：删除选中的文本。</span><br><span class="line"><span class="selector-tag">p</span>：粘贴选中的文本。</span><br></pre></td></tr></table></figure>
+<p><strong>4.命令行模式 (Command-Line Mode)：</strong></p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">用于执行命令，如保存、退出、查找等。</span><br><span class="line">进入方式：按 : 进入。</span><br><span class="line">常用命令：</span><br><span class="line"><span class="symbol">:w</span>：保存文件。</span><br><span class="line"><span class="symbol">:q</span>：退出文件。</span><br><span class="line"><span class="symbol">:wq</span>：保存并退出。</span><br><span class="line"><span class="symbol">:q!</span>：强制退出（不保存修改）。</span><br></pre></td></tr></table></figure>
+<h2 id="3-基本操作指南"><a href="#3-基本操作指南" class="headerlink" title="3. 基本操作指南"></a>3. 基本操作指南</h2><h3 id="3-1-移动光标"><a href="#3-1-移动光标" class="headerlink" title="3.1 移动光标"></a>3.1 移动光标</h3><p>Vim 的基本光标移动是基于 h、j、k、l 四个键，可以用来代替方向键。此外，Vim 提供了更多强大的导航功能：</p>
+<pre><code>w：跳转到下一个单词的开头。
+b：跳转到上一个单词的开头。
+gg：跳转到文件开头。
+G：跳转到文件末尾。
+Ctrl + f：向下翻页。
+Ctrl + b：向上翻页。
+</code></pre><h3 id="3-2-插入和编辑文本"><a href="#3-2-插入和编辑文本" class="headerlink" title="3.2 插入和编辑文本"></a>3.2 插入和编辑文本</h3><p>在普通模式下，通过按以下键进入插入模式以编辑文本：</p>
+<pre><code>i：在光标前插入文本。
+I：在当前行的行首插入文本。
+a：在光标后插入文本。
+A：在当前行的行尾插入文本。
+o：在光标下方新建一行并插入。
+O：在光标上方新建一行并插入。
+</code></pre><h3 id="3-3-删除文本"><a href="#3-3-删除文本" class="headerlink" title="3.3 删除文本"></a>3.3 删除文本</h3><figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line">x：删除光标所在的字符。</span><br><span class="line"><span class="built_in">dd</span>：删除当前行。</span><br><span class="line">d + 移动命令：根据移动命令删除内容，例如 <span class="built_in">dw</span> 删除到下一个单词开头，d$ 删除到行尾。</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-复制和粘贴"><a href="#3-4-复制和粘贴" class="headerlink" title="3.4 复制和粘贴"></a>3.4 复制和粘贴</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">yy：复制当前行。</span><br><span class="line">y + 移动命令：复制指定范围的内容，例如 yw 复制到下一个单词开头。</span><br><span class="line"><span class="selector-tag">p</span>：在光标后粘贴内容。</span><br><span class="line"><span class="selector-tag">P</span>：在光标前粘贴内容。</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-撤销和重做"><a href="#3-5-撤销和重做" class="headerlink" title="3.5 撤销和重做"></a>3.5 撤销和重做</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">u：撤销上一步操作。</span><br><span class="line">Ctrl + <span class="built_in">r</span>：重做撤销的操作。</span><br></pre></td></tr></table></figure>
+<h2 id="4-Vim-高级操作"><a href="#4-Vim-高级操作" class="headerlink" title="4. Vim 高级操作"></a>4. Vim 高级操作</h2><h3 id="4-1-查找和替换"><a href="#4-1-查找和替换" class="headerlink" title="4.1 查找和替换"></a>4.1 查找和替换</h3><p>Vim 提供了强大的查找和替换功能：<br><figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">/pattern：向前查找 pattern。</span><br><span class="line"><span class="string">?p</span>attern：向后查找 pattern。</span><br><span class="line">n：跳转到下一个匹配项。</span><br><span class="line">N：跳转到上一个匹配项。</span><br><span class="line"><span class="symbol">:s/old/new/g</span>：将当前行中的 old 替换为 new。</span><br><span class="line"><span class="symbol">:%s/old/new/g</span>：将整个文件中的 old 替换为 new。</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-2-多文件和窗口操作"><a href="#4-2-多文件和窗口操作" class="headerlink" title="4.2 多文件和窗口操作"></a>4.2 多文件和窗口操作</h3><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="symbol">:e</span> filename：打开一个新文件。</span><br><span class="line"><span class="symbol">:vsp</span> filename：垂直分屏打开文件。</span><br><span class="line"><span class="symbol">:sp</span> filename：水平分屏打开文件。</span><br><span class="line"><span class="title class_">Ctrl</span> + w + h/j/k/l：在不同窗口间切换。</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-宏录制与回放"><a href="#4-3-宏录制与回放" class="headerlink" title="4.3 宏录制与回放"></a>4.3 宏录制与回放</h3><p>Vim 支持录制操作的宏，可以将常用操作记录下来并反复执行：<br><figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">q</span> + 字母：开始录制宏到指定的字母键（如 <span class="selector-tag">q</span> <span class="selector-tag">a</span> 开始录制到 <span class="selector-tag">a</span>）。</span><br><span class="line">执行所需操作。</span><br><span class="line"><span class="selector-tag">q</span>：停止录制。</span><br><span class="line">@<span class="selector-tag">a</span>：回放录制的宏 <span class="selector-tag">a</span>。</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-Vim-的配置"><a href="#5-Vim-的配置" class="headerlink" title="5. Vim 的配置"></a>5. Vim 的配置</h2><p>Vim 可以通过编辑 .vimrc 文件进行自定义，这个文件通常位于用户的主目录下。通过编辑 .vimrc，你可以为 Vim 添加一些个性化的配置，以提高编辑效率。以下是一些常用配置选项：<br><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>        <span class="comment">&quot; 显示行号</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span>     <span class="comment">&quot; 设置 Tab 键宽度为 4 个空格</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>  <span class="comment">&quot; 设置自动缩进为 4 个空格</span></span><br><span class="line"><span class="keyword">set</span> expandtab     <span class="comment">&quot; 将 Tab 转换为空格</span></span><br><span class="line"><span class="keyword">set</span> cursorline    <span class="comment">&quot; 高亮当前行</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span>         <span class="comment">&quot; 启用语法高亮</span></span><br><span class="line"><span class="keyword">set</span> relativenumber <span class="comment">&quot; 显示相对行号</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="6-常用-Vim-插件"><a href="#6-常用-Vim-插件" class="headerlink" title="6. 常用 Vim 插件"></a>6. 常用 Vim 插件</h2><p>Vim 的强大之处还在于其插件支持，可以通过插件扩展其功能。以下是一些常用的 Vim 插件：</p>
+<ol>
+<li>NerdTree：文件浏览器插件，允许你在 Vim 中以树状结构浏览文件。</li>
+<li>Vim-Airline：美化状态栏，提供更丰富的状态信息。</li>
+<li>Fzf：强大的文件搜索工具，能够快速定位和打开文件。</li>
+<li>YouCompleteMe：代码自动补全插件，支持多种编程语言的补全。</li>
+<li>Syntastic：语法检查工具，能够帮助你及时发现代码中的错误。</li>
+</ol>
+<p>可以通过 Vim 的插件管理工具（如 Vundle 或 Pathogen）来安装和管理这些插件。</p>
+<h2 id="7-如何退出-Vim"><a href="#7-如何退出-Vim" class="headerlink" title="7. 如何退出 Vim"></a>7. 如何退出 Vim</h2><p>退出 Vim 是初学者经常遇到的问题。以下是几种退出方式：<br><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="symbol">:q</span>：退出（无修改时）。</span><br><span class="line"><span class="symbol">:wq</span> 或 <span class="title class_">ZZ</span>：保存并退出。</span><br><span class="line"><span class="symbol">:q!</span>：强制退出（不保存修改）。</span><br><span class="line"><span class="symbol">:wq!</span>：强制保存并退出。</span><br></pre></td></tr></table></figure></p>
+<p>掌握了这些内容基本就足够在服务器终端上大展身手了，网上有很多大佬开发了各种各样的vim插件（说实话vim的最终解就是vscode），以后可能会继续更新这些插件配置相关内容</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>vim</tag>
       </tags>
   </entry>
   <entry>
@@ -2623,57 +2674,6 @@ run(**vars(opt))
       </tags>
   </entry>
   <entry>
-    <title>vim从入门到入土</title>
-    <url>/2024/10/15/vim%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/</url>
-    <content><![CDATA[<p>首先声明我的vscode坚定拥护者身份，奈何十年老古董实在带不动，不得不重新捡起vim开始朴素（装逼）生活。<br><span id="more"></span></p>
-<h2 id="1-什么是-Vim？"><a href="#1-什么是-Vim？" class="headerlink" title="1. 什么是 Vim？"></a>1. 什么是 Vim？</h2><p>Vim 是一个强大的文本编辑器，基于经典的 vi 编辑器。它的核心设计理念是高效编辑文本，特别适合程序员和技术用户 <strong>(高逼格用户)</strong>。</p>
-<p>与大多数文本编辑器不同，Vim 的操作基于模式切换，它拥有多个操作模式，使你能够在插入、编辑、命令等操作之间快速切换。</p>
-<p><strong><em>Vim vs Vi：Vim 是 vi 的增强版，提供了更多的功能，如多级撤销、语法高亮、扩展的脚本支持等。</em></strong></p>
-<h2 id="2-Vim-的主要模式"><a href="#2-Vim-的主要模式" class="headerlink" title="2. Vim 的主要模式"></a>2. Vim 的主要模式</h2><p>Vim 的操作基于不同的模式，主要有以下几种模式：<br><strong>1.普通模式 (Normal Mode)：</strong><br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">默认进入的模式，用于导航和操作文本。</span><br><span class="line">进入方式：启动 Vim 后默认进入，或按 Esc 回到普通模式。</span><br><span class="line">常用命令：</span><br><span class="line">h：向左移动光标。</span><br><span class="line">j：向下移动光标。</span><br><span class="line">k：向上移动光标。</span><br><span class="line">l：向右移动光标。</span><br><span class="line"><span class="selector-tag">dd</span>：删除当前行。</span><br><span class="line">yy：复制当前行。</span><br><span class="line"><span class="selector-tag">p</span>：在光标之后粘贴。</span><br></pre></td></tr></table></figure><br><strong>2.插入模式 (Insert Mode)：</strong><br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">用于编辑文本，类似于普通文本编辑器的输入状态。</span><br><span class="line">进入方式：按 <span class="selector-tag">i</span> 或 <span class="selector-tag">a</span> 进入。</span><br><span class="line">退出方式：按 Esc 退出插入模式，回到普通模式。</span><br></pre></td></tr></table></figure><br><strong>3.可视模式 (Visual Mode)：</strong></p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">用于选择文本块。</span><br><span class="line">进入方式：按 v 进入。</span><br><span class="line">常用操作：</span><br><span class="line">y：复制选中的文本。</span><br><span class="line">d：删除选中的文本。</span><br><span class="line"><span class="selector-tag">p</span>：粘贴选中的文本。</span><br></pre></td></tr></table></figure>
-<p><strong>4.命令行模式 (Command-Line Mode)：</strong></p>
-<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">用于执行命令，如保存、退出、查找等。</span><br><span class="line">进入方式：按 : 进入。</span><br><span class="line">常用命令：</span><br><span class="line"><span class="symbol">:w</span>：保存文件。</span><br><span class="line"><span class="symbol">:q</span>：退出文件。</span><br><span class="line"><span class="symbol">:wq</span>：保存并退出。</span><br><span class="line"><span class="symbol">:q!</span>：强制退出（不保存修改）。</span><br></pre></td></tr></table></figure>
-<h2 id="3-基本操作指南"><a href="#3-基本操作指南" class="headerlink" title="3. 基本操作指南"></a>3. 基本操作指南</h2><h3 id="3-1-移动光标"><a href="#3-1-移动光标" class="headerlink" title="3.1 移动光标"></a>3.1 移动光标</h3><p>Vim 的基本光标移动是基于 h、j、k、l 四个键，可以用来代替方向键。此外，Vim 提供了更多强大的导航功能：</p>
-<pre><code>w：跳转到下一个单词的开头。
-b：跳转到上一个单词的开头。
-gg：跳转到文件开头。
-G：跳转到文件末尾。
-Ctrl + f：向下翻页。
-Ctrl + b：向上翻页。
-</code></pre><h3 id="3-2-插入和编辑文本"><a href="#3-2-插入和编辑文本" class="headerlink" title="3.2 插入和编辑文本"></a>3.2 插入和编辑文本</h3><p>在普通模式下，通过按以下键进入插入模式以编辑文本：</p>
-<pre><code>i：在光标前插入文本。
-I：在当前行的行首插入文本。
-a：在光标后插入文本。
-A：在当前行的行尾插入文本。
-o：在光标下方新建一行并插入。
-O：在光标上方新建一行并插入。
-</code></pre><h3 id="3-3-删除文本"><a href="#3-3-删除文本" class="headerlink" title="3.3 删除文本"></a>3.3 删除文本</h3><figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line">x：删除光标所在的字符。</span><br><span class="line"><span class="built_in">dd</span>：删除当前行。</span><br><span class="line">d + 移动命令：根据移动命令删除内容，例如 <span class="built_in">dw</span> 删除到下一个单词开头，d$ 删除到行尾。</span><br></pre></td></tr></table></figure>
-<h3 id="3-4-复制和粘贴"><a href="#3-4-复制和粘贴" class="headerlink" title="3.4 复制和粘贴"></a>3.4 复制和粘贴</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">yy：复制当前行。</span><br><span class="line">y + 移动命令：复制指定范围的内容，例如 yw 复制到下一个单词开头。</span><br><span class="line"><span class="selector-tag">p</span>：在光标后粘贴内容。</span><br><span class="line"><span class="selector-tag">P</span>：在光标前粘贴内容。</span><br></pre></td></tr></table></figure>
-<h3 id="3-5-撤销和重做"><a href="#3-5-撤销和重做" class="headerlink" title="3.5 撤销和重做"></a>3.5 撤销和重做</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">u：撤销上一步操作。</span><br><span class="line">Ctrl + <span class="built_in">r</span>：重做撤销的操作。</span><br></pre></td></tr></table></figure>
-<h2 id="4-Vim-高级操作"><a href="#4-Vim-高级操作" class="headerlink" title="4. Vim 高级操作"></a>4. Vim 高级操作</h2><h3 id="4-1-查找和替换"><a href="#4-1-查找和替换" class="headerlink" title="4.1 查找和替换"></a>4.1 查找和替换</h3><p>Vim 提供了强大的查找和替换功能：<br><figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">/pattern：向前查找 pattern。</span><br><span class="line"><span class="string">?p</span>attern：向后查找 pattern。</span><br><span class="line">n：跳转到下一个匹配项。</span><br><span class="line">N：跳转到上一个匹配项。</span><br><span class="line"><span class="symbol">:s/old/new/g</span>：将当前行中的 old 替换为 new。</span><br><span class="line"><span class="symbol">:%s/old/new/g</span>：将整个文件中的 old 替换为 new。</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-2-多文件和窗口操作"><a href="#4-2-多文件和窗口操作" class="headerlink" title="4.2 多文件和窗口操作"></a>4.2 多文件和窗口操作</h3><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="symbol">:e</span> filename：打开一个新文件。</span><br><span class="line"><span class="symbol">:vsp</span> filename：垂直分屏打开文件。</span><br><span class="line"><span class="symbol">:sp</span> filename：水平分屏打开文件。</span><br><span class="line"><span class="title class_">Ctrl</span> + w + h/j/k/l：在不同窗口间切换。</span><br></pre></td></tr></table></figure>
-<h3 id="4-3-宏录制与回放"><a href="#4-3-宏录制与回放" class="headerlink" title="4.3 宏录制与回放"></a>4.3 宏录制与回放</h3><p>Vim 支持录制操作的宏，可以将常用操作记录下来并反复执行：<br><figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">q</span> + 字母：开始录制宏到指定的字母键（如 <span class="selector-tag">q</span> <span class="selector-tag">a</span> 开始录制到 <span class="selector-tag">a</span>）。</span><br><span class="line">执行所需操作。</span><br><span class="line"><span class="selector-tag">q</span>：停止录制。</span><br><span class="line">@<span class="selector-tag">a</span>：回放录制的宏 <span class="selector-tag">a</span>。</span><br></pre></td></tr></table></figure></p>
-<h2 id="5-Vim-的配置"><a href="#5-Vim-的配置" class="headerlink" title="5. Vim 的配置"></a>5. Vim 的配置</h2><p>Vim 可以通过编辑 .vimrc 文件进行自定义，这个文件通常位于用户的主目录下。通过编辑 .vimrc，你可以为 Vim 添加一些个性化的配置，以提高编辑效率。以下是一些常用配置选项：<br><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>        <span class="comment">&quot; 显示行号</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span>     <span class="comment">&quot; 设置 Tab 键宽度为 4 个空格</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>  <span class="comment">&quot; 设置自动缩进为 4 个空格</span></span><br><span class="line"><span class="keyword">set</span> expandtab     <span class="comment">&quot; 将 Tab 转换为空格</span></span><br><span class="line"><span class="keyword">set</span> cursorline    <span class="comment">&quot; 高亮当前行</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span>         <span class="comment">&quot; 启用语法高亮</span></span><br><span class="line"><span class="keyword">set</span> relativenumber <span class="comment">&quot; 显示相对行号</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="6-常用-Vim-插件"><a href="#6-常用-Vim-插件" class="headerlink" title="6. 常用 Vim 插件"></a>6. 常用 Vim 插件</h2><p>Vim 的强大之处还在于其插件支持，可以通过插件扩展其功能。以下是一些常用的 Vim 插件：</p>
-<ol>
-<li>NerdTree：文件浏览器插件，允许你在 Vim 中以树状结构浏览文件。</li>
-<li>Vim-Airline：美化状态栏，提供更丰富的状态信息。</li>
-<li>Fzf：强大的文件搜索工具，能够快速定位和打开文件。</li>
-<li>YouCompleteMe：代码自动补全插件，支持多种编程语言的补全。</li>
-<li>Syntastic：语法检查工具，能够帮助你及时发现代码中的错误。</li>
-</ol>
-<p>可以通过 Vim 的插件管理工具（如 Vundle 或 Pathogen）来安装和管理这些插件。</p>
-<h2 id="7-如何退出-Vim"><a href="#7-如何退出-Vim" class="headerlink" title="7. 如何退出 Vim"></a>7. 如何退出 Vim</h2><p>退出 Vim 是初学者经常遇到的问题。以下是几种退出方式：<br><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="symbol">:q</span>：退出（无修改时）。</span><br><span class="line"><span class="symbol">:wq</span> 或 <span class="title class_">ZZ</span>：保存并退出。</span><br><span class="line"><span class="symbol">:q!</span>：强制退出（不保存修改）。</span><br><span class="line"><span class="symbol">:wq!</span>：强制保存并退出。</span><br></pre></td></tr></table></figure></p>
-<p>掌握了这些内容基本就足够在服务器终端上大展身手了，网上有很多大佬开发了各种各样的vim插件（说实话vim的最终解就是vscode），以后可能会继续更新这些插件配置相关内容</p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>yolo初步</title>
     <url>/2024/04/10/yolo%E5%88%9D%E6%AD%A5/</url>
     <content><![CDATA[<p>参考文献：<br /><a href="https://towardsdatascience.com/chess-rolls-or-basketball-lets-create-a-custom-object-detection-model-ef53028eac7d">A simple way of creating a custom object detection model</a>（这个就是卓晴教程的原版）<br /><a href="https://blog.csdn.net/sinat_28371057/article/details/120598220?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=yolo5&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-7-120598220.142^v99^control&amp;spm=1018.2226.3001.4187">YOLOv5的详细使用教程，以及使用yolov5训练自己的数据集_yolo5训练集-CSDN博客</a></p>
@@ -2883,88 +2883,6 @@ O：在光标上方新建一行并插入。
       </categories>
       <tags>
         <tag>数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于stm32的蓝牙循迹小车思路</title>
-    <url>/2023/11/05/%E5%9F%BA%E4%BA%8Estm32%E7%9A%84%E8%93%9D%E7%89%99%E5%BE%AA%E8%BF%B9%E5%B0%8F%E8%BD%A6%E6%80%9D%E8%B7%AF/</url>
-    <content><![CDATA[<h2 id="一-概况："><a href="#一-概况：" class="headerlink" title="一. 概况："></a>一. 概况：</h2><ol>
-<li><p>基本思路。</p>
-</li>
-<li><p>最初代码实现。</p>
-</li>
-<li><p>最终代码实现。</p>
-<span id="more"></span>
-</li>
-</ol>
-<h2 id="二-思路实现-amp-amp-理解："><a href="#二-思路实现-amp-amp-理解：" class="headerlink" title="二. 思路实现&amp;&amp;理解："></a>二. 思路实现&amp;&amp;理解：</h2><h3 id="1-循迹："><a href="#1-循迹：" class="headerlink" title="1. 循迹："></a>1. 循迹：</h3><ul>
-<li><p>整体思路：ADC采样—&gt;对ADC采样数据的数学处理—&gt;对得到的数据进行PID算法运算—&gt;赋值给ccr调整pwm波输出占空比驱动电机。循环此过程则可实现速度闭环实现直角弯道除外的赛道。</p>
-</li>
-<li><p>方案：两灯&amp;三灯及以上。</p>
-</li>
-</ul>
-<p>​       <strong>归根结底，重点在于数学算法处理。</strong></p>
-<ul>
-<li><p>实操理解：</p>
-<p><strong>针对采样：</strong></p>
-</li>
-</ul>
-<p>​      <em>重要参数</em>：单个采样范围及变化趋势&amp;&amp;单个采样值。</p>
-<p>​              单个采样范围及变化趋势：非常有限，几乎不触及黑线采样值变化很小，但一接近黑线立即成指数增长。</p>
-<p>​              单个采样值：几百（个体差异）~约2300的原始值。但转化为电压值之后仅为0~3.3，大量数据被压缩，损失了很多精度，最终决定采用原始                                        值进行操作。</p>
-<p>​              误差来源<em>包括但不限</em>：环境红外线影响  红外对管个体差异  红外对管彼此距离  红外对管对地距离。</p>
-<p>​              环境红外线影响：</p>
-<p>​                    非常影响红外对管采集数据。最终解决办法有两种：</p>
-<p>​                （1）在每个红外对管四周缠上黑胶布，用以反射环境红外线并聚合红外对管发出的红外线；</p>
-<p>​                （2）在代码中初始化过程中消除环境误差并不需要测得，但随着小车运动导 致的位置改变，环境误差在变化，而我们只消除了开始的误差，但我们放弃使用动态消除误差，可能会影响正常循迹和路口识别。</p>
-<p>​               红外对管个体差异：</p>
-<p>​                    不同红外对管的峰值大致相同，但最低值各有千秋。有的一两百，有的却五六百。考虑到对ADC采样数据进行处理时，个体误差的存在会影响很多计算结果造成两个灯调节作用差别很大。故必须消除。最终我们采用个体采样值域大的红外对管，以输出更加灵敏的值，并在代码中在初始化过程中，连同环境误差一起消除。</p>
-<p>​               红外对管彼此距离：</p>
-<p>​                    主要影响两点，一是识别范围，二是数学处理时产生漏洞。对于第一点，两灯距离太小时，识别范围就太小，小车遇到稍抖一点的弯路时极易偏线，但两灯距离过大时，就相当于允许小车有一定程度的偏线，造成循迹不流畅。对于第二点，若两灯距离过小，此时可以忽略个体误差，但同时ADC数学处理获得值值域很小，调节精度或说范围很小，若两灯距离过大，两灯之间会留出一个处理值为0的空白区允许小车一定程度偏线，这是我们不希望看到的。</p>
-<p>​               红外对管对地距离：</p>
-<p>​                    主要影响红外对管的采样值域。对地距离过低时红外对管接收不到反射光，采样值很低，对地距离过高时很受环境光干扰，接收红外线很多，采样值很高，通过打印波形图来观察何对地距离红外对管的检测距离最大，以及采样值域最大。</p>
-<p>​        <strong>针对数学处理：</strong></p>
-<p>​       处理参数：识别范围，输出值。</p>
-<p>​                  识别范围：即小车的“视野”，能够允许偏线程度最大的情况下依然可以回归正轨。</p>
-<p>​                   输出值：作为偏差，进行PID运算后，改变ccr来改变电机占空比。</p>
-<p>​       处理方法与消除误差：</p>
-<p>​                   两灯： 缺少能够作为条件的判断，所以只有让两灯采样值相减，同时让两灯在同一环境下初始化，记录两灯差值，然后代入程序中来消除个体误差和环境误差，然后调用ADC数据处理函数，得到曲线。</p>
-<p>​      </p>
-<p>​    <strong>针对PID：</strong></p>
-<p>​        本次任务中采用位置式PID，且用到P与D参与运算。</p>
-<p>​        采用PD系统调节原因：通过P进行主导线形控制，通过D来计算未来趋势抑制系统震荡，即通过PD系统获得更快的反应速度。符合循迹需求。</p>
-<p>​        输入值：实时计算ADC数学处理获得值与目标值0的差值</p>
-<p>​        输出值：除了初始占空比以外的用于控制电机的pwm</p>
-<p>​        偏差：ADC数学处理获得值与目标值0的差值，用于P计算</p>
-<p>​        二次偏差：前后两次偏差的差值，用于D计算</p>
-<p>​        调参注意：P过小调节作用小，P过大造成过冲系统震荡。D过小调节作用小，D过大会放大系统趋势的影响，使系统震荡。</p>
-<p>​        调参顺序：先设D=0，调P，从0逐渐增大，直到系统震荡。再调D使其逐渐增大，直到系统震荡。之后进行微调，直到系统稳定。</p>
-<p>​      <strong>针对电机控制：</strong></p>
-<p>​          调节方式：对两边电机同时附PID运算值，以达到使两测车轮具有相同效果的调节作用。</p>
-<p>​          调节精度及限制：</p>
-<p>​          考虑到可供调节的ccr范围为0~500( 有点小，占空比的相对调节精度小），但考虑到对循迹小车来讲500的调节范围够用，所以没改，但后来调车发现问题，发现有些曲率较大的弯转不过去，起初认为是P设的过小，但经过数学运算后发现问题是数值溢出，即能转过这个弯路的PID处理值没发挥出它的作用，因为溢出下限即占空比为0，溢出上限即占空比为100，所以最终采用【循迹电机反转函数】的使用，使溢出值得到充分利用。事实上增大ccr的可操作区间亦可。</p>
-<p>​           初始值设置：一开始设置为50%占空比，因为考虑到想使PID调节具有对称性。事实效果很好，循迹很丝滑，但后来考虑到走直线速度较慢，故逐渐增大初始占空比，再具体进行调参。</p>
-<p>​           置“0”操作：每次赋值给电机后，电机会保持这个数值运动，但在赋新的值之前，若不将之前赋过值的电机置0，两者会发生冲突比如相互抵消。</p>
-<h3 id="2-机械结构："><a href="#2-机械结构：" class="headerlink" title="2. 机械结构："></a>2. 机械结构：</h3><ul>
-<li>机械臂：</li>
-</ul>
-<p>​              负责能量块夹放及将普通矿放入盒子内。</p>
-<ul>
-<li>机械铲：</li>
-</ul>
-<p>​              负责为机械臂工作铺路。（可根据具体需要调整）</p>
-<h2 id="三-最初代码实现："><a href="#三-最初代码实现：" class="headerlink" title="三. 最初代码实现："></a>三. 最初代码实现：</h2><h2 id="1-循迹：-1"><a href="#1-循迹：-1" class="headerlink" title="1. 循迹："></a>1. 循迹：</h2><ul>
-<li>两灯：</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">ADC_caiyang</span><span class="params">(<span class="type">void</span>)</span>    </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> wucha=<span class="number">0</span>;             <span class="comment">//定义两灯远离黑线的个体误差</span></span><br><span class="line">	</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> LeftMax=<span class="number">0</span>;     <span class="comment">//定义左灯峰值 </span></span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> RightMax=<span class="number">0</span>;    <span class="comment">//定义右灯峰值</span></span><br><span class="line"></span><br><span class="line">	Right_AD=ADC_ConvertedValue[<span class="number">4</span>]; 	<span class="comment">//定义左右灯实时采样数据</span></span><br><span class="line">	Left_AD=ADC_ConvertedValue[<span class="number">7</span>];		</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">if</span>(Left_AD&gt;LeftMax)	       <span class="comment">//确定左灯峰值</span></span><br><span class="line">	&#123;</span><br><span class="line">		LeftMax=Left_AD;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(Right_AD&gt;RightMax)       <span class="comment">//确定右灯峰值</span></span><br><span class="line">	&#123;</span><br><span class="line">		RightMax=Right_AD;</span><br><span class="line">	&#125;		</span><br><span class="line">	</span><br><span class="line">	wucha=Right_AD-Left_AD;    <span class="comment">//确定两灯远离黑线的个体误差</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Right_AD:%d Left_AD:%d\r\n&quot;</span>,Right_AD,Left_AD);    <span class="comment">//用rawdate实时打印方便记录</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;wucha:%d LeftMax:%d RightMax:%d \r\n&quot;</span>,wucha,LeftMax,RightMax);</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">FloatToByte</span>                             //联合体函数</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">float</span> ADC_ConvertedValueLocal[NOFCHANEL];   <span class="comment">//用于保存转换计算后的电压值</span></span><br><span class="line">	<span class="type">char</span> byte[NOFCHANEL*<span class="number">4</span>+<span class="number">4</span>];                   <span class="comment">//联合体    将1个浮点数为4个字节</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">FloatToByte</span> <span class="title">a</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> Data_Out;            <span class="comment">//ADC数学处理获得值</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> Left_AD,Right_AD;    <span class="comment">//左右灯实时采样数据</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Test_ADC_PRINTF</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	  a.byte[NOFCHANEL*<span class="number">4</span>+<span class="number">0</span>]=<span class="number">0x00</span>;</span><br><span class="line">	  a.byte[NOFCHANEL*<span class="number">4</span>+<span class="number">1</span>]=<span class="number">0x00</span>;</span><br><span class="line">	  a.byte[NOFCHANEL*<span class="number">4</span>+<span class="number">2</span>]=<span class="number">0x80</span>;</span><br><span class="line">    a.byte[NOFCHANEL*<span class="number">4</span>+<span class="number">3</span>]=<span class="number">0x7f</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">0</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">0</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">1</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">1</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">2</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">2</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">3</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">3</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">4</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">4</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">5</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">5</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">6</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">6</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">7</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">7</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">8</span>] = (<span class="type">float</span>)Right_AD ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">9</span>] = (<span class="type">float</span>)Left_AD ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">10</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">10</span>];</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">11</span>] = (<span class="type">float</span>)Data_Out ;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;NOFCHANEL*<span class="number">4</span>+<span class="number">4</span>;i++)      <span class="comment">//NOFCHANEL*4+4为数值12*4+4=52</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,a.byte[i]);</span><br><span class="line">			&#125;</span><br><span class="line">       </span><br><span class="line">        Delay_MS(<span class="number">5</span>);        <span class="comment">//5ms一采样</span></span><br><span class="line">				</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> WUCHA -400 		</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LEFT_MAX 2927   </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RIGHT_MAX 2868  	</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">ADC_chuli</span><span class="params">()</span></span><br><span class="line">&#123;	</span><br><span class="line">	Left_AD=ADC_ConvertedValue[<span class="number">4</span>];</span><br><span class="line">	Right_AD=ADC_ConvertedValue[<span class="number">7</span>];</span><br><span class="line">	</span><br><span class="line">	Data_Out=(Left_AD-Right_AD+WUCHA);   <span class="comment">//只有两个灯，故只能作差处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	 <span class="type">uint16_t</span> kp;</span><br><span class="line">	 <span class="type">uint16_t</span> ki;</span><br><span class="line">	 <span class="type">uint16_t</span> kd;</span><br><span class="line"></span><br><span class="line">&#125;PID;</span><br><span class="line"></span><br><span class="line">PID pid;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">PositionPID</span><span class="params">(<span class="type">float</span> dev)</span>         <span class="comment">//此为位置式pid（需要两次），可以考虑增量式pid（需要三次）</span></span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="type">float</span> Position_kp=(<span class="type">float</span>)pid.kp,Position_ki=(<span class="type">float</span>)pid.ki,Position_kd=(<span class="type">float</span>)pid.kd;</span><br><span class="line">  <span class="type">static</span> <span class="type">float</span> Bias,Pwm,Integral_Bias,Last_Bias;</span><br><span class="line">	Bias=Data_Out;</span><br><span class="line">	Integral_Bias+=Bias;</span><br><span class="line">	</span><br><span class="line">	Pwm=Position_kp*Bias+Position_ki*Integral_Bias+Position_kd*(Bias-Last_Bias);</span><br><span class="line">	</span><br><span class="line">	Last_Bias=Bias;</span><br><span class="line">	<span class="keyword">return</span> Pwm;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">motor_xunji</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Motor_Run(motor_1, <span class="number">200</span>-PositionPID(Data_Out));</span><br><span class="line">  Motor_Run(motor_2, <span class="number">0</span>);</span><br><span class="line">  Motor_Run(motor_3, <span class="number">200</span>-PositionPID(Data_Out));</span><br><span class="line">  Motor_Run(motor_4, <span class="number">0</span>);</span><br><span class="line">  Motor_Run(motor_5, <span class="number">200</span>+PositionPID(Data_Out));</span><br><span class="line">  Motor_Run(motor_6, <span class="number">0</span>);</span><br><span class="line">  Motor_Run(motor_7, <span class="number">200</span>+PositionPID(Data_Out));</span><br><span class="line">	Motor_Run(motor_8, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">ADC_chuli</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">ADC_caiyang</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">motor_xunji</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="comment">// 将 ADC1 转换的电压值通过 DMA 方式传到 SRAM</span></span><br><span class="line"><span class="keyword">extern</span> __IO <span class="type">uint16_t</span> ADC_ConvertedValue[NOFCHANEL];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 局部变量，用于保存转换计算后的电压值</span></span><br><span class="line"><span class="type">float</span> ADC_ConvertedValueLocal[NOFCHANEL];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> Data_Out;            </span><br><span class="line"><span class="type">int</span> Left_AD,Right_AD;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	pid.kp=<span class="number">0</span>;</span><br><span class="line">	pid.kp=<span class="number">0</span>;</span><br><span class="line">	pid.kp=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	USART_Config();</span><br><span class="line">	ADCx_Init();</span><br><span class="line">	Delay_Init();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line"><span class="comment">//	ADC_caiyang();     //获得adc采样数据</span></span><br><span class="line">    ADC_chuli();    <span class="comment">//只进行adc采样数据处理</span></span><br><span class="line"></span><br><span class="line">		Delay_MS(<span class="number">5</span>);</span><br><span class="line"><span class="comment">//	Test_ADC_PRINTF(); //打印ADC波形</span></span><br><span class="line">		</span><br><span class="line"><span class="comment">//		void motor_xunji();    //循迹启动</span></span><br><span class="line">		</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-机械臂："><a href="#2-机械臂：" class="headerlink" title="2.机械臂："></a>2.机械臂：</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="number">66</span> == i)                         <span class="comment">//上升</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (; rise &gt; <span class="number">500</span>; rise--)</span><br><span class="line">	&#123;</span><br><span class="line">		Servo_Run(servo_1, rise);</span><br><span class="line">		Delay_MS(<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="number">54</span> == i)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="number">65</span> == i)                          <span class="comment">//下降</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (; rise &lt; <span class="number">2500</span>; rise++)</span><br><span class="line">	&#123;</span><br><span class="line">		Servo_Run(servo_1, rise);</span><br><span class="line">		Delay_MS(<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="number">54</span> == i)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="number">67</span> == i)                        <span class="comment">//夹取</span></span><br><span class="line">&#123;</span><br><span class="line">	Servo_Run(servo_2, <span class="number">1000</span>);</span><br><span class="line">	Servo_Run(servo_3, <span class="number">1400</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="number">68</span> == i)                        <span class="comment">//松开</span></span><br><span class="line">&#123; </span><br><span class="line">	Servo_Run(servo_2, <span class="number">1200</span>);</span><br><span class="line">	Servo_Run(servo_3, <span class="number">1200</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于本次赛制并不是单纯实现循迹功能，而是走迷宫，需要在十字路口，T字路口，环形岛等情况时进行特殊判断，故舍弃原先两灯方案。</p>
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
-      <tags>
-        <tag>stm32</tag>
       </tags>
   </entry>
   <entry>
@@ -3258,6 +3176,88 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><h2 id="四、置信度"><a href="#
       </tags>
   </entry>
   <entry>
+    <title>基于stm32的蓝牙循迹小车思路</title>
+    <url>/2023/11/05/%E5%9F%BA%E4%BA%8Estm32%E7%9A%84%E8%93%9D%E7%89%99%E5%BE%AA%E8%BF%B9%E5%B0%8F%E8%BD%A6%E6%80%9D%E8%B7%AF/</url>
+    <content><![CDATA[<h2 id="一-概况："><a href="#一-概况：" class="headerlink" title="一. 概况："></a>一. 概况：</h2><ol>
+<li><p>基本思路。</p>
+</li>
+<li><p>最初代码实现。</p>
+</li>
+<li><p>最终代码实现。</p>
+<span id="more"></span>
+</li>
+</ol>
+<h2 id="二-思路实现-amp-amp-理解："><a href="#二-思路实现-amp-amp-理解：" class="headerlink" title="二. 思路实现&amp;&amp;理解："></a>二. 思路实现&amp;&amp;理解：</h2><h3 id="1-循迹："><a href="#1-循迹：" class="headerlink" title="1. 循迹："></a>1. 循迹：</h3><ul>
+<li><p>整体思路：ADC采样—&gt;对ADC采样数据的数学处理—&gt;对得到的数据进行PID算法运算—&gt;赋值给ccr调整pwm波输出占空比驱动电机。循环此过程则可实现速度闭环实现直角弯道除外的赛道。</p>
+</li>
+<li><p>方案：两灯&amp;三灯及以上。</p>
+</li>
+</ul>
+<p>​       <strong>归根结底，重点在于数学算法处理。</strong></p>
+<ul>
+<li><p>实操理解：</p>
+<p><strong>针对采样：</strong></p>
+</li>
+</ul>
+<p>​      <em>重要参数</em>：单个采样范围及变化趋势&amp;&amp;单个采样值。</p>
+<p>​              单个采样范围及变化趋势：非常有限，几乎不触及黑线采样值变化很小，但一接近黑线立即成指数增长。</p>
+<p>​              单个采样值：几百（个体差异）~约2300的原始值。但转化为电压值之后仅为0~3.3，大量数据被压缩，损失了很多精度，最终决定采用原始                                        值进行操作。</p>
+<p>​              误差来源<em>包括但不限</em>：环境红外线影响  红外对管个体差异  红外对管彼此距离  红外对管对地距离。</p>
+<p>​              环境红外线影响：</p>
+<p>​                    非常影响红外对管采集数据。最终解决办法有两种：</p>
+<p>​                （1）在每个红外对管四周缠上黑胶布，用以反射环境红外线并聚合红外对管发出的红外线；</p>
+<p>​                （2）在代码中初始化过程中消除环境误差并不需要测得，但随着小车运动导 致的位置改变，环境误差在变化，而我们只消除了开始的误差，但我们放弃使用动态消除误差，可能会影响正常循迹和路口识别。</p>
+<p>​               红外对管个体差异：</p>
+<p>​                    不同红外对管的峰值大致相同，但最低值各有千秋。有的一两百，有的却五六百。考虑到对ADC采样数据进行处理时，个体误差的存在会影响很多计算结果造成两个灯调节作用差别很大。故必须消除。最终我们采用个体采样值域大的红外对管，以输出更加灵敏的值，并在代码中在初始化过程中，连同环境误差一起消除。</p>
+<p>​               红外对管彼此距离：</p>
+<p>​                    主要影响两点，一是识别范围，二是数学处理时产生漏洞。对于第一点，两灯距离太小时，识别范围就太小，小车遇到稍抖一点的弯路时极易偏线，但两灯距离过大时，就相当于允许小车有一定程度的偏线，造成循迹不流畅。对于第二点，若两灯距离过小，此时可以忽略个体误差，但同时ADC数学处理获得值值域很小，调节精度或说范围很小，若两灯距离过大，两灯之间会留出一个处理值为0的空白区允许小车一定程度偏线，这是我们不希望看到的。</p>
+<p>​               红外对管对地距离：</p>
+<p>​                    主要影响红外对管的采样值域。对地距离过低时红外对管接收不到反射光，采样值很低，对地距离过高时很受环境光干扰，接收红外线很多，采样值很高，通过打印波形图来观察何对地距离红外对管的检测距离最大，以及采样值域最大。</p>
+<p>​        <strong>针对数学处理：</strong></p>
+<p>​       处理参数：识别范围，输出值。</p>
+<p>​                  识别范围：即小车的“视野”，能够允许偏线程度最大的情况下依然可以回归正轨。</p>
+<p>​                   输出值：作为偏差，进行PID运算后，改变ccr来改变电机占空比。</p>
+<p>​       处理方法与消除误差：</p>
+<p>​                   两灯： 缺少能够作为条件的判断，所以只有让两灯采样值相减，同时让两灯在同一环境下初始化，记录两灯差值，然后代入程序中来消除个体误差和环境误差，然后调用ADC数据处理函数，得到曲线。</p>
+<p>​      </p>
+<p>​    <strong>针对PID：</strong></p>
+<p>​        本次任务中采用位置式PID，且用到P与D参与运算。</p>
+<p>​        采用PD系统调节原因：通过P进行主导线形控制，通过D来计算未来趋势抑制系统震荡，即通过PD系统获得更快的反应速度。符合循迹需求。</p>
+<p>​        输入值：实时计算ADC数学处理获得值与目标值0的差值</p>
+<p>​        输出值：除了初始占空比以外的用于控制电机的pwm</p>
+<p>​        偏差：ADC数学处理获得值与目标值0的差值，用于P计算</p>
+<p>​        二次偏差：前后两次偏差的差值，用于D计算</p>
+<p>​        调参注意：P过小调节作用小，P过大造成过冲系统震荡。D过小调节作用小，D过大会放大系统趋势的影响，使系统震荡。</p>
+<p>​        调参顺序：先设D=0，调P，从0逐渐增大，直到系统震荡。再调D使其逐渐增大，直到系统震荡。之后进行微调，直到系统稳定。</p>
+<p>​      <strong>针对电机控制：</strong></p>
+<p>​          调节方式：对两边电机同时附PID运算值，以达到使两测车轮具有相同效果的调节作用。</p>
+<p>​          调节精度及限制：</p>
+<p>​          考虑到可供调节的ccr范围为0~500( 有点小，占空比的相对调节精度小），但考虑到对循迹小车来讲500的调节范围够用，所以没改，但后来调车发现问题，发现有些曲率较大的弯转不过去，起初认为是P设的过小，但经过数学运算后发现问题是数值溢出，即能转过这个弯路的PID处理值没发挥出它的作用，因为溢出下限即占空比为0，溢出上限即占空比为100，所以最终采用【循迹电机反转函数】的使用，使溢出值得到充分利用。事实上增大ccr的可操作区间亦可。</p>
+<p>​           初始值设置：一开始设置为50%占空比，因为考虑到想使PID调节具有对称性。事实效果很好，循迹很丝滑，但后来考虑到走直线速度较慢，故逐渐增大初始占空比，再具体进行调参。</p>
+<p>​           置“0”操作：每次赋值给电机后，电机会保持这个数值运动，但在赋新的值之前，若不将之前赋过值的电机置0，两者会发生冲突比如相互抵消。</p>
+<h3 id="2-机械结构："><a href="#2-机械结构：" class="headerlink" title="2. 机械结构："></a>2. 机械结构：</h3><ul>
+<li>机械臂：</li>
+</ul>
+<p>​              负责能量块夹放及将普通矿放入盒子内。</p>
+<ul>
+<li>机械铲：</li>
+</ul>
+<p>​              负责为机械臂工作铺路。（可根据具体需要调整）</p>
+<h2 id="三-最初代码实现："><a href="#三-最初代码实现：" class="headerlink" title="三. 最初代码实现："></a>三. 最初代码实现：</h2><h2 id="1-循迹：-1"><a href="#1-循迹：-1" class="headerlink" title="1. 循迹："></a>1. 循迹：</h2><ul>
+<li>两灯：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">ADC_caiyang</span><span class="params">(<span class="type">void</span>)</span>    </span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> wucha=<span class="number">0</span>;             <span class="comment">//定义两灯远离黑线的个体误差</span></span><br><span class="line">	</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> LeftMax=<span class="number">0</span>;     <span class="comment">//定义左灯峰值 </span></span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> RightMax=<span class="number">0</span>;    <span class="comment">//定义右灯峰值</span></span><br><span class="line"></span><br><span class="line">	Right_AD=ADC_ConvertedValue[<span class="number">4</span>]; 	<span class="comment">//定义左右灯实时采样数据</span></span><br><span class="line">	Left_AD=ADC_ConvertedValue[<span class="number">7</span>];		</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">if</span>(Left_AD&gt;LeftMax)	       <span class="comment">//确定左灯峰值</span></span><br><span class="line">	&#123;</span><br><span class="line">		LeftMax=Left_AD;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(Right_AD&gt;RightMax)       <span class="comment">//确定右灯峰值</span></span><br><span class="line">	&#123;</span><br><span class="line">		RightMax=Right_AD;</span><br><span class="line">	&#125;		</span><br><span class="line">	</span><br><span class="line">	wucha=Right_AD-Left_AD;    <span class="comment">//确定两灯远离黑线的个体误差</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Right_AD:%d Left_AD:%d\r\n&quot;</span>,Right_AD,Left_AD);    <span class="comment">//用rawdate实时打印方便记录</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;wucha:%d LeftMax:%d RightMax:%d \r\n&quot;</span>,wucha,LeftMax,RightMax);</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">FloatToByte</span>                             //联合体函数</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">float</span> ADC_ConvertedValueLocal[NOFCHANEL];   <span class="comment">//用于保存转换计算后的电压值</span></span><br><span class="line">	<span class="type">char</span> byte[NOFCHANEL*<span class="number">4</span>+<span class="number">4</span>];                   <span class="comment">//联合体    将1个浮点数为4个字节</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">FloatToByte</span> <span class="title">a</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> Data_Out;            <span class="comment">//ADC数学处理获得值</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> Left_AD,Right_AD;    <span class="comment">//左右灯实时采样数据</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">Test_ADC_PRINTF</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	  a.byte[NOFCHANEL*<span class="number">4</span>+<span class="number">0</span>]=<span class="number">0x00</span>;</span><br><span class="line">	  a.byte[NOFCHANEL*<span class="number">4</span>+<span class="number">1</span>]=<span class="number">0x00</span>;</span><br><span class="line">	  a.byte[NOFCHANEL*<span class="number">4</span>+<span class="number">2</span>]=<span class="number">0x80</span>;</span><br><span class="line">    a.byte[NOFCHANEL*<span class="number">4</span>+<span class="number">3</span>]=<span class="number">0x7f</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">0</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">0</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">1</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">1</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">2</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">2</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">3</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">3</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">4</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">4</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">5</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">5</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">6</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">6</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">7</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">7</span>] ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">8</span>] = (<span class="type">float</span>)Right_AD ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">9</span>] = (<span class="type">float</span>)Left_AD ;</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">10</span>] = (<span class="type">float</span>)ADC_ConvertedValue[<span class="number">10</span>];</span><br><span class="line">        a.ADC_ConvertedValueLocal[<span class="number">11</span>] = (<span class="type">float</span>)Data_Out ;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;NOFCHANEL*<span class="number">4</span>+<span class="number">4</span>;i++)      <span class="comment">//NOFCHANEL*4+4为数值12*4+4=52</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,a.byte[i]);</span><br><span class="line">			&#125;</span><br><span class="line">       </span><br><span class="line">        Delay_MS(<span class="number">5</span>);        <span class="comment">//5ms一采样</span></span><br><span class="line">				</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> WUCHA -400 		</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LEFT_MAX 2927   </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> RIGHT_MAX 2868  	</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">ADC_chuli</span><span class="params">()</span></span><br><span class="line">&#123;	</span><br><span class="line">	Left_AD=ADC_ConvertedValue[<span class="number">4</span>];</span><br><span class="line">	Right_AD=ADC_ConvertedValue[<span class="number">7</span>];</span><br><span class="line">	</span><br><span class="line">	Data_Out=(Left_AD-Right_AD+WUCHA);   <span class="comment">//只有两个灯，故只能作差处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	 <span class="type">uint16_t</span> kp;</span><br><span class="line">	 <span class="type">uint16_t</span> ki;</span><br><span class="line">	 <span class="type">uint16_t</span> kd;</span><br><span class="line"></span><br><span class="line">&#125;PID;</span><br><span class="line"></span><br><span class="line">PID pid;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">PositionPID</span><span class="params">(<span class="type">float</span> dev)</span>         <span class="comment">//此为位置式pid（需要两次），可以考虑增量式pid（需要三次）</span></span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="type">float</span> Position_kp=(<span class="type">float</span>)pid.kp,Position_ki=(<span class="type">float</span>)pid.ki,Position_kd=(<span class="type">float</span>)pid.kd;</span><br><span class="line">  <span class="type">static</span> <span class="type">float</span> Bias,Pwm,Integral_Bias,Last_Bias;</span><br><span class="line">	Bias=Data_Out;</span><br><span class="line">	Integral_Bias+=Bias;</span><br><span class="line">	</span><br><span class="line">	Pwm=Position_kp*Bias+Position_ki*Integral_Bias+Position_kd*(Bias-Last_Bias);</span><br><span class="line">	</span><br><span class="line">	Last_Bias=Bias;</span><br><span class="line">	<span class="keyword">return</span> Pwm;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">motor_xunji</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	Motor_Run(motor_1, <span class="number">200</span>-PositionPID(Data_Out));</span><br><span class="line">  Motor_Run(motor_2, <span class="number">0</span>);</span><br><span class="line">  Motor_Run(motor_3, <span class="number">200</span>-PositionPID(Data_Out));</span><br><span class="line">  Motor_Run(motor_4, <span class="number">0</span>);</span><br><span class="line">  Motor_Run(motor_5, <span class="number">200</span>+PositionPID(Data_Out));</span><br><span class="line">  Motor_Run(motor_6, <span class="number">0</span>);</span><br><span class="line">  Motor_Run(motor_7, <span class="number">200</span>+PositionPID(Data_Out));</span><br><span class="line">	Motor_Run(motor_8, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">ADC_chuli</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">ADC_caiyang</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">motor_xunji</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="comment">// 将 ADC1 转换的电压值通过 DMA 方式传到 SRAM</span></span><br><span class="line"><span class="keyword">extern</span> __IO <span class="type">uint16_t</span> ADC_ConvertedValue[NOFCHANEL];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 局部变量，用于保存转换计算后的电压值</span></span><br><span class="line"><span class="type">float</span> ADC_ConvertedValueLocal[NOFCHANEL];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> Data_Out;            </span><br><span class="line"><span class="type">int</span> Left_AD,Right_AD;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">	pid.kp=<span class="number">0</span>;</span><br><span class="line">	pid.kp=<span class="number">0</span>;</span><br><span class="line">	pid.kp=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	USART_Config();</span><br><span class="line">	ADCx_Init();</span><br><span class="line">	Delay_Init();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line"><span class="comment">//	ADC_caiyang();     //获得adc采样数据</span></span><br><span class="line">    ADC_chuli();    <span class="comment">//只进行adc采样数据处理</span></span><br><span class="line"></span><br><span class="line">		Delay_MS(<span class="number">5</span>);</span><br><span class="line"><span class="comment">//	Test_ADC_PRINTF(); //打印ADC波形</span></span><br><span class="line">		</span><br><span class="line"><span class="comment">//		void motor_xunji();    //循迹启动</span></span><br><span class="line">		</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-机械臂："><a href="#2-机械臂：" class="headerlink" title="2.机械臂："></a>2.机械臂：</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="number">66</span> == i)                         <span class="comment">//上升</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (; rise &gt; <span class="number">500</span>; rise--)</span><br><span class="line">	&#123;</span><br><span class="line">		Servo_Run(servo_1, rise);</span><br><span class="line">		Delay_MS(<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="number">54</span> == i)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="number">65</span> == i)                          <span class="comment">//下降</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (; rise &lt; <span class="number">2500</span>; rise++)</span><br><span class="line">	&#123;</span><br><span class="line">		Servo_Run(servo_1, rise);</span><br><span class="line">		Delay_MS(<span class="number">2</span>);</span><br><span class="line">		<span class="keyword">if</span> (<span class="number">54</span> == i)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="number">67</span> == i)                        <span class="comment">//夹取</span></span><br><span class="line">&#123;</span><br><span class="line">	Servo_Run(servo_2, <span class="number">1000</span>);</span><br><span class="line">	Servo_Run(servo_3, <span class="number">1400</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="number">68</span> == i)                        <span class="comment">//松开</span></span><br><span class="line">&#123; </span><br><span class="line">	Servo_Run(servo_2, <span class="number">1200</span>);</span><br><span class="line">	Servo_Run(servo_3, <span class="number">1200</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于本次赛制并不是单纯实现循迹功能，而是走迷宫，需要在十字路口，T字路口，环形岛等情况时进行特殊判断，故舍弃原先两灯方案。</p>
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>stm32</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>成绩单</title>
     <url>/2023/12/09/%E6%88%90%E7%BB%A9%E5%8D%95/</url>
     <content><![CDATA[<h1 id="TXT成绩单"><a href="#TXT成绩单" class="headerlink" title="TXT成绩单"></a>TXT成绩单</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><strong>一份班级成绩表存储在一个TXT文件中，每行由学号、姓名、数学成绩、英语成绩、C语言成绩组成，如下：</strong></p>
@@ -3460,20 +3460,6 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><h2 id="四、置信度"><a href="#
       </tags>
   </entry>
   <entry>
-    <title>文件基本操作</title>
-    <url>/2023/12/10/%E6%96%87%E4%BB%B6%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h3 id="文件基本操作"><a href="#文件基本操作" class="headerlink" title="文件基本操作"></a>文件基本操作</h3><p>（临时抱佛脚，捞捞）</p>
-<span id="more"></span>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    FILE *file; <span class="comment">// 文件指针</span></span><br><span class="line">    <span class="type">char</span> filename[] = <span class="string">&quot;example.txt&quot;</span>; <span class="comment">// 文件名</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开文件以进行读写操作（如果文件不存在，则创建新文件）</span></span><br><span class="line">    file = fopen(filename, <span class="string">&quot;w+&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (file == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法打开文件 %s\n&quot;</span>, filename);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写入数据到文件</span></span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;这是一个文件操作示例。\n&quot;</span>);</span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;欢迎使用 C 语言进行文件操作！\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将文件指针移到文件开头</span></span><br><span class="line">    fseek(file, <span class="number">0</span>, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从文件中读取内容并输出到屏幕上</span></span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">while</span> (fgets(buffer, <span class="keyword">sizeof</span>(buffer), file) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, buffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭文件</span></span><br><span class="line">    fclose(file);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>屎山</category>
-      </categories>
-      <tags>
-        <tag>C语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>树莓派配合公网服务器frp转发实现内网穿透</title>
     <url>/2025/02/23/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E5%90%88%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8frp%E8%BD%AC%E5%8F%91%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
     <content><![CDATA[<p>相信不少的同学都遇到过一个很麻烦的事情——实验室用的服务器只有连上实验室的内网后才能使用，一旦外出开impart或者回家后，就不能进入实验室的服务器继续玩耍（卷）了。这个时候怎么办呢？<br>如果你没有一个公网服务器又不想花钱，cpolar是你的最佳选择，但是如果你有事情就变得完全不一样了——<strong>frp的优雅永不过时</strong>。</p>
@@ -3534,6 +3520,20 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><h2 id="四、置信度"><a href="#
         <tag>frp转发</tag>
         <tag>树莓派</tag>
         <tag>内网穿透</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文件基本操作</title>
+    <url>/2023/12/10/%E6%96%87%E4%BB%B6%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h3 id="文件基本操作"><a href="#文件基本操作" class="headerlink" title="文件基本操作"></a>文件基本操作</h3><p>（临时抱佛脚，捞捞）</p>
+<span id="more"></span>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    FILE *file; <span class="comment">// 文件指针</span></span><br><span class="line">    <span class="type">char</span> filename[] = <span class="string">&quot;example.txt&quot;</span>; <span class="comment">// 文件名</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开文件以进行读写操作（如果文件不存在，则创建新文件）</span></span><br><span class="line">    file = fopen(filename, <span class="string">&quot;w+&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (file == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法打开文件 %s\n&quot;</span>, filename);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写入数据到文件</span></span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;这是一个文件操作示例。\n&quot;</span>);</span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;欢迎使用 C 语言进行文件操作！\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将文件指针移到文件开头</span></span><br><span class="line">    fseek(file, <span class="number">0</span>, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从文件中读取内容并输出到屏幕上</span></span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">while</span> (fgets(buffer, <span class="keyword">sizeof</span>(buffer), file) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, buffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭文件</span></span><br><span class="line">    fclose(file);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>屎山</category>
+      </categories>
+      <tags>
+        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -3764,34 +3764,6 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><h2 id="四、置信度"><a href="#
       </tags>
   </entry>
   <entry>
-    <title>线性表</title>
-    <url>/2024/09/20/%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
-    <content><![CDATA[<h1 id="学习笔记：顺序表（SQList）的理解与实现"><a href="#学习笔记：顺序表（SQList）的理解与实现" class="headerlink" title="学习笔记：顺序表（SQList）的理解与实现"></a>学习笔记：顺序表（SQList）的理解与实现</h1><h2 id="1-什么是顺序表（SQList）-s"><a href="#1-什么是顺序表（SQList）-s" class="headerlink" title="1. 什么是顺序表（SQList） ß"></a>1. 什么是顺序表（SQList） ß</h2><p>顺序表是一种常见的线性数据结构，其特点是通过一组连续的内存空间来存储数据元素。在顺序表中，每个元素都有一个直接的前驱和后继（除了第一个元素没有前驱，最后一个元素没有后继）。顺序表的操作主要包括插入、删除、查找等。</p>
-<h2 id="2-顺序表的特点"><a href="#2-顺序表的特点" class="headerlink" title="2. 顺序表的特点"></a>2. 顺序表的特点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li><strong>访问速度快</strong>：由于元素在内存中是连续存储的，因此可以通过索引直接访问，时间复杂度为 O(1)。</li>
-<li><strong>易于实现</strong>：使用数组或容器如 <code>std::vector</code> 可以轻松实现顺序表。</li>
-</ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li><strong>插入和删除效率低</strong>：当在表中间插入或删除元素时，需要移动后续的所有元素，最坏情况下的时间复杂度为 O(n)。</li>
-<li><strong>空间预分配</strong>：需要提前知道表的最大容量，否则可能会导致内存不足。</li>
-</ul>
-<h2 id="3-顺序表的实现"><a href="#3-顺序表的实现" class="headerlink" title="3. 顺序表的实现"></a>3. 顺序表的实现</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SQList</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; elements;</span><br><span class="line">    <span class="type">int</span> size; <span class="comment">// 当前顺序表的实际大小</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">SQList</span>() : <span class="built_in">size</span>(<span class="number">0</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向顺序表中添加元素</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> elem)</span> </span>&#123;</span><br><span class="line">        elements.<span class="built_in">push_back</span>(elem);</span><br><span class="line">        ++size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据索引获取元素</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">            std::cerr &lt;&lt; <span class="string">&quot;Index out of bounds.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 或者抛出异常</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> elements[index];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除指定索引处的元素</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">remove</span><span class="params">(<span class="type">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">            std::cerr &lt;&lt; <span class="string">&quot;Index out of bounds.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        elements.<span class="built_in">erase</span>(elements.<span class="built_in">begin</span>() + index);</span><br><span class="line">        --size;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印顺序表的内容</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="built_in">get</span>(i) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取顺序表的大小</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getSize</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    SQList list;</span><br><span class="line">    list.<span class="built_in">add</span>(<span class="number">1</span>);</span><br><span class="line">    list.<span class="built_in">add</span>(<span class="number">2</span>);</span><br><span class="line">    list.<span class="built_in">add</span>(<span class="number">3</span>);</span><br><span class="line">    list.<span class="built_in">print</span>(); <span class="comment">// 输出: 1 2 3</span></span><br><span class="line"></span><br><span class="line">    list.<span class="built_in">remove</span>(<span class="number">1</span>);</span><br><span class="line">    list.<span class="built_in">print</span>(); <span class="comment">// 输出: 1 3</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-时间复杂度分析"><a href="#4-时间复杂度分析" class="headerlink" title="4. 时间复杂度分析"></a>4. 时间复杂度分析</h2><ul>
-<li><strong>访问</strong>: O(1)，直接通过索引访问。</li>
-<li><strong>插入</strong>: 最坏情况下为 O(n)，当插入位置位于表的开头或中间时。</li>
-<li><strong>删除</strong>: 最坏情况下为 O(n)，当删除位置位于表的开头或中间时。</li>
-<li><strong>查找</strong>: O(n)，需要遍历整个表。</li>
-</ul>
-<h2 id="5-应用场景"><a href="#5-应用场景" class="headerlink" title="5. 应用场景"></a>5. 应用场景</h2><p>顺序表适合用于需要频繁访问但插入和删除较少的情况，例如缓存数据、静态数据集合等。</p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>筛去重复元素</title>
     <url>/2023/12/14/%E7%AD%9B%E5%8E%BB%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/</url>
     <content><![CDATA[<h1 id="筛去重复元素"><a href="#筛去重复元素" class="headerlink" title="筛去重复元素"></a>筛去重复元素</h1><p>最近发现这样一道题，大致意思是给定一个数组，其中元素仅有一个只出现一次，其余元素均出现两次，编写程序以找出这个数。</p>
@@ -3867,6 +3839,34 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><h2 id="四、置信度"><a href="#
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线性表</title>
+    <url>/2024/09/20/%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
+    <content><![CDATA[<h1 id="学习笔记：顺序表（SQList）的理解与实现"><a href="#学习笔记：顺序表（SQList）的理解与实现" class="headerlink" title="学习笔记：顺序表（SQList）的理解与实现"></a>学习笔记：顺序表（SQList）的理解与实现</h1><h2 id="1-什么是顺序表（SQList）-s"><a href="#1-什么是顺序表（SQList）-s" class="headerlink" title="1. 什么是顺序表（SQList） ß"></a>1. 什么是顺序表（SQList） ß</h2><p>顺序表是一种常见的线性数据结构，其特点是通过一组连续的内存空间来存储数据元素。在顺序表中，每个元素都有一个直接的前驱和后继（除了第一个元素没有前驱，最后一个元素没有后继）。顺序表的操作主要包括插入、删除、查找等。</p>
+<h2 id="2-顺序表的特点"><a href="#2-顺序表的特点" class="headerlink" title="2. 顺序表的特点"></a>2. 顺序表的特点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li><strong>访问速度快</strong>：由于元素在内存中是连续存储的，因此可以通过索引直接访问，时间复杂度为 O(1)。</li>
+<li><strong>易于实现</strong>：使用数组或容器如 <code>std::vector</code> 可以轻松实现顺序表。</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li><strong>插入和删除效率低</strong>：当在表中间插入或删除元素时，需要移动后续的所有元素，最坏情况下的时间复杂度为 O(n)。</li>
+<li><strong>空间预分配</strong>：需要提前知道表的最大容量，否则可能会导致内存不足。</li>
+</ul>
+<h2 id="3-顺序表的实现"><a href="#3-顺序表的实现" class="headerlink" title="3. 顺序表的实现"></a>3. 顺序表的实现</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SQList</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;<span class="type">int</span>&gt; elements;</span><br><span class="line">    <span class="type">int</span> size; <span class="comment">// 当前顺序表的实际大小</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">SQList</span>() : <span class="built_in">size</span>(<span class="number">0</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向顺序表中添加元素</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> elem)</span> </span>&#123;</span><br><span class="line">        elements.<span class="built_in">push_back</span>(elem);</span><br><span class="line">        ++size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据索引获取元素</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> index)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">            std::cerr &lt;&lt; <span class="string">&quot;Index out of bounds.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">// 或者抛出异常</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> elements[index];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除指定索引处的元素</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">remove</span><span class="params">(<span class="type">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">            std::cerr &lt;&lt; <span class="string">&quot;Index out of bounds.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        elements.<span class="built_in">erase</span>(elements.<span class="built_in">begin</span>() + index);</span><br><span class="line">        --size;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打印顺序表的内容</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="built_in">get</span>(i) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取顺序表的大小</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getSize</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    SQList list;</span><br><span class="line">    list.<span class="built_in">add</span>(<span class="number">1</span>);</span><br><span class="line">    list.<span class="built_in">add</span>(<span class="number">2</span>);</span><br><span class="line">    list.<span class="built_in">add</span>(<span class="number">3</span>);</span><br><span class="line">    list.<span class="built_in">print</span>(); <span class="comment">// 输出: 1 2 3</span></span><br><span class="line"></span><br><span class="line">    list.<span class="built_in">remove</span>(<span class="number">1</span>);</span><br><span class="line">    list.<span class="built_in">print</span>(); <span class="comment">// 输出: 1 3</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-时间复杂度分析"><a href="#4-时间复杂度分析" class="headerlink" title="4. 时间复杂度分析"></a>4. 时间复杂度分析</h2><ul>
+<li><strong>访问</strong>: O(1)，直接通过索引访问。</li>
+<li><strong>插入</strong>: 最坏情况下为 O(n)，当插入位置位于表的开头或中间时。</li>
+<li><strong>删除</strong>: 最坏情况下为 O(n)，当删除位置位于表的开头或中间时。</li>
+<li><strong>查找</strong>: O(n)，需要遍历整个表。</li>
+</ul>
+<h2 id="5-应用场景"><a href="#5-应用场景" class="headerlink" title="5. 应用场景"></a>5. 应用场景</h2><p>顺序表适合用于需要频繁访问但插入和删除较少的情况，例如缓存数据、静态数据集合等。</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
