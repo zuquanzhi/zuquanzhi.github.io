@@ -2,7 +2,7 @@
 title: KMP
 tags: 数据结构
 categories: 数据结构与算法
-cover: 'https://imgapi.jinghuashang.cn/random?18'
+cover: 'https://www.loliapi.com/acg?18'
 abbrlink: 31301
 date: 2024-09-20 16:15:29
 ---

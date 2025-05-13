@@ -2,7 +2,7 @@
 title: screen命令应用
 tags: 命令
 categories: 科研
-cover: 'https://imgapi.jinghuashang.cn/random?13'
+cover: 'https://www.loliapi.com/acg?13'
 abbrlink: 60232
 date: 2024-09-18 23:42:35
 ---

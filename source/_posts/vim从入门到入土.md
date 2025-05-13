@@ -4,7 +4,7 @@ tags: vim
 categories: 工具
 abbrlink: 25909
 date: 2024-10-15 20:31:14
-cover: https://imgapi.jinghuashang.cn/random?24
+cover: https://www.loliapi.com/acg?24
 ---
 
 首先声明我的vscode坚定拥护者身份，奈何十年老古董实在带不动，不得不重新捡起vim开始朴素（装逼）生活。

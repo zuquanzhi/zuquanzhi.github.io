@@ -4,7 +4,7 @@ tags: ROS
 categories: 718
 abbrlink: 51251
 date: 2024-03-11 20:12:21
-cover: https://imgapi.jinghuashang.cn/random?6
+cover: https://www.loliapi.com/acg?6
 ---
 
 <a name="J4y9t"></a>

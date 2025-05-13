@@ -4,7 +4,7 @@ tags: YOLO 目标识别
 categories: 
     - RoboMaster
     - 计算机视觉
-cover: 'https://imgapi.jinghuashang.cn/random?39'
+cover: 'https://www.loliapi.com/acg?39'
 abbrlink: 1343
 date: 2025-01-07 16:30:02
 ---

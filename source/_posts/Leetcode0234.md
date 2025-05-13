@@ -117,7 +117,7 @@ bool isPalindrome(struct ListNode* head) {
 
    若链表有奇数个节点，则中间的节点应该看作是前半部分。
 
-   步骤二可以使用[反转链表]([Leetcode0206 | 全之の博客 (zuweicun.top)](http://zuweicun.top/2023/11/30/Leetcode0206/#more))问题中的解决方法来反转链表的后半部分。
+   步骤二可以使用[反转链表]([Leetcode0206 | 全之の博客 (blog.zuquanzhi.top)](http://blog.zuquanzhi.top/2023/11/30/Leetcode0206/#more))问题中的解决方法来反转链表的后半部分。
 
    步骤三比较两个部分的值，当后半部分到达末尾则比较完成，可以忽略计数情况中的中间节点。
 

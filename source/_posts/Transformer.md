@@ -5,7 +5,7 @@ date: 2024-09-20 16:20:04
 tags: Transformer
 categories: 科研
 
-cover: https://imgapi.jinghuashang.cn/random?22
+cover: https://www.loliapi.com/acg?22
 ---
 ### Transformer 架构及技术细节详解
 

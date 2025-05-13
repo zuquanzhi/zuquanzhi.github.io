@@ -4,7 +4,7 @@ tags: yolo
 categories: 718
 abbrlink: 5926
 date: 2024-04-10 21:48:36
-cover: https://imgapi.jinghuashang.cn/random?1
+cover: https://www.loliapi.com/acg?1
 ---
 
 参考文献：<br />[A simple way of creating a custom object detection model](https://towardsdatascience.com/chess-rolls-or-basketball-lets-create-a-custom-object-detection-model-ef53028eac7d)（这个就是卓晴教程的原版）<br />[YOLOv5的详细使用教程，以及使用yolov5训练自己的数据集_yolo5训练集-CSDN博客](https://blog.csdn.net/sinat_28371057/article/details/120598220?ops_request_misc=&request_id=&biz_id=102&utm_term=yolo5&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-7-120598220.142^v99^control&spm=1018.2226.3001.4187)

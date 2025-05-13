@@ -4,7 +4,7 @@ tags: ROS
 categories: 718
 abbrlink: 51200
 date: 2024-03-11 20:16:00
-cover: https://imgapi.jinghuashang.cn/random?5
+cover: https://www.loliapi.com/acg?5
 ---
 <a name="w3PS4"></a>
 # 安装ROS2 

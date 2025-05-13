@@ -6,5 +6,5 @@ type: Pictures
 
 # 随机二次元图片
 
-![](https://imgapi.jinghuashang.cn/random)
+![](https://www.loliapi.com/acg)
 

@@ -4,7 +4,7 @@ tags: stm32
 categories: 项目
 abbrlink: 43791
 date: 2023-11-05 15:10:23
-cover: https://imgapi.jinghuashang.cn/random?13
+cover: https://www.loliapi.com/acg?13
 ---
 
 ## 一. 概况：
