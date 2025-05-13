@@ -2616,7 +2616,6 @@ run(**vars(opt))
 ]]></content>
       <categories>
         <category>RoboMaster</category>
-        <category>计算机视觉</category>
       </categories>
       <tags>
         <tag>YOLO 目标识别</tag>
@@ -3248,7 +3247,6 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><h2 id="四、置信度"><a href="#
 </blockquote>
 ]]></content>
       <categories>
-        <category>计算机视觉</category>
         <category>RoboMaster</category>
       </categories>
       <tags>
