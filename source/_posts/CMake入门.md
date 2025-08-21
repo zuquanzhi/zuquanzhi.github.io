@@ -4,7 +4,7 @@ tags: Cmake
 categories: 718
 abbrlink: 63833
 date: 2024-01-12 23:55:00
-cover: https://imgapi.jinghuashang.cn/random?8
+cover: https://www.loliapi.com/acg?8
 ---
 
 ### 1 前言

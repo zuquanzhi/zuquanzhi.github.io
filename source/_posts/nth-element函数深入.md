@@ -2,13 +2,13 @@
 title: nth_element函数深入
 tags: STL
 categories: 数据结构与算法
-cover: 'https://imgapi.jinghuashang.cn/random?29'
+cover: 'https://www.loliapi.com/acg?29'
 abbrlink: 47436
 date: 2024-10-02 22:48:02
 ---
 `nth_element` 是 C++ 标准模板库 (STL) 中的一个非常有用的算法，它的功能是对范围内的元素进行部分排序，使得第 `n` 小的元素排到指定位置，其前面的元素都小于等于它，后面的元素都大于等于它，但前后的元素不一定是完全排序的。
 
-`nth_element` 算法基于[快速排序](http://zuweicun.top/2024/10/02/快排/)，时间复杂度在平均情况下是 O(n)，最坏情况是 O(n^2)，但通过随机化选取枢轴可以避免最坏情况的频繁发生。
+`nth_element` 算法基于[快速排序](http://blog.zuquanzhi.top/2024/10/02/快排/)，时间复杂度在平均情况下是 O(n)，最坏情况是 O(n^2)，但通过随机化选取枢轴可以避免最坏情况的频繁发生。
 
 ### 函数原型
 ```cpp

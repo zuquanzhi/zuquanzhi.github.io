@@ -62,7 +62,7 @@ date: 2023-09-27 22:33:35
 | Platform    | Link                                   |
 |-------------|----------------------------------------|
 | 📧 Email    | [zuquanzhi@qq.com](mailto:zuquanzhi@qq.com) |
-| 🌐 Blog     | [zuweicun.top](https://zuweicun.top/)  |
+| 🌐 Blog     | [blog.zuquanzhi.top](https://blog.zuquanzhi.top/)  |
 | 🐙 GitHub   | [zuquanzhi](https://github.com/zuquanzhi) |
 | 📺 Bilibili | [Profile](https://space.bilibili.com/400543177) |
 | 🏆 RoboMaster | [Official Page](https://bbs.robomaster.com/user/298036) |

@@ -4,7 +4,7 @@ tags: OpenCV
 categories: 718
 abbrlink: 48272
 date: 2024-01-12 23:57:55
-cover: https://imgapi.jinghuashang.cn/random?9
+cover: https://www.loliapi.com/acg?9
 ---
 
 经过长达一天的重装和环境配置，正式开始OpenCV的学习。

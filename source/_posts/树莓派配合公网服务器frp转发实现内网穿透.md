@@ -5,7 +5,7 @@ tags:
   - 树莓派
   - 内网穿透
 categories: 树莓派项目
-cover: 'https://imgapi.jinghuashang.cn/random?245'
+cover: 'https://www.loliapi.com/acg?245'
 abbrlink: 14348
 date: 2025-02-23 00:16:45
 ---
