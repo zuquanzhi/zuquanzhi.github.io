@@ -1,6 +1,11 @@
 - class_name: 友链
   class_desc: 贴一些大帅哥的博客
   link_list:
+  - name: 潘神の博客
+    link: https://ruakker.moe
+    avatar: /img/psh.png
+    descr: 学弟太强辣
+
   - name: cmzの博客
     link: https://cmzcc.github.io/
     avatar: /img/cmz.jpg
@@ -8,11 +13,8 @@
   - name: dhrの博客
     link: https://TheRiddler-EdwardNygma.github.io
     avatar: /img/dhr.jpg
-    descr: 洪锐哥哥一点也不能吃辣
-  - name: 潘神の博客
-    link: https://ruakker.moe
-    avatar: /img/psh.png
-    descr: 学弟太强辣
+    descr: 人机吃辣会短路
+
 
 - class_name: Tools
   class_desc: 放一些常用的工具
