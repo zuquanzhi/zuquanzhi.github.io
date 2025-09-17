@@ -2,7 +2,7 @@
 title: YOLOv3深入学习
 tags: YOLO 目标识别
 categories: 
-    - 计算机视觉
+    - 机器人/计算机视觉
 cover: 'https://www.loliapi.com/acg?39'
 abbrlink: 1343
 date: 2025-01-07 16:30:02

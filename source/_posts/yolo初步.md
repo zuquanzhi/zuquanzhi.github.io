@@ -1,7 +1,7 @@
 ---
 title: yolo初步
 tags: yolo
-categories: 718
+categories: 机器人/计算机视觉
 abbrlink: 5926
 date: 2024-04-10 21:48:36
 cover: https://www.loliapi.com/acg?1

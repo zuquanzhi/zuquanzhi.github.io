@@ -1,7 +1,7 @@
 ---
 title: PID算法初探
 tags: PID
-categories: 718
+categories: 机器人/计算机视觉
 abbrlink: 60846
 date: 2023-11-03 20:41:10
 ---

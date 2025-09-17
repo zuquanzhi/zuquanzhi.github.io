@@ -1,7 +1,7 @@
 ---
 title: CMake入门
 tags: Cmake
-categories: 718
+categories: 工具
 abbrlink: 63833
 date: 2024-01-12 23:55:00
 cover: https://www.loliapi.com/acg?8

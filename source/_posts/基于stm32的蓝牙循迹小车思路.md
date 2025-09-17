@@ -1,7 +1,7 @@
 ---
 title: 基于stm32的蓝牙循迹小车思路
 tags: stm32
-categories: 项目
+categories: 机器人/计算机视觉
 abbrlink: 43791
 date: 2023-11-05 15:10:23
 cover: https://www.loliapi.com/acg?13

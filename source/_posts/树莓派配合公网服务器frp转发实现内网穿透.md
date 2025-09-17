@@ -4,7 +4,7 @@ tags:
   - frp转发
   - 树莓派
   - 内网穿透
-categories: 树莓派项目
+categories: 工具
 cover: 'https://www.loliapi.com/acg?245'
 abbrlink: 14348
 date: 2025-02-23 00:16:45

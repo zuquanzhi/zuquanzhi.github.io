@@ -1,7 +1,7 @@
 ---
 title: OpenCV学习
 tags: OpenCV
-categories: 718
+categories: 机器人/计算机视觉
 abbrlink: 48272
 date: 2024-01-12 23:57:55
 cover: https://www.loliapi.com/acg?9
