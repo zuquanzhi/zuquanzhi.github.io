@@ -4289,4 +4289,100 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><h2 id="四、置信度"><a href="#
         <tag>高精度</tag>
       </tags>
   </entry>
+  <entry>
+    <title>深入解析Go中Slice底层实现</title>
+    <url>/2025/09/22/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90Go%E4%B8%ADSlice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h1 id="深入解析Go中Slice的底层实现"><a href="#深入解析Go中Slice的底层实现" class="headerlink" title="深入解析Go中Slice的底层实现"></a>深入解析Go中Slice的底层实现</h1><h2 id="一、Slice的底层数据结构"><a href="#一、Slice的底层数据结构" class="headerlink" title="一、Slice的底层数据结构"></a>一、Slice的底层数据结构</h2><p>切片是 Go 中的一种基本的数据结构，是对底层数组的一个动态、灵活的视图。使用这种结构可以用来管理数据集合。切片的设计想法是由动态数组概念而来，为了开发者可以更加方便的使一个数据结构可以自动增加和减少。但是切片本身并不是动态数据或者数组指针。</p>
+<p>在golang runtime中，slice的实现并不是一个指针，而是一组结构体:<br><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// runtime/slice.go 中的定义</span></span><br><span class="line"><span class="keyword">type</span> slice <span class="keyword">struct</span> &#123;</span><br><span class="line">    array unsafe.Pointer <span class="comment">// 指向底层数组的指针</span></span><br><span class="line">    <span class="built_in">len</span>   <span class="type">int</span>            <span class="comment">// 当前长度</span></span><br><span class="line">    <span class="built_in">cap</span>   <span class="type">int</span>            <span class="comment">// 容量（从起始位置到底层数组末尾的元素个数）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>切片本身并不是动态数组或者数组指针。它内部实现的数据结构通过指针引用底层数组，设定相关属性将数据读写操作限定在指定的区域内。切片本身是一个只读对象，其工作机制类似数组指针的一种封装。</p>
+<p>切片（slice）是对数组一个连续片段的引用，所以切片是一个引用类型（因此更类似于 C++ 中的 Vector 类型，或者 Python 中的 list 类型）。这个片段可以是整个数组，或者是由起始和终止索引标识的一些项的子集。需要注意的是，终止索引标识的项不包括在切片内。切片提供了一个与指向数组的动态窗口。</p>
+<p>给定项的切片索引可能比相关数组的相同元素的索引小。和数组不同的是，切片的长度可以在运行时修改，最小为 0 最大为相关数组的长度：切片是一个长度可变的数组。</p>
+<h2 id="二、内存布局"><a href="#二、内存布局" class="headerlink" title="二、内存布局"></a>二、内存布局</h2><p>假设我们有<br><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line">arr := [<span class="number">6</span>]<span class="type">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">s := arr[<span class="number">1</span>:<span class="number">4</span>] <span class="comment">// s 指向 arr[1] 到 arr[3]</span></span><br></pre></td></tr></table></figure><br>则内存布局如下：<br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">底层数组 arr:</span><br><span class="line">索引:  0   1   2   3   4   5</span><br><span class="line">值:   [0][1][2][3][4][5]</span><br><span class="line">       ↑           ↑</span><br><span class="line">       |___________|</span><br><span class="line">           s 的范围（len=3）</span><br><span class="line"></span><br><span class="line">s 的结构：</span><br><span class="line">- array → 指向 arr[1] 的地址</span><br><span class="line">- len   = 3</span><br><span class="line">- cap   = 5 （因为从 arr[1] 到 arr[5] 共 5 个元素）</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>cap = len(arr) - start_index = 6 - 1 = 5</strong></p>
+</blockquote>
+<hr>
+<h2 id="三、关键操作的底层行为"><a href="#三、关键操作的底层行为" class="headerlink" title="三、关键操作的底层行为"></a>三、关键操作的底层行为</h2><h3 id="1-创建切片（字面量或-make）"><a href="#1-创建切片（字面量或-make）" class="headerlink" title="1. 创建切片（字面量或 make）"></a>1. 创建切片（字面量或 make）</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s := []<span class="type">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Go 会在堆上分配一个底层数组 <code>[10, 20, 30]</code></li>
+<li>创建一个 slice 结构体：<ul>
+<li><code>array</code> → 指向该数组首地址</li>
+<li><code>len = 3</code></li>
+<li><code>cap = 3</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">2</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>分配一个长度为 5 的底层数组（初始化为 0）</li>
+<li>slice 结构体：<ul>
+<li><code>array</code> → 指向数组首地址</li>
+<li><code>len = 2</code></li>
+<li><code>cap = 5</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-切片操作（s-i-j-）"><a href="#2-切片操作（s-i-j-）" class="headerlink" title="2. 切片操作（s[i:j]）"></a>2. 切片操作（s[i:j]）</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line">a := []<span class="type">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">b := a[<span class="number">1</span>:<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>b.array = a.array + 1 * sizeof(int)</code>（指针偏移）</li>
+<li><code>b.len = 4 - 1 = 3</code></li>
+<li><code>b.cap = a.cap - 1 = 6 - 1 = 5</code></li>
+</ul>
+<blockquote>
+<p><strong>不复制数据！只是调整指针和长度/容量。</strong></p>
+</blockquote>
+<p>验证代码：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;unsafe&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a := []<span class="type">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br><span class="line">    b := a[<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">&quot;a 地址: %p, len=%d, cap=%d\n&quot;</span>, &amp;a[<span class="number">0</span>], <span class="built_in">len</span>(a), <span class="built_in">cap</span>(a))</span><br><span class="line">    fmt.Printf(<span class="string">&quot;b 地址: %p, len=%d, cap=%d\n&quot;</span>, &amp;b[<span class="number">0</span>], <span class="built_in">len</span>(b), <span class="built_in">cap</span>(b))</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改 b 影响 a</span></span><br><span class="line">    b[<span class="number">0</span>] = <span class="number">999</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;修改 b[0] 后 a =&quot;</span>, a) <span class="comment">// [0 999 2 3 4 5]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Output：<br><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">a 地址: 0xc0000140c0, <span class="attribute">len</span>=6, <span class="attribute">cap</span>=6</span><br><span class="line">b 地址: 0xc0000140c8, <span class="attribute">len</span>=3, <span class="attribute">cap</span>=5</span><br><span class="line">修改 b[0] 后 a = [0 999 2 3 4 5]</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>b</code> 的起始地址比 <code>a</code> 大 8 字节（64 位系统，int 占 8 字节），说明指针偏移。</p>
+</blockquote>
+<hr>
+<h3 id="3-append-的底层逻辑"><a href="#3-append-的底层逻辑" class="headerlink" title="3. append 的底层逻辑"></a>3. <code>append</code> 的底层逻辑</h3><p><code>append</code> 的伪代码逻辑如下：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">append</span><span class="params">(slice []T, elements ...T)</span></span> []T &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(slice)+<span class="built_in">len</span>(elements) &gt; <span class="built_in">cap</span>(slice) &#123;</span><br><span class="line">        <span class="comment">// 容量不足，需要扩容</span></span><br><span class="line">        newCap := growCap(<span class="built_in">cap</span>(slice), <span class="built_in">len</span>(slice), <span class="built_in">len</span>(elements))</span><br><span class="line">        newSlice := <span class="built_in">make</span>([]T, <span class="built_in">len</span>(slice), newCap)</span><br><span class="line">        <span class="built_in">copy</span>(newSlice, slice) <span class="comment">// 复制旧数据</span></span><br><span class="line">        slice = newSlice</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将新元素追加到 slice[len(slice):]</span></span><br><span class="line">    <span class="built_in">copy</span>(slice[<span class="built_in">len</span>(slice):], elements)</span><br><span class="line">    slice.<span class="built_in">len</span> += <span class="built_in">len</span>(elements)</span><br><span class="line">    <span class="keyword">return</span> slice</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="扩容策略（Go-1-18-）："><a href="#扩容策略（Go-1-18-）：" class="headerlink" title="扩容策略（Go 1.18+）："></a>扩容策略（Go 1.18+）：</h4><ul>
+<li>如果 <code>cap &lt; 1024</code>：新容量 ≈ 2 * 旧容量</li>
+<li>如果 <code>cap &gt;= 1024</code>：每次增加约 1/4 容量（直到满足需求）</li>
+</ul>
+<blockquote>
+<p>实际策略更复杂，考虑内存对齐等。</p>
+</blockquote>
+<p>示例：观察扩容</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> s []<span class="type">int</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;初始: len=%d, cap=%d\n&quot;</span>, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        s = <span class="built_in">append</span>(s, i)</span><br><span class="line">        fmt.Printf(<span class="string">&quot;追加 %d 后: len=%d, cap=%d\n&quot;</span>, i, <span class="built_in">len</span>(s), <span class="built_in">cap</span>(s))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Output：<br><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">初始: <span class="attribute">len</span>=0, <span class="attribute">cap</span>=0</span><br><span class="line">追加 0 后: <span class="attribute">len</span>=1, <span class="attribute">cap</span>=1</span><br><span class="line">追加 1 后: <span class="attribute">len</span>=2, <span class="attribute">cap</span>=2</span><br><span class="line">追加 2 后: <span class="attribute">len</span>=3, <span class="attribute">cap</span>=4</span><br><span class="line">追加 3 后: <span class="attribute">len</span>=4, <span class="attribute">cap</span>=4</span><br><span class="line">追加 4 后: <span class="attribute">len</span>=5, <span class="attribute">cap</span>=8</span><br><span class="line"><span class="built_in">..</span>.</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>可见容量按 1→2→4→8 增长（指数增长）。</p>
+</blockquote>
+<hr>
+<h3 id="4-copy-的底层行为"><a href="#4-copy-的底层行为" class="headerlink" title="4. copy 的底层行为"></a>4. <code>copy</code> 的底层行为</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line">dst := <span class="built_in">make</span>([]<span class="type">int</span>, <span class="number">3</span>)</span><br><span class="line">src := []<span class="type">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">n := <span class="built_in">copy</span>(dst, src)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>底层调用 <code>memmove</code>（或类似）复制 <code>min(len(dst), len(src))</code> 个元素</li>
+<li><strong>不改变 dst 的 len/cap，只改内容</strong></li>
+</ul>
+<hr>
+<h2 id="四、使用-unsafe-观察-slice-结构（高级）"><a href="#四、使用-unsafe-观察-slice-结构（高级）" class="headerlink" title="四、使用 unsafe 观察 slice 结构（高级）"></a>四、使用 <code>unsafe</code> 观察 slice 结构（高级）</h2><blockquote>
+<p>⚠️ 仅用于学习，生产代码避免使用 <code>unsafe</code></p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;unsafe&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    s := []<span class="type">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;slice s: %v\n&quot;</span>, s)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将 slice 强制转换为结构体指针</span></span><br><span class="line">    <span class="keyword">type</span> sliceHeader <span class="keyword">struct</span> &#123;</span><br><span class="line">        ptr <span class="type">uintptr</span></span><br><span class="line">        <span class="built_in">len</span> <span class="type">int</span></span><br><span class="line">        <span class="built_in">cap</span> <span class="type">int</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    h := (*sliceHeader)(unsafe.Pointer(&amp;s))</span><br><span class="line">    fmt.Printf(<span class="string">&quot;ptr: 0x%x, len: %d, cap: %d\n&quot;</span>, h.ptr, h.<span class="built_in">len</span>, h.<span class="built_in">cap</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 验证 ptr 指向第一个元素</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;s[0] 地址: %p\n&quot;</span>, &amp;s[<span class="number">0</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Output：<br><figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">slice</span> s:<span class="meta"> [10 20 30]</span></span><br><span class="line"><span class="attribute">ptr</span>: <span class="number">0</span>xc0000140c0, len: <span class="number">3</span>, cap: <span class="number">3</span></span><br><span class="line"><span class="attribute">s</span>[<span class="number">0</span>] 地址: <span class="number">0</span>xc0000140c0</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>ptr</code> 与 <code>&amp;s[0]</code> 地址一致，验证了 slice 的指针指向底层数组首元素。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>引用</p>
+<ul>
+<li><a href="https://halfrost.com/go_slice/#toc-1">深入解析 Go 中 Slice 底层实现</a></li>
+<li><a href="https://chat.qwen.ai/">Qwen</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Golang</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+        <tag>Slice</tag>
+      </tags>
+  </entry>
 </search>
