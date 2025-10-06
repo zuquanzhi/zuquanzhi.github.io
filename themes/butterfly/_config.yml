@@ -142,7 +142,7 @@ copy:
     enable: true
     limit_count: 50
 ##live2d
-enable: true
+enable: flase
 
 
 # Post
@@ -350,7 +350,7 @@ rightside_item_order:
 # MathJax
 mathjax:
   enable: true
-  per_page: true
+  per_page: false
 
 # KaTeX
 katex:
@@ -660,7 +660,7 @@ mask:
 rightside_bottom:
 
 # Enter transitions (開啓網頁進入效果)
-enter_transitions: true
+enter_transitions: false
 
 # Typewriter Effect (打字效果)
 # https://github.com/disjukr/activate-power-mode
@@ -706,7 +706,7 @@ fireworks:
 
 # Mouse click effects: Heart symbol (鼠標點擊效果: 愛心)
 click_heart:
-  enable: true
+  enable: false
   mobile: false
 
 # Mouse click effects: words (鼠標點擊效果: 文字)
@@ -879,7 +879,7 @@ pangu:
 # Lazyload (圖片懶加載)
 # https://github.com/verlok/vanilla-lazyload
 lazyload:
-  enable: false
+  enable: true
   field: site # site/post
   placeholder:
   blur: false
@@ -916,10 +916,14 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    # - <link rel="stylesheet" href="/xxx.css">
+    # # - <link rel="stylesheet" href="/xxx.css">
+    # - <link rel="stylesheet" href="/css/transpancy.css">
+    # - <link rel="stylesheet" href="/css/mouse.css">    
+    # # - <script src="/live2d-widget/autoload.js"></script> 
     - <link rel="stylesheet" href="/css/transpancy.css">
     - <link rel="stylesheet" href="/css/mouse.css">    
-    - <script src="/live2d-widget/autoload.js"></script> 
+    - <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    - <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   bottom:
     # - <script src="xxxx"></script>
 # CDN
@@ -929,11 +933,13 @@ CDN:
   # The CDN provider of internal scripts (主題內部 js 的 cdn 配置)
   # option: local/jsdelivr/unpkg/cdnjs/custom
   # Dev version can only choose. ( dev版的主題只能設置為 local )
-  internal_provider: local
+  # internal_provider: local
+  internal_provider: jsdelivr
 
   # The CDN provider of third party scripts (第三方 js 的 cdn 配置)
   # option: local/jsdelivr/unpkg/cdnjs/custom
   # when set it to local, you need to install hexo-butterfly-extjs
+  # third_party_provider: jsdelivr
   third_party_provider: jsdelivr
 
   # Add version number to url, true or false
