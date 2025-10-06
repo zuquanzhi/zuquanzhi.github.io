@@ -6,7 +6,7 @@
   <link href="http://blog.zuquanzhi.top/atom.xml" rel="self"/>
   
   <link href="http://blog.zuquanzhi.top/"/>
-  <updated>2025-09-27T14:38:52.522Z</updated>
+  <updated>2025-09-27T14:42:13.413Z</updated>
   <id>http://blog.zuquanzhi.top/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>gin的中间件机制</title>
-    <link href="http://blog.zuquanzhi.top/2025/09/27/gin%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%9C%BA%E5%88%B6/"/>
-    <id>http://blog.zuquanzhi.top/2025/09/27/gin%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%9C%BA%E5%88%B6/</id>
+    <link href="http://blog.zuquanzhi.top/2025/09/27/44434/"/>
+    <id>http://blog.zuquanzhi.top/2025/09/27/44434/</id>
     <published>2025-09-27T07:19:44.000Z</published>
-    <updated>2025-09-27T14:38:52.522Z</updated>
+    <updated>2025-09-27T14:42:13.413Z</updated>
     
     <content type="html"><![CDATA[<h1 id="gin框架的中间件机制"><a href="#gin框架的中间件机制" class="headerlink" title="gin框架的中间件机制"></a>gin框架的中间件机制</h1><h2 id="中间件的概念和原理"><a href="#中间件的概念和原理" class="headerlink" title="中间件的概念和原理"></a>中间件的概念和原理</h2><h3 id="What-is-中间件"><a href="#What-is-中间件" class="headerlink" title="What is 中间件"></a>What is 中间件</h3><p>在Web应用开发中，中间件（Middleware）是位于应用程序与服务器之间的软件组件，能够拦截HTTP请求和响应，并执行特定的逻辑处理。<br>说通俗一点就是，在开始做你真正想做的事之前，要把一些杂活先干完。例如鉴权登录、身份验证、日志记录等等等等。</p><h3 id="Why-is-中间件"><a href="#Why-is-中间件" class="headerlink" title="Why is 中间件"></a>Why is 中间件</h3><p>中间件的核心思想是 <strong>分层处理</strong> 和 <strong>职责分离</strong>。<br>通过将通用的、与业务无关的逻辑抽象出来，放在中间件中处理，可以让业务代码更加 简洁、专注、易于维护。<br>同时，中间件采用 链式调用 的方式，形成一个处理管道，请求依次经过各个中间件，每个中间件都可以在请求到达业务逻辑之前或之后执行特定的操作。<br>这样做一定程度上可以避免屎山产生，对于整个项目的架构和可拓展性起着很重要的作用。</p><h3 id="How-is-中间件"><a href="#How-is-中间件" class="headerlink" title="How is 中间件"></a>How is 中间件</h3><p>Gin的中间件工作原理基于责任链模式（Chain of Responsibility Pattern）。这种设计模式允许多个处理器依次处理同一个请求，每个处理器专注于自己的职责领域。<br>说白了就是挨个问一遍，谁能干谁干，干不了就甩给下家。每一层只关心自己那一档子事，能处理就处理，不能处理就把业务原封不动往下传，直到有人搞定为止。（像极了某些效率低下的臃肿团队）</p><p>在Gin中，每个中间件可以执行以下操作：</p><ul><li>前置操作：在请求处理前执行某些逻辑</li><li>流程控制：通过调用c.Next()将控制权传递给下一个中间件</li><li>后置操作：在下游中间件执行完毕后继续执行操作</li><li>中断处理：通过调用c.Abort()终止后续中间件的执行</li></ul><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                            HTTP请求                                  │</span><br><span class="line">└───────────────────────────────┬─────────────────────────────────────┘</span><br><span class="line">                                │</span><br><span class="line">┌───────────────────────────────▼─────────────────────────────────────┐</span><br><span class="line">│              中间件<span class="number">1</span>前置逻辑（如：请求日志记录开始）                    │</span><br><span class="line">└───────────────────────────────┬─────────────────────────────────────┘</span><br><span class="line">                                │</span><br><span class="line">                                │  c.<span class="keyword">Next</span>()调用</span><br><span class="line">                                │</span><br><span class="line">┌───────────────────────────────▼─────────────────────────────────────┐</span><br><span class="line">│                中间件<span class="number">2</span>前置逻辑（如：身份验证）                         │</span><br><span class="line">└───────────────────────────────┬─────────────────────────────────────┘</span><br><span class="line">                                │</span><br><span class="line">                                │  c.<span class="keyword">Next</span>()调用</span><br><span class="line">                                │</span><br><span class="line">┌───────────────────────────────▼─────────────────────────────────────┐</span><br><span class="line">│                最终处理函数（如：获取用户列表）                        │</span><br><span class="line">└───────────────────────────────┬─────────────────────────────────────┘</span><br><span class="line">                                │</span><br><span class="line">                                │  处理函数返回</span><br><span class="line">                                │</span><br><span class="line">┌───────────────────────────────▼─────────────────────────────────────┐</span><br><span class="line">│                 中间件<span class="number">2</span>后置逻辑（如：记录操作日志）                    │</span><br><span class="line">└───────────────────────────────┬─────────────────────────────────────┘</span><br><span class="line">                                │</span><br><span class="line">                                │  返回到中间件<span class="number">1</span></span><br><span class="line">                                │</span><br><span class="line">┌───────────────────────────────▼─────────────────────────────────────┐</span><br><span class="line">│               中间件<span class="number">1</span>后置逻辑（如：计算响应时间）                      │</span><br><span class="line">└───────────────────────────────┬─────────────────────────────────────┘</span><br><span class="line">                                │</span><br><span class="line">┌───────────────────────────────▼─────────────────────────────────────┐</span><br><span class="line">│                          HTTP响应                                    │</span><br><span class="line">└─────────────────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure><h2 id="Gin-中间件的类型"><a href="#Gin-中间件的类型" class="headerlink" title="Gin 中间件的类型"></a>Gin 中间件的类型</h2><ol><li>全局中间件：应用于所有路由，在任何路由处理之前执行。<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局中间件：应用于所有路由</span></span><br><span class="line">router.Use(Logger())</span><br></pre></td></tr></table></figure></li><li>路由组中间件：只应用于特定路由组内的路由<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 路由组中间件：只应用于authorized组</span></span><br><span class="line">authorized := router.Group(<span class="string">&quot;/&quot;</span>)</span><br><span class="line">authorized.Use(AuthRequired())</span><br></pre></td></tr></table></figure></li><li>单个路由中间件<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单个路由中间件：只应用于此路由</span></span><br><span class="line">router.GET(<span class="string">&quot;/benchmark&quot;</span>, MyBenchLogger(), benchEndpoint)</span><br></pre></td></tr></table></figure></li></ol><h2 id="Gin-内置的中间件"><a href="#Gin-内置的中间件" class="headerlink" title="Gin 内置的中间件"></a>Gin 内置的中间件</h2><p>Gin 框架虽然以“轻量”著称，但也贴心地提供了一些<strong>开箱即用的中间件</strong>，帮助开发者快速实现常见功能。这些中间件都位于 <code>gin</code> 包或官方扩展库 <code>github.com/gin-contrib</code> 中。</p><h3 id="1-Logger-——-请求日志记录"><a href="#1-Logger-——-请求日志记录" class="headerlink" title="1. Logger() —— 请求日志记录"></a>1. <code>Logger()</code> —— 请求日志记录</h3><p>这是最常用的中间件之一，自动记录每个 HTTP 请求的基本信息（方法、路径、状态码、耗时等）。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.Use(gin.Logger())</span><br></pre></td></tr></table></figure><p>输出示例：<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GIN] <span class="number">2025</span>/<span class="number">09</span>/<span class="number">27</span> - <span class="number">15</span>:<span class="number">30</span>:<span class="number">45</span> | <span class="type">200</span> |    <span class="type">1</span><span class="number">.2</span>ms |       <span class="type">127</span><span class="number">.0</span><span class="number">.0</span><span class="number">.1</span> | <span class="type">GET</span>      <span class="string">&quot;/api/users&quot;</span></span><br></pre></td></tr></table></figure></p><blockquote><p>💡 提示：生产环境中更推荐使用结构化日志（如 <code>zap</code> + 自定义中间件），但开发阶段 <code>Logger()</code> 足够好用。</p></blockquote><hr><h3 id="2-Recovery-——-崩溃恢复"><a href="#2-Recovery-——-崩溃恢复" class="headerlink" title="2. Recovery() —— 崩溃恢复"></a>2. <code>Recovery()</code> —— 崩溃恢复</h3><p>当你的 handler 中发生 panic 时，<code>Recovery()</code> 能捕获异常，防止整个服务崩溃，并返回 500 错误。</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.Use(gin.Recovery())</span><br></pre></td></tr></table></figure><p>默认会打印 panic 堆栈到 stderr，你也可以自定义恢复逻辑：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.Use(gin.CustomRecovery(<span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context, recovered <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    c.String(<span class="number">500</span>, <span class="string">&quot;服务器开小差了，请稍后再试~&quot;</span>)</span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure><hr><h3 id="3-其他常用官方中间件（来自-gin-contrib）"><a href="#3-其他常用官方中间件（来自-gin-contrib）" class="headerlink" title="3. 其他常用官方中间件（来自 gin-contrib）"></a>3. 其他常用官方中间件（来自 <code>gin-contrib</code>）</h3><p>Gin 官方维护了一系列高质量中间件，需单独安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go get github.com/gin-contrib/cors</span><br><span class="line">go get github.com/gin-contrib/static</span><br><span class="line">go get github.com/gin-contrib/sse</span><br></pre></td></tr></table></figure><div class="table-container"><table><thead><tr><th>中间件</th><th>作用</th></tr></thead><tbody><tr><td><code>cors</code></td><td>处理跨域请求（CORS）</td></tr><tr><td><code>static</code></td><td>提供静态文件服务（如前端资源）</td></tr><tr><td><code>gzip</code></td><td>自动压缩响应体（节省带宽）</td></tr><tr><td><code>secure</code></td><td>添加安全相关的 HTTP 头（如 XSS 保护）</td></tr><tr><td><code>timeout</code></td><td>为路由设置超时控制</td></tr></tbody></table></div><p><strong>示例：启用 CORS</strong><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/gin-contrib/cors&quot;</span></span><br><span class="line"></span><br><span class="line">router.Use(cors.Default()) <span class="comment">// 允许所有来源（仅开发环境！）</span></span><br></pre></td></tr></table></figure></p><blockquote><p>⚠️ 注意：<code>cors.Default()</code> 仅用于开发！生产环境应配置具体域名。</p></blockquote><hr><h2 id="自定义中间件实战"><a href="#自定义中间件实战" class="headerlink" title="自定义中间件实战"></a>自定义中间件实战</h2><p>中间件的本质就是一个 <strong><code>func(c *gin.Context)</code></strong> 类型的函数。下面通过几个例子展示如何编写实用中间件。</p><h3 id="示例-1：鉴权中间件（AuthRequired）"><a href="#示例-1：鉴权中间件（AuthRequired）" class="headerlink" title="示例 1：鉴权中间件（AuthRequired）"></a>示例 1：鉴权中间件（AuthRequired）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AuthRequired</span><span class="params">()</span></span> gin.HandlerFunc &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        token := c.GetHeader(<span class="string">&quot;Authorization&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> token != <span class="string">&quot;Bearer secret123&quot;</span> &#123;</span><br><span class="line">            c.AbortWithStatusJSON(<span class="number">401</span>, gin.H&#123;</span><br><span class="line">                <span class="string">&quot;error&quot;</span>: <span class="string">&quot;未授权，请提供有效 token&quot;</span>,</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 验证通过，继续</span></span><br><span class="line">        c.Next()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">admin := router.Group(<span class="string">&quot;/admin&quot;</span>)</span><br><span class="line">admin.Use(AuthRequired())</span><br><span class="line">&#123;</span><br><span class="line">    admin.GET(<span class="string">&quot;/users&quot;</span>, listUsers)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><hr><h3 id="示例-2：请求耗时统计中间件"><a href="#示例-2：请求耗时统计中间件" class="headerlink" title="示例 2：请求耗时统计中间件"></a>示例 2：请求耗时统计中间件</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">RequestTime</span><span class="params">()</span></span> gin.HandlerFunc &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        start := time.Now()</span><br><span class="line">        </span><br><span class="line">        c.Next() <span class="comment">// 等待下游处理完成</span></span><br><span class="line">        </span><br><span class="line">        duration := time.Since(start)</span><br><span class="line">        c.Header(<span class="string">&quot;X-Response-Time&quot;</span>, duration.String())</span><br><span class="line">        log.Printf(<span class="string">&quot;[%s] %s %s → %v&quot;</span>, </span><br><span class="line">            c.Request.Method, </span><br><span class="line">            c.Request.URL.Path, </span><br><span class="line">            c.Writer.Status(), </span><br><span class="line">            duration)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个中间件会在响应头中加入 <code>X-Response-Time</code>，同时打印日志，方便性能分析。</p><hr><h3 id="示例-3：防重复提交（基于内存-过期时间）"><a href="#示例-3：防重复提交（基于内存-过期时间）" class="headerlink" title="示例 3：防重复提交（基于内存 + 过期时间）"></a>示例 3：防重复提交（基于内存 + 过期时间）</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    requestCache = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]time.Time)</span><br><span class="line">    cacheMutex   = sync.RWMutex&#123;&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PreventDuplicateRequest</span><span class="params">()</span></span> gin.HandlerFunc &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">        key := c.ClientIP() + c.Request.URL.Path + c.Request.UserAgent()</span><br><span class="line">        </span><br><span class="line">        cacheMutex.Lock()</span><br><span class="line">        <span class="keyword">defer</span> cacheMutex.Unlock()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> t, exists := requestCache[key]; exists &amp;&amp; time.Since(t) &lt; <span class="number">2</span>*time.Second &#123;</span><br><span class="line">            c.AbortWithStatusJSON(<span class="number">429</span>, gin.H&#123;<span class="string">&quot;error&quot;</span>: <span class="string">&quot;请求太频繁，请稍后再试&quot;</span>&#125;)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        requestCache[key] = time.Now()</span><br><span class="line">        c.Next()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="中间件使用实践"><a href="#中间件使用实践" class="headerlink" title="中间件使用实践"></a>中间件使用实践</h2><h3 id="1-中间件顺序很重要！"><a href="#1-中间件顺序很重要！" class="headerlink" title="1. 中间件顺序很重要！"></a>1. <strong>中间件顺序很重要！</strong></h3><p>Gin 中间件是<strong>从注册顺序依次执行前置逻辑，再逆序执行后置逻辑</strong>。例如：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.Use(Logger(), Recovery(), AuthRequired())</span><br></pre></td></tr></table></figure><p>执行顺序：</p><ol><li>Logger 前置</li><li>Recovery 前置</li><li>AuthRequired 前置</li><li>Handler 执行</li><li>AuthRequired 后置（几乎没有）</li><li>Recovery 后置（处理 panic）</li><li>Logger 后置（记录耗时）</li></ol><blockquote><p>建议顺序：<code>Recovery → Logger → Auth → RateLimit → Handler</code></p></blockquote><hr><h3 id="2-不要滥用全局中间件"><a href="#2-不要滥用全局中间件" class="headerlink" title="2. 不要滥用全局中间件"></a>2. <strong>不要滥用全局中间件</strong></h3><p>全局中间件会对<strong>每一个请求</strong>生效，包括静态资源、健康检查等。不必要的中间件会拖慢性能。</p><p><strong>反例：</strong><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.Use(AuthRequired()) <span class="comment">// 所有路由都要登录？包括 /health？</span></span><br></pre></td></tr></table></figure></p><p><strong>正例：</strong><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">api := router.Group(<span class="string">&quot;/api&quot;</span>)</span><br><span class="line">api.Use(AuthRequired()) <span class="comment">// 只保护 API 路由</span></span><br></pre></td></tr></table></figure></p><hr><h3 id="3-中间件应尽量无状态、幂等"><a href="#3-中间件应尽量无状态、幂等" class="headerlink" title="3. 中间件应尽量无状态、幂等"></a>3. <strong>中间件应尽量无状态、幂等</strong></h3><p>避免在中间件中修改请求体（<code>c.Request.Body</code> 只能读一次），如需多次读取，可使用 <code>c.GetRawData()</code> 或封装 <code>io.TeeReader</code>。</p><hr><h3 id="4-合理使用-c-Abort-和-c-Next"><a href="#4-合理使用-c-Abort-和-c-Next" class="headerlink" title="4. 合理使用 c.Abort() 和 c.Next()"></a>4. <strong>合理使用 c.Abort() 和 c.Next()</strong></h3><ul><li><code>c.Next()</code>：继续执行下一个中间件（通常放在前置逻辑后）</li><li><code>c.Abort()</code>：立即终止后续中间件和 handler（常用于鉴权失败）</li><li><code>c.AbortWithStatusJSON()</code>：终止并返回 JSON 响应（推荐）</li></ul><hr><p>Gin 的中间件机制是其强大灵活性的核心之一。它用极简的 API 实现了强大的<strong>请求处理管道</strong>，让开发者可以像搭积木一样组合功能。</p><ul><li><strong>理解责任链模式</strong>是掌握中间件的关键；</li><li><strong>善用内置中间件</strong>能快速搭建基础能力；</li><li><strong>自定义中间件</strong>让你轻松集成业务逻辑；</li><li><strong>注意顺序与性能</strong>，避免“中间件陷阱”。</li></ul><p>当你能把日志、鉴权、限流、监控等横切关注点优雅地封装进中间件，你的 Go 项目就已经走在了<strong>清晰、可维护、可扩展</strong>的正道上。</p><blockquote><p>🌈 <strong>“好的中间件，让业务代码只关心业务。”</strong></p></blockquote><hr><p><strong>参考链接：</strong></p><ul><li><a href="https://gin-gonic.com/docs/middleware/">Gin 官方文档 - Middleware</a></li><li><a href="https://github.com/gin-contrib">gin-contrib 中间件仓库</a></li><li><a href="https://blog.csdn.net/gophertribe/article/details/146546615">gin框架从入门到精通</a></li></ul><hr>]]></content>
     
@@ -44,8 +44,8 @@
   
   <entry>
     <title>深入解析Go中Slice底层实现</title>
-    <link href="http://blog.zuquanzhi.top/2025/09/22/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90Go%E4%B8%ADSlice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/"/>
-    <id>http://blog.zuquanzhi.top/2025/09/22/%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90Go%E4%B8%ADSlice%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0/</id>
+    <link href="http://blog.zuquanzhi.top/2025/09/22/59604/"/>
+    <id>http://blog.zuquanzhi.top/2025/09/22/59604/</id>
     <published>2025-09-22T05:17:44.000Z</published>
     <updated>2025-09-27T07:17:51.514Z</updated>
     
@@ -70,8 +70,8 @@
   
   <entry>
     <title>搭建Docker私有镜像站</title>
-    <link href="http://blog.zuquanzhi.top/2025/09/17/%E6%90%AD%E5%BB%BADocker%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E7%AB%99/"/>
-    <id>http://blog.zuquanzhi.top/2025/09/17/%E6%90%AD%E5%BB%BADocker%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F%E7%AB%99/</id>
+    <link href="http://blog.zuquanzhi.top/2025/09/17/7375/"/>
+    <id>http://blog.zuquanzhi.top/2025/09/17/7375/</id>
     <published>2025-09-17T10:44:21.000Z</published>
     <updated>2025-09-17T13:30:58.692Z</updated>
     
@@ -99,8 +99,8 @@
   
   <entry>
     <title>cpolar实现内网穿透</title>
-    <link href="http://blog.zuquanzhi.top/2025/09/17/cpolar%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
-    <id>http://blog.zuquanzhi.top/2025/09/17/cpolar%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</id>
+    <link href="http://blog.zuquanzhi.top/2025/09/17/63383/"/>
+    <id>http://blog.zuquanzhi.top/2025/09/17/63383/</id>
     <published>2025-09-17T10:30:30.000Z</published>
     <updated>2025-09-17T13:30:58.689Z</updated>
     
@@ -127,8 +127,8 @@
   
   <entry>
     <title>Agent时代基础设施--MCP协议介绍</title>
-    <link href="http://blog.zuquanzhi.top/2025/04/11/Agent%E6%97%B6%E4%BB%A3%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD-MCP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://blog.zuquanzhi.top/2025/04/11/Agent%E6%97%B6%E4%BB%A3%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD-MCP%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D/</id>
+    <link href="http://blog.zuquanzhi.top/2025/04/11/43814/"/>
+    <id>http://blog.zuquanzhi.top/2025/04/11/43814/</id>
     <published>2025-04-10T16:00:06.000Z</published>
     <updated>2025-04-10T16:43:54.483Z</updated>
     
@@ -153,8 +153,8 @@
   
   <entry>
     <title>一文教你学会看多目标检测中的指标</title>
-    <link href="http://blog.zuquanzhi.top/2025/03/16/%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%E7%9A%84%E6%8C%87%E6%A0%87%E9%80%9F%E9%80%9A/"/>
-    <id>http://blog.zuquanzhi.top/2025/03/16/%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%B8%AD%E7%9A%84%E6%8C%87%E6%A0%87%E9%80%9F%E9%80%9A/</id>
+    <link href="http://blog.zuquanzhi.top/2025/03/16/58849/"/>
+    <id>http://blog.zuquanzhi.top/2025/03/16/58849/</id>
     <published>2025-03-15T16:18:59.000Z</published>
     <updated>2025-09-17T13:30:58.691Z</updated>
     
@@ -181,8 +181,8 @@
   
   <entry>
     <title>树莓派配合公网服务器frp转发实现内网穿透</title>
-    <link href="http://blog.zuquanzhi.top/2025/02/23/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E5%90%88%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8frp%E8%BD%AC%E5%8F%91%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
-    <id>http://blog.zuquanzhi.top/2025/02/23/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E5%90%88%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8frp%E8%BD%AC%E5%8F%91%E5%AE%9E%E7%8E%B0%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</id>
+    <link href="http://blog.zuquanzhi.top/2025/02/23/14348/"/>
+    <id>http://blog.zuquanzhi.top/2025/02/23/14348/</id>
     <published>2025-02-22T16:16:45.000Z</published>
     <updated>2025-09-17T13:30:58.693Z</updated>
     
@@ -209,8 +209,8 @@
   
   <entry>
     <title>YOLOv3深入学习</title>
-    <link href="http://blog.zuquanzhi.top/2025/01/07/YOLOv3%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://blog.zuquanzhi.top/2025/01/07/YOLOv3%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0/</id>
+    <link href="http://blog.zuquanzhi.top/2025/01/07/1343/"/>
+    <id>http://blog.zuquanzhi.top/2025/01/07/1343/</id>
     <published>2025-01-07T08:30:02.000Z</published>
     <updated>2025-09-17T13:30:58.689Z</updated>
     
@@ -235,8 +235,8 @@
   
   <entry>
     <title>近世代数</title>
-    <link href="http://blog.zuquanzhi.top/2024/11/16/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0/"/>
-    <id>http://blog.zuquanzhi.top/2024/11/16/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0/</id>
+    <link href="http://blog.zuquanzhi.top/2024/11/16/14347/"/>
+    <id>http://blog.zuquanzhi.top/2024/11/16/14347/</id>
     <published>2024-11-16T13:30:20.000Z</published>
     <updated>2025-08-21T13:42:26.228Z</updated>
     
@@ -259,8 +259,8 @@
   
   <entry>
     <title>vim从入门到入土</title>
-    <link href="http://blog.zuquanzhi.top/2024/10/15/vim%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/"/>
-    <id>http://blog.zuquanzhi.top/2024/10/15/vim%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%85%A5%E5%9C%9F/</id>
+    <link href="http://blog.zuquanzhi.top/2024/10/15/25909/"/>
+    <id>http://blog.zuquanzhi.top/2024/10/15/25909/</id>
     <published>2024-10-15T12:31:14.000Z</published>
     <updated>2025-08-21T13:42:26.222Z</updated>
     
@@ -280,8 +280,8 @@
   
   <entry>
     <title>nth_element函数深入</title>
-    <link href="http://blog.zuquanzhi.top/2024/10/02/nth-element%E5%87%BD%E6%95%B0%E6%B7%B1%E5%85%A5/"/>
-    <id>http://blog.zuquanzhi.top/2024/10/02/nth-element%E5%87%BD%E6%95%B0%E6%B7%B1%E5%85%A5/</id>
+    <link href="http://blog.zuquanzhi.top/2024/10/02/47436/"/>
+    <id>http://blog.zuquanzhi.top/2024/10/02/47436/</id>
     <published>2024-10-02T14:48:02.000Z</published>
     <updated>2025-08-21T13:42:26.221Z</updated>
     
@@ -304,8 +304,8 @@
   
   <entry>
     <title>快排</title>
-    <link href="http://blog.zuquanzhi.top/2024/10/02/%E5%BF%AB%E6%8E%92/"/>
-    <id>http://blog.zuquanzhi.top/2024/10/02/%E5%BF%AB%E6%8E%92/</id>
+    <link href="http://blog.zuquanzhi.top/2024/10/02/12326/"/>
+    <id>http://blog.zuquanzhi.top/2024/10/02/12326/</id>
     <published>2024-10-02T13:54:45.000Z</published>
     <updated>2025-08-21T13:42:26.226Z</updated>
     
@@ -328,8 +328,8 @@
   
   <entry>
     <title>数据结构的深度思考和总结</title>
-    <link href="http://blog.zuquanzhi.top/2024/10/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83%E5%92%8C%E6%80%BB%E7%BB%93/"/>
-    <id>http://blog.zuquanzhi.top/2024/10/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83%E5%92%8C%E6%80%BB%E7%BB%93/</id>
+    <link href="http://blog.zuquanzhi.top/2024/10/02/63385/"/>
+    <id>http://blog.zuquanzhi.top/2024/10/02/63385/</id>
     <published>2024-10-02T12:51:56.000Z</published>
     <updated>2025-08-21T13:42:26.227Z</updated>
     
@@ -349,8 +349,8 @@
   
   <entry>
     <title>Transformer架构初步</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/20/Transformer/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/20/Transformer/</id>
+    <link href="http://blog.zuquanzhi.top/2024/09/20/15915/"/>
+    <id>http://blog.zuquanzhi.top/2024/09/20/15915/</id>
     <published>2024-09-20T08:20:04.000Z</published>
     <updated>2025-08-21T13:42:26.219Z</updated>
     
@@ -373,8 +373,8 @@
   
   <entry>
     <title>KMP</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/20/KMP/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/20/KMP/</id>
+    <link href="http://blog.zuquanzhi.top/2024/09/20/31301/"/>
+    <id>http://blog.zuquanzhi.top/2024/09/20/31301/</id>
     <published>2024-09-20T08:15:29.000Z</published>
     <updated>2025-08-21T13:42:26.217Z</updated>
     
@@ -397,8 +397,8 @@
   
   <entry>
     <title>堆栈</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/20/%E5%A0%86%E6%A0%88/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/20/%E5%A0%86%E6%A0%88/</id>
+    <link href="http://blog.zuquanzhi.top/2024/09/20/62758/"/>
+    <id>http://blog.zuquanzhi.top/2024/09/20/62758/</id>
     <published>2024-09-20T08:14:26.000Z</published>
     <updated>2025-08-21T13:42:26.225Z</updated>
     
@@ -421,8 +421,8 @@
   
   <entry>
     <title>线性表</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/20/%E7%BA%BF%E6%80%A7%E8%A1%A8/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/20/%E7%BA%BF%E6%80%A7%E8%A1%A8/</id>
+    <link href="http://blog.zuquanzhi.top/2024/09/20/33510/"/>
+    <id>http://blog.zuquanzhi.top/2024/09/20/33510/</id>
     <published>2024-09-20T08:12:06.000Z</published>
     <updated>2025-08-21T13:42:26.228Z</updated>
     
@@ -445,8 +445,8 @@
   
   <entry>
     <title>screen命令应用</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/18/screen%E5%91%BD%E4%BB%A4%E5%BA%94%E7%94%A8/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/18/screen%E5%91%BD%E4%BB%A4%E5%BA%94%E7%94%A8/</id>
+    <link href="http://blog.zuquanzhi.top/2024/09/18/60232/"/>
+    <id>http://blog.zuquanzhi.top/2024/09/18/60232/</id>
     <published>2024-09-18T15:42:35.000Z</published>
     <updated>2025-09-17T13:30:58.690Z</updated>
     
@@ -470,8 +470,8 @@
   
   <entry>
     <title>yolo初步</title>
-    <link href="http://blog.zuquanzhi.top/2024/04/10/yolo%E5%88%9D%E6%AD%A5/"/>
-    <id>http://blog.zuquanzhi.top/2024/04/10/yolo%E5%88%9D%E6%AD%A5/</id>
+    <link href="http://blog.zuquanzhi.top/2024/04/10/5926/"/>
+    <id>http://blog.zuquanzhi.top/2024/04/10/5926/</id>
     <published>2024-04-10T13:48:36.000Z</published>
     <updated>2025-09-17T13:30:58.690Z</updated>
     
@@ -492,8 +492,8 @@
   
   <entry>
     <title>高精度算法</title>
-    <link href="http://blog.zuquanzhi.top/2024/04/02/%E9%AB%98%E7%B2%BE%E5%BA%A6/"/>
-    <id>http://blog.zuquanzhi.top/2024/04/02/%E9%AB%98%E7%B2%BE%E5%BA%A6/</id>
+    <link href="http://blog.zuquanzhi.top/2024/04/02/55084/"/>
+    <id>http://blog.zuquanzhi.top/2024/04/02/55084/</id>
     <published>2024-04-02T02:55:06.000Z</published>
     <updated>2025-08-21T13:42:26.229Z</updated>
     
