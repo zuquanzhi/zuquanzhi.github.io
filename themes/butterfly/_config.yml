@@ -646,7 +646,7 @@ text_align_justify: false
 # Website Background (設置網站背景)
 # can set it to color or image (可設置圖片 或者 顔色)
 # The formal of image: url(http://xxxxxx.com/xxx.jpg)
-background: url(/img/background.jpg)
+background: url(/img/background.webp)
 
 # Footer Background
 footer_bg: url(/img/footer_bg.jpg)
@@ -920,10 +920,13 @@ inject:
     # - <link rel="stylesheet" href="/css/transpancy.css">
     # - <link rel="stylesheet" href="/css/mouse.css">    
     # # - <script src="/live2d-widget/autoload.js"></script> 
-    - <link rel="stylesheet" href="/css/transpancy.css">
-    - <link rel="stylesheet" href="/css/mouse.css">    
+    - <link rel="preload" href="/css/transpancy.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    - <link rel="preload" href="/css/mouse.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    - <noscript><link rel="stylesheet" href="/css/transpancy.css"></noscript>
+    - <noscript><link rel="stylesheet" href="/css/mouse.css"></noscript>
     - <link rel="preconnect" href="https://cdn.jsdelivr.net">
     - <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
   bottom:
     # - <script src="xxxx"></script>
 # CDN
