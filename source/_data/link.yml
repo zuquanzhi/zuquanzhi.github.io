@@ -1,6 +1,11 @@
 - class_name: 友链
   class_desc: 贴一些大帅哥的博客
   link_list:
+  - name: 阳神の博客
+    link: https://blog.tosania.top/
+    avatar: /img/scy.jpg
+    descr: 给acm爷磕一个
+
   - name: 潘神の博客
     link: https://ruakker.moe
     avatar: /img/psh.png
@@ -19,7 +24,18 @@
 - class_name: Tools
   class_desc: 放一些常用的工具
   link_list:
-  - name: Clash
+  - name: Clash(Linux)
     link: http://cloud.zuquanzhi.top/f/mWuR/Clash.for.Windows-0.20.39-x64-linux.tar.gz
     avatar: /img/clash.png
     descr: 科学上网必备
+
+  - name: Mihomo
+    link: http://cloud.zuquanzhi.top/f/DBtd/clash-party-linux-1.8.8-amd64.deb
+    avatar: /img/mihomo.png
+    descr: 一个更易用的代理Linux客户端
+
+  - name: Typora
+    link: https://github.com/main-studio/TyporaCrack
+    avatar: /img/typora.png
+    descr: 一个好用的markdown编辑器
+
