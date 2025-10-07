@@ -563,14 +563,14 @@
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/Cmake/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/Cmake/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -612,14 +612,14 @@
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/%E5%B9%B3%E8%A1%A1%E8%BD%A6/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/ROS/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/ROS/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/%E5%B9%B3%E8%A1%A1%E8%BD%A6/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -634,13 +634,6 @@
   
   <url>
     <loc>http://blog.zuquanzhi.top/tags/YOLO-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB/</loc>
-    <lastmod>2025-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.zuquanzhi.top/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -675,7 +668,7 @@
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/%E5%91%BD%E4%BB%A4/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -683,6 +676,20 @@
   
   <url>
     <loc>http://blog.zuquanzhi.top/tags/STL/</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.zuquanzhi.top/tags/%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.zuquanzhi.top/tags/yolo/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -703,14 +710,14 @@
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/yolo/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/stm32/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/stm32/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/C%E8%AF%AD%E8%A8%80/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -738,20 +745,6 @@
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/C%E8%AF%AD%E8%A8%80/</loc>
-    <lastmod>2025-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.zuquanzhi.top/tags/%E6%8E%92%E5%BA%8F/</loc>
-    <lastmod>2025-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://blog.zuquanzhi.top/tags/docker/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -773,7 +766,14 @@
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/Slice/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/%E6%8E%92%E5%BA%8F/</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.zuquanzhi.top/tags/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -794,14 +794,7 @@
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2025-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.zuquanzhi.top/tags/c%E8%AF%AD%E8%A8%80/</loc>
+    <loc>http://blog.zuquanzhi.top/tags/Slice/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -809,6 +802,13 @@
   
   <url>
     <loc>http://blog.zuquanzhi.top/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2025-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.zuquanzhi.top/tags/c%E8%AF%AD%E8%A8%80/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -845,14 +845,14 @@
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
