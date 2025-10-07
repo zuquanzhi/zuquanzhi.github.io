@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://blog.zuquanzhi.top
+url: https://blog.zuquanzhi.top
 permalink: :year/:month/:day/:abbrlink/
 permalink_defaults:
 pretty_urls:
@@ -110,6 +110,14 @@ feed:
 
 ## Themes: https://hexo.io/themes/
 theme: butterfly
+
+# Sitemap - 站点地图
+sitemap:
+  path: sitemap.xml
+
+# # 百度站点地图
+# baidusitemap:
+#   path: baidusitemap.xml
 
 ##密码
 encrypt: # hexo-blog-encrypt
