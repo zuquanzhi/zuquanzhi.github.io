@@ -3,11 +3,11 @@
   <title>全之の博客</title>
   
   <subtitle>ME = Ctrl C + Ctrl V</subtitle>
-  <link href="http://blog.zuquanzhi.top/atom.xml" rel="self"/>
+  <link href="https://blog.zuquanzhi.top/atom.xml" rel="self"/>
   
-  <link href="http://blog.zuquanzhi.top/"/>
+  <link href="https://blog.zuquanzhi.top/"/>
   <updated>2025-09-27T14:42:13.413Z</updated>
-  <id>http://blog.zuquanzhi.top/</id>
+  <id>https://blog.zuquanzhi.top/</id>
   
   <author>
     <name>ZU Quanzhi</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>gin的中间件机制</title>
-    <link href="http://blog.zuquanzhi.top/2025/09/27/44434/"/>
-    <id>http://blog.zuquanzhi.top/2025/09/27/44434/</id>
+    <link href="https://blog.zuquanzhi.top/2025/09/27/44434/"/>
+    <id>https://blog.zuquanzhi.top/2025/09/27/44434/</id>
     <published>2025-09-27T07:19:44.000Z</published>
     <updated>2025-09-27T14:42:13.413Z</updated>
     
@@ -33,19 +33,19 @@
     
     
     
-    <category term="Golang" scheme="http://blog.zuquanzhi.top/categories/Golang/"/>
+    <category term="Golang" scheme="https://blog.zuquanzhi.top/categories/Golang/"/>
     
     
-    <category term="Golang" scheme="http://blog.zuquanzhi.top/tags/Golang/"/>
+    <category term="Golang" scheme="https://blog.zuquanzhi.top/tags/Golang/"/>
     
-    <category term="中间件" scheme="http://blog.zuquanzhi.top/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    <category term="中间件" scheme="https://blog.zuquanzhi.top/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
   </entry>
   
   <entry>
     <title>深入解析Go中Slice底层实现</title>
-    <link href="http://blog.zuquanzhi.top/2025/09/22/59604/"/>
-    <id>http://blog.zuquanzhi.top/2025/09/22/59604/</id>
+    <link href="https://blog.zuquanzhi.top/2025/09/22/59604/"/>
+    <id>https://blog.zuquanzhi.top/2025/09/22/59604/</id>
     <published>2025-09-22T05:17:44.000Z</published>
     <updated>2025-09-27T07:17:51.514Z</updated>
     
@@ -59,19 +59,19 @@
     
     
     
-    <category term="Golang" scheme="http://blog.zuquanzhi.top/categories/Golang/"/>
+    <category term="Golang" scheme="https://blog.zuquanzhi.top/categories/Golang/"/>
     
     
-    <category term="Golang" scheme="http://blog.zuquanzhi.top/tags/Golang/"/>
+    <category term="Golang" scheme="https://blog.zuquanzhi.top/tags/Golang/"/>
     
-    <category term="Slice" scheme="http://blog.zuquanzhi.top/tags/Slice/"/>
+    <category term="Slice" scheme="https://blog.zuquanzhi.top/tags/Slice/"/>
     
   </entry>
   
   <entry>
     <title>搭建Docker私有镜像站</title>
-    <link href="http://blog.zuquanzhi.top/2025/09/17/7375/"/>
-    <id>http://blog.zuquanzhi.top/2025/09/17/7375/</id>
+    <link href="https://blog.zuquanzhi.top/2025/09/17/7375/"/>
+    <id>https://blog.zuquanzhi.top/2025/09/17/7375/</id>
     <published>2025-09-17T10:44:21.000Z</published>
     <updated>2025-09-17T13:30:58.692Z</updated>
     
@@ -86,21 +86,21 @@
     
     
     
-    <category term="工具" scheme="http://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="docker" scheme="http://blog.zuquanzhi.top/tags/docker/"/>
+    <category term="docker" scheme="https://blog.zuquanzhi.top/tags/docker/"/>
     
-    <category term="镜像" scheme="http://blog.zuquanzhi.top/tags/%E9%95%9C%E5%83%8F/"/>
+    <category term="镜像" scheme="https://blog.zuquanzhi.top/tags/%E9%95%9C%E5%83%8F/"/>
     
-    <category term="容器化" scheme="http://blog.zuquanzhi.top/tags/%E5%AE%B9%E5%99%A8%E5%8C%96/"/>
+    <category term="容器化" scheme="https://blog.zuquanzhi.top/tags/%E5%AE%B9%E5%99%A8%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>cpolar实现内网穿透</title>
-    <link href="http://blog.zuquanzhi.top/2025/09/17/63383/"/>
-    <id>http://blog.zuquanzhi.top/2025/09/17/63383/</id>
+    <link href="https://blog.zuquanzhi.top/2025/09/17/63383/"/>
+    <id>https://blog.zuquanzhi.top/2025/09/17/63383/</id>
     <published>2025-09-17T10:30:30.000Z</published>
     <updated>2025-09-17T13:30:58.689Z</updated>
     
@@ -116,19 +116,19 @@
     
     
     
-    <category term="工具" scheme="http://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="cpolar" scheme="http://blog.zuquanzhi.top/tags/cpolar/"/>
+    <category term="cpolar" scheme="https://blog.zuquanzhi.top/tags/cpolar/"/>
     
-    <category term="内网穿透" scheme="http://blog.zuquanzhi.top/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    <category term="内网穿透" scheme="https://blog.zuquanzhi.top/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     
   </entry>
   
   <entry>
     <title>Agent时代基础设施--MCP协议介绍</title>
-    <link href="http://blog.zuquanzhi.top/2025/04/11/43814/"/>
-    <id>http://blog.zuquanzhi.top/2025/04/11/43814/</id>
+    <link href="https://blog.zuquanzhi.top/2025/04/11/43814/"/>
+    <id>https://blog.zuquanzhi.top/2025/04/11/43814/</id>
     <published>2025-04-10T16:00:06.000Z</published>
     <updated>2025-04-10T16:43:54.483Z</updated>
     
@@ -142,19 +142,19 @@
     
     
     
-    <category term="大模型" scheme="http://blog.zuquanzhi.top/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
+    <category term="大模型" scheme="https://blog.zuquanzhi.top/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
     
     
-    <category term="大模型" scheme="http://blog.zuquanzhi.top/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
+    <category term="大模型" scheme="https://blog.zuquanzhi.top/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/"/>
     
-    <category term="Agent" scheme="http://blog.zuquanzhi.top/tags/Agent/"/>
+    <category term="Agent" scheme="https://blog.zuquanzhi.top/tags/Agent/"/>
     
   </entry>
   
   <entry>
     <title>一文教你学会看多目标检测中的指标</title>
-    <link href="http://blog.zuquanzhi.top/2025/03/16/58849/"/>
-    <id>http://blog.zuquanzhi.top/2025/03/16/58849/</id>
+    <link href="https://blog.zuquanzhi.top/2025/03/16/58849/"/>
+    <id>https://blog.zuquanzhi.top/2025/03/16/58849/</id>
     <published>2025-03-15T16:18:59.000Z</published>
     <updated>2025-09-17T13:30:58.691Z</updated>
     
@@ -168,21 +168,21 @@
     
     
     
-    <category term="机器人/计算机视觉" scheme="http://blog.zuquanzhi.top/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
+    <category term="机器人/计算机视觉" scheme="https://blog.zuquanzhi.top/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
     
     
-    <category term="多目标检测" scheme="http://blog.zuquanzhi.top/tags/%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
+    <category term="多目标检测" scheme="https://blog.zuquanzhi.top/tags/%E5%A4%9A%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"/>
     
-    <category term="YOLO" scheme="http://blog.zuquanzhi.top/tags/YOLO/"/>
+    <category term="YOLO" scheme="https://blog.zuquanzhi.top/tags/YOLO/"/>
     
-    <category term="计算机视觉" scheme="http://blog.zuquanzhi.top/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
+    <category term="计算机视觉" scheme="https://blog.zuquanzhi.top/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
     
   </entry>
   
   <entry>
     <title>树莓派配合公网服务器frp转发实现内网穿透</title>
-    <link href="http://blog.zuquanzhi.top/2025/02/23/14348/"/>
-    <id>http://blog.zuquanzhi.top/2025/02/23/14348/</id>
+    <link href="https://blog.zuquanzhi.top/2025/02/23/14348/"/>
+    <id>https://blog.zuquanzhi.top/2025/02/23/14348/</id>
     <published>2025-02-22T16:16:45.000Z</published>
     <updated>2025-09-17T13:30:58.693Z</updated>
     
@@ -196,21 +196,21 @@
     
     
     
-    <category term="工具" scheme="http://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="内网穿透" scheme="http://blog.zuquanzhi.top/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
+    <category term="内网穿透" scheme="https://blog.zuquanzhi.top/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/"/>
     
-    <category term="frp转发" scheme="http://blog.zuquanzhi.top/tags/frp%E8%BD%AC%E5%8F%91/"/>
+    <category term="frp转发" scheme="https://blog.zuquanzhi.top/tags/frp%E8%BD%AC%E5%8F%91/"/>
     
-    <category term="树莓派" scheme="http://blog.zuquanzhi.top/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/"/>
+    <category term="树莓派" scheme="https://blog.zuquanzhi.top/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/"/>
     
   </entry>
   
   <entry>
     <title>YOLOv3深入学习</title>
-    <link href="http://blog.zuquanzhi.top/2025/01/07/1343/"/>
-    <id>http://blog.zuquanzhi.top/2025/01/07/1343/</id>
+    <link href="https://blog.zuquanzhi.top/2025/01/07/1343/"/>
+    <id>https://blog.zuquanzhi.top/2025/01/07/1343/</id>
     <published>2025-01-07T08:30:02.000Z</published>
     <updated>2025-09-17T13:30:58.689Z</updated>
     
@@ -226,17 +226,17 @@
     
     
     
-    <category term="机器人/计算机视觉" scheme="http://blog.zuquanzhi.top/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
+    <category term="机器人/计算机视觉" scheme="https://blog.zuquanzhi.top/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
     
     
-    <category term="YOLO 目标识别" scheme="http://blog.zuquanzhi.top/tags/YOLO-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB/"/>
+    <category term="YOLO 目标识别" scheme="https://blog.zuquanzhi.top/tags/YOLO-%E7%9B%AE%E6%A0%87%E8%AF%86%E5%88%AB/"/>
     
   </entry>
   
   <entry>
     <title>近世代数</title>
-    <link href="http://blog.zuquanzhi.top/2024/11/16/14347/"/>
-    <id>http://blog.zuquanzhi.top/2024/11/16/14347/</id>
+    <link href="https://blog.zuquanzhi.top/2024/11/16/14347/"/>
+    <id>https://blog.zuquanzhi.top/2024/11/16/14347/</id>
     <published>2024-11-16T13:30:20.000Z</published>
     <updated>2025-08-21T13:42:26.228Z</updated>
     
@@ -250,17 +250,17 @@
     
     
     
-    <category term="数学基础" scheme="http://blog.zuquanzhi.top/categories/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/"/>
+    <category term="数学基础" scheme="https://blog.zuquanzhi.top/categories/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="近世代数" scheme="http://blog.zuquanzhi.top/tags/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0/"/>
+    <category term="近世代数" scheme="https://blog.zuquanzhi.top/tags/%E8%BF%91%E4%B8%96%E4%BB%A3%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>vim从入门到入土</title>
-    <link href="http://blog.zuquanzhi.top/2024/10/15/25909/"/>
-    <id>http://blog.zuquanzhi.top/2024/10/15/25909/</id>
+    <link href="https://blog.zuquanzhi.top/2024/10/15/25909/"/>
+    <id>https://blog.zuquanzhi.top/2024/10/15/25909/</id>
     <published>2024-10-15T12:31:14.000Z</published>
     <updated>2025-08-21T13:42:26.222Z</updated>
     
@@ -271,17 +271,17 @@
     
     
     
-    <category term="工具" scheme="http://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="vim" scheme="http://blog.zuquanzhi.top/tags/vim/"/>
+    <category term="vim" scheme="https://blog.zuquanzhi.top/tags/vim/"/>
     
   </entry>
   
   <entry>
     <title>nth_element函数深入</title>
-    <link href="http://blog.zuquanzhi.top/2024/10/02/47436/"/>
-    <id>http://blog.zuquanzhi.top/2024/10/02/47436/</id>
+    <link href="https://blog.zuquanzhi.top/2024/10/02/47436/"/>
+    <id>https://blog.zuquanzhi.top/2024/10/02/47436/</id>
     <published>2024-10-02T14:48:02.000Z</published>
     <updated>2025-08-21T13:42:26.221Z</updated>
     
@@ -295,17 +295,17 @@
     
     
     
-    <category term="数据结构与算法" scheme="http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="STL" scheme="http://blog.zuquanzhi.top/tags/STL/"/>
+    <category term="STL" scheme="https://blog.zuquanzhi.top/tags/STL/"/>
     
   </entry>
   
   <entry>
     <title>快排</title>
-    <link href="http://blog.zuquanzhi.top/2024/10/02/12326/"/>
-    <id>http://blog.zuquanzhi.top/2024/10/02/12326/</id>
+    <link href="https://blog.zuquanzhi.top/2024/10/02/12326/"/>
+    <id>https://blog.zuquanzhi.top/2024/10/02/12326/</id>
     <published>2024-10-02T13:54:45.000Z</published>
     <updated>2025-08-21T13:42:26.226Z</updated>
     
@@ -319,17 +319,17 @@
     
     
     
-    <category term="数据结构与算法" scheme="http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="STL" scheme="http://blog.zuquanzhi.top/tags/STL/"/>
+    <category term="STL" scheme="https://blog.zuquanzhi.top/tags/STL/"/>
     
   </entry>
   
   <entry>
     <title>数据结构的深度思考和总结</title>
-    <link href="http://blog.zuquanzhi.top/2024/10/02/63385/"/>
-    <id>http://blog.zuquanzhi.top/2024/10/02/63385/</id>
+    <link href="https://blog.zuquanzhi.top/2024/10/02/63385/"/>
+    <id>https://blog.zuquanzhi.top/2024/10/02/63385/</id>
     <published>2024-10-02T12:51:56.000Z</published>
     <updated>2025-08-21T13:42:26.227Z</updated>
     
@@ -340,17 +340,17 @@
     
     
     
-    <category term="数据结构与算法" scheme="http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="数据结构" scheme="http://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>Transformer架构初步</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/20/15915/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/20/15915/</id>
+    <link href="https://blog.zuquanzhi.top/2024/09/20/15915/"/>
+    <id>https://blog.zuquanzhi.top/2024/09/20/15915/</id>
     <published>2024-09-20T08:20:04.000Z</published>
     <updated>2025-08-21T13:42:26.219Z</updated>
     
@@ -364,17 +364,17 @@
     
     
     
-    <category term="科研" scheme="http://blog.zuquanzhi.top/categories/%E7%A7%91%E7%A0%94/"/>
+    <category term="科研" scheme="https://blog.zuquanzhi.top/categories/%E7%A7%91%E7%A0%94/"/>
     
     
-    <category term="Transformer" scheme="http://blog.zuquanzhi.top/tags/Transformer/"/>
+    <category term="Transformer" scheme="https://blog.zuquanzhi.top/tags/Transformer/"/>
     
   </entry>
   
   <entry>
     <title>KMP</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/20/31301/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/20/31301/</id>
+    <link href="https://blog.zuquanzhi.top/2024/09/20/31301/"/>
+    <id>https://blog.zuquanzhi.top/2024/09/20/31301/</id>
     <published>2024-09-20T08:15:29.000Z</published>
     <updated>2025-08-21T13:42:26.217Z</updated>
     
@@ -388,17 +388,17 @@
     
     
     
-    <category term="数据结构与算法" scheme="http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="数据结构" scheme="http://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>堆栈</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/20/62758/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/20/62758/</id>
+    <link href="https://blog.zuquanzhi.top/2024/09/20/62758/"/>
+    <id>https://blog.zuquanzhi.top/2024/09/20/62758/</id>
     <published>2024-09-20T08:14:26.000Z</published>
     <updated>2025-08-21T13:42:26.225Z</updated>
     
@@ -412,17 +412,17 @@
     
     
     
-    <category term="数据结构与算法" scheme="http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="数据结构" scheme="http://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>线性表</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/20/33510/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/20/33510/</id>
+    <link href="https://blog.zuquanzhi.top/2024/09/20/33510/"/>
+    <id>https://blog.zuquanzhi.top/2024/09/20/33510/</id>
     <published>2024-09-20T08:12:06.000Z</published>
     <updated>2025-08-21T13:42:26.228Z</updated>
     
@@ -436,17 +436,17 @@
     
     
     
-    <category term="数据结构与算法" scheme="http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="数据结构" scheme="http://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="https://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>screen命令应用</title>
-    <link href="http://blog.zuquanzhi.top/2024/09/18/60232/"/>
-    <id>http://blog.zuquanzhi.top/2024/09/18/60232/</id>
+    <link href="https://blog.zuquanzhi.top/2024/09/18/60232/"/>
+    <id>https://blog.zuquanzhi.top/2024/09/18/60232/</id>
     <published>2024-09-18T15:42:35.000Z</published>
     <updated>2025-09-17T13:30:58.690Z</updated>
     
@@ -461,17 +461,17 @@
     
     
     
-    <category term="工具" scheme="http://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
+    <category term="工具" scheme="https://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-    <category term="命令" scheme="http://blog.zuquanzhi.top/tags/%E5%91%BD%E4%BB%A4/"/>
+    <category term="命令" scheme="https://blog.zuquanzhi.top/tags/%E5%91%BD%E4%BB%A4/"/>
     
   </entry>
   
   <entry>
     <title>yolo初步</title>
-    <link href="http://blog.zuquanzhi.top/2024/04/10/5926/"/>
-    <id>http://blog.zuquanzhi.top/2024/04/10/5926/</id>
+    <link href="https://blog.zuquanzhi.top/2024/04/10/5926/"/>
+    <id>https://blog.zuquanzhi.top/2024/04/10/5926/</id>
     <published>2024-04-10T13:48:36.000Z</published>
     <updated>2025-09-17T13:30:58.690Z</updated>
     
@@ -483,17 +483,17 @@
     
     
     
-    <category term="机器人/计算机视觉" scheme="http://blog.zuquanzhi.top/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
+    <category term="机器人/计算机视觉" scheme="https://blog.zuquanzhi.top/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"/>
     
     
-    <category term="yolo" scheme="http://blog.zuquanzhi.top/tags/yolo/"/>
+    <category term="yolo" scheme="https://blog.zuquanzhi.top/tags/yolo/"/>
     
   </entry>
   
   <entry>
     <title>高精度算法</title>
-    <link href="http://blog.zuquanzhi.top/2024/04/02/55084/"/>
-    <id>http://blog.zuquanzhi.top/2024/04/02/55084/</id>
+    <link href="https://blog.zuquanzhi.top/2024/04/02/55084/"/>
+    <id>https://blog.zuquanzhi.top/2024/04/02/55084/</id>
     <published>2024-04-02T02:55:06.000Z</published>
     <updated>2025-08-21T13:42:26.229Z</updated>
     
@@ -504,10 +504,10 @@
     
     
     
-    <category term="数据结构与算法" scheme="http://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="高精度" scheme="http://blog.zuquanzhi.top/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/"/>
+    <category term="高精度" scheme="https://blog.zuquanzhi.top/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/"/>
     
   </entry>
   
