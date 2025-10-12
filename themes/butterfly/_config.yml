@@ -37,6 +37,7 @@ code_word_wrap: true
 social:
   fab fa-github: https://github.com/zuquanzhi || Github || '#24292e'
   fas fa-envelope: zuweicun@gmail.com || Email || '#4a7dbe'
+  fas fa-rss: /atom.xml || RSS || '#ff6600'
 
 # Image (圖片設置)
 # --------------------------------------
