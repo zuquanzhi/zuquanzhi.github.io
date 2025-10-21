@@ -503,6 +503,12 @@ giscus:
     dark: dark
   option:
 
+cusdis:
+  enable: true
+  app_id: 你的AppID
+  host: https://cusdis.com
+  lang: zh-cn
+
 # Remark42
 # https://remark42.com/docs/configuration/frontend/
 remark42:
