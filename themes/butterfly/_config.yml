@@ -351,7 +351,7 @@ rightside_item_order:
 # MathJax
 mathjax:
   enable: true
-  per_page: false
+  per_page: true
 
 # KaTeX
 katex:
