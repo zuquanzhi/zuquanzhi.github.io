@@ -1,5 +1,5 @@
 ---
-title: LRU缓存机制
+title: 缓存机制深度解析：Golang 实现与优化
 cover: 'https://www.loliapi.com/acg?302'
 categories: 数据结构与算法
 tags: LRU
@@ -7,7 +7,6 @@ abbrlink: 55306
 date: 2025-10-21 17:04:13
 updated: 2025-10-21 17:04:13
 ---
-# LRU 缓存机制深度解析：Golang 实现与优化
 
 ## 1. LRU 缓存概述
 

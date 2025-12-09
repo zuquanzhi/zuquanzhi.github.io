@@ -7,7 +7,6 @@ abbrlink: 64154
 date: 2025-12-06 22:32:40
 updated: 2025-12-06 22:32:40
 ---
-# 一篇 Vision‑Language‑Action 综述的深度阅读
 
 **论文链接：**[Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications](https://arxiv.org/abs/2510.07077)
 

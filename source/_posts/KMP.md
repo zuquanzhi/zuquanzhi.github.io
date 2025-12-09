@@ -6,8 +6,6 @@ cover: 'https://www.loliapi.com/acg?18'
 abbrlink: 31301
 date: 2024-09-20 16:15:29
 ---
-# KMP 算法（Knuth-Morris-Pratt）笔记
-
 ## 1. 算法简介
 KMP 算法用于 **字符串匹配**，通过预处理模式串，避免重复的字符比较，从而实现高效匹配。它的时间复杂度是 **O(n + m)**，其中 n 是主串长度，m 是模式串长度。
 
