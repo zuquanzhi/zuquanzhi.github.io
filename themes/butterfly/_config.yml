@@ -130,7 +130,7 @@ anchor:
   # when you scroll, the URL will update according to header id.
   auto_update: true
   # Click the headline to scroll and update the anchor
-  click_to_scroll: false
+  click_to_scroll: true
 
 # figcaption (圖片描述文字)
 photofigcaption: true
@@ -143,7 +143,7 @@ copy:
     enable: true
     limit_count: 50
 ##live2d
-enable: flase
+enable: false
 
 
 # Post
@@ -667,7 +667,7 @@ mask:
 rightside_bottom:
 
 # Enter transitions (開啓網頁進入效果)
-enter_transitions: false
+enter_transitions: true
 
 # Typewriter Effect (打字效果)
 # https://github.com/disjukr/activate-power-mode
@@ -772,10 +772,15 @@ subtitle:
   # source: 2  調用一句網（簡體） https://yijuzhan.com/
   # source: 3  調用今日詩詞（簡體） https://www.jinrishici.com/
   # subtitle 會先顯示 source , 再顯示 sub 的內容
-  source: 2
+  source: false
   # 如果關閉打字效果，subtitle 只會顯示 sub 的第一行文字
   sub: 
-    - Ctrl C + Ctrl V = Me
+    - 其实我不是二次元
+    - 只是喜欢这种风格而已
+    - ME = Ctrl C + Ctrl V --- IGNORE ---
+    - 生活不止眼前的苟且
+    - 还有诗和远方的田野
+    - 
 
 # Loading Animation (加載動畫)
 preloader:
@@ -801,7 +806,7 @@ wordcount:
 
 # medium-zoom
 # https://github.com/francoischalifour/medium-zoom
-medium_zoom: false
+medium_zoom: true
 
 # fancybox
 # https://fancyapps.com/fancybox/
@@ -826,7 +831,7 @@ abcjs:
 # mermaid
 # see https://github.com/mermaid-js/mermaid
 mermaid:
-  enable: false
+  enable: true
   # built-in themes: default/forest/dark/neutral
   theme:
     light: default
