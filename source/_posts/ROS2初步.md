@@ -8,28 +8,29 @@ cover: https://www.loliapi.com/acg?5
 ---
 <a name="w3PS4"></a>
 # 安装ROS2 
-鱼香yyds
+下面给出一套在 Ubuntu 上可复现的安装方式（以 FishROS 脚本为例）。
 ```bash
 wget http://fishros.com/install -O fishros && bash fishros
 ```
-卸载ROS
+如果需要卸载 ROS 发行版，可执行：
 ```bash
 sudo apt remove ros-foxy-* && sudo apt autoremove
 ```
 <a name="hoy3W"></a>
 <!--more-->
 # 基础概念：
-与ROS1类似，ROS中同样具有节点，工作空间，功能包等概念
+与 ROS1 类似，ROS2 也由节点、工作空间、功能包等核心概念构成。
 <a name="ALm4g"></a>
 ## 节点
 <a name="RgFga"></a>
 ### 每一个节点都负责一个单独的模块。
-举个不太恰当的例子：外卖员小哥外卖给主播小姐姐吃，送累了就刷小姐姐直播跳舞，这里外卖小哥和小姐姐都是一个节点，大家共同构成了一个整体，营造出lianghao社会（bushi）<br />ROS2中的节点也是如此，每一个节点也是只负责一个单独的模块化的功能（比如一个节点负责控制车轮转动，一个节点负责从激光雷达获取数据、一个节点负责处理激光雷达的数据、一个节点负责定位等等）
+可以把系统想成一条流水线：每个节点只负责一件事，然后通过标准通信机制协作。<br />
+例如：一个节点采集激光雷达数据，一个节点做定位，一个节点做路径规划，一个节点控制底盘执行。
 
 > <a name="sQg5i"></a>
 ### 节点通信（详见）
 
-ROS2中主要有以下四种通信方式：
+ROS2 中主要有以下四种通信方式：
 
 - 话题-topics
 - 服务-services
@@ -52,17 +53,17 @@ ros2 run <package_name> <executable_name>
 - CLI（Command-Line Interface）就是命令行界面了，我们所用的终端，黑框框就是命令行界面，没有图形化。
 <a name="JdGKJ"></a>
 ### 节点相关CLI：
-列举几个常用的：<br />运行节点(
+列举几个常用的：<br />运行节点：
 ```bash
-ros2 run <package_name> <executable_name>Copy to clipboardErrorCopied
+ros2 run <package_name> <executable_name>
 ```
 查看节点列表(常用)：
 ```bash
-ros2 node listCopy to clipboardErrorCopied
+ros2 node list
 ```
 查看节点信息(常用)：
 ```bash
-ros2 node listCopy to clipboardErrorCopied
+ros2 node info <node_name>
 ```
 重映射节点名称
 ```bash
@@ -88,7 +89,7 @@ cd turtle_ws/src
 sudo apt install ros-<version>-package_name
 ```
 
-- 手动编译：有点麻烦，一般都是需要对包进行修改的时候shiytong
+- 手动编译：通常在你需要修改源码或调试依赖时使用。
 <a name="mddWh"></a>
 ### 相关指令——ros2pkg
 ```bash
@@ -101,27 +102,27 @@ xml          Output the XML of the package manifest or a specific tag
 ```
    **1.创建功能包**
 ```bash
-ros2 pkg create <package-name>  --build-type  {cmake,ament_cmake,ament_python}  --dependencies <依赖名字>Copy to clipboardErrorCopied
+ros2 pkg create <package-name> --build-type {cmake,ament_cmake,ament_python} --dependencies <依赖名字>
 ```
 **2.列出可执行文件**<br />列出所有
 ```bash
-ros2 pkg executablesCopy to clipboardErrorCopied
+ros2 pkg executables
 ```
 列出某个功能包的
 ```bash
-ros2 pkg executables turtlesimCopy to clipboardErrorCopied
+ros2 pkg executables turtlesim
 ```
 ![](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709952853767-34253709-40e1-445a-9df0-99407cbf16e4.png#averageHue=%23262321&clientId=uc1f625e0-63bc-4&from=paste&id=u29043447&originHeight=82&originWidth=430&originalType=url&ratio=1.25&rotation=0&showTitle=false&status=done&style=none&taskId=u5ab1ac60-bfbc-4ace-97a5-3a014d2af0f&title=)<br />**3.列出所有的包**
 ```bash
-ros2 pkg listCopy to clipboardErrorCopied
+ros2 pkg list
 ```
 **4.输出某个包所在路径的前缀**
 ```bash
-ros2 pkg prefix  <package-name>Copy to clipboardErrorCopied
+ros2 pkg prefix <package-name>
 ```
 比如小乌龟
 ```bash
-ros2 pkg prefix turtlesimCopy to clipboardErrorCopied
+ros2 pkg prefix turtlesim
 ```
 **5.列出包的清单描述文件**<br />**每一个功能包都有一个标配的manifest.xml文件，用于记录这个包的名字，构建工具，编译信息，拥有者，干啥用的等信息。**<br />**通过这个信息，就可以自动为该功能包安装依赖，构建时确定编译顺序等**<br />查看小乌龟模拟器功能包的信息。
 ```bash
@@ -129,7 +130,7 @@ ros2 pkg xml turtlesim
 ```
 <a name="WrcLt"></a>
 ## colcon:
-colcon其是就是个功能包的构建工具，说白了就是编译器。<br />ros2默认死没有colcon的，所以需要安装
+colcon 是 ROS2 常用的构建工具。若系统未安装，可先执行：
 ```bash
 sudo apt-get install python3-colcon-common-extensions
 ```
@@ -138,17 +139,17 @@ sudo apt-get install python3-colcon-common-extensions
 <a name="moZ8W"></a>
 ### [5.1 只编译一个包](https://fishros.com/d2lros2foxy/#/chapt3/3.3ROS2%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8Colcon?id=_51-%e5%8f%aa%e7%bc%96%e8%af%91%e4%b8%80%e4%b8%aa%e5%8c%85)
 ```bash
-colcon build --packages-select YOUR_PKG_NAME Copy to clipboardErrorCopied
+colcon build --packages-select YOUR_PKG_NAME
 ```
 <a name="Mb0AY"></a>
 ### [5.2 不编译测试单元](https://fishros.com/d2lros2foxy/#/chapt3/3.3ROS2%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8Colcon?id=_52-%e4%b8%8d%e7%bc%96%e8%af%91%e6%b5%8b%e8%af%95%e5%8d%95%e5%85%83)
 ```bash
-colcon build --packages-select YOUR_PKG_NAME  --cmake-args -DBUILD_TESTING=0Copy to clipboardErrorCopied
+colcon build --packages-select YOUR_PKG_NAME --cmake-args -DBUILD_TESTING=0
 ```
 <a name="Dt5J5"></a>
 ### [5.3 运行编译的包的测试](https://fishros.com/d2lros2foxy/#/chapt3/3.3ROS2%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8Colcon?id=_53-%e8%bf%90%e8%a1%8c%e7%bc%96%e8%af%91%e7%9a%84%e5%8c%85%e7%9a%84%e6%b5%8b%e8%af%95)
 ```bash
-colcon testCopy to clipboardErrorCopied
+colcon test
 ```
 <a name="Gacar"></a>
 ### [5.4 允许通过更改src下的部分文件来改变install（重要）](https://fishros.com/d2lros2foxy/#/chapt3/3.3ROS2%E7%9A%84%E7%BC%96%E8%AF%91%E5%99%A8Colcon?id=_54-%e5%85%81%e8%ae%b8%e9%80%9a%e8%bf%87%e6%9b%b4%e6%94%b9src%e4%b8%8b%e7%9a%84%e9%83%a8%e5%88%86%e6%96%87%e4%bb%b6%e6%9d%a5%e6%94%b9%e5%8f%98install%ef%bc%88%e9%87%8d%e8%a6%81%ef%bc%89)
@@ -157,10 +158,10 @@ colcon testCopy to clipboardErrorCopied
 colcon build --symlink-install
 ```
 <a name="DEwTp"></a>
-## 手撸节点test（c++）
-由于python的运行效率实在是一言难尽，我们只学习C++_的版本
+## 手写节点测试（C++）
+这一节用 C++ 做一个最小可运行节点，重点是熟悉 ROS2 的节点编写、编译与安装流程。
 <a name="b6gfN"></a>
-### 创建工作空间&& 功能包
+### 创建工作空间与功能包
 ```bash
 mkdir -p town_ws/src
 cd town_ws/src
@@ -168,7 +169,7 @@ ros2 pkg create village_wang --build-type ament_cmake --dependencies rclcpp
 ```
 创建完成的目录结构如下：<br />![image-20210727193256467.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709953867147-9f288dcf-5e47-4151-9465-e4418685f654.png#averageHue=%23300a24&clientId=u7f35f781-53fd-4&from=drop&id=ua3e86124&originHeight=118&originWidth=212&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=7896&status=done&style=none&taskId=u4fdf03cc-db2e-4232-9a0f-487eae2ca95&title=)
 <a name="XZHy1"></a>
-### POP方式编写节点
+### POP 方式编写节点
 在village_wang/src中创建wang2.cpp
 ```bash
 #include "rclcpp/rclcpp.hpp"
@@ -181,7 +182,7 @@ int main(int argc, char **argv)
     /*产生一个Wang2的节点*/
     auto node = std::make_shared<rclcpp::Node>("wang2");
     // 打印一句自我介绍
-    RCLCPP_INFO(node->get_logger(), "大家好，我是单身狗wang2.");
+    RCLCPP_INFO(node->get_logger(), "大家好，我是节点 wang2.");
     /* 运行节点，并检测退出信号*/
     rclcpp::spin(node);
     rclcpp::shutdown();
@@ -192,7 +193,7 @@ int main(int argc, char **argv)
 主函数中首先初始化rclcpp，然后新建了一个Node节点的对象，命名为wang2，接着使用rclcpp让这个节点暴露在外面，并检测退出信号（Ctrl+C），检测到退出信号后，就会执行rcl.shutdown()关闭节点。
 <a name="FGd6F"></a>
 #### 添加到cmakelists
-在CmakeLists.txt最后一行加入下面两行代码。
+在 CMakeLists.txt 中加入下面几行代码，让 `wang2.cpp` 被正常编译并安装：
 ```
 add_executable(wang2_node src/wang2.cpp)
 ament_target_dependencies(wang2_node rclcpp)
@@ -204,29 +205,32 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 ```
-这个是C++比Python要麻烦的地方，需要手动将编译好的文件安装到install/village_wang/lib/village_wang下.
+这一步的作用是把编译产物安装到 ROS2 约定的目录中，否则 `ros2 run` 找不到对应节点。
 <a name="WfmFe"></a>
 #### 编译运行：
-打开vscode终端，进入town_ws
+打开终端，进入 `town_ws` 后按下面顺序执行：
 <a name="Z1Ujk"></a>
-### [编译节点](https://fishros.com/d2lros2foxy/#/chapt3/3.6.2POP%E6%96%B9%E6%B3%95%E7%BC%96%E5%86%99C++%E8%8A%82%E7%82%B9%E5%B9%B6%E6%B5%8B%E8%AF%95?id=%e7%bc%96%e8%af%91%e8%8a%82%e7%82%b9)
+### 1. 编译节点
 ```bash
 colcon build
 ```
 <a name="FFV99"></a>
-### [source环境](https://fishros.com/d2lros2foxy/#/chapt3/3.6.2POP%E6%96%B9%E6%B3%95%E7%BC%96%E5%86%99C++%E8%8A%82%E7%82%B9%E5%B9%B6%E6%B5%8B%E8%AF%95?id=source%e7%8e%af%e5%a2%83)
+### 2. 加载环境
 ```bash
 source install/setup.bash
 ```
 <a name="xqzlR"></a>
-### [运行节点](https://fishros.com/d2lros2foxy/#/chapt3/3.6.2POP%E6%96%B9%E6%B3%95%E7%BC%96%E5%86%99C++%E8%8A%82%E7%82%B9%E5%B9%B6%E6%B5%8B%E8%AF%95?id=%e8%bf%90%e8%a1%8c%e8%8a%82%e7%82%b9)
+### 3. 运行节点
 ```bash
 ros2 run village_wang wang2_node
 ```
-不出意外，你可以看到王二的自我介绍。<br />![a85481a9b56ae5cf6bee46a440140235.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709954465823-94f63561-dbe0-4ac6-90a6-3e3720ef2823.png#averageHue=%231f1d1c&clientId=u7f35f781-53fd-4&from=drop&id=ucbef2116&originHeight=317&originWidth=644&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=105682&status=done&style=none&taskId=u3d85a105-b651-4405-8a1d-378ebd2cea7&title=)<br />当节点运行起来后，使用ros2 node list 指令来查看现有的节点。![972b7669eb967a31c2a0d959b7301ad9.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709954606260-0bd6726b-4a2b-4717-bf95-eba0cac67750.png#averageHue=%23363534&clientId=u7f35f781-53fd-4&from=drop&id=u21cafeca&originHeight=68&originWidth=437&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=14564&status=done&style=none&taskId=ubda76a82-e9ab-43e9-943a-dd83f8acea4&title=)
+如果运行成功，你会看到节点打印自我介绍。此时再执行 `ros2 node list`，可以确认节点已经注册到系统中。<br />![a85481a9b56ae5cf6bee46a440140235.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709954465823-94f63561-dbe0-4ac6-90a6-3e3720ef2823.png#averageHue=%231f1d1c&clientId=u7f35f781-53fd-4&from=drop&id=ucbef2116&originHeight=317&originWidth=644&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=105682&status=done&style=none&taskId=u3d85a105-b651-4405-8a1d-378ebd2cea7&title=)<br />![972b7669eb967a31c2a0d959b7301ad9.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709954606260-0bd6726b-4a2b-4717-bf95-eba0cac67750.png#averageHue=%23363534&clientId=u7f35f781-53fd-4&from=drop&id=u21cafeca&originHeight=68&originWidth=437&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=14564&status=done&style=none&taskId=ubda76a82-e9ab-43e9-943a-dd83f8acea4&title=)
 <a name="MJsrM"></a>
-## OPP方式编写节点
-还是在wang2.cpp输入代码：
+## OOP 方式编写节点
+
+如果你希望把节点封装成类，便于后续扩展订阅器、定时器和服务端，可以改成下面这种写法。
+
+还是在 `wang2.cpp` 中输入代码：
 ```cpp
 
 #include "rclcpp/rclcpp.hpp"
@@ -242,7 +246,7 @@ public:
 SingleDogNode(std::string name) : Node(name)
 {
     // 打印一句自我介绍
-    RCLCPP_INFO(this->get_logger(), "大家好，我是单身狗%s.",name.c_str());
+    RCLCPP_INFO(this->get_logger(), "大家好，我是节点 %s.", name.c_str());
 }
 
 private:
@@ -263,35 +267,51 @@ int main(int argc, char **argv)
 ```
 <a name="mRwWY"></a>
 ### 修改cmakelists&&运行
-同上，不多赘述<br />![8014891cb75b9e90255db630b7115fad.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709965221810-a121ef27-b3a9-42f7-a674-f23eee0c3e3b.png#averageHue=%231d1d1c&clientId=u488a9513-274b-4&from=drop&id=u35b36f1c&originHeight=1344&originWidth=1108&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=230404&status=done&style=none&taskId=u6451a532-fc8b-4701-8e02-2a8ab5680a6&title=)<br />运行成功。
+这部分与上一节相同：更新 CMakeLists.txt、重新编译、重新 source，然后运行节点即可。<br />![8014891cb75b9e90255db630b7115fad.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709965221810-a121ef27-b3a9-42f7-a674-f23eee0c3e3b.png#averageHue=%231d1d1c&clientId=u488a9513-274b-4&from=drop&id=u35b36f1c&originHeight=1344&originWidth=1108&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=230404&status=done&style=none&taskId=u6451a532-fc8b-4701-8e02-2a8ab5680a6&title=)<br />运行成功后，说明类封装节点的方式已经走通。
 <a name="zvknJ"></a>
 ## 通信
-鱼香教程里的举例实在是难以忘却，这里我cv过来
-```bash
-这里的王二和李四两个节点，通过话题来互相通信（传递数据）。
+这一节开始进入 ROS2 的核心能力：节点之间通过标准通信接口交换数据。
 
-李四节点会创建一个发布者（Publisher）来发布一个话题（艳娘传奇,小鱼取个英文名叫sexy_girl）。单身汉王二节点，他创建了一个订阅者（Subscriber）来订阅李四发布的话题sexy_girl。
+这里用一个最小示例说明“发布者-订阅者”模型：
 
-那艳娘传奇的内容是什么呢？我们暂且规定为由文字组成的字符串（连插图都没的那种）。
+1. 发布者节点负责发送消息。
+2. 订阅者节点负责接收消息。
+3. 消息内容用字符串类型表示。
 
-[object Promise]
-李四王二通信模型是一个一对一（一个发布者，一个订阅者）的模型，除此之外ROS2中话题通信其实还可以是1对n,n对1,n对n的。
-```
+这是一个一对一示例，但在 ROS2 中，话题通信同样支持 1 对多、多对 1、多对多。
 <a name="HgXzG"></a>
 ### 话题通讯
 <a name="jWcs8"></a>
-#### 规则：
+##### 死锁
+这个例子的核心问题，不是“服务不好用”，而是**阻塞式等待和单线程执行器撞在了一起**。
 
+假设服务回调里需要等待队列里攒够足够多的章节，才能把结果返回给客户端；但新章节又恰好依赖另一个订阅回调持续写入队列。如果节点仍然运行在默认的单线程执行器中，那么服务回调一旦阻塞，订阅回调就没有机会执行，队列也就永远补不满，这就是典型的死锁场景。
+
+更直接地说：
+
+- 服务回调在等队列变大。
+- 订阅回调负责把数据写进队列。
+- 单线程执行器一次只能跑一个回调。
+
+结果就是两边互相等待，系统卡住。
+
+解决办法有两种思路：
+
+- 不在回调里做长时间阻塞等待，改成异步状态机或定时器驱动。
+- 如果示例就是要保留阻塞式逻辑，那么至少把相关回调拆到合适的回调组里，并使用多线程执行器。
 - 话题名字是关键,发布订阅接口类型要相同，发布的是字符串，接受也要用字符串来接收;
 - 同一个人(节点)可以订阅多个话题，同时也可以发布多个话题，就像一本书的作者也可以是另外一本书的读者;
 - 同一个小说不能有多个作者（版权问题），但跟小说不一样，同一个话题可以有多个发布者。
-<a name="YaREO"></a>
-#### 相关工具：
+ROS2 里常见的做法是结合多线程执行器和回调组，把可能互相影响的回调拆开调度。先在 `SingleDogNode` 中声明一个服务回调组成员变量：
+
+```cpp
 <a name="FnJns"></a>
 ##### rqt_graph:
-ROS2作为一个强大的工具，在运行过程中，我们是可以通过命令来看到节点和节点之间的数据关系的。![image-20210803113450234.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709972464260-688eb5ba-8779-4843-ad42-7a00609803f8.png#averageHue=%23e9e9e8&clientId=ud645a189-b8aa-4&from=drop&id=ud5918dcf&originHeight=591&originWidth=761&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=53857&status=done&style=none&taskId=u304193b0-36aa-4ccc-9cbe-cdec436b6b7&title=)
+`rqt_graph` 可以直观看到节点和话题之间的连接关系，是排查通信问题时非常实用的工具。![image-20210803113450234.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709972464260-688eb5ba-8779-4843-ad42-7a00609803f8.png#averageHue=%23e9e9e8&clientId=ud645a189-b8aa-4&from=drop&id=ud5918dcf&originHeight=591&originWidth=761&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=53857&status=done&style=none&taskId=u304193b0-36aa-4ccc-9cbe-cdec436b6b7&title=)
 
-<a name="Cm70r"></a>
+此时类的大致结构如下：
+
+```cpp
 ##### 命令行界面——CLI
 返回系统活动所有主题列表
 ```bash
@@ -327,10 +347,10 @@ ros2 topic pub /chatter std_msgs/msg/String 'data: "123"'
 3. 声明并创建订阅者
 4. 编写订阅回调处理逻辑
 <a name="vIZWC"></a>
-### 王三
+### 订阅者示例
 
 - 将wang2.cpp代码修改如下：
-```bash
+```cpp
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "std_msgs/msg/u_int32.hpp"
@@ -350,8 +370,8 @@ public:
     SingleDogNode(std::string name) : Node(name)
     {
         // 打印一句自我介绍
-        RCLCPP_INFO(this->get_logger(), "大家好，我是单身狗%s.", name.c_str());
-         // 创建一个订阅者来订阅李四写的小说，通过名字sexy_girl
+        RCLCPP_INFO(this->get_logger(), "大家好，我是节点 %s.", name.c_str());
+         // 创建一个订阅者，订阅名为 sexy_girl 的话题
         sub_novel = this->create_subscription<std_msgs::msg::String>("sexy_girl", 10, std::bind(&SingleDogNode::topic_callback, this, _1));
     }
 
@@ -379,12 +399,13 @@ int main(int argc, char **argv)
 }
 
 ```
-使用C++订阅话题，需要添加对应的消息类型头文件：
+使用 C++ 订阅话题，需要先引入对应的消息类型头文件：
 ```
 #include "std_msgs/msg/string.hpp"
 #include "std_msgs/msg/u_int32.hpp"
 ```
-创建订阅者和发布者时依然使用this->create_subscription和this->create_publisher方法。<br />C++中创建一个订阅者，需要传入话题类型、话题名称、所要绑定的回调函数，以及通信Qos.<br />**std::bind()**<br />**C++的类成员函数不能像普通函数那样用于回调，因为每个成员函数都需要有一个对象实例去调用它。 通常情况下，要实现成员函数作为回调函数：一种过去常用的方法就是把该成员函数设计为静态成员函数（因为类的成员函数需要隐含的this指针 而回调函数没有办法提供），但这样做有一个缺点，就是会破坏类的结构性，因为静态成员函数只能访问该类的静态成员变量和静态成员函数，不能访问非静态的，要解决这个问题，可以把对象实例的指针或引用做为参数传给它。 后面就可以靠这个对象实例的指针或引用访问非静态成员函数。另一种办法就是使用std::bind和std::function结合实现回调技术。(目前还看不太懂)**
+创建订阅者和发布者时，依然使用 `this->create_subscription` 和 `this->create_publisher`。<br />
+在 C++ 中，类成员函数不能直接作为普通回调函数传入，因此这里使用 `std::bind` 把成员函数和当前对象实例绑定起来。你可以先把它理解成“把 `this` 和回调函数打包后交给 ROS2”。
 
 - 编译运行
 ```
@@ -393,8 +414,9 @@ colcon build --packages-select village_wang
 
 - source运行
 <a name="KES9k"></a>
-### 李四
-突然发现李四的源码在教程里没有，自己搓了个试试。
+### 发布者示例
+
+下面补一个最小发布者节点，用来把“发布-订阅”链路完整跑通。
 ```cpp
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -516,27 +538,28 @@ ros2 interface package std_msgs
 ![](https://cdn.nlark.com/yuque/0/2024/png/39221021/1710036811203-ae44eadd-e3cf-41ce-8f6e-17452d028e89.png#averageHue=%23262626&clientId=ud3f5d7d5-6e8f-4&from=paste&id=u11110c34&originHeight=246&originWidth=669&originalType=url&ratio=1.5625&rotation=0&showTitle=false&status=done&style=none&taskId=ue6b53307-54e5-482e-9233-ae6dfa80bfa&title=)
 <a name="kgaGi"></a>
 ##### [查看某一个接口详细的内容](https://fishros.com/d2lros2foxy/#/chapt4/4.5ROS2%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D?id=_44%e6%9f%a5%e7%9c%8b%e6%9f%90%e4%b8%80%e4%b8%aa%e6%8e%a5%e5%8f%a3%e8%af%a6%e7%bb%86%e7%9a%84%e5%86%85%e5%ae%b9)
-```cpp
+```bash
 ros2 interface show std_msgs/msg/String
 ```
 ![](https://cdn.nlark.com/yuque/0/2024/png/39221021/1710036811860-73d814e9-0ad4-4f3c-8b03-cc84d50b8e00.png#averageHue=%23292929&clientId=ud3f5d7d5-6e8f-4&from=paste&id=uff812660&originHeight=114&originWidth=764&originalType=url&ratio=1.5625&rotation=0&showTitle=false&status=done&style=none&taskId=ufbd1877f-055c-45bb-b469-d1c4c124258&title=)
 <a name="YVXNq"></a>
 ##### [输出某一个接口所有属性](https://fishros.com/d2lros2foxy/#/chapt4/4.5ROS2%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3%E4%BB%8B%E7%BB%8D?id=_45-%e8%be%93%e5%87%ba%e6%9f%90%e4%b8%80%e4%b8%aa%e6%8e%a5%e5%8f%a3%e6%89%80%e6%9c%89%e5%b1%9e%e6%80%a7)
-```cpp
+```bash
 ros2 interface proto sensor_msgs/msg/Image
 ```
 ![](https://cdn.nlark.com/yuque/0/2024/png/39221021/1710036811870-5f07a163-7673-4f56-a3c5-337c13939d9a.png#averageHue=%23212121&clientId=ud3f5d7d5-6e8f-4&from=paste&id=u9b08528d&originHeight=208&originWidth=611&originalType=url&ratio=1.5625&rotation=0&showTitle=false&status=done&style=none&taskId=uf0315698-41a2-4e5e-b260-a5dff7aa66e&title=)
 
 <a name="PJTRk"></a>
-#### 
-显然，服务和话题的区别在于话题是没有返回的，只是单向的数据传递。而服务是双向的客户端发送，服务端响应。
+#### 服务与话题的区别
+
+话题更适合连续数据流，通常没有即时返回结果；服务则是典型的请求-响应模型，客户端发起请求，服务端处理后返回结果。
 <a name="JJ4MV"></a>
 ### 自定义话题接口
 
 - 新建工作空间
 
 在town_ws的src文件夹下，运行下面的指令，即可完成village_interfaces功能包的创建。    <br /> 	**注意，这里包的编译类型我们使用ament_cmake方式。**
-```cpp
+```bash
 ros2 pkg create village_interfaces --build-type ament_cmake 
 ```
 ![image-20210809151545012.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1710037304935-3b720491-175f-421f-b8b8-cd410932ca33.png#averageHue=%23212121&clientId=ud3f5d7d5-6e8f-4&from=drop&id=u0e50a9c7&originHeight=179&originWidth=503&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=15650&status=done&style=none&taskId=u951c0305-6102-4c35-885a-e55d3f3c93b&title=)
@@ -544,8 +567,8 @@ ros2 pkg create village_interfaces --build-type ament_cmake
 
 - 新建msg文件和Novel.msg（小说消息）
 
-**注意:msg文件开头首字母一定要大写，ROS2强制要求，盲猜应该是为了和类名保持一致**
-```cpp
+**注意：消息文件名首字母通常使用大写，便于和生成后的类型名保持一致。**
+```bash
 cd village_interfaces
 mkdir msg
 touch Novel.msg 
@@ -555,14 +578,14 @@ touch Novel.msg
 
 - 编写Novel.msg内容
 
-我们的目的是给李四的小说每一章增加一张图片，原来李四写小说是对外发布一个std_msgs/msg/String字符串类型的数据。<br />而发布图片的格式，我们需要采用ros自带的传感器消息接口中的图片sensor_msgs/msg/Image数据类型，所以我们新的消息文件的内容就是将两者合并，在ROS2中可以写做这样：<br />**在msg文件中可以使用#号添加注释。**
+这里的目标是定义一个复合消息：既包含文本内容，也包含图像数据。文本部分可以用 `string` 或 `std_msgs/String` 表示，图像部分则使用 `sensor_msgs/Image`。在 `msg` 文件中可以使用 `#` 添加注释。
 ```
 # 标准消息接口std_msgs下的String类型
 std_msgs/String content
 # 图像消息，调用sensor_msgs下的Image类型
 sensor_msgs/Image image
 ```
-这种组合结构图如下：<br />[object Promise]<br />这个图一共三层，第一层是消息定义层，第二层是ROS2已有的std_msgs,sensor_msgs，其组成关系是由下一层组合成上一层。<br />最下面一层string、uint8、uint32是ROS2中的原始数据类型，原始数据类型有下面几种，ROS2中所有的接口都是由这些原始数据类型组成。
+可以把这类自定义消息理解成三层组合：最上层是你定义的消息，中间层是 ROS2 的标准消息类型，最底层是 `string`、`uint32` 这类基础数据类型。ROS2 的所有接口本质上都是这样逐层组合出来的。
 ```
 bool
 byte
@@ -576,7 +599,7 @@ string
 ```
 
 
-- Another way
+### 另一种写法
 
 我们不使用std_msgs/String 而是直接使用最下面一层的string。
 ```
@@ -586,7 +609,7 @@ string content
 sensor_msgs/Image image
 ```
 
-- 说明
+### 为什么可以直接使用 string
 
 如何知道，std_msgs/String是由基础数据类型string组成的，其实可以通过下面的指令来查看
 ```
@@ -616,7 +639,7 @@ sensor_msgs/Image image
 - 修改Cmakelists.txt
 
 完成了代码的编写还不够，我们还需要在CMakeLists.txt中告诉编译器，你要给我把Novel.msg转换成Python库和C++的头文件。<br />直接添加下面的代码到CMakeLists.txt即可。
-```cpp
+```cmake
 #添加对sensor_msgs的
 find_package(sensor_msgs REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
@@ -626,16 +649,16 @@ rosidl_generate_interfaces(${PROJECT_NAME}
     DEPENDENCIES sensor_msgs
     )
 ```
-find_package用于查找rosidl_default_generators位置，下面rosidl_generate_interfaces就是声明msg文件所属的工程名字、文件位置以及依赖DEPENDENCIES。<br />**踩坑报告：**
+`find_package` 用于查找依赖，`rosidl_generate_interfaces` 用于声明接口文件和依赖。这里有两个常见坑：
 
-- **重点强调一下依赖部分DEPENDENCIES，我们消息中用到的依赖这里必须写上，即使不写编译器也不会报错，直到运行的时候才会出错。**
-- **而且rosidl_generate_interfaces()** 函数必须在 **ament_package()** 函数之前调用。
+1. `DEPENDENCIES` 里的依赖要写全，否则有些问题会在运行时才暴露。
+2. `rosidl_generate_interfaces()` 必须写在 `ament_package()` 之前。
 
 代码大概是这样的<br />![e3877412c40448c0995ba2884a1ae7c1.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1710038380883-6becece5-b4cd-4c3d-bc11-cdcffa9dcf1d.png#averageHue=%23201f1f&clientId=ud3f5d7d5-6e8f-4&from=drop&id=ua4ec7301&originHeight=843&originWidth=1469&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=471267&status=done&style=none&taskId=u795fc122-a6a1-4427-9f9d-d20f8507983&title=)
 
 - 修改package.xml
 
-修改village_interfaces目录下的package.xml，添加下面三行代码，为工程添加一下所需的依赖。<br />**这里其实不添加也可以**
+修改 `village_interfaces` 目录下的 `package.xml`，显式添加依赖更稳妥，能减少环境差异带来的问题。
 ```
   <depend>sensor_msgs</depend>
   <build_depend>rosidl_default_generators</build_depend>
@@ -675,44 +698,49 @@ ros2 interface proto village_interfaces/msg/Novel #显示属性
 下面操作一下ros2自带的样例服务：
 <a name="ZLIvy"></a>
 #### 启动服务端
-运行一个服务节点
-```cpp
+先运行一个服务节点：
+```bash
 ros2 run examples_rclpy_minimal_service service
-//服务的功能是将两个数字相加，给定a，b两个数，返回sum也就是ab之和
 ```
+
+这个服务的作用很简单：输入两个整数，返回它们的和。
 <a name="OhYmw"></a>
 ##### 查看服务列表
-```cpp
+```bash
 ros2 service list
 ```
 <a name="ZNyUa"></a>
-##### 手动调用服务（一定要注意a：  b: 的空格）
-```cpp
+##### 手动调用服务
+
+注意请求体里的 YAML 格式要写对：
+
+```bash
 ros2 service call /add_two_ints example_interfaces/srv/AddTwoInts "{a: 5,b: 10}"
-//需要再启动一个终端
 ```
+
+这条命令建议在另一个终端里执行。
 <a name="RHF6C"></a>
 ##### 查看服务接口类型
-```cpp
+```bash
 ros2 service type /add_two_ints
 
 ```
 <a name="AIADv"></a>
 ##### 查找使用某一接口的服务
-```cpp
+```bash
 ros2 service find example_interfaces/srv/AddTwoInts
 
 ```
 <a name="X9wyU"></a>
 #### 自定义服务接口
-我们来看一下服务的消息接口长什么样子？<br />服务接口格式：xxx.srv
+先看一下服务接口的基本格式。一个 `.srv` 文件分成请求和响应两部分：
 ```
 int64 a
 int64 b
 ---
 int64 sum
 ```
-与话题不同的是，srv文件比msg文件中间多出了三个---这三个杠杠就是分界线，上方的是客户端发送请求的数据结构定义，下方的是服务端响应结果的数据结构定义。<br />参考下面的步骤：
+与话题不同，`srv` 文件中间多出的 `---` 就是分界线：上面定义请求结构，下面定义响应结构。可以按下面顺序创建自定义服务：
 
 - 新建srv文件夹，并在文件夹下新建xxx.srv
 - 在xxx.srv下编写服务接口内容并保存
@@ -720,17 +748,19 @@ int64 sum
 - 在package.xml中添加xxx.srv所需的依赖
 - 编译功能包即可生成python与c++头文件
 
-当然在做上面的步骤之前，我们还需要做一件很重要的事情。就是根据业务需求，确定好请求的数据结构和返回的数据结构。我们依然是在village_interfaces下创建服务接口。<br />开始之前，我们先根据李四的需求来确定数据结构。<br />上一节中李四对借钱的要求如下：
+在动手写 `.srv` 文件之前，先根据业务需求确定请求和返回的数据结构。这里依然在 `village_interfaces` 下创建服务接口。
 
-1. 借钱一定要打欠条，收到欠条才能给钱
-2. 每次借钱不能超过自己全部资金的10%且一定是整数，也就是说李四假如现在有100块钱，那么最多借出去100x10%=10块钱
+假设需求如下：
 
-总结一下就是，李三发送借钱请求的时候一定要有欠条，我们想一下，欠条中应该至少包含两条信息
+1. 请求方必须携带借条信息，服务端收到后才继续处理。
+2. 单次放款金额不能超过当前可用资金的 10%，并且金额必须是整数。
+
+总结一下，借钱请求至少要包含两条信息：
 
 - 借钱者名字，字符串类型、可以用string表示
 - 金额，整形，可以用uint32表示
 
-那请求的数据结构我们就可以确定下来了，接着确定返回的数据的格式。<br />既然是借钱，那李四就有可能拒绝，会有借钱失败的情况，所以返回数据应该有这两条信息：
+确定了请求结构后，再设计返回结构。既然服务端可能同意，也可能拒绝，那么返回值至少需要两项：
 
 - 是否出借：只有成功和失败两种情况，布尔类型（bool）可表示
 - 出借金额：无符号整形，可以用uint32表示，借钱失败时为0。
@@ -739,7 +769,7 @@ int64 sum
 在village_interfaces下新建srv文件夹<br />![image-20210811162010736.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1710038764606-c8035912-d3b5-4a18-8758-978165a7a504.png#averageHue=%23222222&clientId=ud3f5d7d5-6e8f-4&from=drop&id=u87e80afd&originHeight=160&originWidth=471&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=14984&status=done&style=none&taskId=u6fcc9d9a-d569-433f-86c9-0a6ed8b969f&title=)
 <a name="yxyCD"></a>
 ##### 编写文件内容
-```cpp
+```srv
 string name
 uint32 money
 ---
@@ -747,9 +777,9 @@ bool success
 uint32 money
 ```
 <a name="efh5K"></a>
-##### 修改Cmakelists.txt
-我们已经添加过依赖DEPENDENCIES和msg文件了，所以这里我们直接添加一个srv即可。
-```cpp
+##### 修改CMakeLists.txt
+我们已经添加过 `msg` 文件和依赖，所以这里直接再加入一个 `srv` 文件即可。
+```cmake
 find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   #---msg---
@@ -759,12 +789,12 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   DEPENDENCIES sensor_msgs
  )
 ```
-需要关注的是这一行"srv/BorrowMoney.srv",添加了对应的文件位置。
+需要关注的是 `"srv/BorrowMoney.srv"` 这一行，它告诉构建系统要生成对应的服务接口代码。
 
 - 踩坑：在rosidl_generate_interfaces()函数中传递了一个依赖项sensor_msgs，但是在使用find_package()函数之前没有找到它。需要在CMakeLists.txt 文件中添加find_package(sensor_msgs REQUIRED)，以确保 **sensor_msgs** 包被正确地找到和链接。
 <a name="io4wO"></a>
-##### 修改package.xml
-```cpp
+##### 修改 package.xml
+```xml
   <build_depend>sensor_msgs</build_depend>
   <build_depend>rosidl_default_generators</build_depend>
   <exec_depend>rosidl_default_runtime</exec_depend>
@@ -773,13 +803,13 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 ```
 <a name="Ink82"></a>
 ##### 编译
-```cpp
+```bash
 colcon build --packages-select village_interfaces
 ```
 <a name="lVN2C"></a>
 ##### 测试
 这次测试我们依然使用ros2 interface指令进行测试。
-```cpp
+```bash
 source install/setup.bash 
 ros2 interface package village_interfaces
 ros2 interface show village_interfaces/srv/BorrowMoney
@@ -787,7 +817,7 @@ ros2 interface proto village_interfaces/srv/BorrowMoney
 ```
 <a name="uONPm"></a>
 #### 服务的c++实现
-**一句话：张三拿多少钱钱给王二，王二凑够多少个章节的艳娘传奇给他，可参考以下步骤**
+**一句话：客户端发起请求，服务端按约定规则处理后返回结果，可按下面步骤实现。**
 
 1. 导入服务接口
 2. 创建服务端回调函数
@@ -832,16 +862,28 @@ std::queue<std::string>  novels_queue;
 ```
 <a name="LaIsk"></a>
 ##### 死锁
-当张三请求王二买二手书的时候，假如王二手里书的数量不足，王二就等攒够了对应数量的书再返回给张三。<br />等待攒够章节的操作需要在卖书服务函数中阻塞当前线程，阻塞后王二就收不到李四写的小说了，这样一来就会造成一个很尴尬的情景：<br />**在卖书服务回调函数中等着书库（队列）里小说章节数量满足张三需求，接收小说的程序等着这边的卖书回调函数结束，好把书放进书库（队列）里。**<br />这种互相等待的情况，我们称之为死锁<br />ROS2默认是单线程的，同时只有一个线程在跑，大家都是顺序执行，你干完我干，一条线下去。<br />所以为了解决这个问题，我们可以使用多线程，即每次收到服务请求后，单独开一个线程来处理，不影响其他部分。
+这个例子的关键问题，是阻塞式等待放在了单线程执行器里。
+
+如果服务回调需要等待队列中积累足够多的数据才能返回，而补充队列的数据又依赖另一个订阅回调，那么单线程执行器就会出现典型的互相等待：服务回调占住线程时，订阅回调得不到执行机会，队列也就永远补不满。
+
+可以把这个问题理解成三句话：
+
+- 服务回调在等待库存变多。
+- 订阅回调负责补库存。
+- 单线程执行器一次只能处理一个回调。
+
+这就是死锁产生的根源。
+
+工程上更稳妥的方案，是避免在回调里做长时间阻塞；如果教程里暂时保留这种写法，那么就应该配合回调组和多线程执行器，让订阅回调仍然有机会继续运行。
 <a name="aZhlq"></a>
 ##### 回调函数组
-ROS2中要使用多线程执行器和回调组来实现多线程，我们先在SingleDogNode中声明一个回调组成员变量。
+ROS2 中通常通过“回调组 + 多线程执行器”的组合来解决这类问题。先在 `SingleDogNode` 中声明一个服务回调组成员变量：
 ```cpp
 // 声明一个服务回调组
 rclcpp::CallbackGroup::SharedPtr callback_group_service_;
 ```
-最终结果
-```
+完整结构大致如下：
+```cpp
 class SingleDogNode : public rclcpp::Node 
 {
 
@@ -868,37 +910,46 @@ private:
 ```
 <a name="rAhK4"></a>
 ##### 实例化服务端&&编写回调函数处理请求
-在ROS2中，回调函数组也是一个对象，通过实例化create_callback_group类即可创建一个callback_group_service的对象。<br />在SingleDogNode的构造函数中添加下面这行代码，即可完成实例化 
-```
+回调组本身也是对象，可以在构造函数中通过 `create_callback_group` 创建：
+
+```cpp
 callback_group_service_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
 ```
-<br />我们使用成员函数作为回调函数，这里要根据回调函数中参数个数，设置占位符，即告诉编译器，这个函数需要传入的参数个数。<br />**在之前订阅话题的回调函数中，我们已经用到过一次了，因为话题回调只有一个参数，所以只需要一个占位符，这里服务的回调是两个参数，所以要设置两个**
-```
+
+因为这里使用成员函数作为服务回调，所以还要准备好两个占位符，对应请求和响应两个参数：
+
+```cpp
 using std::placeholders::_1;
 using std::placeholders::_2;
 ```
-在private:下**声明服务端**
-```
+
+然后在 `private:` 区域声明服务端：
+
+```cpp
 // 声明一个服务端
 rclcpp::Service<village_interfaces::srv::SellNovel>::SharedPtr server_;
 ```
-在构造函数中**实例化服务端**
-```
+
+最后在构造函数中实例化服务端：
+
+```cpp
 // 实例化卖二手书的服务
 server_ = this->create_service<village_interfaces::srv::SellNovel>("sell_novel",
                             std::bind(&SingleDogNode::sell_book_callback,this,_1,_2),
                             rmw_qos_profile_services_default,
                             callback_group_service_);
 ```
-实例化服务端可以直接使用create_service函数，该函数是一个模版函数，需要输入要创建的服务类型，这里我们使用的是<village_interfaces::srv::SellNovel>，这个函数有四个参数需要输入,小鱼接下来进行一一介绍
+这段代码的四个参数分别表示：
 
-- "sell_novel"服务名称，没啥好说的，要唯一哦，因为服务只能有一个
-- std::bind(&SingleDogNode::sell_book_callback,this,_1,_2)回调函数，这里指向了我们2.3.1中我们声明的sell_book_callback
-- rmw_qos_profile_services_default 通信质量，这里使用服务默认的通信质量
-- callback_group_service_，回调组，我们前面创建回调组就是在这里使用的，告诉ROS2，当你要调用回调函数处理请求时，请把它放到单独线程的回调组中
+- `sell_novel`：服务名。
+- `std::bind(&SingleDogNode::sell_book_callback, this, _1, _2)`：服务请求到来时执行的回调。
+- `rmw_qos_profile_services_default`：服务通信使用默认 QoS。
+- `callback_group_service_`：把这个服务回调放进前面创建的回调组里，便于后续由多线程执行器调度。
 <a name="q5mnn"></a>
 ##### 编写回调函数
-```
+下面是一个直接可运行的服务回调示例：
+
+```cpp
 // 声明一个回调函数，当收到买书请求时调用该函数，用于处理数据
     void sell_book_callback(const village_interfaces::srv::SellNovel::Request::SharedPtr request,
         const village_interfaces::srv::SellNovel::Response::SharedPtr response)
@@ -906,10 +957,10 @@ server_ = this->create_service<village_interfaces::srv::SellNovel>("sell_novel",
         RCLCPP_INFO(this->get_logger(), "收到一个买书请求，一共给了%d钱",request->money);
         unsigned int novelsNum = request->money*1;  //应给小说数量，一块钱一章
 
-        //判断当前书库里书的数量是否满足张三要买的数量，不够则进入等待函数
+        // 判断当前库存是否满足需求，不够则进入等待
         if(novels_queue.size()<novelsNum)
         {
-            RCLCPP_INFO(this->get_logger(), "当前艳娘传奇章节存量为%d：不能满足需求,开始等待",novels_queue.size());
+            RCLCPP_INFO(this->get_logger(), "当前章节库存为%d，暂时不能满足请求，开始等待",novels_queue.size());
 
             // 设置rate周期为1s，代表1s检查一次
             rclcpp::Rate loop_rate(1);
@@ -923,7 +974,7 @@ server_ = this->create_service<village_interfaces::srv::SellNovel>("sell_novel",
                     RCLCPP_ERROR(this->get_logger(), "程序被终止了");
                     return ;
                 }
-                //打印一下当前的章节数量和缺少的数量
+                // 打印一下当前库存和缺口
                 RCLCPP_INFO(this->get_logger(), "等待中，目前已有%d章，还差%d章",novels_queue.size(),novelsNum-novels_queue.size());
 
                 //rate.sleep()让整个循环1s运行一次
@@ -931,7 +982,7 @@ server_ = this->create_service<village_interfaces::srv::SellNovel>("sell_novel",
             }
         }
         // 章节数量满足需求了
-        RCLCPP_INFO(this->get_logger(), "当前艳娘传奇章节存量为%d：已经满足需求",novels_queue.size());
+        RCLCPP_INFO(this->get_logger(), "当前章节库存为%d，已经满足请求",novels_queue.size());
 
         //一本本把书取出来，放进请求响应对象response中
         for(unsigned int i =0 ;i<novelsNum;i++)
@@ -941,26 +992,35 @@ server_ = this->create_service<village_interfaces::srv::SellNovel>("sell_novel",
         }
     }
 ```
-<br />当收到请求时，先计算一下应该给张三多少书novelsNum，然后判断书库里书的数量够不够，不够则进入攒书程序。如果够或者攒够了就把书放到服务响应对象里，返回给张三。这里我们还需要修改一下话题回调函数，增加了一行代码，将小说放到书库里novels_queue.push(msg->data);
-```
+
+这段逻辑可以按下面的顺序理解：
+
+- 先根据请求参数计算本次需要返回多少章节。
+- 如果库存不足，就暂时等待队列补充。
+- 一旦队列数量满足条件，就把内容逐个写入响应对象。
+
+与此同时，订阅回调也要负责把收到的新章节写入队列：
+
+```cpp
 // 收到话题数据的回调函数
  void topic_callback(const std_msgs::msg::String::SharedPtr msg){
      // 新建一张人民币
      std_msgs::msg::UInt32 money;
      money.data = 10;
 
-    // 发送人民币给李四
+    // 发送稿费消息
     pub_->publish(money);
-    RCLCPP_INFO(this->get_logger(), "王二：我收到了：'%s' ，并给了李四：%d 元的稿费", msg->data.c_str(),money.data);
+    RCLCPP_INFO(this->get_logger(), "收到新章节：'%s'，并支付稿费：%d 元", msg->data.c_str(),money.data);
 
-    //将小说放入novels_queue中
+    // 将章节放入缓存队列
     novels_queue.push(msg->data);
 };
 ```
 <a name="S7CCg"></a>
 ##### 修改main函数
-因为我们要让整个程序变成多线程的，所以我们要把节点的执行器变成多线程执行器。<br />修改一下main函数，新建一个多线程执行器，添加王二节点并spin,完整代码如下：
-```
+因为这个例子依赖服务回调和订阅回调并行推进，所以 `main` 函数里也要把默认执行器换成多线程执行器：
+
+```cpp
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
@@ -974,6 +1034,9 @@ int main(int argc, char **argv)
     return 0;
 }
 ```
+
+如果你只是想验证“多线程执行器是否生效”，可以先保留示例逻辑不动，观察服务等待期间订阅回调是否还能继续写入队列；这比单纯记概念更容易理解为什么这里一定要切到 `MultiThreadedExecutor`。
+
  [wang2.cpp](https://raw.githubusercontent.com/fishros/ros2_town/af8b29f7b23153d35348ebfcd3b1bc5760c6c5a6/village_wang/src/wang2.cpp)
 <a name="NmoFR"></a>
 ##### 编译：
