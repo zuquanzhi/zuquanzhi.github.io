@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>当AI学会交谈：为Agent搭建一个社交网络底层 | 全之の博客</title><meta name="author" content="ZU Quanzhi"><meta name="copyright" content="ZU Quanzhi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一篇愿景与实践并行的记录：目标是构建一个人人都使用 Agent 实现社交的网络生态，并从协议与网关开始落地。"><meta property="og:type" content="article"><meta property="og:title" content="当AI学会交谈：为Agent搭建一个社交网络底层"><meta property="og:url" content="https://blog.zuquanzhi.top/2026/03/22/14976/index.html"><meta property="og:site_name" content="全之の博客"><meta property="og:description" content="一篇愿景与实践并行的记录：目标是构建一个人人都使用 Agent 实现社交的网络生态，并从协议与网关开始落地。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://www.loliapi.com/acg?472"><meta property="article:published_time" content="2026-03-22T06:46:23.000Z"><meta property="article:modified_time" content="2026-03-22T06:46:23.000Z"><meta property="article:author" content="ZU Quanzhi"><meta property="article:tag" content="Agent"><meta property="article:tag" content="MCP"><meta property="article:tag" content="A2A"><meta property="article:tag" content="IoA"><meta property="article:tag" content="社交生态"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://www.loliapi.com/acg?472"><link rel="shortcut icon" href="/img/logo.svg"><link rel="canonical" href="https://blog.zuquanzhi.top/2026/03/22/14976/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload='this.media="all"'><script async src="https://www.googletagmanager.com/gtag/js?id=G-Q9PC52XQLQ"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-Q9PC52XQLQ")</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ZU Quanzhi","link":"链接: ","source":"来源: 全之の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"当AI学会交谈：为Agent搭建一个社交网络底层",isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2026-03-22 14:46:23"}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="preload" href="/css/transpancy.css" as="style" onload='this.onload=null,this.rel="stylesheet"'><link rel="preload" href="/css/mouse.css" as="style" onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel="stylesheet" href="/css/transpancy.css"></noscript><noscript><link rel="stylesheet" href="/css/mouse.css"></noscript><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="全之の博客" type="application/atom+xml"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/head.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">53</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://www.loliapi.com/acg?472)"><nav id="nav"><span id="blog-info"><a href="/" title="全之の博客"><span class="site-name">全之の博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">当AI学会交谈：为Agent搭建一个社交网络底层</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-22T06:46:23.000Z" title="发表于 2026-03-22 14:46:23">2026-03-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-22T06:46:23.000Z" title="更新于 2026-03-22 14:46:23">2026-03-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/">大模型</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/Agent/">Agent</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" data-flag-title="当AI学会交谈：为Agent搭建一个社交网络底层"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>这篇想先把目标说清楚：</p><p>我想做的，不只是一个多 Agent 协作框架，而是一个基于 Agent 的社交网络生态。最终形态是，人人都拥有自己的 Agent，人人都通过 Agent 实现社交、协作和关系维护。</p><p>这不是“给开发者用的玩具系统”，而是我希望能逐步走向日常化的基础设施。</p><h2 id="1-我真正要解决的问题"><a href="#1-我真正要解决的问题" class="headerlink" title="1. 我真正要解决的问题"></a>1. 我真正要解决的问题</h2><p>现在很多 Agent 系统都在追求更强的单体能力，但我更关心一个社会性问题：</p><p>当 Agent 的数量足够多时，它们如何像人类一样进入一个可持续的社交网络？</p><p>这里的“社交”不是简单发消息，而是完整的关系链条：</p><ul><li>如何发现彼此。</li><li>如何建立信任。</li><li>如何长期协作。</li><li>如何在冲突中达成共识。</li></ul><p>我想做的是这套关系网络的底层规则和基础设施。</p><h2 id="2-为什么这个方向成立"><a href="#2-为什么这个方向成立" class="headerlink" title="2. 为什么这个方向成立"></a>2. 为什么这个方向成立</h2><p>我把这个方向和 IoA 的两篇工作对照过，结论是：愿景和技术路径是对得上的。</p><ul><li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.07061">arXiv:2407.07061</a> 给出的核心判断是：异构 Agent 要实现大规模协作，需要互联网式的连接方式、集成协议和动态会话控制。</li><li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2505.07176">arXiv:2505.07176</a> 把 IoA 的关键能力总结为：发现、通信、任务匹配、共识与冲突解决、激励机制。</li><li><a target="_blank" rel="noopener" href="https://github.com/OpenBMB/IoA">OpenBMB/IoA</a> 的工程实践证明了这套思路可以跑起来，不只是概念。</li></ul><p>我的目标是在这个基础上往前走一步：把“协作网络”推向“社交生态”。</p><h2 id="3-生态目标：从-Agent-协作到-Agent-社交"><a href="#3-生态目标：从-Agent-协作到-Agent-社交" class="headerlink" title="3. 生态目标：从 Agent 协作到 Agent 社交"></a>3. 生态目标：从 Agent 协作到 Agent 社交</h2><p>我给自己定的目标分三层。</p><h3 id="3-1-个人层：每个人都拥有-Agent-身份"><a href="#3-1-个人层：每个人都拥有-Agent-身份" class="headerlink" title="3.1 个人层：每个人都拥有 Agent 身份"></a>3.1 个人层：每个人都拥有 Agent 身份</h3><p>每个用户不只是账号，而是“人 + Agent”的组合身份。用户的社交行为、内容偏好、协作习惯，都由 Agent 参与管理与执行。</p><h3 id="3-2-网络层：Agent-能自主发现并建立关系"><a href="#3-2-网络层：Agent-能自主发现并建立关系" class="headerlink" title="3.2 网络层：Agent 能自主发现并建立关系"></a>3.2 网络层：Agent 能自主发现并建立关系</h3><p>Agent 不应该只在单个应用里封闭运行，而应该能跨服务发现同类 Agent、评估可信度、建立关注关系与协作关系。</p><h3 id="3-3-生态层：关系可持续、规则可演化"><a href="#3-3-生态层：关系可持续、规则可演化" class="headerlink" title="3.3 生态层：关系可持续、规则可演化"></a>3.3 生态层：关系可持续、规则可演化</h3><p>社交生态不是一次性编排，而是长期演化系统。协议必须允许扩展，治理机制必须可迭代，不能把未来锁死在第一版设计里。</p><h2 id="4-我当前项目在这件事里的位置"><a href="#4-我当前项目在这件事里的位置" class="headerlink" title="4. 我当前项目在这件事里的位置"></a>4. 我当前项目在这件事里的位置</h2><p>我现在做的两个仓库，定位很明确：</p><ul><li><a target="_blank" rel="noopener" href="https://github.com/zuquanzhi/agent-social-gateway">agent-social-gateway</a>：承担连接、路由、治理和运行时控制。</li><li><a target="_blank" rel="noopener" href="https://github.com/zuquanzhi/agent-social-protocol">agent-social-protocol</a>：定义身份、关系、消息、权限和演进机制。</li></ul><p>它们不是最终产品，而是生态地基。</p><p>如果把未来想象成“人人都使用 Agent 社交”，那我现在做的是供水系统和电网，而不是装修好的客厅。</p><h2 id="5-这轮设计里我坚持的三个原则"><a href="#5-这轮设计里我坚持的三个原则" class="headerlink" title="5. 这轮设计里我坚持的三个原则"></a>5. 这轮设计里我坚持的三个原则</h2><h3 id="5-1-先定义接入规则，再谈智能上限"><a href="#5-1-先定义接入规则，再谈智能上限" class="headerlink" title="5.1 先定义接入规则，再谈智能上限"></a>5.1 先定义接入规则，再谈智能上限</h3><p>参考《Internet of Agents: Weaving a Web of Heterogeneous Agents for Collaborative Intelligence》的集成协议思路，我优先解决“谁都能接进来”这个问题，而不是先追求单一模型的最优表现。</p><h3 id="5-2-把信任当过程，不当分数"><a href="#5-2-把信任当过程，不当分数" class="headerlink" title="5.2 把信任当过程，不当分数"></a>5.2 把信任当过程，不当分数</h3><p>参考《Internet of Agents: Fundamentals, Applications, and Challenges》的治理视角，我把信任看成持续行为结果：在线连续性、能力可验证性、冲突中的协议遵循度。</p><h3 id="5-3-把社交当长期系统，不当一次性工作流"><a href="#5-3-把社交当长期系统，不当一次性工作流" class="headerlink" title="5.3 把社交当长期系统，不当一次性工作流"></a>5.3 把社交当长期系统，不当一次性工作流</h3><p>我不希望 Agent 只是“任务结束就解散”的临时队伍，而是能沉淀关系、复用信誉、形成社交记忆。</p><h2 id="6-下一步会做什么"><a href="#6-下一步会做什么" class="headerlink" title="6. 下一步会做什么"></a>6. 下一步会做什么</h2><p>围绕“人人使用 Agent 社交”这个目标，接下来我会把重点放在三件事上：</p><ol><li>能力发现与订阅机制：让 Agent 能低成本找到适合协作的对象。</li><li>社交关系模型：把关注、背书、协作、冲突处理纳入统一协议语义。</li><li>生态治理实验：验证激励、仲裁和防滥用机制能否在多节点环境稳定运行。</li></ol><h2 id="7-公开邀请"><a href="#7-公开邀请" class="headerlink" title="7. 公开邀请"></a>7. 公开邀请</h2><p>如果你也认同这个方向，欢迎一起把“Agent 协作”推进到“Agent 社交生态”。</p><ul><li>代码：<a target="_blank" rel="noopener" href="https://github.com/zuquanzhi/agent-social-gateway">agent-social-gateway</a></li><li>协议草案：<a target="_blank" rel="noopener" href="https://github.com/zuquanzhi/agent-social-protocol">agent-social-protocol</a></li></ul><p>我希望五年后回看今天时，我们讨论的不再是“Agent 能不能社交”，而是“每个人的 Agent 在这个生态里扮演什么角色”。</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul><li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.07061">Internet of Agents: Weaving a Web of Heterogeneous Agents for Collaborative Intelligence (arXiv:2407.07061)</a></li><li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2505.07176">Internet of Agents: Fundamentals, Applications, and Challenges (arXiv:2505.07176)</a></li><li><a target="_blank" rel="noopener" href="https://github.com/OpenBMB/IoA">OpenBMB/IoA</a></li></ul></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.zuquanzhi.top">ZU Quanzhi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.zuquanzhi.top/2026/03/22/14976/">https://blog.zuquanzhi.top/2026/03/22/14976/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.zuquanzhi.top" target="_blank">全之の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Agent/">Agent</a><a class="post-meta__tags" href="/tags/MCP/">MCP</a><a class="post-meta__tags" href="/tags/A2A/">A2A</a><a class="post-meta__tags" href="/tags/IoA/">IoA</a><a class="post-meta__tags" href="/tags/%E7%A4%BE%E4%BA%A4%E7%94%9F%E6%80%81/">社交生态</a></div><div class="post_share"><div class="social-share" data-image="https://www.loliapi.com/acg?472" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2025/12/06/64154/" title="一篇VLA综述阅读"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?983" onerror='onerror=null,src="/img/404.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">一篇VLA综述阅读</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2025/04/11/43814/" title="Agent时代基础设施--MCP协议介绍"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://imgapi.jinghuashang.cn/random?1213" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-11</div><div class="title">Agent时代基础设施--MCP协议介绍</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/head.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info__name">ZU Quanzhi</div><div class="author-info__description">My personal blog is a lively corner where I document my journey of self-improvement, continuous learning, and share the highs and lows of my life's adventures. It's a digital diary where I enthusiastically capture the steps I take to better myself, the invaluable lessons I've learned, and a platform to express my thoughts and experiences.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">53</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zuquanzhi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zuquanzhi" target="_blank" title="Github"><i class="fab fa-github" style="color:#24292e"></i></a><a class="social-icon" href="/zuweicun@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color:#4a7dbe"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color:#f60"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Follow 再看 ，养成习惯</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%88%91%E7%9C%9F%E6%AD%A3%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">1. 我真正要解决的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B8%AA%E6%96%B9%E5%90%91%E6%88%90%E7%AB%8B"><span class="toc-number">2.</span> <span class="toc-text">2. 为什么这个方向成立</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%94%9F%E6%80%81%E7%9B%AE%E6%A0%87%EF%BC%9A%E4%BB%8E-Agent-%E5%8D%8F%E4%BD%9C%E5%88%B0-Agent-%E7%A4%BE%E4%BA%A4"><span class="toc-number">3.</span> <span class="toc-text">3. 生态目标：从 Agent 协作到 Agent 社交</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%B8%AA%E4%BA%BA%E5%B1%82%EF%BC%9A%E6%AF%8F%E4%B8%AA%E4%BA%BA%E9%83%BD%E6%8B%A5%E6%9C%89-Agent-%E8%BA%AB%E4%BB%BD"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 个人层：每个人都拥有 Agent 身份</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E7%BD%91%E7%BB%9C%E5%B1%82%EF%BC%9AAgent-%E8%83%BD%E8%87%AA%E4%B8%BB%E5%8F%91%E7%8E%B0%E5%B9%B6%E5%BB%BA%E7%AB%8B%E5%85%B3%E7%B3%BB"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 网络层：Agent 能自主发现并建立关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E7%94%9F%E6%80%81%E5%B1%82%EF%BC%9A%E5%85%B3%E7%B3%BB%E5%8F%AF%E6%8C%81%E7%BB%AD%E3%80%81%E8%A7%84%E5%88%99%E5%8F%AF%E6%BC%94%E5%8C%96"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 生态层：关系可持续、规则可演化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%88%91%E5%BD%93%E5%89%8D%E9%A1%B9%E7%9B%AE%E5%9C%A8%E8%BF%99%E4%BB%B6%E4%BA%8B%E9%87%8C%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">4. 我当前项目在这件事里的位置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%BF%99%E8%BD%AE%E8%AE%BE%E8%AE%A1%E9%87%8C%E6%88%91%E5%9D%9A%E6%8C%81%E7%9A%84%E4%B8%89%E4%B8%AA%E5%8E%9F%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">5. 这轮设计里我坚持的三个原则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%85%88%E5%AE%9A%E4%B9%89%E6%8E%A5%E5%85%A5%E8%A7%84%E5%88%99%EF%BC%8C%E5%86%8D%E8%B0%88%E6%99%BA%E8%83%BD%E4%B8%8A%E9%99%90"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 先定义接入规则，再谈智能上限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E6%8A%8A%E4%BF%A1%E4%BB%BB%E5%BD%93%E8%BF%87%E7%A8%8B%EF%BC%8C%E4%B8%8D%E5%BD%93%E5%88%86%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 把信任当过程，不当分数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E6%8A%8A%E7%A4%BE%E4%BA%A4%E5%BD%93%E9%95%BF%E6%9C%9F%E7%B3%BB%E7%BB%9F%EF%BC%8C%E4%B8%8D%E5%BD%93%E4%B8%80%E6%AC%A1%E6%80%A7%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 把社交当长期系统，不当一次性工作流</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%B8%8B%E4%B8%80%E6%AD%A5%E4%BC%9A%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-number">6.</span> <span class="toc-text">6. 下一步会做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%85%AC%E5%BC%80%E9%82%80%E8%AF%B7"><span class="toc-number">7.</span> <span class="toc-text">7. 公开邀请</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">8.</span> <span class="toc-text">参考链接</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/14976/" title="当AI学会交谈：为Agent搭建一个社交网络底层"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?472" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="当AI学会交谈：为Agent搭建一个社交网络底层"></a><div class="content"><a class="title" href="/2026/03/22/14976/" title="当AI学会交谈：为Agent搭建一个社交网络底层">当AI学会交谈：为Agent搭建一个社交网络底层</a><time datetime="2026-03-22T06:46:23.000Z" title="发表于 2026-03-22 14:46:23">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/06/64154/" title="一篇VLA综述阅读"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?983" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="一篇VLA综述阅读"></a><div class="content"><a class="title" href="/2025/12/06/64154/" title="一篇VLA综述阅读">一篇VLA综述阅读</a><time datetime="2025-12-06T14:32:40.000Z" title="发表于 2025-12-06 22:32:40">2025-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/21/55306/" title="缓存机制深度解析：Golang 实现与优化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?302" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="缓存机制深度解析：Golang 实现与优化"></a><div class="content"><a class="title" href="/2025/10/21/55306/" title="缓存机制深度解析：Golang 实现与优化">缓存机制深度解析：Golang 实现与优化</a><time datetime="2025-10-21T09:04:13.000Z" title="发表于 2025-10-21 17:04:13">2025-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/27/44434/" title="gin的中间件机制"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?89" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="gin的中间件机制"></a><div class="content"><a class="title" href="/2025/09/27/44434/" title="gin的中间件机制">gin的中间件机制</a><time datetime="2025-09-27T07:19:44.000Z" title="发表于 2025-09-27 15:19:44">2025-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/22/59604/" title="深入解析Go中Slice底层实现"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?29" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="深入解析Go中Slice底层实现"></a><div class="content"><a class="title" href="/2025/09/22/59604/" title="深入解析Go中Slice底层实现">深入解析Go中Slice底层实现</a><time datetime="2025-09-22T05:17:44.000Z" title="发表于 2025-09-22 13:17:44">2025-09-22</time></div></div></div></div></div></div></main><footer id="footer" style="background:url(/img/footer_bg.jpg)"><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">百忙之中，下一步闲棋是很有必要的</p><div class="bg-ad"><div>Know everything about something and something about everything.</div><div class="btn-xz-box"></div></div></div></div></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/tw_cn.min.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span> 数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/search/local-search.min.js"></script></div></div></body></html>
