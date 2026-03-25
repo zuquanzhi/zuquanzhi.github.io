@@ -141,6 +141,8 @@ search:
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
+  ignore:
+    - CNAME.html
   repo: git@github.com:zuquanzhi/zuquanzhi.github.io.git
        #https://github.com/zuquanzhi/zuquanzhi.github.io.git
   branch: master
