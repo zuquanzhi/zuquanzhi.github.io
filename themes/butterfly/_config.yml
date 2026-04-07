@@ -63,7 +63,7 @@ default_top_img: transparent
 archive_img: transparent
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img:
+tag_img: transparent
 
 # The banner image of tag page
 # format:
@@ -72,7 +72,7 @@ tag_per_img:
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img:
+category_img: transparent
 
 # The banner image of category page
 # format:
@@ -914,13 +914,10 @@ lazyload:
 Open_Graph_meta:
   enable: true
   option:
-    # twitter_card:
-    # twitter_image:
-    # twitter_id:
-    # twitter_site:
-    # google_plus:
-    # fb_admins:
-    # fb_app_id:
+    twitter_card: summary_large_image
+    twitter_image:
+    twitter_id: '@zuwance'
+    twitter_site: '@zuwance'
 
 # Add the vendor prefixes to ensure compatibility
 css_prefix: true
