@@ -6,7 +6,7 @@
 title: 全之の博客
 subtitle: Be Someone Interesting
 description: My personal blog is a lively corner where I document my journey of self-improvement, continuous learning, and share the highs and lows of my life's adventures. It's a digital diary where I enthusiastically capture the steps I take to better myself, the invaluable lessons I've learned, and a platform to express my thoughts and experiences. 
-keywords: ''
+keywords: '全之博客,全之,zuquanzhi,个人博客,技术博客,编程,算法,机器人,ROS,深度学习,计算机,互联网,golang,后端,RoboMaster,智能车,AI,人工智能'
 author: ZU Quanzhi
 language: zh-CN
 timezone: Asia/Shanghai
@@ -115,9 +115,9 @@ theme: butterfly
 sitemap:
   path: sitemap.xml
 
-# # 百度站点地图
-# baidusitemap:
-#   path: baidusitemap.xml
+# 百度站点地图
+baidusitemap:
+  path: baidusitemap.xml
 
 ##密码
 encrypt: # hexo-blog-encrypt

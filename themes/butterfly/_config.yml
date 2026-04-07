@@ -605,10 +605,12 @@ google_adsense:
 # --------------------------------------
 
 site_verification:
-  # - name: google-site-verification
-  #   content: xxxxxx
-  # - name: baidu-site-verification
-  #   content: xxxxxxx
+  # Google Search Console 验证 (从 Google Search Console 获取)
+  - name: google-site-verification
+    content: 'googlec916dbfc0e4a4117.html'
+  # 百度站点验证 (从百度站长平台获取)
+  - name: baidu-site-verification
+    content: 'bcf3fdbec5fe93ce22346c06a273f870'
 
 # Beautify/Effect (美化/效果)
 # --------------------------------------
@@ -930,8 +932,8 @@ inject:
   head:
     # # - <link rel="stylesheet" href="/xxx.css">
     # - <link rel="stylesheet" href="/css/transpancy.css">
-    # - <link rel="stylesheet" href="/css/mouse.css">    
-    # # - <script src="/live2d-widget/autoload.js"></script> 
+    # - <link rel="stylesheet" href="/css/mouse.css">
+    # # - <script src="/live2d-widget/autoload.js"></script>
     - <link rel="preload" href="/css/transpancy.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     - <link rel="preload" href="/css/mouse.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     - <noscript><link rel="stylesheet" href="/css/transpancy.css"></noscript>

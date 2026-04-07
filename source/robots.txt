@@ -1,4 +1,20 @@
 User-agent: *
 Allow: /
+Disallow: /tmp/
+Disallow: /var/
+Disallow: /_temporary/
+Disallow: /themes/butterfly/
+Disallow: /themes/next/
 
+# 禁止搜索引擎抓取加密文章
+Disallow: /*password*
+
+# Sitemap
 Sitemap: https://blog.zuquanzhi.top/sitemap.xml
+Sitemap: https://blog.zuquanzhi.top/baidusitemap.xml
+
+# 百度
+User-agent: Baiduspider
+Allow: /
+Disallow: /tmp/
+Disallow: /themes/butterfly/
