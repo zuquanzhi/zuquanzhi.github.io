@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>从Openclaw迁移到Hermes：三天真实体验 | 全之の博客</title><meta name="author" content="ZU Quanzhi"><meta name="copyright" content="ZU Quanzhi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Agent工具的使用体验分享"><meta property="og:type" content="article"><meta property="og:title" content="从Openclaw迁移到Hermes：三天真实体验"><meta property="og:url" content="https://blog.zuquanzhi.top/2026/04/14/32348/index.html"><meta property="og:site_name" content="全之の博客"><meta property="og:description" content="Agent工具的使用体验分享"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://www.loliapi.com/acg?86"><meta property="article:published_time" content="2026-04-13T17:40:37.000Z"><meta property="article:modified_time" content="2026-04-13T17:40:37.000Z"><meta property="article:author" content="ZU Quanzhi"><meta property="article:tag" content="Openclaw, Hermes, Agent Cli"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://www.loliapi.com/acg?86"><meta name="twitter:creator" content="@zuwance"><meta name="twitter:site" content="@zuwance"><link rel="shortcut icon" href="/img/logo.svg"><link rel="canonical" href="https://blog.zuquanzhi.top/2026/04/14/32348/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="googlec916dbfc0e4a4117.html"><meta name="baidu-site-verification" content="bcf3fdbec5fe93ce22346c06a273f870"><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload='this.media="all"'><script async src="https://www.googletagmanager.com/gtag/js?id=G-Q9PC52XQLQ"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-Q9PC52XQLQ")</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ZU Quanzhi","link":"链接: ","source":"来源: 全之の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"从Openclaw迁移到Hermes：三天真实体验",isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!0,postUpdate:"2026-04-14 01:40:37"}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="preload" href="/css/transpancy.css" as="style" onload='this.onload=null,this.rel="stylesheet"'><link rel="preload" href="/css/mouse.css" as="style" onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel="stylesheet" href="/css/transpancy.css"></noscript><noscript><link rel="stylesheet" href="/css/mouse.css"></noscript><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="全之の博客" type="application/atom+xml"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/head.jpg" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><hr class="custom-hr"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://www.loliapi.com/acg?86)"><nav id="nav"><span id="blog-info"><a href="/" title="全之の博客"><span class="site-name">全之の博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">从Openclaw迁移到Hermes：三天真实体验</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-04-13T17:40:37.000Z" title="发表于 2026-04-14 01:40:37">2026-04-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-04-13T17:40:37.000Z" title="更新于 2026-04-14 01:40:37">2026-04-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Agent/">Agent</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" data-flag-title="从Openclaw迁移到Hermes：三天真实体验"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>说起来挺巧的。</p><p>本来我不是要换 agent。龙虾用了两个多月，代码写得让我难受，但该跑的都在跑，没出什么大问题。换平台的念头有过，切换成本摆在那儿，一直没动。</p><p>前两天闲来无事刷 L 站，不知道怎么点开了 <a target="_blank" rel="noopener" href="https://github.com/NousResearch/hermes-agent">Hermes 的 GitHub</a>。</p><blockquote><p>The self-improving AI agent — it creates skills from experience, improves them during use, nudges itself to persist knowledge, searches its own past conversations.</p></blockquote><p>看完了。</p><p>不是「哦，听起来不错」。是「这个设计……有点东西」。不确定它能不能做到，但这个目标本身让我觉得值得认真看一下。</p><p>花了一整天读架构文档，晚上开始迁移，把能跑的都跑起来了。现在是第三天，有些东西还在调。整体感受是：它超出了我最初的预期。</p><p>每当发现一个有意思的项目，我总想把为什么觉得它有意思说一说。</p><hr><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>OpenClaw（也就是前阵子很火的龙虾）实际跑了快俩月。</p><p>虽然有很多自媒体带节奏的原因，但是我确实没想到国内的大厂甚至官方（比如广东）也这么快下场了。不知道是好事还是坏事。</p><p>它能跑。微信接入、SOUL.md 人格、TTS 语音，核心需求都满足。理奈这个角色在里面活了几个月，记忆、习惯、工作流都沉淀了。</p><p>问题是它的代码。不是不能用，是每次打开 web 想加点东西，就感觉在往一个设计混乱的地方塞新的零件。想加个功能发现底层结构不支持，解决方案是重写那块。不是一个功能的问题，是架构的问题。</p><hr><h2 id="Hermes-是什么"><a href="#Hermes-是什么" class="headerlink" title="Hermes 是什么"></a>Hermes 是什么</h2><p><a target="_blank" rel="noopener" href="https://github.com/NousResearch/hermes-agent">Hermes</a> 是 Nous Research 出品的开源项目，定位是 self-improving AI agent。核心目标不是「能聊天」，也不是「能用工具」，而是让 agent 真正具备持续改进自己的能力——从经验里创建 Skills，在使用中改进 Skills，主动沉淀知识，搜索自己的历史会话。</p><p>README 这句话我读了三遍才继续往下看。不是因为它难懂，是因为它说了一件大多数 agent 框架不愿意认真承诺的事。</p><hr><h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</span><br></pre></td></tr></table></figure><p>Linux / macOS / WSL2 / Android Termux 支持。Windows 需要 WSL2。装完 <code>source ~/.bashrc</code>，<code>hermes</code> 命令生效。两分钟，全自动。</p><h3 id="初始化配置"><a href="#初始化配置" class="headerlink" title="初始化配置"></a>初始化配置</h3><p><code>hermes setup</code>，五步引导：</p><p><strong>模型与 Provider</strong></p><p>20+ provider 支持：OpenRouter、OpenAI、Anthropic、MiniMax、Nous Portal…… 我原来在用 MiniMax 的 Coding Plan，量大管饱，直接复用，两分钟切过去。<code>hermes model</code> 随时可换。</p><p><strong>终端后端</strong></p><p>这是 Hermes 和龙虾设计思路差异最明显的地方。</p><p>龙虾的 agent 跑在本地，没有「执行环境」这个概念。Hermes 把 agent 的运行环境抽象成了独立的「终端后端」，支持六种：Local、Docker、SSH、Modal、Daytona、Singularity。</p><p>这个设计解决了一个实际问题：不同场景需要不同的资源隔离策略。本地开发用 Local，需要 GPU 用 Modal，需要强隔离用 Docker，不想自己管理用 Daytona。切换后端不需要改 agent 代码，只需要改配置。</p><p>Modal 和 Daytona 支持休眠唤醒，idle 不花钱，需要时自动起来。试了一下 Modal，账单比预期低很多——大部分时间根本没在用它，它自己在睡觉。龙虾要么跑着烧钱，要么关掉。</p><p><strong>消息平台</strong></p><p>15 个平台适配器：Telegram、Discord、Slack、WhatsApp、Signal、钉钉、飞书、企业微信……微信和 Telegram 都是现接。</p><p><strong>工具集</strong></p><p><code>hermes tools</code> 独立管理界面，48 个工具按平台开关。</p><p><strong>主题</strong></p><p><code>hermes skin</code> 可切外观。<code>mono</code> 主题切完从金色 kawaii 变成纯黑白，差别大到像两个产品。熟悉我的朋友都知道我是钢铁侠审美的忠实粉丝，这个设计非常戳我的点。</p><h3 id="从龙虾迁移"><a href="#从龙虾迁移" class="headerlink" title="从龙虾迁移"></a>从龙虾迁移</h3><p><code>hermes claw migrate --dry-run</code> 先看预演，确认内容后执行。两分半钟搞定，没有手动复制任何东西。Skills 迁移后检查路径引用，有一个报错了两分钟，修了半小时发现是 Openclaw 的屎太大了，垃圾到处扔。</p><h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hermes               <span class="comment"># CLI 界面</span></span><br><span class="line">hermes gateway start <span class="comment"># 消息网关（后台）</span></span><br></pre></td></tr></table></figure><hr><h2 id="三天的感受"><a href="#三天的感受" class="headerlink" title="三天的感受"></a>三天的感受</h2><h3 id="CLI-是主战场"><a href="#CLI-是主战场" class="headerlink" title="CLI 是主战场"></a>CLI 是主战场</h3><p>龙虾本质上是「消息平台上的 AI」，Hermes 本质上是「CLI 上的 AI，顺便支持消息平台」。我愿称它为 Agent 届的 Claude Code。</p><p><code>hermes</code> 打开的是全屏 TUI 界面：多行编辑、命令历史、斜杠命令自动补全、流式输出。坐在电脑前时 CLI 比消息平台更高效，没有延迟，没有平台限制，token 用量清晰。</p><h3 id="记忆系统"><a href="#记忆系统" class="headerlink" title="记忆系统"></a>记忆系统</h3><p>龙虾的记忆靠文件散落管理（随地大小便）。文件一多，agent 自己也容易混乱，context 满了就开始出现「读不进去」的问题。</p><p>Hermes 做了几件不一样的事：</p><p><strong>FTS5 全文搜索。</strong></p><p>这是三天里用得最多的功能。任何历史会话内容直接搜索，不是文件名索引，是全文检索。搜「上次处理 SSH 断线」，三秒钟出结果，不用让 agent 读一堆文件然后给你一个大概的答案。</p><p><strong>Memory Manager 插件化。</strong></p><p>龙虾的 memory 写死在 AGENTS.md 体系里。Hermes 抽象出了 Memory Manager 接口，可以接入 Honcho、mem0、Supermemory 等第三方方案。默认够用，但这个扩展性是真实存在的。</p><p><strong>Skill 创建与固化。</strong></p><p><code>/skills save</code> 把当前会话的经验固化成一个可复用 Skill，下一次同类型任务直接调用。这比龙虾的「复制粘贴 Prompt 大法」省心很多。</p><h3 id="Skill-系统"><a href="#Skill-系统" class="headerlink" title="Skill 系统"></a>Skill 系统</h3><p>龙虾的 Skills 更像是预设 Prompt，定义简单，功能有限。</p><p>Hermes 的 Skills 有完整生命周期：创建 → 携带脚本和参考资料 → 使用 → 自动改进。接入了 agentskills.io 开放标准和 ClawHub 社区市场，<code>hermes skills install &lt;skill-name&gt;</code> 直接装社区共享 Skills。</p><p>第二天逛了一下社区 Skills，质量参差不齐，但机制本身是完整的。龙虾没有这个——Skills 是私有的，想分享得手动导出文件。</p><h3 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h3><p>龙虾的 cron 靠外部调度器，配置有门槛。</p><p>Hermes 原生内置 cron：</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/cron 每天早上九点给我发天气摘要 <span class="attribute">deliver</span>=telegram</span><br></pre></td></tr></table></figure><p>自然语言描述需求即可。Cron 运行在独立会话里，不污染主对话 context。</p><hr><h2 id="设计理念：为什么这个架构不一样"><a href="#设计理念：为什么这个架构不一样" class="headerlink" title="设计理念：为什么这个架构不一样"></a>设计理念：为什么这个架构不一样</h2><p>这部分是让我真正觉得有意思的东西，写详细一点。</p><h3 id="Self-improving-不是宣传语，是架构目标"><a href="#Self-improving-不是宣传语，是架构目标" class="headerlink" title="Self-improving 不是宣传语，是架构目标"></a>Self-improving 不是宣传语，是架构目标</h3><p>大多数 agent 框架的 self-improving 是「我会记住你说的话」，本质上是把对话历史当记忆用。Hermes 不一样。</p><p>它的 self-improving 是结构化的：agent 每次完成复杂任务，可以创建 Skill；Skill 有完整的生命周期定义，可以携带脚本、参考资料、使用记录；agent 在使用 Skills 的过程中可以主动改进它们。这不是「记住你说的话」，是「形成可复用的能力模块，并在使用中迭代它们」。</p><p>要实现这个目标，底下的基础设施必须到位。不是加个 <code>learn()</code> 函数就能解决的。</p><p>在这股 AI 生产力大跃进的浪潮里，氛围编程、Agentic 编程的概念满天飞，焦虑感比方法论长得更快。Hermes 的难得之处恰恰是它没有随这个大流——它选择在代码结构和工程化上花力气，而不是堆功能、造概念。</p><p>这件事说起来简单，做起来完全是另一回事。架构一旦烂了，self-improving 就只是宣传语。Hermes 能把这个目标放进架构设计里，而不是事后打补丁，靠的正是对代码结构和秩序的坚持。这种敏感度和掌控度，在当下的环境里反而成了稀缺品。</p><p>某种程度上，这也是人类在 AI 时代还能站稳脚跟的东西——不是比谁能更快地调用 AI，而是谁能保持对复杂系统的结构和节奏的感知。</p><h3 id="数据库驱动的会话存储是一切的基础"><a href="#数据库驱动的会话存储是一切的基础" class="headerlink" title="数据库驱动的会话存储是一切的基础"></a>数据库驱动的会话存储是一切的基础</h3><p>Hermes 的会话存储用 SQLite + FTS5（<code>hermes_state.py</code>），不是文件系统堆文件。</p><p>这个设计解决了一个根本问题：agent 的记忆必须是可查询的、可交叉引用的、可追踪改进历史的。</p><p>文件系统的天花板就是文件名和内容匹配。你想让 agent 回忆「三个月前处理的那个 SSH 问题」，在文件系统下只能靠 agent 读文件然后自己推理。在数据库下可以直接 FTS5 查询，精确到会话级别、工具调用级别、决策级别。</p><p>更重要的是：只有结构化的数据才能支撑上面说的 Skill 改进机制。Skill 的每次使用、每次改进、每个版本，都需要被记录和追踪。这在文件系统下是做不到的，不是「难」，是「天花板就在那里」。</p><p>龙虾的 memory 是 <code>.md</code> 文件。这不是技术路线的分歧，这是对「self-improving 需要什么基础设施」的不同理解。</p><h3 id="Prompt-Caching-是认真的工程决策"><a href="#Prompt-Caching-是认真的工程决策" class="headerlink" title="Prompt Caching 是认真的工程决策"></a>Prompt Caching 是认真的工程决策</h3><p>Anthropic 提供的 Prompt Caching 接口，Hermes 是第一批认真接入的 agent 框架之一。</p><p>对于长上下文会话，重复发送完整的 system prompt 是浪费。Prompt Caching 把 system prompt 缓存起来，只传变更的部分，成本有时候能降 50% 以上。这不是可选项，是工程上的必然。</p><p>龙虾没有这个。不是龙虾不想，是龙虾的架构在设计之初就没有考虑这种优化。等你想加的时候，整个上下文管理层可能要重写。</p><p>这不是「功能有没有」的问题，是「架构是否允许你后续加这些东西」的问题。</p><h3 id="工具注册机制决定了你能不能扩展"><a href="#工具注册机制决定了你能不能扩展" class="headerlink" title="工具注册机制决定了你能不能扩展"></a>工具注册机制决定了你能不能扩展</h3><p>48 个工具通过中央 registry 注册（<code>tools/registry.py</code>），一次注册所有平台自动可用。</p><p>新增工具的流程：写工具实现 → 注册 → 分发。链路清晰，不容易出错，不需要为每个平台单独适配。</p><p>龙虾的插件体系更偏向预设 vs 注册。不是说不能扩展，是扩展成本更高，出错点更多，每次加新工具都要多考虑几个地方。</p><h3 id="Gateway-和-CLI-共享命令注册表"><a href="#Gateway-和-CLI-共享命令注册表" class="headerlink" title="Gateway 和 CLI 共享命令注册表"></a>Gateway 和 CLI 共享命令注册表</h3><p>这是 Hermes 设计里我最喜欢的细节之一。</p><p>龙虾的消息模块和 CLI 是两套独立的命令处理。Hermes 的 Gateway 和 CLI 共用同一个 <code>COMMAND_REGISTRY</code>——<code>/model</code>、<code>/skills</code>、<code>/compress</code> 在两个入口的行为完全一致，不需要维护两套逻辑。</p><p>这个设计的好处不只是代码复用。它意味着你可以在 CLI 里调试好一个 workflow，然后无缝迁移到消息平台，反之亦然。不会有「这个命令在 CLI 里能用但 Telegram 里不能用」的问题。</p><hr><h2 id="优缺点都说说"><a href="#优缺点都说说" class="headerlink" title="优缺点都说说"></a>优缺点都说说</h2><h3 id="Hermes-真正做得好的地方"><a href="#Hermes-真正做得好的地方" class="headerlink" title="Hermes 真正做得好的地方"></a>Hermes 真正做得好的地方</h3><p><strong>架构一致性。</strong> 从数据库设计到工具注册，从 Gateway 到 CLI，从 Skill 生命周期到 Prompt Caching，每一块都像是同一个设计思路的产物。这不是功能多，这是设计语言统一。</p><p><strong>扩展性是架构内置的，不是打补丁。</strong> 想加新的 Memory Provider？接上去。想加新工具？注册一下。想换终端后端？改配置。不用动核心代码。</p><p><strong>多 Profile 体系。</strong> 同一台机器上跑多个独立配置的 agent 实例，每个 Profile 有自己的目录、配置、Gateway。龙虾是单实例的，想跑第二个得另起进程，各种配置容易打架。</p><p><strong>多模型支持。</strong> 20+ provider，<code>hermes model</code> 随时切换，不用改代码不用迁移数据。provider 绑定的风险低很多。</p><h3 id="Hermes-真正的短板"><a href="#Hermes-真正的短板" class="headerlink" title="Hermes 真正的短板"></a>Hermes 真正的短板</h3><p><strong>开箱体验不如龙虾。</strong> 龙虾装完基本能跑，需要配置的东西少。Hermes 选项多，选项多意味着初期决策成本高。不是说复杂，是「你得想清楚自己要什么」。</p><p><strong>Skill 自我改进的实际效果有待验证。</strong> 文档里说 agent 会主动改进 Skills，三天时间不够验证这个能力在实际使用中的效果。目前能用的是 Skill 创建和复用，主动改进的部分还没有足够的样本观察。</p><p><strong>社区还在早期。</strong> ClawHub 上的社区 Skills 质量参差不齐，好用的有，不好用的也有，需要自己筛选。龙虾没有社区 Skills，但胜在稳定——预设的东西虽然少，质量有保证。</p><p><strong>有些功能名字取得好听，实现还不完整。</strong> 比如 trajectory 压缩、RL 训练数据采集这些功能，架构上是存在的，但普通用户用起来还是有一定门槛。不是不能用，是需要配置。</p><hr><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>用了三天 Hermes，该跑的都在跑了。</p><p>最大的感受不是「这个比那个好」。是「发现了一个架构设计认真的项目，它的思路让我觉得 self-improving 这个目标值得继续看」。</p><p>龙虾的问题不是不能用，是它的架构不支持真正的 self-improving。每次开新会话 agent 得从头认识你一遍，Skills 是静态的，记忆是文件堆出来的。Hermes 的架构是为 self-improvement 设计的，这些东西是它的底层设计目标，不只是功能清单。</p><p>三天不够验证它能走多远，但起步是认真的。</p><hr><p><em>写于 Hermes 第三天。Telegram 跑通了，WeChat 还在调，Skill 还在攒。</em></p></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.zuquanzhi.top">ZU Quanzhi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.zuquanzhi.top/2026/04/14/32348/">https://blog.zuquanzhi.top/2026/04/14/32348/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.zuquanzhi.top" target="_blank">全之の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Openclaw-Hermes-Agent-Cli/">Openclaw, Hermes, Agent Cli</a></div><div class="post_share"><div class="social-share" data-image="https://www.loliapi.com/acg?86" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2026/03/22/14976/" title="当AI学会交谈：为Agent搭建一个社交网络底层"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?472" onerror='onerror=null,src="/img/404.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">当AI学会交谈：为Agent搭建一个社交网络底层</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/head.jpg" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info__name">ZU Quanzhi</div><div class="author-info__description">My personal blog is a lively corner where I document my journey of self-improvement, continuous learning, and share the highs and lows of my life's adventures. It's a digital diary where I enthusiastically capture the steps I take to better myself, the invaluable lessons I've learned, and a platform to express my thoughts and experiences.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">46</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zuquanzhi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zuquanzhi" target="_blank" title="Github"><i class="fab fa-github" style="color:#24292e"></i></a><a class="social-icon" href="/zuweicun@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color:#4a7dbe"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fas fa-rss" style="color:#f60"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">Follow 再看 ，养成习惯</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hermes-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">3.</span> <span class="toc-text">Hermes 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">搭建过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">4.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="toc-number">4.2.</span> <span class="toc-text">初始化配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E9%BE%99%E8%99%BE%E8%BF%81%E7%A7%BB"><span class="toc-number">4.3.</span> <span class="toc-text">从龙虾迁移</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">4.4.</span> <span class="toc-text">启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%A4%A9%E7%9A%84%E6%84%9F%E5%8F%97"><span class="toc-number">5.</span> <span class="toc-text">三天的感受</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CLI-%E6%98%AF%E4%B8%BB%E6%88%98%E5%9C%BA"><span class="toc-number">5.1.</span> <span class="toc-text">CLI 是主战场</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.2.</span> <span class="toc-text">记忆系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Skill-%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.3.</span> <span class="toc-text">Skill 系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">5.4.</span> <span class="toc-text">定时任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B8%AA%E6%9E%B6%E6%9E%84%E4%B8%8D%E4%B8%80%E6%A0%B7"><span class="toc-number">6.</span> <span class="toc-text">设计理念：为什么这个架构不一样</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-improving-%E4%B8%8D%E6%98%AF%E5%AE%A3%E4%BC%A0%E8%AF%AD%EF%BC%8C%E6%98%AF%E6%9E%B6%E6%9E%84%E7%9B%AE%E6%A0%87"><span class="toc-number">6.1.</span> <span class="toc-text">Self-improving 不是宣传语，是架构目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A9%B1%E5%8A%A8%E7%9A%84%E4%BC%9A%E8%AF%9D%E5%AD%98%E5%82%A8%E6%98%AF%E4%B8%80%E5%88%87%E7%9A%84%E5%9F%BA%E7%A1%80"><span class="toc-number">6.2.</span> <span class="toc-text">数据库驱动的会话存储是一切的基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prompt-Caching-%E6%98%AF%E8%AE%A4%E7%9C%9F%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%86%B3%E7%AD%96"><span class="toc-number">6.3.</span> <span class="toc-text">Prompt Caching 是认真的工程决策</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E6%B3%A8%E5%86%8C%E6%9C%BA%E5%88%B6%E5%86%B3%E5%AE%9A%E4%BA%86%E4%BD%A0%E8%83%BD%E4%B8%8D%E8%83%BD%E6%89%A9%E5%B1%95"><span class="toc-number">6.4.</span> <span class="toc-text">工具注册机制决定了你能不能扩展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gateway-%E5%92%8C-CLI-%E5%85%B1%E4%BA%AB%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%86%8C%E8%A1%A8"><span class="toc-number">6.5.</span> <span class="toc-text">Gateway 和 CLI 共享命令注册表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9%E9%83%BD%E8%AF%B4%E8%AF%B4"><span class="toc-number">7.</span> <span class="toc-text">优缺点都说说</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hermes-%E7%9C%9F%E6%AD%A3%E5%81%9A%E5%BE%97%E5%A5%BD%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-number">7.1.</span> <span class="toc-text">Hermes 真正做得好的地方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hermes-%E7%9C%9F%E6%AD%A3%E7%9A%84%E7%9F%AD%E6%9D%BF"><span class="toc-number">7.2.</span> <span class="toc-text">Hermes 真正的短板</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">8.</span> <span class="toc-text">结论</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/04/14/32348/" title="从Openclaw迁移到Hermes：三天真实体验"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?86" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="从Openclaw迁移到Hermes：三天真实体验"></a><div class="content"><a class="title" href="/2026/04/14/32348/" title="从Openclaw迁移到Hermes：三天真实体验">从Openclaw迁移到Hermes：三天真实体验</a><time datetime="2026-04-13T17:40:37.000Z" title="发表于 2026-04-14 01:40:37">2026-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/22/14976/" title="当AI学会交谈：为Agent搭建一个社交网络底层"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?472" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="当AI学会交谈：为Agent搭建一个社交网络底层"></a><div class="content"><a class="title" href="/2026/03/22/14976/" title="当AI学会交谈：为Agent搭建一个社交网络底层">当AI学会交谈：为Agent搭建一个社交网络底层</a><time datetime="2026-03-22T06:46:23.000Z" title="发表于 2026-03-22 14:46:23">2026-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/06/64154/" title="一篇VLA综述阅读"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?983" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="一篇VLA综述阅读"></a><div class="content"><a class="title" href="/2025/12/06/64154/" title="一篇VLA综述阅读">一篇VLA综述阅读</a><time datetime="2025-12-06T14:32:40.000Z" title="发表于 2025-12-06 22:32:40">2025-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/21/55306/" title="缓存机制深度解析：Golang 实现与优化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?302" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="缓存机制深度解析：Golang 实现与优化"></a><div class="content"><a class="title" href="/2025/10/21/55306/" title="缓存机制深度解析：Golang 实现与优化">缓存机制深度解析：Golang 实现与优化</a><time datetime="2025-10-21T09:04:13.000Z" title="发表于 2025-10-21 17:04:13">2025-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/27/44434/" title="gin的中间件机制"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://www.loliapi.com/acg?89" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="gin的中间件机制"></a><div class="content"><a class="title" href="/2025/09/27/44434/" title="gin的中间件机制">gin的中间件机制</a><time datetime="2025-09-27T07:19:44.000Z" title="发表于 2025-09-27 15:19:44">2025-09-27</time></div></div></div></div></div></div></main><footer id="footer" style="background:url(/img/footer_bg.jpg)"><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">百忙之中，下一步闲棋是很有必要的</p><div class="bg-ad"><div>Know everything about something and something about everything.</div><div class="btn-xz-box"></div></div></div></div></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/main.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/tw_cn.min.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span> 数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div><hr><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-butterfly@4.13.0/source/js/search/local-search.min.js"></script></div></div></body></html>
