@@ -3872,7 +3872,7 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
   <entry>
     <title>Hexo部署成功，页面却没更新？一次CDN缓存引发的灵异事件</title>
     <url>/2026/04/15/47447/</url>
-    <content><![CDATA[<h1 id="Hexo-部署成功，页面却没更新？一次-CDN-缓存引发的”灵异事件”"><a href="#Hexo-部署成功，页面却没更新？一次-CDN-缓存引发的”灵异事件”" class="headerlink" title="Hexo 部署成功，页面却没更新？一次 CDN 缓存引发的”灵异事件”"></a>Hexo 部署成功，页面却没更新？一次 CDN 缓存引发的”灵异事件”</h1><h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>昨天晚上，我往博客发了一篇新文章。</p>
+    <content><![CDATA[<h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>昨天晚上，我往博客发了一篇新文章。</p>
 <p><code>hexo d</code> 执行完毕，终端显示一切正常：</p>
 <figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">Deploying</span>: git</span><br><span class="line"><span class="attribute">Site</span> updated: <span class="number">2026</span>-<span class="number">04</span>-<span class="number">15</span> <span class="number">00</span>:<span class="number">52</span>:<span class="number">55</span></span><br><span class="line"><span class="attribute">HEAD</span> -&gt; master (forced update)</span><br><span class="line"><span class="attribute">Deploy</span> done: git</span><br></pre></td></tr></table></figure>
 <p>第二天打开博客首页一看————新文章呢？</p>
