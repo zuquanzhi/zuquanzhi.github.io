@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.zuquanzhi.top/2026/04/15/47447/</loc>
+    
+    <lastmod>2026-04-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.zuquanzhi.top/2026/04/15/51943/</loc>
     
     <lastmod>2026-04-14</lastmod>
@@ -913,6 +922,20 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/CDN/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/Hexo/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -987,6 +1010,13 @@
   
   <url>
     <loc>https://blog.zuquanzhi.top/categories/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/categories/bug%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2026-04-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
