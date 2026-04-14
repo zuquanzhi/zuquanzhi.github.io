@@ -1,16 +1,17 @@
 ---
-title: '从Openclaw迁移到Hermes：三天真实体验'
+title: 从Openclaw迁移到Hermes：三天真实体验
 toc: true
 mathjax: false
 copyright: true
-cover: 'https://www.loliapi.com/acg?86'
+cover: 'https://www.loliapi.com/acg?673'
 categories: Agent
-tags: 'Openclaw, Hermes, Agent Cli'
-description: Agent工具的使用体验分享
-keywords: 'Agent, Openclaw, Hermes, Agent Cli'
-abbrlink: 32348
-date: '2026-04-14 01:40:37'
-updated: '2026-04-14 01:40:37'
+tags:
+  - Openclaw
+  - Hermes
+  - Agent Cli
+abbrlink: 51943
+date: 2026-04-15 01:04:43
+updated: 2026-04-15 01:04:43
 ---
 
 ## 前言
@@ -249,3 +250,4 @@ Anthropic 提供的 Prompt Caching 接口，Hermes 是第一批认真接入的 a
 ---
 
 *写于 Hermes 第三天。Telegram 跑通了，WeChat 还在调，Skill 还在攒。*
+*目前微信插件似乎还有一些bug，提了issue看看后面会不会修一下*
