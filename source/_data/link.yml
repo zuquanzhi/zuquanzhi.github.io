@@ -30,11 +30,11 @@
   link_list:
   - name: 洛克API
     link: https://api.innilove.xyz
-    avatar: https://cloud.zuquanzhi.top/f/egFR/dimo1%E5%8F%B7.png
+    avatar: /img/dimo.png
     descr: 自建API中转站
 
   - name: 全之の云盘
     link: https://cloud.zuquanzhi.top
-    avatar: https://cloud.zuquanzhi.top/f/wRcV/site.svg
+    avatar: /img/site.svg
     descr: 全之的自建云盘
 
