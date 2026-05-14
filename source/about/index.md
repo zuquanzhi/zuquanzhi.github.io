@@ -17,6 +17,8 @@ date: 2023-09-27 22:33:35
 
 > 清晨也好，深夜也罢，愿你恰好路过这里。
 
+![](https://cdn.jsdelivr.net/gh/zuquanzhi/zuquanzhi/profile-snake-contrib/github-contribution-grid-snake-dark.svg)
+
 这里是全之的自留地——一块安静的屏幕，用来记录代码、生活，和那些漫无目的的思考。
 
 2023 年，我带着些许迷茫踏入哈尔滨工业大学（威海）的校园。在这几年的时间里，我的大学轨迹很大一部分是由实验室里熬过的夜串联起来的。我曾在 RoboMaster 机甲大师赛和智能车竞赛中，体验过把枯燥的视觉算法变成实体机器人动作的奇妙瞬间；也曾走出象牙塔，在百度做了一段后台研发实习，初步窥见了一个庞大工业级系统真实的运转模样。今年五月，我拿到了腾讯微信事业群（WXG）的 offer，即将在那里开启下一段旅程。这些经历对我而言，比起履历上的奖项，更是丈量自我与真实世界差距的标尺。
@@ -249,7 +251,7 @@ date: 2023-09-27 22:33:35
 
 ### Detailed Metrics
 
-![](https://cdn.jsdelivr.net/gh/zuquanzhi/zuquanzhi/github-metrics/people.followers.svg)
+<!-- ![](https://cdn.jsdelivr.net/gh/zuquanzhi/zuquanzhi/github-metrics/people.followers.svg) -->
 
 <!-- ![Languages In-depth](https://cdn.jsdelivr.net/gh/zuquanzhi/zuquanzhi/github-metrics/languages.indepth.svg) -->
 
