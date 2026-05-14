@@ -5,6 +5,10 @@
     link: https://blog.tosania.top/
     avatar: /img/scy.jpg
     descr: 给acm爷磕一个
+  - name: SwritedのBlog
+    link: https://blog.swrited.top/
+    avatar: /img/swrited.jpg
+    descr: 上号刷异色了
 
   - name: 潘神の博客
     link: https://ruakker.moe
@@ -21,21 +25,16 @@
     descr: 人机吃辣会短路
 
 
-- class_name: Tools
-  class_desc: 放一些常用的工具
+- class_name: Site
+  class_desc: 放一些常用的网址
   link_list:
-  - name: Clash(Linux)
-    link: http://cloud.zuquanzhi.top/f/mWuR/Clash.for.Windows-0.20.39-x64-linux.tar.gz
-    avatar: /img/clash.png
-    descr: 科学上网必备
+  - name: 洛克API
+    link: https://api.innilove.xyz
+    avatar: https://cloud.zuquanzhi.top/f/egFR/dimo1%E5%8F%B7.png
+    descr: 自建中转站
 
-  - name: Mihomo
-    link: http://cloud.zuquanzhi.top/f/DBtd/clash-party-linux-1.8.8-amd64.deb
-    avatar: /img/mihomo.png
-    descr: 一个更易用的代理Linux客户端
-
-  - name: Typora
-    link: https://github.com/main-studio/TyporaCrack
-    avatar: /img/typora.png
-    descr: 一个好用的markdown编辑器
+  - name: 全之の云盘
+    link: https://cloud.zuquanzhi.top
+    avatar: https://cloud.zuquanzhi.top/f/wRcV/site.svg
+    descr: 我自建的云盘服务器
 

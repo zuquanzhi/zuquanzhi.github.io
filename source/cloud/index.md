@@ -1,5 +1,5 @@
 ---
-title: cloud
+title: Cloud
 date: 2024-10-16 00:38:36
 type: "cloud"
 ---
