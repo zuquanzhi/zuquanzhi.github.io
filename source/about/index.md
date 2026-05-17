@@ -192,7 +192,7 @@ date: 2023-09-27 22:33:35
   box-shadow:
     0 10px 24px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(1px);
   box-sizing: border-box;
   font-size: 0.85em;
   color: rgba(255, 255, 255, 0.88);
