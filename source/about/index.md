@@ -15,58 +15,21 @@ date: 2023-09-27 22:33:35
 
 ### About Me
 
-> 清晨也好，深夜也罢，愿你恰好路过这里。
+> 技术只是手段，生活才是目的。
 
 ![](https://cdn.jsdelivr.net/gh/zuquanzhi/zuquanzhi/profile-snake-contrib/github-contribution-grid-snake-dark.svg)
 
-这里是全之的自留地——一块安静的屏幕，用来记录代码、生活，和那些漫无目的的思考。
+这里是全之的一片净土——一块安静的角落，用来记录技术迭代、生活片段，以及那些漫无目的的思考。
 
-2023 年，我带着些许迷茫踏入哈尔滨工业大学（威海）的校园。在这几年的时间里，我的大学轨迹很大一部分是由实验室里熬过的夜串联起来的。我曾在 RoboMaster 机甲大师赛和智能车竞赛中，体验过把枯燥的视觉算法变成实体机器人动作的奇妙瞬间；也曾走出象牙塔，在百度做了一段后台研发实习，初步窥见了一个庞大工业级系统真实的运转模样。今年五月，我拿到了腾讯微信事业群（WXG）的 offer，即将在那里开启下一段旅程。这些经历对我而言，比起履历上的奖项，更是丈量自我与真实世界差距的标尺。
+2023 年，我带着几许迷茫踏入哈尔滨工业大学（威海）的校园。大学这几年，我的轨迹在很大程度上由实验室的灯火串联而成。我在 RoboMaster 机甲大师赛和智能车竞赛的赛场上，经历了将枯燥算法转化为机器人动作的奇妙时刻；也曾走出校园的庇护，在百度的后台研发岗位初窥工业级系统的真实运转。如今，带着腾讯微信事业群（WXG）的 offer，我即将开启人生的下一个篇章。这些经历对我而言，不仅是履历上的记录，更是丈量自我与现实世界距离的标尺。
 
-在开源社区和各个平台上，我也一直使用「全之」这个 ID。我习惯用文字在知乎或这里记录下踩过的坑和突然的顿悟。偶尔会有读者关注，这让我觉得，在这条崎岖的探索路上能遇到同频的人，是一件很幸运的事。
+在开源社区和各个平台上，我一直使用「全之」这个 ID。我习惯用文字在知乎或这里记录下踩过的坑与突然的顿悟。每当有读者驻足，我就会感受到在探索之路上能遇见同频的人，是件多么幸运的事。
 
-聊聊技术。我目前最习惯使用 Go 来构建后端世界，平时也喜欢折腾云服务器和各种开源项目。但这并不是我的全部——从底层的嵌入式视觉（OpenCV/YOLO）到最近火热的 Agent，我都有所涉猎并在 Github 留下了些许脚印。相比于把自己局限在某个"技术栈"里，我更享受那种"为了解决一个具体问题，而去啃下一门新知识"的成长过程。
+关于技术。我一直相信技术本质是解决问题的工具，而非目的本身。我喜欢在实际场景中学习和积累，从底层的系统设计到上层的应用开发，都有涉猎。相比于标榜自己精通什么，我更坦诚地说——我还在不断探索和学习。真正吸引我的，是那种"为了解决一个具体问题而主动钻研"的过程，以及在这个过程中与志同道合的人交流碰撞的感觉。
 
-代码之外，生活依然是具体的。如果说敲击键盘是向外输出，那么折腾工具就是我向内充电的方式。我喜欢用镜头记录海边的日落，或者在没有 deadline 的周末读一本闲书，拜读一篇大佬的博客。你也许能在我的博客里找到这些生活碎片的痕迹。
+代码之余，生活依然是具体而微的。如果说敲击键盘是向外的输出，那么折腾工具就是我向内的充电。我喜欢用镜头捕捉海边的日落，也喜欢在闲适的周末读一本闲书，或者拜读大佬的深邃思考。你也许能在这个博客里找到这些生活的碎片。
 
-最后，关于"全之"这个名字。它并非取自什么宏大的典故，只是源于我对一种状态的期许——在残缺与不完美中，寻找属于自己的周全。在这个技术焦虑和内卷盛行的时代，承认自己的局限，保持清醒，顺其自然。
-
----
-
-{% timeline Timeline, blue %}
-
-<!-- timeline 2023 -->
-**入学哈尔滨工业大学（威海）**
-
-带着些许迷茫选了计算机专业。那时候对一切都挺好奇，满脑子想着做点不一样的东西。
-<!-- endtimeline -->
-
-<!-- timeline 2024 -->
-**第十九届全国大学生智能汽车竞赛 · 全国二等奖**
-
-和队友备战大半年，泡在实验室调车。算是大学里的第一个高光时刻。
-<!-- endtimeline -->
-
-<!-- timeline 2025 -->
-**RoboMaster 机甲大师赛 · 全国一等奖**
-
-加入视觉组之后，日子几乎被代码和调参填满。
-<!-- endtimeline -->
-
-<!-- timeline 2026.02 -->
-**百度后台研发实习**
-
-走出象牙塔，初步窥见了一个庞大工业级系统真实的运转模样。
-<!-- endtimeline -->
-
-<!-- timeline 2026.05 -->
-**腾讯微信事业群（WXG）offer · 至今**
-
-今年五月拿到 offer，即将开启新的阶段。
-<!-- endtimeline -->
-
-{% endtimeline %}
-
+最后，关于"全之"这个名字。它并无宏大的典故，只源于我对一种状态的期许——在残缺与不完美中，寻找属于自己的圆满。在这个充斥技术焦虑与内卷的时代，我选择承认自己的局限、保持清醒，顺其自然。
 
 ---
 
@@ -76,11 +39,12 @@ date: 2023-09-27 22:33:35
   <div class="contact-card-bg"></div>
   <div class="contact-card-overlay"></div>
   <div class="contact-avatar">
-    <img src="/img/head.jpg" alt="哈尔滨工业大学">
+    <img src="/img/head.jpg" alt="热爱技术，享受生活">
   </div>
   <div class="contact-info">
     <div class="contact-name">全之</div>
-    <div class="contact-bio">CS 学生 · 记录者</div>
+    <div class="contact-bio">后端开发 · 工具主义 · 折腾爱好者</div>
+    <div class="contact-note">欢迎通过这些入口找到我。</div>
     <div class="contact-links">
       <a href="mailto:zuquanzhi@qq.com" class="contact-link-item">
         <span class="contact-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
@@ -150,8 +114,8 @@ date: 2023-09-27 22:33:35
   gap: 24px;
   padding: 24px 28px;
   border-radius: 12px;
-  margin: 20px 0;
-  max-width: 560px;
+  margin: 20px auto;
+  width: min(100%, 560px);
   overflow: hidden;
 }
 .contact-card-bg {
@@ -200,27 +164,68 @@ date: 2023-09-27 22:33:35
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 14px;
 }
+.contact-note {
+  margin-bottom: 16px;
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.48);
+  letter-spacing: 0.02em;
+}
 .contact-links {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 .contact-link-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(2px);
+  box-sizing: border-box;
   font-size: 0.85em;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
 }
 .contact-link-item:hover {
   color: #fff;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
 }
 .contact-link-icon {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.contact-link-icon svg {
+  width: 14px;
+  height: 14px;
 }
 @media (max-width: 600px) {
   .about-hero {
@@ -240,6 +245,45 @@ date: 2023-09-27 22:33:35
 }
 </style>
 
+---
+
+{% timeline Timeline, blue %}
+
+<!-- timeline 2023 -->
+**入学哈尔滨工业大学（威海）**
+
+带着些许迷茫选了计算机专业。那时候对一切都挺好奇，满脑子想着做点不一样的东西。
+<!-- endtimeline -->
+
+<!-- timeline 2024 -->
+**第十九届全国大学生智能汽车竞赛 · 全国二等奖**
+
+和队友备战大半年，泡在实验室调车。算是大学里的第一个高光时刻。
+<!-- endtimeline -->
+
+<!-- timeline 2025 -->
+**RoboMaster 机甲大师赛 · 全国一等奖**
+
+加入视觉组之后，日子几乎被代码和调参填满。
+<!-- endtimeline -->
+
+<!-- timeline 2026.02 -->
+**百度后台研发实习**
+
+走出象牙塔，初步窥见了一个庞大工业级系统真实的运转模样。
+<!-- endtimeline -->
+
+<!-- timeline 2026.05 -->
+**腾讯微信事业群（WXG）offer · 至今**
+
+今年五月拿到 offer，即将开启新的阶段。
+<!-- endtimeline -->
+
+{% endtimeline %}
+
+
+---
+
 ### GitHub Statistics
 
 [![Overview](https://raw.githubusercontent.com/zuquanzhi/github-stats/master/generated/overview.svg#gh-dark-mode-only)](https://github.com/zuquanzhi)
@@ -247,9 +291,6 @@ date: 2023-09-27 22:33:35
 
 ![Profile Details](https://raw.githubusercontent.com/zuquanzhi/zuquanzhi/main/profile-summary-card-output/dark/0-profile-details.svg)
 
----
-
-### Detailed Metrics
 
 <!-- ![](https://cdn.jsdelivr.net/gh/zuquanzhi/zuquanzhi/github-metrics/people.followers.svg) -->
 

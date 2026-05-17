@@ -5,7 +5,6 @@ mathjax: false
 copyright: true
 cover: 'https://www.loliapi.com/acg?472'
 categories:
-  - 大模型
   - Agent
 tags:
   - Agent
