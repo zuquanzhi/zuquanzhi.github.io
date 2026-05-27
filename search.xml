@@ -87,7 +87,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>大模型</category>
+        <category>AI/大模型</category>
       </categories>
       <tags>
         <tag>大模型</tag>
@@ -247,7 +247,7 @@
 <p><strong>外链：<a href="https://www.yuque.com/quanzhi-ndfvt/azx1dc/udzvfrcvol51mwr4?singleDoc#">https://www.yuque.com/quanzhi-ndfvt/azx1dc/udzvfrcvol51mwr4?singleDoc#</a> 《2023校内赛技术报告》</strong></p>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>寻迹车 蓝牙</tag>
@@ -583,7 +583,7 @@
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">findMaxConsecutiveOnes</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numsSize; i++) &#123;</span><br><span class="line">        tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; numsSize &amp;&amp; nums[i] == <span class="number">1</span>) &#123;</span><br><span class="line">            tmp++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &lt; tmp) &#123;</span><br><span class="line">            count = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -633,7 +633,7 @@
 <p>对于这类题，建议优先建立“位置贡献”视角：<br>当前位置答案 = 左侧所有数的乘积 × 右侧所有数的乘积。</p>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -667,7 +667,7 @@
 <p>一边遍历一边把得到元素存到res数组里，得到新数组，及完成任务。</p>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>二维数组</tag>
@@ -706,7 +706,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -745,7 +745,7 @@
 <p>这样，通过不断地将值从上一个位置移动到当前位置，实现数组的循环右移。</p>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -774,7 +774,7 @@
 <p>s</p>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -803,7 +803,7 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">reverseList</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">prev</span> =</span><span class="literal">NULL</span>;<span class="comment">//创建一个空头节点</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">curr</span>=</span>head;<span class="comment">//创建curr用于遍历链表</span></span><br><span class="line">    <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">next</span> =</span>curr-&gt;next;</span><br><span class="line">        curr-&gt;next =prev;</span><br><span class="line">        prev =curr;<span class="comment">//把pre遍历到当前节点</span></span><br><span class="line">        curr=next;<span class="comment">//把当前指针遍历到下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>链表</tag>
@@ -862,7 +862,7 @@
 <p>这种方法的核心思想是使用递归从链表的末尾开始比较节点的值，同时使用 <code>frontPointer</code> 从链表的头部开始。这两个指针相向移动，逐一比较节点的值，如果在整个过程中没有找到不相等的节点，则链表被认为是回文的。</p>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>链表</tag>
@@ -988,7 +988,7 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/imgcodecs.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/highgui.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/imgproc.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/objdetect.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;X11/Xlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;X11/Xutil.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Display* display = <span class="built_in">XOpenDisplay</span>(<span class="literal">NULL</span>); <span class="comment">// 打开X11显示</span></span><br><span class="line">    Screen* screen = <span class="built_in">DefaultScreenOfDisplay</span>(display); <span class="comment">// 获取默认屏幕</span></span><br><span class="line">    <span class="type">int</span> width = screen-&gt;width; <span class="comment">// 获取屏幕的宽度</span></span><br><span class="line">    <span class="type">int</span> height = screen-&gt;height; <span class="comment">// 获取屏幕的高度</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 加载人脸检测分类器</span></span><br><span class="line">    CascadeClassifier faceCascade;</span><br><span class="line">    faceCascade.<span class="built_in">load</span>(<span class="string">&quot;/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (faceCascade.<span class="built_in">empty</span>()) &#123; cout &lt;&lt; <span class="string">&quot;Load Error&quot;</span> &lt;&lt; endl; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建VideoWriter对象，用于将每一帧屏幕图像写入视频文件</span></span><br><span class="line">    <span class="function">VideoWriter <span class="title">writer</span><span class="params">(<span class="string">&quot;out.mp4&quot;</span>, cv::VideoWriter::fourcc(<span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;p&#x27;</span>, <span class="string">&#x27;4&#x27;</span>, <span class="string">&#x27;v&#x27;</span>), <span class="number">30</span>, Size(width, height))</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 获取屏幕的XImage对象</span></span><br><span class="line">        XImage* ximage = <span class="built_in">XGetImage</span>(display, <span class="built_in">DefaultRootWindow</span>(display), <span class="number">0</span>, <span class="number">0</span>, width, height, AllPlanes, ZPixmap);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 转换为OpenCV的Mat对象</span></span><br><span class="line">        <span class="function">cv::Mat <span class="title">image</span><span class="params">(height, width, CV_8UC4, ximage-&gt;data)</span></span>; <span class="comment">// 创建Mat对象</span></span><br><span class="line">        cv::<span class="built_in">cvtColor</span>(image, image, cv::COLOR_BGRA2BGR); <span class="comment">// 转换为BGR格式</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 在屏幕图像上进行人脸检测和标注</span></span><br><span class="line">        vector&lt;Rect&gt; face;</span><br><span class="line">        faceCascade.<span class="built_in">detectMultiScale</span>(image, face);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; face.<span class="built_in">size</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">rectangle</span>(image, face[i], <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>);</span><br><span class="line">            <span class="built_in">putText</span>(image, <span class="string">&quot;a people&quot;</span>, face[i].<span class="built_in">tl</span>(), FONT_HERSHEY_DUPLEX, <span class="number">0.75</span>,<span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">69</span>, <span class="number">255</span>), <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 显示屏幕图像</span></span><br><span class="line">        cv::<span class="built_in">imshow</span>(<span class="string">&quot;Screen&quot;</span>, image);</span><br><span class="line">        cv::<span class="built_in">waitKey</span>(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将修改后的图像写入视频文件</span></span><br><span class="line">        writer.<span class="built_in">write</span>(image);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 释放资源</span></span><br><span class="line">        <span class="built_in">XDestroyImage</span>(ximage);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭X11显示</span></span><br><span class="line">    <span class="built_in">XCloseDisplay</span>(display);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放VideoCapture对象和VideoWriter对象的资源</span></span><br><span class="line">    writer.<span class="built_in">release</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>OpenCV</tag>
@@ -1016,7 +1016,7 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">deleteDuplicates</span><span class="params">(<span class="keyword">struct</span> ListNode* head)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!head) &#123;</span><br><span class="line">        <span class="keyword">return</span> head;<span class="comment">//即链表为空，没有重复元素可以删除。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> head;</span><br><span class="line">    <span class="keyword">while</span> (cur-&gt;next) &#123;<span class="comment">//条件是当前节点的下一个节点不为空</span></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val == cur-&gt;next-&gt;val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>链表</tag>
@@ -1130,7 +1130,7 @@
 <h3 id="效果："><a href="#效果：" class="headerlink" title="效果："></a>效果：</h3><p><img src="https://cdn.nlark.com/yuque/0/2024/png/39228163/1705559548910-bc235096-7d99-4292-b382-b91268dfc171.png#averageHue=%231f1b1b&amp;clientId=ucf2197ff-0c36-4&amp;from=paste&amp;height=506&amp;id=ub6200bb0&amp;originHeight=1012&amp;originWidth=1508&amp;originalType=binary&amp;ratio=2&amp;rotation=0&amp;showTitle=false&amp;size=286203&amp;status=done&amp;style=none&amp;taskId=u5d1e22a4-1937-479d-8cce-5e1ec8d2b05&amp;title=&amp;width=754" alt="image.png"></p>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>ROS</tag>
@@ -1181,7 +1181,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>PID</tag>
@@ -1194,7 +1194,7 @@
 <p>烂尾了，直接贴代码了<br><a href="https://github.com/zuquanzhi/Self_Balance_Bycicle">https://github.com/zuquanzhi/Self_Balance_Bycicle</a></p>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>平衡车</tag>
@@ -1517,7 +1517,7 @@
 <p><a href="https://fishros.com/d2lros2foxy/#/chapt4/4.10%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0(C++">客户端实现</a>?id=_3%e5%ae%a2%e6%88%b7%e7%ab%af%ef%bc%88%e5%bc%a0%e4%b8%89%ef%bc%89%e5%ae%9e%e7%8e%b0)<img src="https://cdn.nlark.com/yuque/0/2024/png/39221021/1710040911063-ab181be4-89fa-4a05-8da4-a2b5d58c0444.png#averageHue=%23eeebe9&amp;clientId=ud3f5d7d5-6e8f-4&amp;from=drop&amp;id=u4725bfe1&amp;originHeight=430&amp;originWidth=380&amp;originalType=binary&amp;ratio=1.5625&amp;rotation=0&amp;showTitle=false&amp;size=62757&amp;status=done&amp;style=none&amp;taskId=u2b8126d0-3aa8-4cae-b16e-308b2b4d88f&amp;title=" alt="28bff3501425d8b0e5a018fb3f7cfb1b.png"></p>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>ROS</tag>
@@ -1552,7 +1552,7 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     struct ListNode *next;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">dummy</span> =</span> <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> ListNode));</span><br><span class="line">    dummy-&gt;next = head;<span class="comment">//在头节点前创建一个空节点，用于解决其为val的情况</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">cur</span> =</span> dummy;<span class="comment">//基操用cur遍历</span></span><br><span class="line">    <span class="keyword">while</span>(cur-&gt;next)&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;next-&gt;val==val) &#123;</span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span>* <span class="title">newHead</span> =</span> dummy-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(dummy);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newHead;<span class="comment">//返回新的头节点，并释放dummy的空间</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>链表</tag>
@@ -2068,7 +2068,7 @@
 <p>做到这一步，再回头看那篇论文标题 <em>Attention is All You Need</em>，感觉就不再只是一个“标题党”，而是能从工程和建模的角度理解它在说什么。</p>
 ]]></content>
       <categories>
-        <category>科研</category>
+        <category>AI/大模型</category>
       </categories>
       <tags>
         <tag>Transformer</tag>
@@ -2448,7 +2448,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>科研</category>
+        <category>AI/大模型</category>
       </categories>
       <tags>
         <tag>VLA</tag>
@@ -2604,7 +2604,7 @@ O：在光标上方新建一行并插入。
 <p><em>写于 Hermes 第三天。Telegram 跑通了，WeChat 还在调，Skill 还在攒。</em><br><em>目前微信插件似乎还有一些bug，提了issue看看后面会不会修一下</em></p>
 ]]></content>
       <categories>
-        <category>Agent</category>
+        <category>AI/大模型</category>
       </categories>
       <tags>
         <tag>Openclaw</tag>
@@ -2624,7 +2624,7 @@ O：在光标上方新建一行并插入。
 <p><strong>屎山——不倒就是山，倒了才是屎</strong></p>
 ]]></content>
       <categories>
-        <category>屎山</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -2725,7 +2725,7 @@ O：在光标上方新建一行并插入。
 <p>由于数据量较小，准确率较低，就不放图了）</p>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>yolo</tag>
@@ -2744,7 +2744,7 @@ O：在光标上方新建一行并插入。
 <h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">input</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a string: &quot;</span>);</span><br><span class="line">    fgets(a, <span class="number">100</span>, <span class="built_in">stdin</span>); <span class="comment">// 使用fgets获取一行输入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete</span><span class="params">(<span class="type">char</span> a[])</span> &#123;</span><br><span class="line">    <span class="type">int</span> i, j = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> spaceFlag = <span class="number">0</span>; <span class="comment">// 标志变量，用于检测空格连续性</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; a[i] != <span class="string">&#x27;\0&#x27;</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((a[i] &lt; <span class="string">&#x27;0&#x27;</span> || a[i] &gt; <span class="string">&#x27;9&#x27;</span>) &amp;&amp; a[i] != <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            a[j++] = a[i]; <span class="comment">// 将非数字字符和非空格字符移动到数组前部</span></span><br><span class="line">            spaceFlag = <span class="number">0</span>; <span class="comment">// 非空格字符出现时，重置空格连续性标志</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[i] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!spaceFlag) &#123;</span><br><span class="line">                a[j++] = <span class="string">&#x27; &#x27;</span>; <span class="comment">// 保留一个空格</span></span><br><span class="line">                spaceFlag = <span class="number">1</span>; <span class="comment">// 标记已经出现一个空格</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    a[j] = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">// 添加字符串结束标志</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> <span class="built_in">array</span>[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter a string: &quot;</span>);</span><br><span class="line">    fgets(<span class="built_in">array</span>, <span class="number">100</span>, <span class="built_in">stdin</span>); <span class="comment">// 读取输入的字符串</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Original string: %s\n&quot;</span>, <span class="built_in">array</span>);</span><br><span class="line"></span><br><span class="line">    delete(<span class="built_in">array</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;After deleting and merging: %s\n&quot;</span>, <span class="built_in">array</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>屎山</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>C语言</tag>
@@ -2849,10 +2849,10 @@ O：在光标上方新建一行并插入。
 </ol>
 ]]></content>
       <categories>
-        <category>屎山</category>
+        <category>编程基础</category>
       </categories>
       <tags>
-        <tag>屎山</tag>
+        <tag>数学建模</tag>
       </tags>
   </entry>
   <entry>
@@ -2876,7 +2876,7 @@ O：在光标上方新建一行并插入。
 <p>​    </p>
 ]]></content>
       <categories>
-        <category>题解</category>
+        <category>数据结构与算法</category>
       </categories>
       <tags>
         <tag>数组</tag>
@@ -2938,8 +2938,7 @@ O：在光标上方新建一行并插入。
 </ul>
 ]]></content>
       <categories>
-        <category>大模型</category>
-        <category>Agent</category>
+        <category>AI/大模型</category>
       </categories>
       <tags>
         <tag>Agent</tag>
@@ -2974,7 +2973,7 @@ O：在光标上方新建一行并插入。
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构体定义</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></span><br><span class="line">    <span class="type">long</span> number;</span><br><span class="line">    <span class="type">char</span> name[<span class="number">50</span>];</span><br><span class="line">    <span class="type">int</span> math;</span><br><span class="line">    <span class="type">int</span> en;</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">    <span class="type">int</span> total;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 读取文件数据到结构体数组</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">readData</span><span class="params">(<span class="keyword">struct</span> Student students[], <span class="type">int</span> *count)</span> &#123;</span><br><span class="line">    FILE *file = fopen(<span class="string">&quot;grades.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (file == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Unable to open the file.\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    *count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">fscanf</span>(file, <span class="string">&quot;%ld%s%d%d%d&quot;</span>, &amp;students[*count].number, students[*count].name,</span><br><span class="line">                  &amp;students[*count].math, &amp;students[*count].en, &amp;students[*count].c) != EOF) &#123;</span><br><span class="line">        students[*count].total = students[*count].math + students[*count].en + students[*count].c;</span><br><span class="line">        (*count)++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fclose(file);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出结构体数组数据到屏幕</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printData</span><span class="params">(<span class="keyword">struct</span> Student students[], <span class="type">int</span> count)</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Student Number\tName\tMath\tEnglish\tC Language\tTotal\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%ld\t%s\t%d\t%d\t%d\t%d\n&quot;</span>, students[i].number, students[i].name,</span><br><span class="line">               students[i].math, students[i].en, students[i].c, students[i].total);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 比较函数用于排序</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">compare</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *a, <span class="type">const</span> <span class="type">void</span> *b)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">studentA</span> =</span> (<span class="keyword">struct</span> Student *)a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> *<span class="title">studentB</span> =</span> (<span class="keyword">struct</span> Student *)b;</span><br><span class="line">    <span class="keyword">return</span> studentB-&gt;total - studentA-&gt;total;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">students</span>[100];</span> <span class="comment">// 假设最多有100个学生</span></span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    readData(students, &amp;count);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Student Records:\n&quot;</span>);</span><br><span class="line">    printData(students, count);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 排序并输出排序后的结果</span></span><br><span class="line">    qsort(students, count, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> Student), compare);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nStudent Records after sorting by total score:\n&quot;</span>);</span><br><span class="line">    printData(students, count);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>屎山</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>C语言</tag>
@@ -3060,7 +3059,7 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
 <p>如果你后续想看，我可以在下一篇补一个“从混淆矩阵到误检样例回放”的实战流程。</p>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>多目标检测</tag>
@@ -3528,7 +3527,7 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    FILE *file; <span class="comment">// 文件指针</span></span><br><span class="line">    <span class="type">char</span> filename[] = <span class="string">&quot;example.txt&quot;</span>; <span class="comment">// 文件名</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打开文件以进行读写操作（如果文件不存在，则创建新文件）</span></span><br><span class="line">    file = fopen(filename, <span class="string">&quot;w+&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (file == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;无法打开文件 %s\n&quot;</span>, filename);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 写入数据到文件</span></span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;这是一个文件操作示例。\n&quot;</span>);</span><br><span class="line">    <span class="built_in">fprintf</span>(file, <span class="string">&quot;欢迎使用 C 语言进行文件操作！\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将文件指针移到文件开头</span></span><br><span class="line">    fseek(file, <span class="number">0</span>, SEEK_SET);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 从文件中读取内容并输出到屏幕上</span></span><br><span class="line">    <span class="type">char</span> buffer[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">while</span> (fgets(buffer, <span class="keyword">sizeof</span>(buffer), file) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, buffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭文件</span></span><br><span class="line">    fclose(file);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>屎山</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>C语言</tag>
@@ -3784,7 +3783,7 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
 </ol>
 ]]></content>
       <categories>
-        <category>机器人/计算机视觉</category>
+        <category>机器人/CV</category>
       </categories>
       <tags>
         <tag>神经网络</tag>
@@ -3817,7 +3816,7 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
         <category>数据结构与算法</category>
       </categories>
       <tags>
-        <tag>c语言</tag>
+        <tag>C语言</tag>
       </tags>
   </entry>
   <entry>
@@ -3829,7 +3828,7 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">S</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> name[<span class="number">50</span>];</span><br><span class="line">    <span class="type">float</span> final_score;</span><br><span class="line">    <span class="type">float</span> class_score;</span><br><span class="line">    <span class="type">char</span> is_cadre; <span class="comment">// &#x27;Y&#x27;表示是学生干部，&#x27;N&#x27;表示不是</span></span><br><span class="line">    <span class="type">char</span> is_west; <span class="comment">// &#x27;Y&#x27;表示来自西部省份，&#x27;N&#x27;表示不是</span></span><br><span class="line">    <span class="type">int</span> published_papers;</span><br><span class="line">    <span class="type">int</span> scholarship;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义输入函数</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">input</span><span class="params">(<span class="keyword">struct</span> S *s)</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Input name: &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, s-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Input final score: &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%f&quot;</span>, &amp;(s-&gt;final_score));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Input class score: &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%f&quot;</span>, &amp;(s-&gt;class_score));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Class cadre or not? (Y/N): &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot; %c&quot;</span>, &amp;(s-&gt;is_cadre));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Students from the West or not? (Y/N): &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot; %c&quot;</span>, &amp;(s-&gt;is_west));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Input the number of published papers: &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;(s-&gt;published_papers));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义排序函数（造个小轮子方便引用qsort）</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sort</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *a, <span class="type">const</span> <span class="type">void</span> *b)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">strcmp</span>(((<span class="keyword">struct</span> S *)a)-&gt;name, ((<span class="keyword">struct</span> S *)b)-&gt;name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(<span class="keyword">struct</span> S *s)</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Name: %s\n&quot;</span>, s-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Final score: %.2f\n&quot;</span>, s-&gt;final_score);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Class score: %.2f\n&quot;</span>, s-&gt;class_score);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Class cadre: %c\n&quot;</span>, s-&gt;is_cadre);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Students from the West: %c\n&quot;</span>, s-&gt;is_west);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Published papers: %d\n&quot;</span>, s-&gt;published_papers);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Scholarship: %d\n&quot;</span>, s-&gt;scholarship);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">addup</span><span class="params">(<span class="keyword">struct</span> S *s)</span> &#123;</span><br><span class="line">    s-&gt;scholarship = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (s-&gt;final_score &gt; <span class="number">80</span> &amp;&amp; s-&gt;published_papers &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">        s-&gt;scholarship += <span class="number">8000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (s-&gt;final_score &gt; <span class="number">85</span> &amp;&amp; s-&gt;class_score &gt; <span class="number">80</span>) &#123;</span><br><span class="line">        s-&gt;scholarship += <span class="number">4000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (s-&gt;final_score &gt; <span class="number">90</span>) &#123;</span><br><span class="line">        s-&gt;scholarship += <span class="number">2000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (s-&gt;final_score &gt; <span class="number">85</span> &amp;&amp; s-&gt;is_west == <span class="string">&#x27;Y&#x27;</span>) &#123;</span><br><span class="line">        s-&gt;scholarship += <span class="number">1000</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (s-&gt;class_score &gt; <span class="number">80</span> &amp;&amp; s-&gt;is_cadre == <span class="string">&#x27;Y&#x27;</span>) &#123;</span><br><span class="line">        s-&gt;scholarship += <span class="number">850</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> S <span class="title function_">findMax</span><span class="params">(<span class="keyword">struct</span> S *students, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">maxStudent</span> =</span> students[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (students[i].scholarship &gt; maxStudent.scholarship) &#123;</span><br><span class="line">            maxStudent = students[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxStudent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Input n: &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">S</span> *<span class="title">students</span> =</span> (<span class="keyword">struct</span> S *)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">struct</span> S));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\nEnter data for student %d:\n&quot;</span>, i + <span class="number">1</span>);</span><br><span class="line">        input(&amp;students[i]);</span><br><span class="line">        addup(&amp;students[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    qsort(students, n, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> S), sort);<span class="comment">//按名字排序</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nStudent information:\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        print(&amp;students[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">maxStudent</span> =</span> findMax(students, n);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nStudent with the highest scholarship:\n&quot;</span>);</span><br><span class="line">    print(&amp;maxStudent);</span><br><span class="line">    <span class="built_in">free</span>(students);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>屎山</category>
+        <category>编程基础</category>
       </categories>
       <tags>
         <tag>C语言</tag>
@@ -3945,10 +3944,65 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义链表节点结构</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建新节点</span></span><br><span class="line"><span class="keyword">struct</span> Node* <span class="title function_">createNode</span><span class="params">(<span class="type">int</span> data)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">newNode</span> =</span> (<span class="keyword">struct</span> Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> Node));</span><br><span class="line">    <span class="keyword">if</span> (newNode == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;内存分配失败\n&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    newNode-&gt;data = data;</span><br><span class="line">    newNode-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> newNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在链表头部插入节点</span></span><br><span class="line"><span class="keyword">struct</span> Node* <span class="title function_">insertAtBeginning</span><span class="params">(<span class="keyword">struct</span> Node *head, <span class="type">int</span> data)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">newNode</span> =</span> createNode(data);</span><br><span class="line">    newNode-&gt;next = head;</span><br><span class="line">    <span class="keyword">return</span> newNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在链表尾部插入节点</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">insertAtEnd</span><span class="params">(<span class="keyword">struct</span> Node *head, <span class="type">int</span> data)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">newNode</span> =</span> createNode(data);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">temp</span> =</span> head;</span><br><span class="line">    <span class="keyword">while</span> (temp-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        temp = temp-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    temp-&gt;next = newNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除第一个值为 data 的节点</span></span><br><span class="line"><span class="keyword">struct</span> Node* <span class="title function_">deleteNode</span><span class="params">(<span class="keyword">struct</span> Node *head, <span class="type">int</span> data)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">current</span> =</span> head;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">prev</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找要删除的节点并记录其前一个节点</span></span><br><span class="line">    <span class="keyword">while</span> (current != <span class="literal">NULL</span> &amp;&amp; current-&gt;data != data) &#123;</span><br><span class="line">        prev = current;</span><br><span class="line">        current = current-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 若找到要删除的节点，则删除它</span></span><br><span class="line">    <span class="keyword">if</span> (current != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (prev == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            head = current-&gt;next; <span class="comment">// 删除头节点</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            prev-&gt;next = current-&gt;next; <span class="comment">// 删除中间或尾节点</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(current);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印链表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printList</span><span class="params">(<span class="keyword">struct</span> Node *head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">temp</span> =</span> head;</span><br><span class="line">    <span class="keyword">while</span> (temp != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, temp-&gt;data);</span><br><span class="line">        temp = temp-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放链表节点</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">freeList</span><span class="params">(<span class="keyword">struct</span> Node *head)</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">temp</span>;</span></span><br><span class="line">    <span class="keyword">while</span> (head != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        temp = head;</span><br><span class="line">        head = head-&gt;next;</span><br><span class="line">        <span class="built_in">free</span>(temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">head</span> =</span> <span class="literal">NULL</span>; <span class="comment">// 初始化链表头节点</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在链表头部插入节点</span></span><br><span class="line">    head = insertAtBeginning(head, <span class="number">10</span>);</span><br><span class="line">    head = insertAtBeginning(head, <span class="number">20</span>);</span><br><span class="line">    head = insertAtBeginning(head, <span class="number">30</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在链表尾部插入节点</span></span><br><span class="line">    insertAtEnd(head, <span class="number">40</span>);</span><br><span class="line">    insertAtEnd(head, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;链表内容：\n&quot;</span>);</span><br><span class="line">    printList(head);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除节点</span></span><br><span class="line">    head = deleteNode(head, <span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;删除后的链表内容：\n&quot;</span>);</span><br><span class="line">    printList(head);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放链表节点内存</span></span><br><span class="line">    freeList(head);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>屎山</category>
+        <category>编程基础</category>
       </categories>
       <tags>
-        <tag>c语言</tag>
+        <tag>C语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面试中一次关于AI能力上限的思考</title>
+    <url>/2026/05/27/16888/</url>
+    <content><![CDATA[<p>说起来挺巧的。</p>
+<p>上周面试美团，某位面试官在闲聊时提到，美团内部现在 All in AI，认为大模型的能力是<strong>没有上限</strong>的。他提到了 harness、spec、skill、human in loop 这一套技术体系，认为只要约束设计得足够严密，AI 就能实现”基本所有的事情”。</p>
+<p>聊得很自然，我也没有当场反驳。但路上一直在想这件事——他说的这套东西我日常也在用，确实能解决不少问题，但要说它没有上限，这个判断我不太认同。</p>
+<hr>
+<h2 id="约束够强就能解决一切问题吗"><a href="#约束够强就能解决一切问题吗" class="headerlink" title="约束够强就能解决一切问题吗"></a>约束够强就能解决一切问题吗</h2><p>human in loop 是目前 AI Agent 架构里的常见模式：AI 做决策，但人在关键节点确认或干预。harness 是约束框架，spec 是规格定义，skill 是技能单元。这套体系设计得挺好，我自己也用过。</p>
+<p>但我有两个问题，面试官没有给出回应。</p>
+<p><strong>第一个问题：权限管理。</strong></p>
+<p>当 AI 能够调用工具、执行操作、管理资源时，权限边界在哪里划？</p>
+<p>举个例子。如果 AI 要帮你发一封邮件，它需要读取你的邮件内容、获取联系人权限、理解上下文——这些东西一旦授权给 AI，边界在哪里？它会不会在”正常操作”的范围内做超出你预期的事情？</p>
+<p>更具体一点：AI 看到了你三个月前的邮件，发现了一些信息，然后在你不知情的情况下把这些信息用在了当前的任务里。这算不算越权？约束能解决这个问题吗？</p>
+<p><strong>第二个问题：代码 review。</strong></p>
+<p>代码 review 这件事，AI 能做到什么程度？</p>
+<p>review 不只是检查语法和风格，还包括判断”这段设计是否符合团队的技术选型”、”这个实现是否埋了潜在的地雷”、”这个改动会不会影响其他模块的兼容性”——这些东西需要的不是规则，是判断力。</p>
+<p>而判断力背后是经验、上下文理解、以及对代码库整体架构的把握。给 AI 一套 review 规则，它能检查风格，能找出明显的问题，但”这个设计三个月后会是个坑”这种判断，目前的 AI 做不到。</p>
+<p>面试官听完这两个问题，没有回应。</p>
+<hr>
+<h2 id="AI-工作流还没有形成完整闭环"><a href="#AI-工作流还没有形成完整闭环" class="headerlink" title="AI 工作流还没有形成完整闭环"></a>AI 工作流还没有形成完整闭环</h2><p>这些问题让我回到一个更根本的观点：<strong>AI 的输出质量高度依赖输入信息的完整度，而完整度本身是有边界的。</strong></p>
+<p>在实际的工作流中，这个问题无处不在：</p>
+<ul>
+<li><strong>信息不完整时，AI 会”幻觉”出看似合理但错误的答案。</strong> 你问它一个私域问题，它给你编一个听起来很专业的回答，你信了就开始执行。</li>
+<li><strong>多步骤任务中，错误会级联传播，一步错步步错。</strong> 让 AI 写一个模块，它能写。让它根据运行结果调整，它可能会引入新的错误，或者根本不理解为什么之前的输出不对。</li>
+<li><strong>缺乏真正的自我纠错机制，只能依赖人工干预。</strong> AI 能生成方案，但方案到执行之间隔着无数的细节。</li>
+</ul>
+<p>human in loop 本意是通过人在环来兜底，但它假设了一个前提：人知道什么时候该干预。但现实往往不是这样的——当你把一个复杂任务交给 AI 跑的时候，人很难判断它走到哪一步应该确认还是不确认。</p>
+<p><strong>这件事的根本问题在于：AI 目前缺乏真正意义上的自适应校正能力。</strong></p>
+<hr>
+<h2 id="AI-能力存在上限"><a href="#AI-能力存在上限" class="headerlink" title="AI 能力存在上限"></a>AI 能力存在上限</h2><p>AI 能力上限的来源，我认为主要有三点：</p>
+<h3 id="1-信息的获取有边界"><a href="#1-信息的获取有边界" class="headerlink" title="1. 信息的获取有边界"></a>1. 信息的获取有边界</h3><p>AI 的知识受限于训练数据。私有领域知识、企业内部信息、实时发生的事件——这些都是 AI 无法触及的盲区。ChatGPT 不知道你公司数据库的 schema，也不知道你上周五才发生的那个 bug。</p>
+<p>这不是模型能力的问题，是信息的根本性问题。</p>
+<h3 id="2-推理能力有上限"><a href="#2-推理能力有上限" class="headerlink" title="2. 推理能力有上限"></a>2. 推理能力有上限</h3><p>即便输入信息完整，模型的推理能力也不是无限的。长上下文会稀释关键信息，多跳推理依然困难重重，复杂的因果链条依然难以准确追踪。</p>
+<p>你让它做一道一步到位的数学题，它很强。你让它做一个需要二十步推导的系统设计，它开始胡说八道。</p>
+<p><strong>这不是”还没做到”，而是推理能力本身有它的天花板。</strong></p>
+<h3 id="3-执行能力有瓶颈"><a href="#3-执行能力有瓶颈" class="headerlink" title="3. 执行能力有瓶颈"></a>3. 执行能力有瓶颈</h3><p>AI 能生成方案，但方案到执行之间隔着无数的细节。</p>
+<p>一段能跑的代码，到能上线的服务，中间还有部署、监控、回滚、容错——这些 AI 目前都无法独立完成。它能给你一个 Dockerfile，但不会帮你跑通 CI，不会帮你调试生产环境的网络问题。</p>
+<p><strong>生成能力和执行能力是两件事。</strong></p>
+<hr>
+<p>写这篇文章不是要唱衰 AI。AI 毫无疑问是划时代的技术革命，美团 All in AI 的战略判断也有其道理。</p>
+<p>但我认为，<strong>承认 AI 有上限，才能更好地驾驭它</strong>。把 AI 当作万能解药，期待它能解决所有问题，反而会在遇到瓶颈时感到失望。</p>
+<p>真正有效的 AI 应用，是那些清楚知道 AI 能做什么、不能做什么，并围绕这个边界设计工作流的场景。把 AI 当工具用，而不是当神拜。</p>
+<p>这件事想清楚了，用 AI 或许才会更顺手。</p>
+<hr>
+<p><em>美团这轮面试后来没有后续，但这篇文章倒是写出来了。</em></p>
+]]></content>
+      <categories>
+        <category>AI/大模型</category>
+        <category>技术思考</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>human in loop</tag>
       </tags>
   </entry>
 </search>
