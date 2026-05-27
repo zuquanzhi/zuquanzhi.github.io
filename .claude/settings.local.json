@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(hexo n *)",
+      "Bash(grep -v \"^tags:$\")",
+      "Bash(grep -v \"^tags: $\")",
+      "Bash(git checkout *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(hexo g *)",
+      "Bash(hexo d *)",
+      "Bash(tar -tzf \"D:/xwechat_files/wxid_s9kuk7j69t3o22_5623/msg/file/2026-05/security_evidence_full_v3.tar.gz\")",
+      "Read(//d/xwechat_files/wxid_s9kuk7j69t3o22_5623/msg/file/2026-05/**)",
+      "Bash(tar -tzf security_evidence_full_v3.tar.gz)",
+      "Bash(mkdir -p /tmp/security_evidence)",
+      "Read(//tmp/**)",
+      "Bash(tar -xzf \"D:/xwechat_files/wxid_s9kuk7j69t3o22_5623/msg/file/2026-05/security_evidence_full_v3.tar.gz\")",
+      "Bash(cp \"D:/xwechat_files/wxid_s9kuk7j69t3o22_5623/msg/file/2026-05/security_evidence_full_v3.tar.gz\" /tmp/security_evidence.tar.gz)",
+      "Read(//d/tmp/**)",
+      "Bash(tar -xzf security_evidence.tar.gz)",
+      "Bash(git add *)"
+    ]
+  }
+}

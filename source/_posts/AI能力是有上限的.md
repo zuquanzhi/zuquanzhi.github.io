@@ -1,5 +1,5 @@
 ---
-title: 面试中一次关于AI能力上限的思考
+title: 面试中关于AI能力上限的思考
 toc: true
 mathjax: false
 copyright: true
