@@ -3,7 +3,7 @@ title: 面试中关于AI能力上限的思考
 toc: true
 mathjax: false
 copyright: true
-cover: https://www.loliapi.com/acg?673
+cover: https://www.loliapi.com/acg?674
 date: 2026-05-27 21:46:45
 updated: 2026-05-27 21:46:45
 categories:
