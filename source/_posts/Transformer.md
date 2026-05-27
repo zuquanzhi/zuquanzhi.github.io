@@ -3,7 +3,7 @@ title: Transformer架构初步
 abbrlink: 15915
 date: 2024-09-20 16:20:04
 tags: Transformer
-categories: 科研
+categories: AI/大模型
 
 cover: https://www.loliapi.com/acg?22
 

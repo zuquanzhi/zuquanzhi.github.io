@@ -1,7 +1,7 @@
 ---
 title: LeetCode0724
 tags: 数组
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 14479
 date: 2023-11-20 21:15:39
 ---

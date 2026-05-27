@@ -1,7 +1,7 @@
 ---
 title: ROS2初步
 tags: ROS
-categories: 机器人/计算机视觉
+categories: 机器人/CV
 abbrlink: 51200
 date: 2024-03-11 20:16:00
 cover: https://www.loliapi.com/acg?5

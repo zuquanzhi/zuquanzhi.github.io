@@ -1,7 +1,7 @@
 ---
 title: Leetcode189
 tags: 数组
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 50191
 date: 2023-11-19 19:56:27
 ---

@@ -1,7 +1,7 @@
 ---
 title: LeetCode0238
 tags: 数组
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 44190
 date: 2023-11-22 08:39:26
 ---

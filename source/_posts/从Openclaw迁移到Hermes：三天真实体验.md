@@ -4,7 +4,7 @@ toc: true
 mathjax: false
 copyright: true
 cover: 'https://www.loliapi.com/acg?673'
-categories: Agent
+categories: AI/大模型
 tags:
   - Openclaw
   - Hermes

@@ -1,7 +1,7 @@
 ---
 title: Leetcode0234
 tags: 链表
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 45468
 date: 2023-11-30 20:36:25
 ---

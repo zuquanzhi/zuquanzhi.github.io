@@ -1,7 +1,7 @@
 ---
 title: Leetcode0206
 tags: 链表
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 32797
 date: 2023-11-30 19:21:11
 ---

@@ -1,7 +1,7 @@
 ---
 title: 一篇VLA综述阅读
 cover: 'https://www.loliapi.com/acg?983'
-categories: 科研
+categories: AI/大模型
 tags: VLA
 abbrlink: 64154
 date: 2025-12-06 22:32:40

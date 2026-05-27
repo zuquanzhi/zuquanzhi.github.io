@@ -1,7 +1,7 @@
 ---
 title: LeetCode66
 tags: 数组
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 51941
 date: 2023-11-19 14:05:27
 ---

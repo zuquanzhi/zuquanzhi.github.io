@@ -1,7 +1,7 @@
 ---
 title: LeetCode0498
 tags: 二维数组
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 3448
 date: 2023-11-23 18:27:43
 ---

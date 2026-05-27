@@ -1,7 +1,7 @@
 ---
 title: Leetcode83
 tags: 链表
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 51494
 date: 2023-11-30 19:02:34
 ---

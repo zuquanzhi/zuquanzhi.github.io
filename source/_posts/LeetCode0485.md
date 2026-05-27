@@ -1,7 +1,7 @@
 ---
 title: LeetCode0485
 tags: 数组
-categories: 题解
+categories: 数据结构与算法
 abbrlink: 22712
 date: 2023-11-21 11:41:58
 ---

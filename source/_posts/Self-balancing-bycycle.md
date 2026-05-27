@@ -1,7 +1,7 @@
 ---
 title: Self-balancing-bycycle
 tags: 平衡车
-categories: 机器人/计算机视觉
+categories: 机器人/CV
 abbrlink: 54276
 date: 2023-10-09 15:06:18
 ---

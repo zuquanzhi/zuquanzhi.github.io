@@ -1,6 +1,6 @@
 ---
 title: Agent时代基础设施--MCP协议介绍
-categories: 大模型
+categories: AI/大模型
 tags:
   - 大模型
   - Agent
