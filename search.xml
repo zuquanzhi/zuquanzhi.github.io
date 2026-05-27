@@ -2759,7 +2759,7 @@ O：在光标上方新建一行并插入。
       </tags>
   </entry>
   <entry>
-    <title>当AI学会交谈：为Agent搭建一个社交网络底层</title>
+    <title>当AI学会交谈：为Agent搭建社交网络底层</title>
     <url>/2026/03/22/14976/</url>
     <content><![CDATA[<p>这篇想先把目标说清楚：</p>
 <p>我想做的，不只是一个多 Agent 协作框架，而是一个基于 Agent 的社交网络生态。最终形态是，人人都拥有自己的 Agent，人人都通过 Agent 实现社交、协作和关系维护。</p>
@@ -3583,7 +3583,7 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
       </tags>
   </entry>
   <entry>
-    <title>面试中一次关于AI能力上限的思考</title>
+    <title>面试中关于AI能力上限的思考</title>
     <url>/2026/05/27/16888/</url>
     <content><![CDATA[<p>说起来挺巧的。</p>
 <p>上周面试美团，某位面试官在闲聊时提到，美团内部现在 All in AI，认为大模型的能力是<strong>没有上限</strong>的。他提到了 harness、spec、skill、human in loop 这一套技术体系，认为只要约束设计得足够严密，AI 就能实现”基本所有的事情”。</p>
@@ -3635,6 +3635,73 @@ mAP = \frac{1}{N}\sum_{i=1}^{N} AP_i</script><p>常见报告形式有：</p>
       <tags>
         <tag>AI</tag>
         <tag>human in loop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>腾讯云服务器被干了：一次SSH爆破实录</title>
+    <url>/2026/04/29/16889/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>说起来有点丢人。</p>
+<p>上个月我的腾讯云服务器被干了，直到现在才有时间写一篇博客来复盘。不是什么高级货色，就是最老套的SSH弱密码爆破。当时服务器的归属变动有些需求，临时设置了弱密码，正好中了下怀。攻击者从爆破成功到植入后门只用了13秒，全程自动化，第二天看日志才发现。</p>
+<hr>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>4月28日晚上23:34:02，爆破成功了。</p>
+<p>其实下午14:03攻击者就开始尝试SSH爆破了，一直爆到晚上23:30才开始密集攻击，每两秒一次，大概四分钟后23:34:02，密码被破掉了。算下来整个爆破过程持续了差不多9.5小时。</p>
+<p>爆破用的是腾讯云上海节点的IP，挺讽刺的，自己家的云跑攻击，对象还是自家的。</p>
+<hr>
+<h2 id="13秒发生了什么"><a href="#13秒发生了什么" class="headerlink" title="13秒发生了什么"></a>13秒发生了什么</h2><p>23:34:02到23:34:15，这13秒里攻击者干了这些事：</p>
+<p>23:34:05 </p>
+<ul>
+<li>sudo whoami 测试权限，发现是sudo用户。23:34:05 </li>
+<li>useradd创建了个傀儡账号admin。23:34:08 </li>
+<li>rm -rf /root/.bash_history 删掉历史记录，想抹痕迹。23:34:08 </li>
+<li>tee /usr/bin/adb0 写入后门二进制，5MB的ELF。<br>23:34:15 </li>
+<li>chmod + nohup启动，后门开始跑。23:34:15 </li>
+<li>攻击者退出。</li>
+</ul>
+<p>13秒。一定是工具自动化执行的。攻击者对这套流程熟练得像在呼吸一样。</p>
+<hr>
+<h2 id="后门分析"><a href="#后门分析" class="headerlink" title="后门分析"></a>后门分析</h2><p>这个 <code>/usr/bin/adb0</code> 是用Go写的DDoS肉鸡，功能就四样东西：发起DDoS、远程Shell、SOCKS5代理、给C2发心跳。</p>
+<p>同一个文件被部署了四个地方：</p>
+<ul>
+<li>/usr/bin/adb0 - 主程序</li>
+<li>/usr/lib/libgdi.so.0.8.2 - 副本2，伪装成图形库</li>
+<li>/etc/profile.d/bash.cfg - 副本3，当前正在跑的那个</li>
+<li>/boot/system.pub - 副本4，开机自启动</li>
+</ul>
+<p>四个地方同一个MD5：<code>e49c610315ff35dca6729fda138553d5</code>。</p>
+<p>C2在 45.150.226.78:65111，美国西雅图的Spartan Host。TLS 1.3通信，证书是自签名的，CN写的是127.0.0.1，属实是把自己当本地开发环境了。<br>前一天我正好在给astroBot的一个插件配置图形库环境，完全没有发现程序已经悄悄被换了，还在想为什么装完了也没用。</p>
+<hr>
+<h2 id="四层持久化"><a href="#四层持久化" class="headerlink" title="四层持久化"></a>四层持久化</h2><p>这是我觉得最离谱的地方。攻击者同时部署了四层持久化，让你怎么清理都清不干净。</p>
+<p><strong>Cron</strong>：每分钟跑一次后门，<code>*/1 * * * * root /.mod</code>，/.mod是个36字节的启动脚本。</p>
+<p><strong>bash_profile</strong>：每次登录bash自动加载后门程序，伪装成<code>[rcu_gp]</code>进程在跑。</p>
+<p><strong>开机自启</strong>：写了init脚本注册成系统服务，Linux一启动就跑。</p>
+<p><strong>SSH公钥后门</strong>：在authorized_keys里埋了自己的公钥，就算你改密码他还能登录。</p>
+<p>从密码、进程、服务、SSH四个维度死死赖住。</p>
+<p>攻击者：你以为删个文件就完事了？天真。</p>
+<hr>
+<h2 id="Rootkit"><a href="#Rootkit" class="headerlink" title="Rootkit"></a>Rootkit</h2><p>攻击者还写了个Rootkit脚本 <code>/etc/profile.d/gateway.sh</code>，专门劫持监控命令。</p>
+<p>ps被劫持了，你查进程看不到后门。ss被劫持了，你查网络连接看不到C2。netstat被劫持了，你查端口看到的都是假的。</p>
+<p>但有个漏洞：他没劫持 <code>netstat -antp</code>，用这个命令还是能看到C2连接的。说明这个攻击者也不是100%严谨，留了个缝。</p>
+<hr>
+<h2 id="怎么发现的"><a href="#怎么发现的" class="headerlink" title="怎么发现的"></a>怎么发现的</h2><p>说实话不是我发现的。当时我在用Hermes Agent帮我分析别的东西，它顺便扫了一眼auth.log，说”这里有一堆SSH失败记录，来自一个不认识的IP，时间点是昨晚23:34:02”。</p>
+<p>我一看还真是。再让Agent跑完整分析，才知道服务器已经被干了四个功能的后门在跑了。我当时还在用这台服务器跑别的服务，浑然不知。</p>
+<hr>
+<h2 id="怎么办"><a href="#怎么办" class="headerlink" title="怎么办"></a>怎么办</h2><p>最紧急的几件事：</p>
+<p>删攻击者公钥，最优先。kill掉后门进程。删四个后门副本。清cron定时任务。删开机自启服务。改密码，换成强密码。</p>
+<p>长期来说，禁用密码登录，用SSH密钥认证。密码登录这种事，就是给攻击者留的口子。</p>
+<hr>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>弱密码真的会出事。9.5小时爆破一个弱密码，成功率比我想象的高得多。</p>
+<p>另外攻击也真的很快。13秒完成入侵和部署，自动化程度超出预期。</p>
+<p>多层持久化是标配。不是删一个文件就完事了，攻击者会从各个维度确保后门还在。</p>
+<p>Rootkit能隐藏东西。ps、ss、netstat这些命令被劫持了，不用非常规手段根本看不到。</p>
+<p>事后把所有日志和证据都打包了，提交给了腾讯云的官方。服务器后来重装了系统，直接关闭了密码认证。</p>
+<h2 id="这事之后我算是明白了，云服务器的安全防护真不是开玩笑的。该上的防护手段一个都不能省，不然真被人干了你都不知道。"><a href="#这事之后我算是明白了，云服务器的安全防护真不是开玩笑的。该上的防护手段一个都不能省，不然真被人干了你都不知道。" class="headerlink" title="这事之后我算是明白了，云服务器的安全防护真不是开玩笑的。该上的防护手段一个都不能省，不然真被人干了你都不知道。"></a>这事之后我算是明白了，云服务器的安全防护真不是开玩笑的。该上的防护手段一个都不能省，不然真被人干了你都不知道。</h2>]]></content>
+      <categories>
+        <category>安全事件</category>
+      </categories>
+      <tags>
+        <tag>服务器安全</tag>
+        <tag>SSH</tag>
+        <tag>网络安全</tag>
       </tags>
   </entry>
 </search>
