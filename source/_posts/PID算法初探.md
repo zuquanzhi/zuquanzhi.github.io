@@ -44,7 +44,7 @@ PID（比例-积分-微分）控制算法是一种用于调节控制系统的反
 即为
 ![公式](4.png)
 这就是所谓的PID算法离散描述公式。还有一个增量型PID算法，下面来推导一下。   
-上面的公式描述了第k哥采样周期的结果，那么前一时刻也就是k-1哥采样周期可表示为：
+上面的公式描述了第k个采样周期的结果，那么前一时刻也就是k-1个采样周期可表示为：
 ![公式](5.png)
 那么我们再来说第K个采样周期的增量，很显然就是U(k)-U(k-1)。于是我们用第k个采样周期公式减去第k-1个采样周期的公式，就得到了增量型PID算法的表示公式：
 ![公式](6.png)
@@ -57,7 +57,7 @@ PID（比例-积分-微分）控制算法是一种用于调节控制系统的反
 #### 位置型PID简单实现
 位置型PID的实现就是以前面的位置型公式为基础。这一节我们只是完成最简单的实现，也就是将前面的离散位置型PID公式的计算机语言化。   
 首先定义PID对象的结构体：
-``````c
+```c
 /*定义结构体和公用体*/
 
 typedef struct
@@ -79,12 +79,12 @@ typedef struct
   float integral;//积分值
 
 }PID;
-``````
+```
 
 
 接下来实现PID控制器：
 
-``````c
+```c
 void PIDRegulation(PID *vPID, float processValue)
 
 {
@@ -100,7 +100,7 @@ void PIDRegulation(PID *vPID, float processValue)
   vPID->lasterror=thisError;
 
 }
-``````
+```
 
 
 
@@ -113,7 +113,7 @@ void PIDRegulation(PID *vPID, float processValue)
 
 首先定义PID对象的结构体：
 
-``````c
+```c
 /*定义结构体和公用体*/
 
 typedef struct
@@ -137,12 +137,12 @@ typedef struct
   float result; //输出值
 
 }PID;
-``````
+```
 
 
 接下来实现PID控制器：
 
-``````c
+```c
 void PIDRegulation(PID *vPID, float processValue)
 {
   float thisError;
@@ -160,9 +160,9 @@ void PIDRegulation(PID *vPID, float processValue)
 }
 
 
-``````
+```
 #### 基本特点
-前面讲述并且实现了PID控制器，包括位置型PID控制器和增量型PID控制器。界限来我们对这两种类型的控制器的特点作一个简单的描述。
+前面讲述并且实现了PID控制器，包括位置型PID控制器和增量型PID控制器。接下来我们对这两种类型的控制器的特点作一个简单的描述。
 
 **位置型PID控制器的基本特点：**
 

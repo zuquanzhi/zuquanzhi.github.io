@@ -9,7 +9,7 @@ cover: 'https://www.loliapi.com/acg?245'
 abbrlink: 14348
 date: 2025-02-23 00:16:45
 ---
-相信不少的同学都遇到过一个很麻烦的事情——实验室用的服务器只有连上实验室的内网后才能使用，一旦外出开impart或者回家后，就不能进入实验室的服务器继续玩耍（卷）了。这个时候怎么办呢？
+相信不少的同学都遇到过一个很麻烦的事情——实验室用的服务器只有连上实验室的内网后才能使用，一旦离开实验室或者回家后，就不能进入实验室的服务器继续玩耍（卷）了。这个时候怎么办呢？
 如果你没有一个公网服务器又不想花钱，cpolar是你的最佳选择，但是如果你有事情就变得完全不一样了——**frp的优雅永不过时**。
 - [FRP 项目官网](https://gofrp.org/)
 - [GitHub 仓库](https://github.com/fatedier/frp)
@@ -77,49 +77,50 @@ bindPort 用于和 frpc 进行绑定。
 ```
 ## 客户端
 ### 安装
-下载适用于树莓派的arm64架构的frp文件包：
+下载与服务端相同版本的 frp（arm64 架构），保持版本一致才能正常通信：
 ```
-sudo wget https://github.com/fatedier/frp/releases/download/v0.35.1/frp_0.35.1_linux_arm64.tar.gz
-sudo tar -zxvf frp_0.35.1_linux_arm64.tar.gz
+sudo wget https://github.com/fatedier/frp/releases/download/v0.55.1/frp_0.55.1_linux_arm64.tar.gz
+sudo tar -zxvf frp_0.55.1_linux_arm64.tar.gz
 # 文件名可能会有不同，用ls -a命令查看
 ```
-编辑其中的frpc.ini文件：
-```
-[common]
-server_addr = 127.0.0.1
-server_port = 7000
+编辑其中的 frpc.toml 文件（v0.55.1 起配置文件统一使用 toml 格式）：
+```toml
+serverAddr = "你的公网服务器IP"
+serverPort = 7000
 
-[ssh]
-type = tcp
-local_ip = 127.0.0.1
-local_port = 22
-remote_port = 6000
+[[proxies]]
+name = "ssh"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 6000
 ```
 按如下参数说明修改配置文件：
 
-- server_addr：服务器的IP地址；
+- serverAddr：公网服务器的 IP 地址（**不能填 127.0.0.1，否则 frpc 不知道连哪里**）；
 
-- server_port：服务器端的端口，与服务端配置文件的bind_port端口相同；
+- serverPort：服务端的端口，与服务端配置文件的 bindPort 一致；
 
-- local_ip：要在公网访问的本地设备的地址，这里指客户端本机，填127.0.0.1即可；
+- localIP：要在公网访问的本地设备的地址，这里指客户端本机，填 127.0.0.1 即可；
 
-- local_port：本地设备要暴露的端口，即理解为提供服务的端口
+- localPort：本地设备要暴露的端口，即提供服务的端口；
 
-- remote_port：在外网的访问端口，此端口上的流量会被转发到本地设备对应的local_port端口上
+- remotePort：在外网的访问端口，此端口上的流量会被转发到本地设备对应的 localPort 端口上
 
-**还有别忘了在服务器防火墙上放行remote_port端口**
+**还有别忘了在服务器防火墙上放行 remotePort 端口**
 
-配置文件中默认有一个ssh的访问配置，如果我们还想让其他的端口在外网访问到，那就可以照猫画虎来添加一个配置。比如在外网用公网ip的8888端口访问本地设备的80端口，就可以这样写：
+配置文件中默认有一个 ssh 的访问配置，如果我们还想让其他的端口在外网访问到，那就可以照猫画虎来添加一个配置。比如在外网用公网 ip 的 8888 端口访问本地设备的 80 端口，就可以这样写：
+```toml
+[[proxies]]
+name = "http"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 80
+remotePort = 8888
 ```
-[http]                  # 名字自定，写在方括号里面
-type = tcp
-local_ip = 127.0.0.1
-local_port = 80
-remote_port = 8888
+然后启动服务（注意是 frp**c** 不是 frps，配置文件是 toml 不是 ini）：
 ```
-然后启动服务
-```
-./frps -c ./frps.ini
+./frpc -c ./frpc.toml
 ```
 大功告成。
 ## 连接

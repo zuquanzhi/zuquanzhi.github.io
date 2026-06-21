@@ -229,7 +229,7 @@ Service 是 ROS 中的请求-响应式通信机制，适合需要明确返回结
 ## 终端图形化测试
 
 可以用 ROS 自带的小乌龟来快速体验服务调用流程：先启动 roscore 和小乌龟节点，然后运行：
-```python
+```bash
 rosrun rqt_service_caller rqt_service_caller
 ```
 召唤出图形化的service界面<br />按照<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/39228163/1705388668505-d518fb03-f941-4f5c-b0f6-7f08d92ac516.png#averageHue=%23ede7e5&clientId=u36e31b96-9ee5-4&from=paste&height=435&id=uc21508a1&originHeight=956&originWidth=940&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=271004&status=done&style=none&taskId=uda7225e4-f750-48cd-b154-967e9ec5ca3&title=&width=427.27271801184054)<br />来配置<br />就能看到图上出现了一只新的小乌龟<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/39228163/1705388704513-fa622c00-39a1-498e-85e3-d908b340bc3e.png#averageHue=%234556fe&clientId=u36e31b96-9ee5-4&from=paste&height=255&id=u07d8973e&originHeight=562&originWidth=504&originalType=binary&ratio=2.200000047683716&rotation=0&showTitle=false&size=20276&status=done&style=none&taskId=u4f0b890d-9656-4f8d-9ad6-8a5d36bee53&title=&width=229.09090412549747)

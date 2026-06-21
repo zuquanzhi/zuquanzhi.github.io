@@ -9,7 +9,7 @@ cover: https://www.loliapi.com/acg?8
 
 ### 1 前言
 
-#### 1 .1Cmake是什么
+#### 1.1 CMake是什么
 
 CMake是一个跨平台的安装（编译）工具，可以用简单的语句来描述所有平台的安装(编译过程)。可以构建、测试、打包项目。CMake 用于使用简单的平台和编译器独立配置文件来控制程序编译过程，并生成可在您选择的编译器环境中使用的主机配置文件和项目文件。对于c++工程来说，通过cmake配置，然后通过cmake工具自动生成makefile文件，最后通过make编译出二进制文件。也就是说CMake 用于使用简单的平台和编译器独立配置文件来控制程序编译过程，并生成可在您选择的编译器环境中使用的主机配置文件和项目文件。
 
@@ -38,7 +38,7 @@ CMake是一个跨平台的安装（编译）工具，可以用简单的语句来
 
 ### 2 Cmake环境配置
 
-先安装cmake然后进行环境变量配置即可。 验证是否成功，在命令窗口执行 cmake --verson 即可。
+先安装cmake然后进行环境变量配置即可。 验证是否成功，在命令窗口执行 cmake --version 即可。
 
 ### 3 简单的Cmake工程
 
@@ -261,7 +261,7 @@ find_package一般用于加载外部库到项目中，并且会加载库的细�
 
 该命令描述特别复杂，参考博客： [(41条消息) CMake中find_package的使用_fengbingchun的博客-CSDN博客](https://blog.csdn.net/fengbingchun/article/details/127473202)
 
-#### 4.13 find_libary()
+#### 4.13 find_library()
 
 该函数用于库查找
 
@@ -288,7 +288,7 @@ find_library(
            NO_CMAKE_FIND_ROOT_PATH]
 )
 # 在默认路径下查找/usr/lib/...  libJSON-C.so
-find_libary(json NAMES JSON-C)
+find_library(json NAMES JSON-C)
 ```
 
 详细介绍见参考博客： [(41条消息) CMake中find_library的使用_fengbingchun的博客-CSDN博客](https://blog.csdn.net/fengbingchun/article/details/127232175)
@@ -303,7 +303,7 @@ find_libary(json NAMES JSON-C)
 
 ```cpp
 aux_source_directory(. SRC_LIST)
-add_library(src-dltest-object OBJECT $(SRC_LIST))
+add_library(src-dltest-object OBJECT ${SRC_LIST})
 set(src-dltest
      $<TARGET_OBJECTS:src-dltest-object>
      PARENT_SCOPE)

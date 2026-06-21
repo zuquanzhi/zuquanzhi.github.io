@@ -97,10 +97,10 @@ Self-Attention 做的事情就是：
 
 自注意力的计算形式是：
 
-$[
+$$
 \text{Attention}(Q,K,V)
 = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
-]$
+$$
 
 逐步理解一下：
 
@@ -126,13 +126,13 @@ $[
 
 形式上是：
 
-$[
+$$
 \text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)
-]$
+$$
 
-$[
+$$
 \text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1,\dots,\text{head}_h)W^O
-]$
+$$
 
 直观含义：
 
@@ -160,10 +160,10 @@ $[
 1. **固定位置编码（正弦/余弦）**
    论文中的做法是用不同频率的正弦、余弦函数生成位置向量，例如：
 
-$$   [
+$$
    PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d}}\right), \quad
    PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d}}\right)
-   ]$$
+   $$
 
    这样做的一个好处是：不同位置之间的“差值”在空间中有一定结构，且可以泛化到训练长度以外的序列。
 

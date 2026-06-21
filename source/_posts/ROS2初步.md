@@ -304,14 +304,12 @@ int main(int argc, char **argv)
 - 同一个小说不能有多个作者（版权问题），但跟小说不一样，同一个话题可以有多个发布者。
 ROS2 里常见的做法是结合多线程执行器和回调组，把可能互相影响的回调拆开调度。先在 `SingleDogNode` 中声明一个服务回调组成员变量：
 
-```cpp
 <a name="FnJns"></a>
 ##### rqt_graph:
 `rqt_graph` 可以直观看到节点和话题之间的连接关系，是排查通信问题时非常实用的工具。![image-20210803113450234.png](https://cdn.nlark.com/yuque/0/2024/png/39221021/1709972464260-688eb5ba-8779-4843-ad42-7a00609803f8.png#averageHue=%23e9e9e8&clientId=ud645a189-b8aa-4&from=drop&id=ud5918dcf&originHeight=591&originWidth=761&originalType=binary&ratio=1.5625&rotation=0&showTitle=false&size=53857&status=done&style=none&taskId=u304193b0-36aa-4ccc-9cbe-cdec436b6b7&title=)
 
 此时类的大致结构如下：
 
-```cpp
 ##### 命令行界面——CLI
 返回系统活动所有主题列表
 ```bash
