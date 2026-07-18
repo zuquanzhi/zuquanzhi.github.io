@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/about/index.html</loc>
+    <loc>https://blog.zuquanzhi.top/about/</loc>
     
     <lastmod>2026-05-27</lastmod>
     
@@ -164,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/index.html</loc>
+    <loc>https://blog.zuquanzhi.top/tags/</loc>
     
     <lastmod>2026-05-14</lastmod>
     
@@ -173,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/movies/index.html</loc>
+    <loc>https://blog.zuquanzhi.top/movies/</loc>
     
     <lastmod>2026-05-14</lastmod>
     
@@ -182,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/cloud/index.html</loc>
+    <loc>https://blog.zuquanzhi.top/cloud/</loc>
     
     <lastmod>2026-05-14</lastmod>
     
@@ -191,7 +191,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/categories/index.html</loc>
+    <loc>https://blog.zuquanzhi.top/categories/</loc>
     
     <lastmod>2026-05-14</lastmod>
     
@@ -218,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/googlec916dbfc0e4a4117.html</loc>
+    <loc>https://blog.zuquanzhi.top/googlec916dbfc0e4a4117</loc>
     
     <lastmod>2026-04-13</lastmod>
     
@@ -227,7 +227,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/baidu_verify_codeva-ZrYlHhmrE0.html</loc>
+    <loc>https://blog.zuquanzhi.top/baidu_verify_codeva-ZrYlHhmrE0</loc>
     
     <lastmod>2026-04-13</lastmod>
     
@@ -308,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/Pictures/index.html</loc>
+    <loc>https://blog.zuquanzhi.top/Pictures/</loc>
     
     <lastmod>2025-08-21</lastmod>
     
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/link/index.html</loc>
+    <loc>https://blog.zuquanzhi.top/link/</loc>
     
     <lastmod>2025-04-10</lastmod>
     
@@ -335,21 +335,7 @@
 
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/Cmake/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.zuquanzhi.top/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.zuquanzhi.top/tags/Agent/</loc>
+    <loc>https://blog.zuquanzhi.top/tags/%E5%AF%BB%E8%BF%B9%E8%BD%A6-%E8%93%9D%E7%89%99/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -370,14 +356,14 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/OpenCV/</loc>
+    <loc>https://blog.zuquanzhi.top/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/%E5%B9%B3%E8%A1%A1%E8%BD%A6/</loc>
+    <loc>https://blog.zuquanzhi.top/tags/Agent/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -398,14 +384,14 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/Transformer/</loc>
+    <loc>https://blog.zuquanzhi.top/tags/Cmake/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/%E5%AF%BB%E8%BF%B9%E8%BD%A6-%E8%93%9D%E7%89%99/</loc>
+    <loc>https://blog.zuquanzhi.top/tags/OpenCV/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -419,7 +405,21 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/%E5%91%BD%E4%BB%A4/</loc>
+    <loc>https://blog.zuquanzhi.top/tags/ROS/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/%E5%B9%B3%E8%A1%A1%E8%BD%A6/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/Transformer/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -440,13 +440,6 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/ROS/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.zuquanzhi.top/tags/Golang/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -455,6 +448,27 @@
   
   <url>
     <loc>https://blog.zuquanzhi.top/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/vim/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/yolo/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -476,20 +490,6 @@
   
   <url>
     <loc>https://blog.zuquanzhi.top/tags/Agent-Cli/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.zuquanzhi.top/tags/vim/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.zuquanzhi.top/tags/yolo/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -573,27 +573,6 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.zuquanzhi.top/tags/SSH/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.zuquanzhi.top/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.zuquanzhi.top/tags/docker/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -616,6 +595,27 @@
   
   <url>
     <loc>https://blog.zuquanzhi.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/SSH/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.zuquanzhi.top/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -652,7 +652,7 @@
 
   
   <url>
-    <loc>https://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://blog.zuquanzhi.top/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA-CV/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -666,14 +666,14 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA-CV/</loc>
+    <loc>https://blog.zuquanzhi.top/categories/bug%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/categories/bug%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://blog.zuquanzhi.top/categories/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -701,14 +701,14 @@
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/categories/%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6/</loc>
+    <loc>https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.zuquanzhi.top/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</loc>
+    <loc>https://blog.zuquanzhi.top/categories/%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6/</loc>
     <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
