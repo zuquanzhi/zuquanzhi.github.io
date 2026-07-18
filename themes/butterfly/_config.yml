@@ -98,9 +98,9 @@ error_img:
 
 # A simple 404 page
 error_404:
-  enable: false
+  enable: true
   subtitle: 'Page Not Found'
-  background: https://i.loli.net/2020/05/19/aKOcLiyPl2JQdFD.png
+  background: /img/404.jpg
 
 post_meta:
   page: # Home Page
@@ -122,8 +122,8 @@ post_meta:
 # 3: auto_excerpt (default)
 # false: do not show the article introduction
 index_post_content:
-  method: 3
-  length: 500 # if you set method to 2 or 3, the length need to config
+  method: 2
+  length: 200 # if you set method to 2 or 3, the length need to config
 
 # anchor
 anchor:
@@ -495,16 +495,16 @@ twikoo:
 # Giscus
 # https://giscus.app/
 giscus:
-  repo:
-  repo_id:
-  category_id:
+  repo: zuquanzhi/zuquanzhi.github.io
+  repo_id: # TODO: 在 giscus.app 完成配置后填入
+  category_id: # TODO: 在 giscus.app 完成配置后填入
   theme:
     light: light
     dark: dark
   option:
 
 cusdis:
-  enable: true
+  enable: false
   app_id: 你的AppID
   host: https://cusdis.com
   lang: zh-cn
@@ -794,7 +794,7 @@ preloader:
 # wordcount (字數統計)
 # see https://butterfly.js.org/posts/ceeb73f/#字數統計
 wordcount:
-  enable: false
+  enable: true
   post_wordcount: true
   min2read: true
   total_wordcount: true
@@ -857,7 +857,7 @@ note:
 # It may contain bugs and unstable, give feedback when you find the bugs.
 # https://github.com/MoOx/pjax
 pjax:
-  enable: false
+  enable: true
   exclude:
     # - xxxx
     # - xxxx
